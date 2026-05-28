@@ -1,0 +1,366 @@
+
+Discarded input sections
+
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000      0x7c0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x8e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x51 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000      0x103 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x6a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000      0x1df /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x6e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x3b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000      0x190 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x4a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x58 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000      0x1de /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000      0x369 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x3c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000     0xa3a6 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x00000000       0x76 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .group         0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000      0x7c0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x8e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x51 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000      0x103 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x6a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000      0x1df /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x6e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x3b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000      0x190 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x4a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x58 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000      0x1de /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000      0x369 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000       0x3c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ .debug_macro   0x00000000     0xa3a6 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x00000000         0x0000c000         xr
+ICCM             0x40000000         0x00020000         xr
+DCCM             0x50010000         0x00010000         rw
+PROT_IO          0x20000000         0x00010000         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a
+START GROUP
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libgloss.a
+END GROUP
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a
+                0x00000000                        . = 0x0
+
+.text.init      0x00000000      0x154
+ *(.text.init)
+ .text.init     0x00000000      0x154 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+                0x00000000                _start
+                0x00000078                _finish
+
+.text           0x00000154      0x578
+ *(.text*)
+ .text          0x00000154        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .text.startup  0x00000154       0x3e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+                0x00000154                main
+ .text          0x00000192      0x3aa /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+                0x00000192                fifo_rx_wait
+                0x000001b4                spi_command_wait
+                0x000001c6                set_spi_csid
+                0x000001d6                write_tx_fifo
+                0x000001e6                read_rx_fifo
+                0x000001f2                spi_read_response
+                0x000001fe                spi_command
+                0x00000228                enable_spi_host
+                0x00000240                configure_spi_host
+                0x0000025c                sd_send_cmd
+                0x000002c4                init_sd_card
+                0x000003f6                read_sd_card
+                0x0000048c                write_sd_card
+ .text          0x0000053c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+ *fill*         0x0000053c        0x0 
+ .text.metal.init.trapvec
+                0x0000053c       0x32 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+                0x0000053c                early_trap_vector
+ .text          0x0000056e      0x15e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+                0x0000056e                uart_tx
+                0x0000058a                uart_rx
+                0x000005a4                enable_uart
+                0x000005ba                end_sim_if_uart_disabled
+                0x000005cc                run_loopback_test
+
+.eh_frame       0x000006cc       0x28
+ *(.eh_frame)
+ .eh_frame      0x000006cc       0x28 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+                0x000006f4                        _data_lma_start = ALIGN (0x4)
+                0x50010000                        _data_vma_start = 0x50010000
+
+.rela.dyn       0x000006f4        0x0
+ .rela.text.init
+                0x000006f4        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+
+.data           0x50010000       0x7c load address 0x000006f4
+ *(.*data)
+ .data          0x50010000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .data          0x50010000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .data          0x50010000       0x7c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+ .data          0x5001007c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+ *(.rodata*)
+ *(.srodata*)
+                0x5001007c                        . = ALIGN (0x4)
+                0x00000770                        _data_lma_end = (_data_lma_start + SIZEOF (.data))
+                0x5001007c                        _data_vma_end = (_data_vma_start + SIZEOF (.data))
+                0x00000770                        _bss_lma_start = _data_lma_end
+                0x5001007c                        _bss_vma_start = _data_vma_end
+
+.bss            0x5001007c        0x0 load address 0x00000770
+ *(.sbss)
+ *(.bss)
+ .bss           0x5001007c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .bss           0x5001007c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .bss           0x5001007c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+ .bss           0x5001007c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+                0x5001007c                        . = ALIGN (0x4)
+                0x00000770                        _bss_lma_end = (_bss_lma_start + SIZEOF (.bss))
+                0x5001007c                        _bss_vma_end = (_bss_vma_start + SIZEOF (.bss))
+                0x00000770                        _end = _bss_lma_end
+                0x00000001                        ASSERT ((_end < 0xc000), ERROR: ROM size exceeds 48KiB)
+                0x5001007c                        . = _bss_vma_end
+                0x5001007c                        _dccm_lma_start = _bss_vma_end
+                0x5001007c                        _dccm_vma_start = _bss_vma_end
+
+.dccm           0x5001007c        0x0
+ *(.dccm*)
+                0x5001007c                        . = ALIGN (0x4)
+                0x5001007c                        iccm_code0_start = .
+
+.data_iccm0     0x40000000        0x0 load address 0x5001007c
+ *(.data_iccm0)
+                0x40000000                        . = ALIGN (0x4)
+                0x5001007c                        iccm_code0_end = (iccm_code0_start + SIZEOF (.data_iccm0))
+                0x5001007c                        iccm_code1_start = ALIGN (iccm_code0_end, 0x4)
+
+.data_iccm1     0x40000000        0x0 load address 0x5001007c
+ *(.data_iccm1)
+                0x40000000                        . = ALIGN (0x4)
+                0x5001007c                        iccm_code1_end = (iccm_code1_start + SIZEOF (.data_iccm1))
+                0x5001007c                        iccm_code2_start = ALIGN (iccm_code1_end, 0x4)
+
+.data_iccm2     0x40000000        0x0 load address 0x5001007c
+ *(.data_iccm2)
+                0x40000000                        . = ALIGN (0x4)
+                0x5001007c                        iccm_code2_end = (iccm_code2_start + SIZEOF (.data_iccm2))
+
+.protected_io
+ *(.protected_io)
+                0x50010080                        . = ALIGN (iccm_code2_end, 0x10)
+                0x50014080                        STACK = (ALIGN (0x10) + 0x4000)
+                0x00000001                        ASSERT ((STACK < 0x50020000), ERROR: Stack overflows the DCCM -- note: lower half of DCCM is allocated in the validation image for remote firmware images)
+OUTPUT(/home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/Ctest.elf elf32-littleriscv)
+
+.debug_info     0x00000000     0x16bb
+ .debug_info    0x00000000      0x1ed /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_info    0x000001ed      0xd02 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_info    0x00000eef      0x7cc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_abbrev   0x00000000      0x579
+ .debug_abbrev  0x00000000      0x132 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_abbrev  0x00000132      0x2a4 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_abbrev  0x000003d6      0x1a3 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_loclists
+                0x00000000      0xfbf
+ .debug_loclists
+                0x00000000       0x7f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_loclists
+                0x0000007f      0x999 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_loclists
+                0x00000a18      0x5a7 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_aranges  0x00000000       0x60
+ .debug_aranges
+                0x00000000       0x20 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_aranges
+                0x00000020       0x20 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_aranges
+                0x00000040       0x20 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_rnglists
+                0x00000000      0x2cf
+ .debug_rnglists
+                0x00000000       0x29 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_rnglists
+                0x00000029      0x1c9 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_rnglists
+                0x000001f2       0xdd /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_macro    0x00000000     0xbd15
+ .debug_macro   0x00000000      0x14e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x0000014e      0x7c0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x0000090e       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000930       0x8e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x000009be       0x51 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000a0f      0x103 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000b12       0x6a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000b7c      0x1df /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000d5b       0x6e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000dc9       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000de2       0x3b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000e1d       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000e51      0x190 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000fe1       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00000ff7       0x4a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00001041       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00001075       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00001085       0x58 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x000010dd      0x1de /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x000012bb      0x369 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00001624       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00001634       0x3c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x00001670     0xa3a6 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x0000ba16       0x76 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_macro   0x0000ba8c      0x144 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_macro   0x0000bbd0      0x145 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_line     0x00000000     0x18a0
+ .debug_line    0x00000000      0x1a8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_line    0x000001a8      0xe08 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_line    0x00000fb0      0x8f0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_str      0x00000000    0x452dd
+ .debug_str     0x00000000    0x450f7 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+                              0x452ea (size before relaxing)
+ .debug_str     0x000450f7      0x17e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+                              0x45428 (size before relaxing)
+ .debug_str     0x00045275       0x68 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+                              0x45168 (size before relaxing)
+
+.debug_line_str
+                0x00000000      0x394
+ .debug_line_str
+                0x00000000      0x2fe /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+                                0x379 (size before relaxing)
+ .debug_line_str
+                0x000002fe       0x4b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+                                0x372 (size before relaxing)
+ .debug_line_str
+                0x00000349       0x4b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+                                0x372 (size before relaxing)
+
+.comment        0x00000000       0x18
+ .comment       0x00000000       0x18 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+                                 0x19 (size before relaxing)
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.note.GNU-stack
+                0x00000000        0x0
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.riscv.attributes
+                0x00000000       0x33
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .riscv.attributes
+                0x0000002f       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .riscv.attributes
+                0x0000005e       0x31 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/start.o
+ .riscv.attributes
+                0x0000008f       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o
+
+.debug_frame    0x00000000      0x214
+ .debug_frame   0x00000000       0x2c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/main.o
+ .debug_frame   0x0000002c      0x188 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/qspi.o
+ .debug_frame   0x000001b4       0x60 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/uart.o

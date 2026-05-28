@@ -1,0 +1,9 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/entropy_src/rtl
++incdir+${PRJ_CALIPTRA_ROOT}/src/csrng/rtl
+${PRJ_CALIPTRA_ROOT}/src/entropy_src/rtl/entropy_src_main_sm_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/entropy_src/rtl/entropy_src_ack_sm_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/entropy_src/rtl/entropy_src_reg_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/entropy_src/rtl/entropy_src_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/csrng/rtl/csrng_reg_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/csrng/rtl/csrng_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/csrng/rtl/csrng_pkg.sv

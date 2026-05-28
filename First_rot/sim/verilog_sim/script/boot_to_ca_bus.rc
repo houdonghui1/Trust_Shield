@@ -1,0 +1,94 @@
+Magic 271485
+Revision Verdi_O-2018.09-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 27 1920 569 193 65
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/houdonghui/cm3_ahbmtx_mcu/sim/verilog_sim/boot_to_ca_sim/TOP.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 687044401.338676 701152075.353041
+cursor 693262500.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 13
+; marker line index
+markerPos 27
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByValue
+
+
+addGroup "G1"
+activeDirFile "" "/home/houdonghui/cm3_ahbmtx_mcu/sim/verilog_sim/boot_to_ca_sim/TOP.fsdb"
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/caliptra_top_dut/clk
+addSignal -h 15 -holdScope cptra_pwrgood
+addSignal -h 15 -holdScope cptra_rst_b
+addSignal -h 15 -holdScope cptra_noncore_rst_b
+addSignal -h 15 -holdScope cptra_uc_rst_b
+addSignal -h 15 -holdScope scan_mode
+addSignal -h 15 -holdScope security_state
+addSignal -h 15 -holdScope ready_for_fuses
+addSignal -h 15 -holdScope ready_for_fw_push
+addSignal -h 15 -holdScope ready_for_runtime
+addSignal -h 15 -holdScope cptra_obf_key[255:0]
+addGroup "G2"
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/caliptra_top_dut/PADDR[31:0]
+addSignal -h 15 -holdScope PPROT[2:0]
+addSignal -h 15 -holdScope PSEL
+addSignal -h 15 -holdScope PENABLE
+addSignal -h 15 -holdScope PWRITE
+addSignal -h 15 -holdScope PWDATA[31:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope PAUSER[31:0]
+addSignal -h 15 -holdScope PREADY
+addSignal -h 15 -holdScope PSLVERR
+addSignal -h 15 -holdScope PRDATA[31:0]
+addGroup "G3"
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/caliptra_top_dut/rvtop/lsu_haddr[31:0]
+addSignal -h 15 -holdScope lsu_htrans[1:0]
+addSignal -h 15 -holdScope lsu_hwrite
+addSignal -h 15 -holdScope lsu_hsize[2:0]
+addSignal -h 15 -holdScope lsu_hwdata[63:0]
+addSignal -h 15 -holdScope lsu_hrdata[63:0]
+addSignal -h 15 -holdScope lsu_hready
+addGroup "G4"
+addGroup "G5"
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/imem_sim/cs_i
+addSignal -h 15 -holdScope we_i
+addSignal -h 15 -holdScope addr_i[12:0]
+addSignal -h 15 -holdScope wdata_i[63:0]
+addSignal -h 15 -holdScope rdata_o[63:0]
+addGroup "G6"
+addGroup "G7"
+addGroup "G8"
+addGroup "G9"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+

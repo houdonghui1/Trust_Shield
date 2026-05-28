@@ -1,0 +1,18 @@
+PIN			FPGA			DB				               COMMIT
+
+CLK			D24	            IO_12P_GC_67/68                50MHz             LVCMOS18
+RSTN		AN9                                            button_n          LVCMOS33
+
+TXD1		AE12                                           LVCMOS33
+RXD1		AF12                                           LVCMOS33
+MDC			AG11                                           LVCMOS33
+MDIO		AH11                                           LVCMOS33
+ETH_RST		AD11                                           LVCMOS33
+
+TXD			K20                                            LVCMOS33
+RXD			N23                                            LVCMOS33
+TDI			AJ13                                           LVCMOS33
+TCK			AH12                                           LVCMOS33
+TMS			AG12                                           LVCMOS33
+TDO			AE13                                           LVCMOS33
+TRST		AF13                                           LVCMOS33

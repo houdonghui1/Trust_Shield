@@ -1,0 +1,78 @@
+Magic 271485
+Revision Verdi_O-2018.09-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 27 1920 587 213 65
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/houdonghui/cm3_ahbmtx_mcu/sim/verilog_sim/boot_to_ca_sim/TOP.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 0.000000 2757464125.000000
+cursor 0.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 8
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/home/houdonghui/cm3_ahbmtx_mcu/sim/verilog_sim/boot_to_ca_sim/TOP.fsdb"
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/caliptra_top_dut/spi_host/clk_i
+addSignal -h 15 -holdScope rst_ni
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/caliptra_top_dut/rvtop/lsu_haddr[31:0]
+addSignal -h 15 -holdScope lsu_htrans[1:0]
+addSignal -h 15 -holdScope lsu_hwrite
+addSignal -h 15 -holdScope lsu_hwdata[63:0]
+addSignal -h 15 -holdScope lsu_hrdata[63:0]
+addSignal -h 15 -holdScope lsu_hready
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/caliptra_top_dut/spi_host/haddr_i[11:0]
+addSignal -h 15 -holdScope hwdata_i[63:0]
+addSignal -h 15 -holdScope hsel_i
+addSignal -h 15 -holdScope hwrite_i
+addSignal -h 15 -holdScope hready_i
+addSignal -h 15 -holdScope htrans_i[1:0]
+addSignal -h 15 -holdScope hrdata_o[63:0]
+addSignal -h 15 -holdScope cio_sck_o
+addSignal -h 15 -holdScope cio_csb_o[1:0]
+addSignal -h 15 -holdScope cio_sd_o[3:0]
+addSignal -h 15 -holdScope cio_sd_i[3:0]
+addSignal -h 15 /TOP/u_mcu_top/u_fp_domain/u_apb3_caliptra_sync/ca_qspi_clk
+addSignal -expanded -h 15 -holdScope ca_qspi_cs[1:0]
+addSignal -h 15 -holdScope ca_qspi_cs[1]
+addSignal -h 15 -holdScope ca_qspi_cs[0]
+addSignal -h 15 -holdScope ca_qspi_data[3:0]
+addGroup "G2"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+

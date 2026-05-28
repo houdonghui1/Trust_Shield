@@ -1,0 +1,58 @@
+SDK_TARGET := boot_to_ca
+SDK_DEFINE := -D__NO_SYSTEM_INIT -DUART_DRIVER -DUART_EX_DRIVER -DCOMMON_DRIVER
+
+SDK_PATH := ${PRJ_SDK_DIR}/${SDK_TARGET}
+BUILD_PATH := ${PRJ_SDK_DIR}/${SDK_TARGET}/build
+OUTPUT_PATH := ${PRJ_SDK_DIR}/${SDK_TARGET}/output
+FW_PATH := ${PRJ_FW_DIR}/${SDK_TARGET}
+FW_INC_PATH := -I ${PRJ_FW_DIR}/${SDK_TARGET}/boot/inc
+CPU_INC_PATH := -I ${PRJ_LIB_DIR}/cmsis/CMSIS/Include -I ${PRJ_LIB_DIR}/cmsis/Device/ARM/CM3DS/Include
+UART_INC_PATH := -I ${PRJ_DRV_DIR} -I ${PRJ_DRV_DIR}/common/inc -I ${PRJ_DRV_DIR}/uart/inc
+GPIO_INC_PATH := -I ${PRJ_DRV_DIR} -I ${PRJ_DRV_DIR}/common/inc -I ${PRJ_DRV_DIR}/gpio/inc
+CALIPTRA1X_INC_PATH := -I ${PRJ_DRV_DIR} -I ${PRJ_DRV_DIR}/common/inc -I ${PRJ_DRV_DIR}/caliptra1x/inc
+INC_PATH := ${FW_INC_PATH} ${CPU_INC_PATH} ${UART_INC_PATH} ${GPIO_INC_PATH} ${CALIPTRA1X_INC_PATH}
+
+LDSCRIPT := ${FW_PATH}/bootloader_itcm.ld
+STARTUP_S := ${PRJ_LIB_DIR}/cmsis/Device/ARM/CM3DS/Source/GCC/startup_CM3DS.s
+
+CFLAG := -std=c99 -DPRJ=${SDK_TARGET} -D__GNUC__=9 -Og -Wall -Wextra -fdata-sections -ffunction-sections
+ARCH_FLAG := -mthumb -mthumb-interwork -mcpu=cortex-m3
+LDFLAG := -Wl,-gc-sections -Wl,-Map=${SDK_TARGET}.map,--cref -specs=nano.specs -specs=nosys.specs
+FLAG := ${CFLAG} ${ARCH_FLAG}
+
+SHELL := /bin/bash
+
+all: prepare compile link build dump
+
+prepare:
+	-mkdir ${SDK_PATH}
+	-mkdir ${BUILD_PATH}
+	-mkdir ${OUTPUT_PATH}
+
+compile:
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/common/src/drv_common.c -o ${BUILD_PATH}/drv_common.o
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/uart/src/drv_uart.c -o ${BUILD_PATH}/drv_uart.o
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/uart/src/drv_uart_ex.c -o ${BUILD_PATH}/drv_uart_ex.o
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/gpio/src/drv_gpio.c -o ${BUILD_PATH}/drv_gpio.o
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/caliptra1x/src/drv_caliptra1x.c -o ${BUILD_PATH}/drv_caliptra1x.c.o
+
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${FW_PATH}/boot/src/main.c -o ${BUILD_PATH}/main.o
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${FW_PATH}/boot/src/interrupt.c -o ${BUILD_PATH}/interrupt.o
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${STARTUP_S} -o ${BUILD_PATH}/startup_CM3DS.o
+
+link:
+	cd ${BUILD_PATH} && arm-none-eabi-gcc -T ${LDSCRIPT} ${ARCH_FLAG} *.o -o ${SDK_TARGET}.elf ${LDFLAG}
+
+build:
+	mv ${BUILD_PATH}/${SDK_TARGET}.elf ${OUTPUT_PATH}
+	mv ${BUILD_PATH}/${SDK_TARGET}.map ${OUTPUT_PATH}
+	cd ${OUTPUT_PATH} && arm-none-eabi-objcopy -O binary -S ${SDK_TARGET}.elf ${SDK_TARGET}.bin
+	cd ${OUTPUT_PATH} && arm-none-eabi-objcopy -O ihex -S ${SDK_TARGET}.elf ${SDK_TARGET}.hex
+
+dump:
+	cd ${OUTPUT_PATH} && arm-none-eabi-objdump -D ${SDK_TARGET}.elf > ${SDK_TARGET}.asm
+
+	cd ${OUTPUT_PATH} && xxd -g 4 -c 4 -p ${SDK_TARGET}.bin > ${SDK_TARGET}.txt
+	source ${PRJ_SCR_DIR}/lsb2msb.sh ${OUTPUT_PATH} ${SDK_TARGET}.txt 
+	source ${PRJ_SCR_DIR}/txt2mif.sh ${OUTPUT_PATH} ${SDK_TARGET}.txt 2048 32 ${SDK_TARGET}.mif
+	source ${PRJ_SCR_DIR}/txt2coe.sh ${OUTPUT_PATH} ${SDK_TARGET}.txt ${SDK_TARGET}.coe

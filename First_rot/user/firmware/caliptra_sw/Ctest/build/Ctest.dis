@@ -1,0 +1,1064 @@
+
+/home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/Ctest/src/../build/Ctest.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text.init:
+
+00000000 <_start>:
+   0:	b0201073          	csrw	minstret,zero
+   4:	b8201073          	csrw	minstreth,zero
+   8:	aaaaa2b7          	lui	t0,0xaaaaa
+   c:	0a928293          	add	t0,t0,169 # aaaaa0a9 <STACK+0x5aa96029>
+  10:	7c029073          	csrw	0x7c0,t0
+  14:	4291                	li	t0,4
+  16:	0000100f          	fence.i
+  1a:	7f929073          	csrw	0x7f9,t0
+  1e:	0000100f          	fence.i
+  22:	00000297          	auipc	t0,0x0
+  26:	51a28293          	add	t0,t0,1306 # 53c <early_trap_vector>
+  2a:	30529073          	csrw	mtvec,t0
+  2e:	6f400293          	li	t0,1780
+  32:	77000313          	li	t1,1904
+  36:	50010397          	auipc	t2,0x50010
+  3a:	fca38393          	add	t2,t2,-54 # 50010000 <_data_vma_start>
+
+0000003e <data_cp_loop>:
+  3e:	0002ae03          	lw	t3,0(t0)
+  42:	01c3a023          	sw	t3,0(t2)
+  46:	0291                	add	t0,t0,4
+  48:	0391                	add	t2,t2,4
+  4a:	fe62eae3          	bltu	t0,t1,3e <data_cp_loop>
+  4e:	77000293          	li	t0,1904
+  52:	77000313          	li	t1,1904
+  56:	50010397          	auipc	t2,0x50010
+  5a:	02638393          	add	t2,t2,38 # 5001007c <_bss_vma_end>
+
+0000005e <bss_cp_loop>:
+  5e:	0002ae03          	lw	t3,0(t0)
+  62:	01c3a023          	sw	t3,0(t2)
+  66:	0291                	add	t0,t0,4
+  68:	0391                	add	t2,t2,4
+  6a:	fe62eae3          	bltu	t0,t1,5e <bss_cp_loop>
+  6e:	50014117          	auipc	sp,0x50014
+  72:	01210113          	add	sp,sp,18 # 50014080 <STACK>
+  76:	28f9                	jal	154 <main>
+
+00000078 <_finish>:
+  78:	300302b7          	lui	t0,0x30030
+  7c:	0cc28293          	add	t0,t0,204 # 300300cc <mfdc+0x3002f8d3>
+  80:	0ff00f13          	li	t5,255
+  84:	01e28023          	sb	t5,0(t0)
+  88:	fe0008e3          	beqz	zero,78 <_finish>
+  8c:	0001                	nop
+  8e:	0001                	nop
+  90:	0001                	nop
+  92:	0001                	nop
+  94:	0001                	nop
+  96:	0001                	nop
+  98:	0001                	nop
+  9a:	0001                	nop
+  9c:	0001                	nop
+  9e:	0001                	nop
+  a0:	0001                	nop
+  a2:	0001                	nop
+  a4:	0001                	nop
+  a6:	0001                	nop
+  a8:	0001                	nop
+  aa:	0001                	nop
+  ac:	0001                	nop
+  ae:	0001                	nop
+  b0:	0001                	nop
+  b2:	0001                	nop
+  b4:	0001                	nop
+  b6:	0001                	nop
+  b8:	0001                	nop
+  ba:	0001                	nop
+  bc:	0001                	nop
+  be:	0001                	nop
+  c0:	0001                	nop
+  c2:	0001                	nop
+  c4:	0001                	nop
+  c6:	0001                	nop
+  c8:	0001                	nop
+  ca:	0001                	nop
+  cc:	0001                	nop
+  ce:	0001                	nop
+  d0:	0001                	nop
+  d2:	0001                	nop
+  d4:	0001                	nop
+  d6:	0001                	nop
+  d8:	0001                	nop
+  da:	0001                	nop
+  dc:	0001                	nop
+  de:	0001                	nop
+  e0:	0001                	nop
+  e2:	0001                	nop
+  e4:	0001                	nop
+  e6:	0001                	nop
+  e8:	0001                	nop
+  ea:	0001                	nop
+  ec:	0001                	nop
+  ee:	0001                	nop
+  f0:	0001                	nop
+  f2:	0001                	nop
+  f4:	0001                	nop
+  f6:	0001                	nop
+  f8:	0001                	nop
+  fa:	0001                	nop
+  fc:	0001                	nop
+  fe:	0001                	nop
+ 100:	0001                	nop
+ 102:	0001                	nop
+ 104:	0001                	nop
+ 106:	0001                	nop
+ 108:	0001                	nop
+ 10a:	0001                	nop
+ 10c:	0001                	nop
+ 10e:	0001                	nop
+ 110:	0001                	nop
+ 112:	0001                	nop
+ 114:	0001                	nop
+ 116:	0001                	nop
+ 118:	0001                	nop
+ 11a:	0001                	nop
+ 11c:	0001                	nop
+ 11e:	0001                	nop
+ 120:	0001                	nop
+ 122:	0001                	nop
+ 124:	0001                	nop
+ 126:	0001                	nop
+ 128:	0001                	nop
+ 12a:	0001                	nop
+ 12c:	0001                	nop
+ 12e:	0001                	nop
+ 130:	0001                	nop
+ 132:	0001                	nop
+ 134:	0001                	nop
+ 136:	0001                	nop
+ 138:	0001                	nop
+ 13a:	0001                	nop
+ 13c:	0001                	nop
+ 13e:	0001                	nop
+ 140:	0001                	nop
+ 142:	0001                	nop
+ 144:	0001                	nop
+ 146:	0001                	nop
+ 148:	0001                	nop
+ 14a:	0001                	nop
+ 14c:	0001                	nop
+ 14e:	0001                	nop
+ 150:	0001                	nop
+ 152:	0001                	nop
+
+Disassembly of section .text:
+
+00000154 <main>:
+  *ptr = data;
+}
+
+// lsu_read_32 returns data from a given a address pointer.
+inline uint32_t lsu_read_32(uintptr_t addr) {
+  return *(volatile uint32_t *)addr;
+ 154:	200017b7          	lui	a5,0x20001
+ 158:	07d1                	add	a5,a5,20 # 20001014 <mfdc+0x2000081b>
+#include "caliptra_reg.h"
+#include "riscv_hw_if.h"
+#include "uart.h"
+#include "qspi.h"
+
+int main() {
+ 15a:	1141                	add	sp,sp,-16
+ 15c:	439c                	lw	a5,0(a5)
+ 15e:	c606                	sw	ra,12(sp)
+    int hwcfg;
+    hwcfg =lsu_read_32(CLP_UART_STATUS);
+    end_sim_if_uart_disabled();
+ 160:	29a9                	jal	5ba <end_sim_if_uart_disabled>
+    enable_uart();
+ 162:	2189                	jal	5a4 <enable_uart>
+  asm volatile ("fence r,r" ::: "memory");
+ 164:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 168:	0220000f          	fence	r,r
+  *ptr = data;
+ 16c:	300307b7          	lui	a5,0x30030
+ 170:	03c78793          	add	a5,a5,60 # 3003003c <mfdc+0x3002f843>
+ 174:	10000737          	lui	a4,0x10000
+ 178:	c398                	sw	a4,0(a5)
+  asm volatile ("fence r,r" ::: "memory");
+ 17a:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 17e:	0220000f          	fence	r,r
+  *ptr = data;
+ 182:	20000737          	lui	a4,0x20000
+ 186:	c398                	sw	a4,0(a5)
+    //uart_tx((uint8_t)hwcfg);
+    lsu_write_32(CLP_SOC_IFC_REG_CPTRA_FLOW_STATUS, SOC_IFC_REG_CPTRA_FLOW_STATUS_READY_FOR_FW_MASK);
+    lsu_write_32(CLP_SOC_IFC_REG_CPTRA_FLOW_STATUS, SOC_IFC_REG_CPTRA_FLOW_STATUS_READY_FOR_RUNTIME_MASK);
+    
+    run_loopback_test();
+ 188:	2191                	jal	5cc <run_loopback_test>
+
+    return 0;
+ 18a:	40b2                	lw	ra,12(sp)
+ 18c:	4501                	li	a0,0
+ 18e:	0141                	add	sp,sp,16
+ 190:	8082                	ret
+
+00000192 <fifo_rx_wait>:
+  return *(volatile uint32_t *)addr;
+ 192:	200006b7          	lui	a3,0x20000
+ 196:	06d1                	add	a3,a3,20 # 20000014 <mfdc+0x1ffff81b>
+#include <string.h>
+#include "caliptra_reg.h"
+#include "riscv_hw_if.h"
+#include "qspi.h"
+
+int fifo_rx_wait(int queue_depth) {
+ 198:	3e900713          	li	a4,1001
+ 19c:	429c                	lw	a5,0(a3)
+    uint32_t rxqd, status;
+    int timeout = 0;
+    do {
+      status = lsu_read_32(CLP_SPI_HOST_REG_STATUS);
+      rxqd = ((status & SPI_HOST_REG_STATUS_RXQD_MASK) >>
+ 19e:	83a1                	srl	a5,a5,0x8
+              SPI_HOST_REG_STATUS_RXQD_LOW);
+      timeout++;
+      if (timeout > 1000) {
+ 1a0:	177d                	add	a4,a4,-1 # 1fffffff <mfdc+0x1ffff806>
+      rxqd = ((status & SPI_HOST_REG_STATUS_RXQD_MASK) >>
+ 1a2:	0ff7f793          	zext.b	a5,a5
+      if (timeout > 1000) {
+ 1a6:	c709                	beqz	a4,1b0 <fifo_rx_wait+0x1e>
+        return 1;
+      }
+    } while (rxqd != queue_depth);
+ 1a8:	fef51ae3          	bne	a0,a5,19c <fifo_rx_wait+0xa>
+    return 0;
+ 1ac:	4501                	li	a0,0
+ 1ae:	8082                	ret
+        return 1;
+ 1b0:	4505                	li	a0,1
+}
+ 1b2:	8082                	ret
+
+000001b4 <spi_command_wait>:
+ 1b4:	20000737          	lui	a4,0x20000
+ 1b8:	0751                	add	a4,a4,20 # 20000014 <mfdc+0x1ffff81b>
+ 1ba:	431c                	lw	a5,0(a4)
+    uint32_t status;
+  
+    // Wait for Status.active
+    do {
+      status = lsu_read_32(CLP_SPI_HOST_REG_STATUS);
+    } while (0 == (status & SPI_HOST_REG_STATUS_ACTIVE_MASK));
+ 1bc:	00179693          	sll	a3,a5,0x1
+ 1c0:	fe06dde3          	bgez	a3,1ba <spi_command_wait+0x6>
+}
+ 1c4:	8082                	ret
+
+000001c6 <set_spi_csid>:
+  asm volatile ("fence r,r" ::: "memory");
+ 1c6:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 1ca:	0220000f          	fence	r,r
+  *ptr = data;
+ 1ce:	200007b7          	lui	a5,0x20000
+ 1d2:	d388                	sw	a0,32(a5)
+
+void set_spi_csid(int host) { 
+    lsu_write_32(CLP_SPI_HOST_REG_CSID, host); 
+}
+ 1d4:	8082                	ret
+
+000001d6 <write_tx_fifo>:
+  asm volatile ("fence r,r" ::: "memory");
+ 1d6:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 1da:	0220000f          	fence	r,r
+  *ptr = data;
+ 1de:	200007b7          	lui	a5,0x20000
+ 1e2:	d7c8                	sw	a0,44(a5)
+
+void write_tx_fifo(uint32_t data) {
+    lsu_write_32(CLP_SPI_HOST_REG_TXDATA, data);
+}
+ 1e4:	8082                	ret
+
+000001e6 <read_rx_fifo>:
+  return *(volatile uint32_t *)addr;
+ 1e6:	200007b7          	lui	a5,0x20000
+ 1ea:	5788                	lw	a0,40(a5)
+
+uint8_t read_rx_fifo() {
+    return lsu_read_32(CLP_SPI_HOST_REG_RXDATA);
+}
+ 1ec:	0ff57513          	zext.b	a0,a0
+ 1f0:	8082                	ret
+
+000001f2 <spi_read_response>:
+
+uint8_t spi_read_response() {
+ 1f2:	200007b7          	lui	a5,0x20000
+ 1f6:	5788                	lw	a0,40(a5)
+ 1f8:	0ff57513          	zext.b	a0,a0
+ 1fc:	8082                	ret
+
+000001fe <spi_command>:
+ 1fe:	20000737          	lui	a4,0x20000
+ 202:	0751                	add	a4,a4,20 # 20000014 <mfdc+0x1ffff81b>
+ 204:	431c                	lw	a5,0(a4)
+    uint32_t status;
+  
+    // Wait for Status.ready
+    do {
+      status = lsu_read_32(CLP_SPI_HOST_REG_STATUS);
+    } while (0 == (status & SPI_HOST_REG_STATUS_READY_MASK));
+ 206:	fe07dfe3          	bgez	a5,204 <spi_command+0x6>
+  
+    lsu_write_32(CLP_SPI_HOST_REG_COMMAND,
+                 (direction << SPI_HOST_REG_COMMAND_DIRECTION_LOW) |
+                     (speed << SPI_HOST_REG_COMMAND_SPEED_LOW) |
+ 20a:	062a                	sll	a2,a2,0xa
+                     (csaat << SPI_HOST_REG_COMMAND_CSAAT_LOW) |
+ 20c:	05a6                	sll	a1,a1,0x9
+ 20e:	00b667b3          	or	a5,a2,a1
+ 212:	8fc9                	or	a5,a5,a0
+                 (direction << SPI_HOST_REG_COMMAND_DIRECTION_LOW) |
+ 214:	06b2                	sll	a3,a3,0xc
+                     (csaat << SPI_HOST_REG_COMMAND_CSAAT_LOW) |
+ 216:	8fd5                	or	a5,a5,a3
+  asm volatile ("fence r,r" ::: "memory");
+ 218:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 21c:	0220000f          	fence	r,r
+  *ptr = data;
+ 220:	20000737          	lui	a4,0x20000
+ 224:	d35c                	sw	a5,36(a4)
+                     (length << SPI_HOST_REG_COMMAND_LEN_LOW));
+}
+ 226:	8082                	ret
+
+00000228 <enable_spi_host>:
+  asm volatile ("fence r,r" ::: "memory");
+ 228:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 22c:	0220000f          	fence	r,r
+  *ptr = data;
+ 230:	a0000737          	lui	a4,0xa0000
+ 234:	200007b7          	lui	a5,0x20000
+ 238:	07f70713          	add	a4,a4,127 # a000007f <STACK+0x4ffebfff>
+ 23c:	cb98                	sw	a4,16(a5)
+void enable_spi_host() {
+    lsu_write_32(CLP_SPI_HOST_REG_CONTROL,
+                (1 << SPI_HOST_REG_CONTROL_SPIEN_LOW) |
+                    (1 << SPI_HOST_REG_CONTROL_OUTPUT_EN_LOW) |
+                    (0x7f << SPI_HOST_REG_CONTROL_RX_WATERMARK_LOW));
+}
+ 23e:	8082                	ret
+
+00000240 <configure_spi_host>:
+
+void configure_spi_host(int host) {
+    uint32_t offset;
+  
+    if (host == 0) {
+ 240:	200007b7          	lui	a5,0x20000
+ 244:	07f1                	add	a5,a5,28 # 2000001c <mfdc+0x1ffff823>
+ 246:	e501                	bnez	a0,24e <configure_spi_host+0xe>
+ 248:	200007b7          	lui	a5,0x20000
+ 24c:	07e1                	add	a5,a5,24 # 20000018 <mfdc+0x1ffff81f>
+  asm volatile ("fence r,r" ::: "memory");
+ 24e:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 252:	0220000f          	fence	r,r
+  *ptr = data;
+ 256:	0007a023          	sw	zero,0(a5)
+                             (0 << SPI_HOST_REG_CONFIGOPTS_0_FULLCYC_LOW) |
+                             (0 << SPI_HOST_REG_CONFIGOPTS_0_CSNLEAD_LOW) |
+                             (0 << SPI_HOST_REG_CONFIGOPTS_0_CSNTRAIL_LOW) |
+                             (0 << SPI_HOST_REG_CONFIGOPTS_0_CSNIDLE_LOW) |
+                             (0 << SPI_HOST_REG_CONFIGOPTS_0_CLKDIV_LOW));
+}
+ 25a:	8082                	ret
+
+0000025c <sd_send_cmd>:
+  asm volatile ("fence r,r" ::: "memory");
+ 25c:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 260:	0220000f          	fence	r,r
+  *ptr = data;
+ 264:	200007b7          	lui	a5,0x20000
+ 268:	02c78793          	add	a5,a5,44 # 2000002c <mfdc+0x1ffff833>
+ 26c:	c388                	sw	a0,0(a5)
+  asm volatile ("fence r,r" ::: "memory");
+ 26e:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 272:	0220000f          	fence	r,r
+  *ptr = data;
+ 276:	6689                	lui	a3,0x2
+ 278:	c38c                	sw	a1,0(a5)
+
+uint8_t sd_send_cmd(uint32_t cmd, uint32_t arg, uint32_t datalen) {
+    write_tx_fifo(cmd);
+    write_tx_fifo(arg);
+    if(datalen != 0) {
+ 27a:	40068693          	add	a3,a3,1024 # 2400 <mfdc+0x1c07>
+ 27e:	c219                	beqz	a2,284 <sd_send_cmd+0x28>
+      datalen--;// length + 1
+ 280:	167d                	add	a2,a2,-1
+                     (csaat << SPI_HOST_REG_COMMAND_CSAAT_LOW) |
+ 282:	8ed1                	or	a3,a3,a2
+  return *(volatile uint32_t *)addr;
+ 284:	20000737          	lui	a4,0x20000
+ 288:	0751                	add	a4,a4,20 # 20000014 <mfdc+0x1ffff81b>
+ 28a:	431c                	lw	a5,0(a4)
+    } while (0 == (status & SPI_HOST_REG_STATUS_READY_MASK));
+ 28c:	fe07dfe3          	bgez	a5,28a <sd_send_cmd+0x2e>
+  asm volatile ("fence r,r" ::: "memory");
+ 290:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 294:	0220000f          	fence	r,r
+  *ptr = data;
+ 298:	6609                	lui	a2,0x2
+ 29a:	200007b7          	lui	a5,0x20000
+ 29e:	60060613          	add	a2,a2,1536 # 2600 <mfdc+0x1e07>
+ 2a2:	d3d0                	sw	a2,36(a5)
+  return *(volatile uint32_t *)addr;
+ 2a4:	01478713          	add	a4,a5,20 # 20000014 <mfdc+0x1ffff81b>
+ 2a8:	431c                	lw	a5,0(a4)
+ 2aa:	fe07dfe3          	bgez	a5,2a8 <sd_send_cmd+0x4c>
+  asm volatile ("fence r,r" ::: "memory");
+ 2ae:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 2b2:	0220000f          	fence	r,r
+  *ptr = data;
+ 2b6:	20000737          	lui	a4,0x20000
+ 2ba:	d354                	sw	a3,36(a4)
+  return *(volatile uint32_t *)addr;
+ 2bc:	5708                	lw	a0,40(a4)
+    }
+    spi_command(0, 1, Dual, WrOnly);
+    spi_command(datalen, 0, Dual, WrOnly);
+    return spi_read_response();
+}
+ 2be:	0ff57513          	zext.b	a0,a0
+ 2c2:	8082                	ret
+
+000002c4 <init_sd_card>:
+
+uint32_t init_sd_card() {
+ 2c4:	1101                	add	sp,sp,-32
+ 2c6:	ce06                	sw	ra,28(sp)
+ 2c8:	cc22                	sw	s0,24(sp)
+ 2ca:	ca26                	sw	s1,20(sp)
+  asm volatile ("fence r,r" ::: "memory");
+ 2cc:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 2d0:	0220000f          	fence	r,r
+  *ptr = data;
+ 2d4:	a0000737          	lui	a4,0xa0000
+ 2d8:	200007b7          	lui	a5,0x20000
+ 2dc:	07f70713          	add	a4,a4,127 # a000007f <STACK+0x4ffebfff>
+ 2e0:	cb98                	sw	a4,16(a5)
+  asm volatile ("fence r,r" ::: "memory");
+ 2e2:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 2e6:	0220000f          	fence	r,r
+  *ptr = data;
+ 2ea:	200007b7          	lui	a5,0x20000
+ 2ee:	0007ac23          	sw	zero,24(a5) # 20000018 <mfdc+0x1ffff81f>
+  asm volatile ("fence r,r" ::: "memory");
+ 2f2:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 2f6:	0220000f          	fence	r,r
+  *ptr = data;
+ 2fa:	200007b7          	lui	a5,0x20000
+ 2fe:	0207a023          	sw	zero,32(a5) # 20000020 <mfdc+0x1ffff827>
+ 302:	4455                	li	s0,21
+
+    retry = 20;
+    do
+    {
+      res = sd_send_cmd(SD_CARD_CMD0, 0, 0); //reset
+    } while ((res != 0x01) && retry--);
+ 304:	4485                	li	s1,1
+ 306:	a011                	j	30a <init_sd_card+0x46>
+ 308:	c005                	beqz	s0,328 <init_sd_card+0x64>
+      res = sd_send_cmd(SD_CARD_CMD0, 0, 0); //reset
+ 30a:	4601                	li	a2,0
+ 30c:	4581                	li	a1,0
+ 30e:	04000513          	li	a0,64
+ 312:	37a9                	jal	25c <sd_send_cmd>
+    } while ((res != 0x01) && retry--);
+ 314:	147d                	add	s0,s0,-1
+ 316:	fe9519e3          	bne	a0,s1,308 <init_sd_card+0x44>
+    }
+    if (sd_type) {
+      return 0;
+    } 
+
+    return -1;
+ 31a:	547d                	li	s0,-1
+}
+ 31c:	8522                	mv	a0,s0
+ 31e:	40f2                	lw	ra,28(sp)
+ 320:	4462                	lw	s0,24(sp)
+ 322:	44d2                	lw	s1,20(sp)
+ 324:	6105                	add	sp,sp,32
+ 326:	8082                	ret
+      if(sd_send_cmd(SD_CARD_CMD8, 0x1AA, 2)) {//v2.0 or higher card
+ 328:	4609                	li	a2,2
+ 32a:	1aa00593          	li	a1,426
+ 32e:	04800513          	li	a0,72
+ 332:	c84a                	sw	s2,16(sp)
+ 334:	3725                	jal	25c <sd_send_cmd>
+ 336:	cd05                	beqz	a0,36e <init_sd_card+0xaa>
+ 338:	c64e                	sw	s3,12(sp)
+        retry = 1000;
+ 33a:	3e800493          	li	s1,1000
+        } while ((res != 0x01) && retry--);//Ask if init is complete?
+ 33e:	4905                	li	s2,1
+ 340:	59fd                	li	s3,-1
+ 342:	a021                	j	34a <init_sd_card+0x86>
+ 344:	14fd                	add	s1,s1,-1
+ 346:	07348063          	beq	s1,s3,3a6 <init_sd_card+0xe2>
+          res = sd_send_cmd(SD_CARD_ACMD41, 0x40000000, 4);//HCS = 1,Does it support high-capacity cards?
+ 34a:	4611                	li	a2,4
+ 34c:	400005b7          	lui	a1,0x40000
+ 350:	06900513          	li	a0,105
+ 354:	3721                	jal	25c <sd_send_cmd>
+        } while ((res != 0x01) && retry--);//Ask if init is complete?
+ 356:	ff2517e3          	bne	a0,s2,344 <init_sd_card+0x80>
+        if(retry && sd_send_cmd(SD_CARD_CMD58, 0, 0) == 0) {
+ 35a:	e4b1                	bnez	s1,3a6 <init_sd_card+0xe2>
+        sd_send_cmd(SD_CARD_CMD16, 0x200, 2);//Set the block length to 512 bytes
+ 35c:	4609                	li	a2,2
+ 35e:	20000593          	li	a1,512
+ 362:	05000513          	li	a0,80
+ 366:	3ddd                	jal	25c <sd_send_cmd>
+    if (sd_type) {
+ 368:	4942                	lw	s2,16(sp)
+ 36a:	49b2                	lw	s3,12(sp)
+ 36c:	b77d                	j	31a <init_sd_card+0x56>
+        res = sd_send_cmd(SD_CARD_ACMD41, 0, 0);
+ 36e:	4601                	li	a2,0
+ 370:	4581                	li	a1,0
+ 372:	06900513          	li	a0,105
+ 376:	35dd                	jal	25c <sd_send_cmd>
+          cmd = SD_CARD_ACMD41;
+ 378:	00a4b4b3          	sltu	s1,s1,a0
+ 37c:	409004b3          	neg	s1,s1
+ 380:	fd84f493          	and	s1,s1,-40
+ 384:	06948493          	add	s1,s1,105
+          cmd = SD_CARD_CMD1;
+ 388:	3e800413          	li	s0,1000
+        } while (res && retry--);
+ 38c:	597d                	li	s2,-1
+ 38e:	a021                	j	396 <init_sd_card+0xd2>
+ 390:	147d                	add	s0,s0,-1
+ 392:	05240163          	beq	s0,s2,3d4 <init_sd_card+0x110>
+          res = sd_send_cmd(cmd, 0, 0);
+ 396:	4601                	li	a2,0
+ 398:	4581                	li	a1,0
+ 39a:	8526                	mv	a0,s1
+ 39c:	35c1                	jal	25c <sd_send_cmd>
+        } while (res && retry--);
+ 39e:	f96d                	bnez	a0,390 <init_sd_card+0xcc>
+        if (retry == 0 || sd_send_cmd(SD_CARD_CMD16, 0x200, 2) != 0) {
+ 3a0:	e815                	bnez	s0,3d4 <init_sd_card+0x110>
+ 3a2:	4942                	lw	s2,16(sp)
+ 3a4:	bf9d                	j	31a <init_sd_card+0x56>
+        if(retry && sd_send_cmd(SD_CARD_CMD58, 0, 0) == 0) {
+ 3a6:	4601                	li	a2,0
+ 3a8:	4581                	li	a1,0
+ 3aa:	07a00513          	li	a0,122
+ 3ae:	357d                	jal	25c <sd_send_cmd>
+ 3b0:	f555                	bnez	a0,35c <init_sd_card+0x98>
+  return *(volatile uint32_t *)addr;
+ 3b2:	200007b7          	lui	a5,0x20000
+ 3b6:	5798                	lw	a4,40(a5)
+ 3b8:	5798                	lw	a4,40(a5)
+ 3ba:	5798                	lw	a4,40(a5)
+ 3bc:	02878793          	add	a5,a5,40 # 20000028 <mfdc+0x1ffff82f>
+        sd_send_cmd(SD_CARD_CMD16, 0x200, 2);//Set the block length to 512 bytes
+ 3c0:	4609                	li	a2,2
+ 3c2:	20000593          	li	a1,512
+ 3c6:	05000513          	li	a0,80
+ 3ca:	439c                	lw	a5,0(a5)
+ 3cc:	3d41                	jal	25c <sd_send_cmd>
+    if (sd_type) {
+ 3ce:	4942                	lw	s2,16(sp)
+ 3d0:	49b2                	lw	s3,12(sp)
+ 3d2:	b7a9                	j	31c <init_sd_card+0x58>
+        if (retry == 0 || sd_send_cmd(SD_CARD_CMD16, 0x200, 2) != 0) {
+ 3d4:	4609                	li	a2,2
+ 3d6:	20000593          	li	a1,512
+ 3da:	05000513          	li	a0,80
+ 3de:	3dbd                	jal	25c <sd_send_cmd>
+ 3e0:	00a03433          	snez	s0,a0
+ 3e4:	40800433          	neg	s0,s0
+}
+ 3e8:	8522                	mv	a0,s0
+ 3ea:	40f2                	lw	ra,28(sp)
+ 3ec:	4462                	lw	s0,24(sp)
+        if (retry == 0 || sd_send_cmd(SD_CARD_CMD16, 0x200, 2) != 0) {
+ 3ee:	4942                	lw	s2,16(sp)
+}
+ 3f0:	44d2                	lw	s1,20(sp)
+ 3f2:	6105                	add	sp,sp,32
+ 3f4:	8082                	ret
+
+000003f6 <read_sd_card>:
+
+uint8_t read_sd_card(uint32_t block_address, uint8_t *buffer, uint32_t cnt) {
+ 3f6:	1141                	add	sp,sp,-16
+ 3f8:	c422                	sw	s0,8(sp)
+ 3fa:	c606                	sw	ra,12(sp)
+    uint8_t res;
+    if(cnt == 1){
+ 3fc:	4705                	li	a4,1
+uint8_t read_sd_card(uint32_t block_address, uint8_t *buffer, uint32_t cnt) {
+ 3fe:	842e                	mv	s0,a1
+ 400:	85aa                	mv	a1,a0
+    if(cnt == 1){
+ 402:	04e60463          	beq	a2,a4,44a <read_sd_card+0x54>
+ 406:	c226                	sw	s1,4(sp)
+        }  
+        read_rx_fifo();
+        read_rx_fifo();
+      }
+    } else {
+      res = sd_send_cmd(SD_CARD_CMD18, block_address, sizeof(block_address));
+ 408:	05200513          	li	a0,82
+ 40c:	84b2                	mv	s1,a2
+ 40e:	4611                	li	a2,4
+ 410:	35b1                	jal	25c <sd_send_cmd>
+      if(!res) {
+ 412:	c511                	beqz	a0,41e <read_sd_card+0x28>
+ 414:	4492                	lw	s1,4(sp)
+        sd_send_cmd(SD_CARD_CMD12, 0, 0);
+      }
+    }
+
+    return res;
+}
+ 416:	40b2                	lw	ra,12(sp)
+ 418:	4422                	lw	s0,8(sp)
+ 41a:	0141                	add	sp,sp,16
+ 41c:	8082                	ret
+ 41e:	20040613          	add	a2,s0,512
+ 422:	200006b7          	lui	a3,0x20000
+ 426:	8732                	mv	a4,a2
+ 428:	02868693          	add	a3,a3,40 # 20000028 <mfdc+0x1ffff82f>
+          for (int i = 0; i < 512; i++) {
+ 42c:	85a2                	mv	a1,s0
+ 42e:	429c                	lw	a5,0(a3)
+    return lsu_read_32(CLP_SPI_HOST_REG_RXDATA);
+ 430:	00f58023          	sb	a5,0(a1) # 40000000 <mfdc+0x3ffff807>
+          for (int i = 0; i < 512; i++) {
+ 434:	0585                	add	a1,a1,1
+ 436:	fee59ce3          	bne	a1,a4,42e <read_sd_card+0x38>
+        } while (--cnt);
+ 43a:	14fd                	add	s1,s1,-1
+ 43c:	20058713          	add	a4,a1,512
+          buffer += 512;
+ 440:	8432                	mv	s0,a2
+        } while (--cnt);
+ 442:	cc8d                	beqz	s1,47c <read_sd_card+0x86>
+ 444:	20060613          	add	a2,a2,512
+ 448:	b7d5                	j	42c <read_sd_card+0x36>
+      res = sd_send_cmd(SD_CARD_CMD17, block_address, sizeof(block_address));
+ 44a:	4611                	li	a2,4
+ 44c:	05100513          	li	a0,81
+ 450:	3531                	jal	25c <sd_send_cmd>
+      if(!res) {
+ 452:	f171                	bnez	a0,416 <read_sd_card+0x20>
+ 454:	200006b7          	lui	a3,0x20000
+ 458:	87a2                	mv	a5,s0
+ 45a:	20040613          	add	a2,s0,512
+ 45e:	02868693          	add	a3,a3,40 # 20000028 <mfdc+0x1ffff82f>
+ 462:	4298                	lw	a4,0(a3)
+    return lsu_read_32(CLP_SPI_HOST_REG_RXDATA);
+ 464:	00e78023          	sb	a4,0(a5)
+        for (int i = 0; i < 512; i++) {
+ 468:	0785                	add	a5,a5,1
+ 46a:	fec79ce3          	bne	a5,a2,462 <read_sd_card+0x6c>
+ 46e:	429c                	lw	a5,0(a3)
+ 470:	429c                	lw	a5,0(a3)
+      res = sd_send_cmd(SD_CARD_CMD17, block_address, sizeof(block_address));
+ 472:	4501                	li	a0,0
+}
+ 474:	40b2                	lw	ra,12(sp)
+ 476:	4422                	lw	s0,8(sp)
+ 478:	0141                	add	sp,sp,16
+ 47a:	8082                	ret
+        sd_send_cmd(SD_CARD_CMD12, 0, 0);
+ 47c:	4601                	li	a2,0
+ 47e:	4581                	li	a1,0
+ 480:	04c00513          	li	a0,76
+ 484:	3be1                	jal	25c <sd_send_cmd>
+      res = sd_send_cmd(SD_CARD_CMD17, block_address, sizeof(block_address));
+ 486:	4501                	li	a0,0
+        sd_send_cmd(SD_CARD_CMD12, 0, 0);
+ 488:	4492                	lw	s1,4(sp)
+ 48a:	b7ed                	j	474 <read_sd_card+0x7e>
+
+0000048c <write_sd_card>:
+
+uint8_t write_sd_card(uint32_t block_address, uint8_t *buffer, uint32_t cnt) {
+ 48c:	1141                	add	sp,sp,-16
+ 48e:	c422                	sw	s0,8(sp)
+ 490:	c606                	sw	ra,12(sp)
+  uint8_t res;
+  if(cnt == 1){
+ 492:	4705                	li	a4,1
+uint8_t write_sd_card(uint32_t block_address, uint8_t *buffer, uint32_t cnt) {
+ 494:	842e                	mv	s0,a1
+ 496:	85aa                	mv	a1,a0
+  if(cnt == 1){
+ 498:	04e60863          	beq	a2,a4,4e8 <write_sd_card+0x5c>
+ 49c:	c226                	sw	s1,4(sp)
+      }  
+      read_rx_fifo();
+      read_rx_fifo();
+    }
+  } else {
+    res = sd_send_cmd(SD_CARD_CMD25, block_address, sizeof(block_address));
+ 49e:	05900513          	li	a0,89
+ 4a2:	84b2                	mv	s1,a2
+ 4a4:	4611                	li	a2,4
+ 4a6:	3b5d                	jal	25c <sd_send_cmd>
+    if(!res) {
+ 4a8:	c511                	beqz	a0,4b4 <write_sd_card+0x28>
+ 4aa:	4492                	lw	s1,4(sp)
+      write_tx_fifo(0);
+    }
+  }
+
+  return res;
+ 4ac:	40b2                	lw	ra,12(sp)
+ 4ae:	4422                	lw	s0,8(sp)
+ 4b0:	0141                	add	sp,sp,16
+ 4b2:	8082                	ret
+ 4b4:	20040613          	add	a2,s0,512
+  *ptr = data;
+ 4b8:	200006b7          	lui	a3,0x20000
+ 4bc:	8732                	mv	a4,a2
+ 4be:	02c68693          	add	a3,a3,44 # 2000002c <mfdc+0x1ffff833>
+        for (int i = 0; i < 512; i++) {
+ 4c2:	85a2                	mv	a1,s0
+          write_tx_fifo(buffer[i]);
+ 4c4:	0005c783          	lbu	a5,0(a1)
+  asm volatile ("fence r,r" ::: "memory");
+ 4c8:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 4cc:	0220000f          	fence	r,r
+  *ptr = data;
+ 4d0:	c29c                	sw	a5,0(a3)
+        for (int i = 0; i < 512; i++) {
+ 4d2:	0585                	add	a1,a1,1
+ 4d4:	fee598e3          	bne	a1,a4,4c4 <write_sd_card+0x38>
+      } while (--cnt);
+ 4d8:	14fd                	add	s1,s1,-1
+ 4da:	20058713          	add	a4,a1,512
+        buffer += 512;
+ 4de:	8432                	mv	s0,a2
+      } while (--cnt);
+ 4e0:	c4a9                	beqz	s1,52a <write_sd_card+0x9e>
+ 4e2:	20060613          	add	a2,a2,512
+ 4e6:	bff1                	j	4c2 <write_sd_card+0x36>
+    res = sd_send_cmd(SD_CARD_CMD24, block_address, sizeof(block_address));
+ 4e8:	4611                	li	a2,4
+ 4ea:	05800513          	li	a0,88
+ 4ee:	33bd                	jal	25c <sd_send_cmd>
+    if(!res) {
+ 4f0:	fd55                	bnez	a0,4ac <write_sd_card+0x20>
+ 4f2:	200006b7          	lui	a3,0x20000
+ 4f6:	87a2                	mv	a5,s0
+ 4f8:	20040613          	add	a2,s0,512
+ 4fc:	02c68693          	add	a3,a3,44 # 2000002c <mfdc+0x1ffff833>
+        write_tx_fifo(buffer[i]);
+ 500:	0007c703          	lbu	a4,0(a5)
+  asm volatile ("fence r,r" ::: "memory");
+ 504:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 508:	0220000f          	fence	r,r
+  *ptr = data;
+ 50c:	c298                	sw	a4,0(a3)
+      for (int i = 0; i < 512; i++) {
+ 50e:	0785                	add	a5,a5,1
+ 510:	fec798e3          	bne	a5,a2,500 <write_sd_card+0x74>
+  return *(volatile uint32_t *)addr;
+ 514:	200007b7          	lui	a5,0x20000
+ 518:	5798                	lw	a4,40(a5)
+ 51a:	02878793          	add	a5,a5,40 # 20000028 <mfdc+0x1ffff82f>
+ 51e:	439c                	lw	a5,0(a5)
+    res = sd_send_cmd(SD_CARD_CMD24, block_address, sizeof(block_address));
+ 520:	4501                	li	a0,0
+ 522:	40b2                	lw	ra,12(sp)
+ 524:	4422                	lw	s0,8(sp)
+ 526:	0141                	add	sp,sp,16
+ 528:	8082                	ret
+  asm volatile ("fence r,r" ::: "memory");
+ 52a:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 52e:	0220000f          	fence	r,r
+    res = sd_send_cmd(SD_CARD_CMD24, block_address, sizeof(block_address));
+ 532:	4501                	li	a0,0
+  *ptr = data;
+ 534:	0006a023          	sw	zero,0(a3)
+ 538:	4492                	lw	s1,4(sp)
+ 53a:	b7e5                	j	522 <write_sd_card+0x96>
+
+0000053c <early_trap_vector>:
+ 53c:	342022f3          	csrr	t0,mcause
+ 540:	34102373          	csrr	t1,mepc
+ 544:	343023f3          	csrr	t2,mtval
+ 548:	30030e37          	lui	t3,0x30030
+ 54c:	0cce0e13          	add	t3,t3,204 # 300300cc <mfdc+0x3002f8d3>
+ 550:	50010e97          	auipc	t4,0x50010
+ 554:	ab0e8e93          	add	t4,t4,-1360 # 50010000 <_data_vma_start>
+
+00000558 <trap_print_loop>:
+ 558:	000e8283          	lb	t0,0(t4)
+ 55c:	005e0023          	sb	t0,0(t3)
+ 560:	0e85                	add	t4,t4,1
+ 562:	fe029be3          	bnez	t0,558 <trap_print_loop>
+ 566:	4f05                	li	t5,1
+ 568:	01ee0023          	sb	t5,0(t3)
+ 56c:	bfc1                	j	53c <early_trap_vector>
+
+0000056e <uart_tx>:
+  return *(volatile uint32_t *)addr;
+ 56e:	20001737          	lui	a4,0x20001
+ 572:	0751                	add	a4,a4,20 # 20001014 <mfdc+0x2000081b>
+ 574:	431c                	lw	a5,0(a4)
+void uart_tx(uint8_t data) {
+    uint32_t status, tx_full, wdata;
+    // Check the TX fifo is not full
+    do {
+      status = lsu_read_32(CLP_UART_STATUS);
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 576:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 578:	fff5                	bnez	a5,574 <uart_tx+0x6>
+  asm volatile ("fence r,r" ::: "memory");
+ 57a:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 57e:	0220000f          	fence	r,r
+  *ptr = data;
+ 582:	200017b7          	lui	a5,0x20001
+ 586:	cfc8                	sw	a0,28(a5)
+  
+    wdata = data;
+    lsu_write_32(CLP_UART_WDATA, wdata);
+}
+ 588:	8082                	ret
+
+0000058a <uart_rx>:
+  return *(volatile uint32_t *)addr;
+ 58a:	20001737          	lui	a4,0x20001
+ 58e:	0751                	add	a4,a4,20 # 20001014 <mfdc+0x2000081b>
+ 590:	431c                	lw	a5,0(a4)
+  
+    // Check the RX Empty
+    do {
+      status = lsu_read_32(CLP_UART_STATUS);
+      rx_empty = ((status & UART_STATUS_RXEMPTY_MASK) >> UART_STATUS_RXEMPTY_LOW);
+    } while (rx_empty);
+ 592:	0207f793          	and	a5,a5,32
+ 596:	ffed                	bnez	a5,590 <uart_rx+0x6>
+ 598:	200017b7          	lui	a5,0x20001
+ 59c:	4f88                	lw	a0,24(a5)
+  
+    // read the data
+    data = lsu_read_32(CLP_UART_RDATA);
+    rdata = data & 0xff;
+    return rdata;
+}
+ 59e:	0ff57513          	zext.b	a0,a0
+ 5a2:	8082                	ret
+
+000005a4 <enable_uart>:
+  asm volatile ("fence r,r" ::: "memory");
+ 5a4:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 5a8:	0220000f          	fence	r,r
+  *ptr = data;
+ 5ac:	0bcb0737          	lui	a4,0xbcb0
+ 5b0:	200017b7          	lui	a5,0x20001
+ 5b4:	070d                	add	a4,a4,3 # bcb0003 <mfdc+0xbcaf80a>
+ 5b6:	cb98                	sw	a4,16(a5)
+    nco = nco / ip_frequency;
+  
+    ctrl = ((nco & 0xffff) << UART_CTRL_NCO_LOW) | UART_CTRL_TX_MASK |
+           UART_CTRL_RX_MASK;
+    lsu_write_32(CLP_UART_CTRL, ctrl);  // Enable RX/TX
+}
+ 5b8:	8082                	ret
+
+000005ba <end_sim_if_uart_disabled>:
+  return *(volatile uint32_t *)addr;
+ 5ba:	300307b7          	lui	a5,0x30030
+ 5be:	0e078793          	add	a5,a5,224 # 300300e0 <mfdc+0x3002f8e7>
+ 5c2:	439c                	lw	a5,0(a5)
+
+void end_sim_if_uart_disabled() {
+  uint32_t hw_cfg;
+  hw_cfg = lsu_read_32(CLP_SOC_IFC_REG_CPTRA_HW_CONFIG);
+  if (hw_cfg & SOC_IFC_REG_CPTRA_HW_CONFIG_UART_EN_MASK) {
+ 5c4:	8ba1                	and	a5,a5,8
+ 5c6:	c391                	beqz	a5,5ca <end_sim_if_uart_disabled+0x10>
+  } else {
+    while (1)
+      ;
+  }
+}
+ 5c8:	8082                	ret
+    while (1)
+ 5ca:	a001                	j	5ca <end_sim_if_uart_disabled+0x10>
+
+000005cc <run_loopback_test>:
+ 5cc:	20001737          	lui	a4,0x20001
+ 5d0:	0751                	add	a4,a4,20 # 20001014 <mfdc+0x2000081b>
+ 5d2:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 5d4:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 5d6:	fff5                	bnez	a5,5d2 <run_loopback_test+0x6>
+  asm volatile ("fence r,r" ::: "memory");
+ 5d8:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 5dc:	0220000f          	fence	r,r
+  *ptr = data;
+ 5e0:	200017b7          	lui	a5,0x20001
+ 5e4:	06300693          	li	a3,99
+ 5e8:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 5ea:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 5ee:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 5f0:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 5f2:	fff5                	bnez	a5,5ee <run_loopback_test+0x22>
+  asm volatile ("fence r,r" ::: "memory");
+ 5f4:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 5f8:	0220000f          	fence	r,r
+  *ptr = data;
+ 5fc:	200017b7          	lui	a5,0x20001
+ 600:	06100693          	li	a3,97
+ 604:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 606:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 60a:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 60c:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 60e:	fff5                	bnez	a5,60a <run_loopback_test+0x3e>
+  asm volatile ("fence r,r" ::: "memory");
+ 610:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 614:	0220000f          	fence	r,r
+  *ptr = data;
+ 618:	200017b7          	lui	a5,0x20001
+ 61c:	06c00693          	li	a3,108
+ 620:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 622:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 626:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 628:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 62a:	fff5                	bnez	a5,626 <run_loopback_test+0x5a>
+  asm volatile ("fence r,r" ::: "memory");
+ 62c:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 630:	0220000f          	fence	r,r
+  *ptr = data;
+ 634:	200017b7          	lui	a5,0x20001
+ 638:	06900693          	li	a3,105
+ 63c:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 63e:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 642:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 644:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 646:	fff5                	bnez	a5,642 <run_loopback_test+0x76>
+  asm volatile ("fence r,r" ::: "memory");
+ 648:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 64c:	0220000f          	fence	r,r
+  *ptr = data;
+ 650:	200017b7          	lui	a5,0x20001
+ 654:	07000693          	li	a3,112
+ 658:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 65a:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 65e:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 660:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 662:	fff5                	bnez	a5,65e <run_loopback_test+0x92>
+  asm volatile ("fence r,r" ::: "memory");
+ 664:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 668:	0220000f          	fence	r,r
+  *ptr = data;
+ 66c:	200017b7          	lui	a5,0x20001
+ 670:	07400693          	li	a3,116
+ 674:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 676:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 67a:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 67c:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 67e:	fff5                	bnez	a5,67a <run_loopback_test+0xae>
+  asm volatile ("fence r,r" ::: "memory");
+ 680:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 684:	0220000f          	fence	r,r
+  *ptr = data;
+ 688:	200017b7          	lui	a5,0x20001
+ 68c:	07200693          	li	a3,114
+ 690:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 692:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 696:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 698:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 69a:	fff5                	bnez	a5,696 <run_loopback_test+0xca>
+  asm volatile ("fence r,r" ::: "memory");
+ 69c:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 6a0:	0220000f          	fence	r,r
+  *ptr = data;
+ 6a4:	200017b7          	lui	a5,0x20001
+ 6a8:	06100693          	li	a3,97
+ 6ac:	cfd4                	sw	a3,28(a5)
+  return *(volatile uint32_t *)addr;
+ 6ae:	01478713          	add	a4,a5,20 # 20001014 <mfdc+0x2000081b>
+ 6b2:	431c                	lw	a5,0(a4)
+      tx_full = ((status & UART_STATUS_TXFULL_MASK) >> UART_STATUS_TXFULL_LOW);
+ 6b4:	8b85                	and	a5,a5,1
+    } while (tx_full);
+ 6b6:	fff5                	bnez	a5,6b2 <run_loopback_test+0xe6>
+  asm volatile ("fence r,r" ::: "memory");
+ 6b8:	0220000f          	fence	r,r
+  asm volatile ("fence r,r" ::: "memory");
+ 6bc:	0220000f          	fence	r,r
+  *ptr = data;
+ 6c0:	200017b7          	lui	a5,0x20001
+ 6c4:	0007ae23          	sw	zero,28(a5) # 2000101c <mfdc+0x20000823>
+      error += 1;
+    }
+  } */
+
+  return error;
+ 6c8:	4501                	li	a0,0
+ 6ca:	8082                	ret

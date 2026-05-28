@@ -1,0 +1,938 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+                              /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o (__lshrdi3)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+                              /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o (strstr)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+                              /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o (memmove)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memset.o)
+                              /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o (memset)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+                              /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o (memcpy)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+                              /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o (strlen)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+                              /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o) (memcmp)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+                              /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o) (strchr)
+/home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+                              /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o) (strnlen)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.std_rv_nop_machine
+                0x00000000        0x8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.std_rv_isr_vector_table
+                0x00000000       0x7c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_0
+                0x00000000        0x4 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_sha512_acc_notif.str1.4
+                0x00000000       0x53 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_sha512_acc_notif
+                0x00000000      0x108 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_sha512_acc_error.str1.4
+                0x00000000       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_sha512_acc_error
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_soc_ifc_notif.str1.4
+                0x00000000       0x4c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_soc_ifc_notif
+                0x00000000      0x18a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_soc_ifc_error.str1.4
+                0x00000000       0x4c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_soc_ifc_error
+                0x00000000      0x1aa /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_sha256_notif.str1.4
+                0x00000000       0x47 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_sha256_notif
+                0x00000000      0x108 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_sha256_error.str1.4
+                0x00000000       0x27 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_sha256_error
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_sha512_notif.str1.4
+                0x00000000       0x47 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_sha512_notif
+                0x00000000      0x108 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_sha512_error.str1.4
+                0x00000000       0x27 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_sha512_error
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_kv_notif.str1.4
+                0x00000000       0x1f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_kv_notif
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_kv_error.str1.4
+                0x00000000       0x1f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_kv_error
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_hmac_notif.str1.4
+                0x00000000       0x45 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_hmac_notif
+                0x00000000      0x108 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_hmac_error.str1.4
+                0x00000000       0x25 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_hmac_error
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_ecc_notif.str1.4
+                0x00000000       0x40 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_ecc_notif
+                0x00000000      0x108 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_ecc_error.str1.4
+                0x00000000       0x42 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_ecc_error
+                0x00000000       0xe0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_doe_notif.str1.4
+                0x00000000       0x40 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_doe_notif
+                0x00000000      0x108 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .rodata.nonstd_veer_isr_doe_error.str1.4
+                0x00000000       0x42 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_isr_doe_error
+                0x00000000       0xe0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.init_interrupts
+                0x00000000       0xf0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.std_rv_mtvec_mti
+                0x00000000       0x20 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_mtvec_miti0
+                0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.nonstd_veer_mtvec_mcei
+                0x00000000       0x20 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text.std_rv_mtvec_exception
+                0x00000000       0x24 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .dccm.nonstd_isr.vec_table
+                0x00000000       0x80 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .comment       0x00000000       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .riscv.attributes
+                0x00000000       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.find_dv_reg
+                0x00000000       0x3a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.find_dv_reg_by_pfx
+                0x00000000       0x54 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.get_datset_len
+                0x00000000       0x18 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.update_bitmap
+                0x00000000       0x1a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .rodata.print_bitmap.str1.4
+                0x00000000       0x30 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.print_bitmap
+                0x00000000       0x68 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.str_contains
+                0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .rodata.is_ctrl_reg.str1.4
+                0x00000000        0x5 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text.is_ctrl_reg
+                0x00000000       0x12 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .bss.lock_status_bitmap
+                0x00000000       0x6c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .data.dv_ctrl_regids
+                0x00000000       0xd0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .rodata.str1.4
+                0x00000000      0x28f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .dccm          0x00000000      0x21c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .rodata.wait_for_ecc_intr.str1.4
+                0x00000000       0x4f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .text.wait_for_ecc_intr
+                0x00000000       0x50 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .rodata.ecc_zeroize.str1.4
+                0x00000000       0x12 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .text.ecc_zeroize
+                0x00000000       0x2a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .rodata.ecc_pcr_signing_flow.str1.4
+                0x00000000       0x11 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .text.ecc_pcr_signing_flow
+                0x00000000      0x158 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .rodata.wait_for_hmac_intr.str1.4
+                0x00000000       0x48 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .text.wait_for_hmac_intr
+                0x00000000       0x4e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .rodata.hmac_zeroize.str1.4
+                0x00000000       0x13 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .text.hmac_zeroize
+                0x00000000       0x2a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .rodata.kv_error_check.str1.4
+                0x00000000       0x21 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .text.kv_error_check
+                0x00000000       0x3e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .rodata.kv_read_ctrl.str1.4
+                0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .text.kv_read_ctrl
+                0x00000000       0x3a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .rodata.kv_write_ctrl.str1.4
+                0x00000000       0x17 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .text.kv_write_ctrl
+                0x00000000       0x70 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .rodata.pv_hash_extend.str1.4
+                0x00000000       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .text.pv_hash_extend
+                0x00000000       0x3a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .comment       0x00000000       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_try_start_send_txn
+                0x00000000       0x14 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_wait_until_start_send_txn
+                0x00000000       0x14 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_write_cmd
+                0x00000000       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_write_dlen
+                0x00000000       0x2e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_copy_request
+                0x00000000       0x82 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_execute_request
+                0x00000000       0x24 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_send_request
+                0x00000000       0x2c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_is_response_ready
+                0x00000000       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_status
+                0x00000000        0xa /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_send_complete
+                0x00000000       0x24 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_try_start_recv_txn
+                0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_recv_cmd
+                0x00000000        0x8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_recv_user
+                0x00000000        0x8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_recv_dlen
+                0x00000000        0x8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text.mailbox_abort_pending_soc_to_uc_transactions
+                0x00000000        0x2 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperGetc
+                0x00000000        0x8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperGets
+                0x00000000       0x54 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperPrintf
+                0x00000000       0x24 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.putc     0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.get_mcycle
+                0x00000000       0x12 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .text.spi_read_response2
+                0x00000000       0x52 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .text.disable_spi_host
+                0x00000000       0x12 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .text.configure_spi_host_fast
+                0x00000000       0x20 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .rodata.wait_for_sha256_intr.str1.4
+                0x00000000       0x4a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .text.wait_for_sha256_intr
+                0x00000000       0x4e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .rodata.sha256_zeroize.str1.4
+                0x00000000       0x15 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .text.sha256_zeroize
+                0x00000000       0x2a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .text.sha256_flow
+                0x00000000      0x14e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.wait_for_sha512_intr.str1.4
+                0x00000000       0x4a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.wait_for_sha512_intr
+                0x00000000       0x4e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.sha_init_last.str1.4
+                0x00000000       0x2b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.sha_init_last
+                0x00000000       0x38 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.sha_gen_hash_start.str1.4
+                0x00000000       0x24 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.sha_gen_hash_start
+                0x00000000       0x2c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.sha384_kvflow.str1.4
+                0x00000000       0x8a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.sha384_kvflow
+                0x00000000      0x13a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.sha512_zeroize.str1.4
+                0x00000000       0x15 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.sha512_zeroize
+                0x00000000       0x2a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.sha512_flow.str1.4
+                0x00000000        0xe /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.sha512_flow
+                0x00000000       0xde /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.measure_rt.str1.4
+                0x00000000       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.measure_rt
+                0x00000000      0x2fe /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.__func__.1
+                0x00000000        0xb /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .text.sm3_process
+                0x00000000      0x4d6 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .text.sm3_starts
+                0x00000000       0x5a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .text.sm3_update
+                0x00000000       0xd6 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .text.sm3_finish
+                0x00000000      0x190 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .text.sm3      0x00000000       0x40 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .rodata.sm3_padding
+                0x00000000       0x40 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .comment       0x00000000       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_clear_execute_reg.str1.4
+                0x00000000       0x1b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_clear_execute_reg
+                0x00000000       0x2e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_chk_execute_uc.str1.4
+                0x00000000      0x13c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_chk_execute_uc
+                0x00000000       0x82 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_set_mbox_status_field.str1.4
+                0x00000000       0x28 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_set_mbox_status_field
+                0x00000000       0x38 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_w1clr_sha_lock_field.str1.4
+                0x00000000       0x55 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_w1clr_sha_lock_field
+                0x00000000       0x66 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_clr_flow_status_field.str1.4
+                0x00000000       0x2a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_clr_flow_status_field
+                0x00000000       0x52 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_mbox_fw_flow.str1.4
+                0x00000000      0x170 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_mbox_fw_flow
+                0x00000000      0x18a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_fw_update.str1.4
+                0x00000000       0x30 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_fw_update
+                0x00000000       0x62 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.soc_ifc_set_fw_update_reset.str1.4
+                0x00000000       0x6d /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_set_fw_update_reset
+                0x00000000       0x84 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_sha_accel_acquire_lock
+                0x00000000        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_sha_accel_wr_mode
+                0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_sha_accel_poll_status
+                0x00000000       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text.soc_ifc_sha_accel_clr_lock
+                0x00000000       0x12 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .text.uart_rx  0x00000000       0x1a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .text.run_loopback_test
+                0x00000000       0x76 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text.asn1_read_length
+                0x00000000       0x3e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .rodata.parse_x509_cert.str1.4
+                0x00000000      0x4d3 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text.parse_x509_cert
+                0x00000000      0x500 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .rodata.print_cert_info.str1.4
+                0x00000000       0x60 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text.print_cert_info
+                0x00000000      0x10c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .rodata.parse_and_print_certificates.str1.4
+                0x00000000       0x5e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text.parse_and_print_certificates
+                0x00000000       0xbc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .data          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .bss.cptra_intr_rcv
+                0x00000000       0x58 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .sbss.intr_count
+                0x00000000        0x4 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .text          0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+ .bss           0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+ .eh_frame      0x00000000       0x28 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .text.critical_factorization
+                0x00000000       0xd0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .text.two_way_short_needle
+                0x00000000      0x1c0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .text.two_way_long_needle
+                0x00000000      0x280 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .text.strstr   0x00000000      0x1de /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .comment       0x00000000       0x1c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strstr.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memset.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memset.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .text.memcmp   0x00000000       0x52 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .comment       0x00000000       0x1c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcmp.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .text.strchr   0x00000000       0xee /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .comment       0x00000000       0x1c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strchr.o)
+ .text          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+ .data          0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+ .bss           0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+ .text.strnlen  0x00000000       0x26 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+ .comment       0x00000000       0x1c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strnlen.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x40015000         0x00032000         xr
+ICCM             0x40000000         0x00020000         xr
+DCCM             0x50010000         0x00020000         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/caliptra_isr.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/keyvault.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sm3.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+LOAD /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a
+START GROUP
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libgloss.a
+END GROUP
+LOAD /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a
+                0x40015000                        . = 0x40015000
+
+.text.init      0x40015000      0x166
+ *(.text.init)
+ .text.init     0x40015000      0x166 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+                0x40015000                _start
+                0x4001508a                _finish
+
+.text           0x40015168     0x3f22
+ *(.text*)
+ .text.store_to_datavault
+                0x40015168       0xe8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+                0x40015168                store_to_datavault
+ .text.read_from_datavault
+                0x40015250       0xb2 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+                0x40015250                read_from_datavault
+ .text.ecc_keygen_flow
+                0x40015302      0x35c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+                0x40015302                ecc_keygen_flow
+ .text.ecc_signing_flow
+                0x4001565e      0x260 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+                0x4001565e                ecc_signing_flow
+ .text.ecc_verifying_flow
+                0x400158be      0x194 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+                0x400158be                ecc_verifying_flow
+ .text.hmac_flow
+                0x40015a52      0x1ac /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+                0x40015a52                hmac_flow
+ .text.mailbox_send_data
+                0x40015bfe      0x12e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+                0x40015bfe                mailbox_send_data
+ .text.whisperPutc
+                0x40015d2c       0x24 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperPuts
+                0x40015d50       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperPrintUnsigned
+                0x40015d72       0x78 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperPrintDecimal
+                0x40015dea       0x98 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperPrintInt
+                0x40015e82       0x9c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .text.whisperPrintfImpl
+                0x40015f1e      0x164 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+                0x40015f1e                whisperPrintfImpl
+ .text.putchar  0x40016082        0x6 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+                0x40016082                putchar
+ .text.puts     0x40016088        0x2 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+                0x40016088                puts
+ .text.printf   0x4001608a       0x1e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+                0x4001608a                printf
+ .text.check_spi_status
+                0x400160a8       0xf0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400160a8                check_spi_status
+ .text.fifo_rx_wait
+                0x40016198       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x40016198                fifo_rx_wait
+ .text.spi_command_wait
+                0x400161ba       0x12 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400161ba                spi_command_wait
+ .text.set_spi_csid
+                0x400161cc       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400161cc                set_spi_csid
+ .text.write_tx_fifo
+                0x400161dc       0x2e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400161dc                write_tx_fifo
+ .text.spi_command
+                0x4001620a       0x32 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x4001620a                spi_command
+ .text.spi_read_response
+                0x4001623c       0x2c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x4001623c                spi_read_response
+ .text.end_sim_if_qspi_disabled
+                0x40016268       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x40016268                end_sim_if_qspi_disabled
+ .text.enable_spi_host
+                0x40016278       0x18 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x40016278                enable_spi_host
+ .text.init_qspi
+                0x40016290        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x40016290                init_qspi
+ .text.configure_spi_host_slow
+                0x4001629c       0x22 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x4001629c                configure_spi_host_slow
+ .text.sd_send_cmd
+                0x400162be      0x3ee /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400162be                sd_send_cmd
+ .text.sendpulse
+                0x400166ac       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400166ac                sendpulse
+ .text.init_sd_card
+                0x400166c2       0xf2 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400166c2                init_sd_card
+ .text.read_sd_card
+                0x400167b4       0x42 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+                0x400167b4                read_sd_card
+ .text.sha256_flow_produce
+                0x400167f6       0xb2 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+                0x400167f6                sha256_flow_produce
+ .text.sha384_core
+                0x400168a8      0x468 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+                0x400168a8                sha384_core
+ .text.sha384_digest
+                0x40016d10      0x224 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+                0x40016d10                sha384_digest
+ .text.delay_second.constprop.0
+                0x40016f34       0x46 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .text.sha_init
+                0x40016f7a       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+                0x40016f7a                sha_init
+ .text.sha_next
+                0x40016fae       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+                0x40016fae                sha_next
+ .text.sha_next_last
+                0x40016fe2       0x34 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+                0x40016fe2                sha_next_last
+ .text.measure_soc
+                0x40017016      0x298 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+                0x40017016                measure_soc
+ .text.measure_fmc
+                0x400172ae      0x29c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+                0x400172ae                measure_fmc
+ .text.soc_ifc_set_flow_status_field
+                0x4001754a       0x46 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+                0x4001754a                soc_ifc_set_flow_status_field
+ .text.soc_ifc_read_mbox_cmd
+                0x40017590        0xe /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+                0x40017590                soc_ifc_read_mbox_cmd
+ .text.uart_tx  0x4001759e       0x1c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+                0x4001759e                uart_tx
+ .text.enable_uart
+                0x400175ba       0x16 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+                0x400175ba                enable_uart
+ .text.end_sim_if_uart_disabled
+                0x400175d0       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+                0x400175d0                end_sim_if_uart_disabled
+ .text.init_uart
+                0x400175e0        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+                0x400175e0                init_uart
+ .text.asn1_write_tag
+                0x400175ec       0x6e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text.encode_dn
+                0x4001765a       0x9e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .text.convert_le32_to_be_bytes
+                0x400176f8       0x32 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+                0x400176f8                convert_le32_to_be_bytes
+ .text.generate_intermediate_tbs_der
+                0x4001772a      0x360 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+                0x4001772a                generate_intermediate_tbs_der
+ .text.add_signature_to_cert
+                0x40017a8a      0x1ec /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+                0x40017a8a                add_signature_to_cert
+ .text.ldevid   0x40017c76      0x76e /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x40017c76                ldevid
+ .text.idevid   0x400183e4      0x698 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x400183e4                idevid
+ .text.init_doe
+                0x40018a7c       0x96 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x40018a7c                init_doe
+ .text.startup.main
+                0x40018b12      0x25a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x40018b12                main
+ *fill*         0x40018d6c        0x0 
+ .text.metal.init.trapvec
+                0x40018d6c       0x32 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+                0x40018d6c                early_trap_vector
+ .text          0x40018d9e       0x28 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+                0x40018d9e                __lshrdi3
+ .text.memmove  0x40018dc6       0xcc /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+                0x40018dc6                memmove
+ .text          0x40018e92       0xa8 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memset.o)
+                0x40018e92                memset
+ .text.memcpy   0x40018f3a       0xec /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+                0x40018f3a                memcpy
+ .text.strlen   0x40019026       0x64 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+                0x40019026                strlen
+
+.rela.dyn       0x4001908c        0x0
+ .rela.text.init
+                0x4001908c        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+
+.eh_frame
+ *(.eh_frame)
+                0x4001908c                        _data_lma_start = ALIGN (0x4)
+                0x50010000                        _data_vma_start = 0x50010000
+
+.data           0x50010000     0x1228 load address 0x4001908c
+ *(.*data)
+ .rodata        0x50010000       0xc0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata        0x500100c0       0x28 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .data          0x500100e8       0x7c /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+ *(.rodata*)
+ .rodata.store_to_datavault.str1.4
+                0x50010164       0x89 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ *fill*         0x500101ed        0x3 0000
+ .rodata.read_from_datavault.str1.4
+                0x500101f0       0x49 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ *fill*         0x50010239        0x3 0000
+ .rodata.__func__.0
+                0x5001023c       0x14 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .rodata.__func__.1
+                0x50010250       0x13 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ *fill*         0x50010263        0x1 0000
+ .rodata.ecc_keygen_flow.str1.4
+                0x50010264      0x12d /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+                                0x141 (size before relaxing)
+ *fill*         0x50010391        0x3 0000
+ .rodata.ecc_signing_flow.str1.4
+                0x50010394       0xef /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ *fill*         0x50010483        0x1 0000
+ .rodata.ecc_verifying_flow.str1.4
+                0x50010484       0x8a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ *fill*         0x5001050e        0x2 0000
+ .rodata.__func__.0
+                0x50010510       0x10 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .rodata.hmac_flow.str1.4
+                0x50010520       0x79 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+                                 0xaa (size before relaxing)
+ *fill*         0x50010599        0x3 0000
+ .rodata.mailbox_send_data.str1.4
+                0x5001059c      0x12a /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ *fill*         0x500106c6        0x2 0000
+ .rodata.check_spi_status.str1.4
+                0x500106c8       0x60 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .rodata.sha256_flow.str1.4
+                0x50010728       0x83 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+                                 0xb2 (size before relaxing)
+ *fill*         0x500107ab        0x1 0000
+ .rodata.sha384_digest.str1.4
+                0x500107ac       0xcf /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ *fill*         0x5001087b        0x5 0000
+ .rodata.k      0x50010880      0x280 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .rodata.sha_init.str1.4
+                0x50010b00       0x21 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ *fill*         0x50010b21        0x3 0000
+ .rodata.sha_next.str1.4
+                0x50010b24       0x21 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ *fill*         0x50010b45        0x3 0000
+ .rodata.sha_next_last.str1.4
+                0x50010b48       0x2b /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ *fill*         0x50010b73        0x1 0000
+ .rodata.measure_soc.str1.4
+                0x50010b74       0xc8 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+                                 0xdc (size before relaxing)
+ .rodata.measure_fmc.str1.4
+                0x50010c3c       0x35 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ *fill*         0x50010c71        0x3 0000
+ .rodata.__func__.0
+                0x50010c74        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.__func__.2
+                0x50010c80        0xc /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .rodata.soc_ifc_set_flow_status_field.str1.4
+                0x50010c8c       0x28 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .rodata.generate_intermediate_tbs_der.str1.4
+                0x50010cb4       0x54 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .rodata.ldevid.str1.4
+                0x50010d08      0x2a9 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                                0x2b5 (size before relaxing)
+ *fill*         0x50010fb1        0x3 0000
+ .rodata.idevid.str1.4
+                0x50010fb4      0x121 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ *fill*         0x500110d5        0x3 0000
+ .rodata.main.str1.4
+                0x500110d8      0x10d /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ *(.srodata*)
+ *fill*         0x500111e5        0x3 0000
+ .srodata.cst8  0x500111e8       0x40 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+                0x50011228                        . = ALIGN (0x4)
+                0x4001a2b4                        _data_lma_end = (_data_lma_start + SIZEOF (.data))
+                0x50011228                        _data_vma_end = (_data_vma_start + SIZEOF (.data))
+                0x4001a2b4                        _bss_lma_start = _data_lma_end
+                0x50011228                        _bss_vma_start = _data_vma_end
+
+.bss            0x50011228        0x0 load address 0x4001a2b4
+ *(.sbss)
+ *(.bss)
+                0x50011228                        . = ALIGN (0x4)
+                0x4001a2b4                        _bss_lma_end = (_bss_lma_start + SIZEOF (.bss))
+                0x50011228                        _bss_vma_end = (_bss_vma_start + SIZEOF (.bss))
+                0x4001a2b4                        _end = _bss_lma_end
+                0x00000001                        ASSERT ((_end < 0x40047000), ERROR: ROM size exceeds 200KiB)
+                0x50011228                        . = _bss_vma_end
+                0x50011228                        _dccm_lma_start = _bss_vma_end
+                0x50011228                        _dccm_vma_start = _bss_vma_end
+
+.dccm           0x50011228     0x7000
+ *(.dccm*)
+ .dccm          0x50011228     0x7000 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x50011228                SOC_FW_data
+                0x50013228                FMC_data
+                0x50018228                        . = ALIGN (0x4)
+                0x50018228                        iccm_code0_start = .
+
+.data_iccm0     0x40000000        0x0 load address 0x50018228
+ *(.data_iccm0)
+                0x40000000                        . = ALIGN (0x4)
+                0x50018228                        iccm_code0_end = (iccm_code0_start + SIZEOF (.data_iccm0))
+                0x50018228                        iccm_code1_start = ALIGN (iccm_code0_end, 0x4)
+
+.data_iccm1     0x40000000        0x0 load address 0x50018228
+ *(.data_iccm1)
+                0x40000000                        . = ALIGN (0x4)
+                0x50018228                        iccm_code1_end = (iccm_code1_start + SIZEOF (.data_iccm1))
+                0x50018228                        iccm_code2_start = ALIGN (iccm_code1_end, 0x4)
+
+.data_iccm2     0x40000000        0x0 load address 0x50018228
+ *(.data_iccm2)
+                0x40000000                        . = ALIGN (0x4)
+                0x50018228                        iccm_code2_end = (iccm_code2_start + SIZEOF (.data_iccm2))
+                0x5001e000                        _cert_store_start = 0x5001e000
+                0x5001e800                        _cert_store_end = 0x5001e800
+                0x5001e820                        _tbs_der_store_start = 0x5001e820
+                0x5001f020                        _tbs_der_store_end = 0x5001f020
+
+.cert_store     0x5001e000      0x820
+ *(.cert_store)
+ .cert_store    0x5001e000      0x820 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x5001e000                cert_store
+                0x5001e820                        . = ALIGN (0x4)
+
+.tbs_der_store  0x5001e820      0x820
+ *(.tbs_der_store)
+ .tbs_der_store
+                0x5001e820      0x820 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+                0x5001e820                tbs_der_store
+                0x5001f040                        . = ALIGN (0x4)
+                0x50018230                        . = ALIGN (iccm_code2_end, 0x10)
+                0x5001c230                        STACK = (ALIGN (0x10) + 0x4000)
+                0x00000001                        ASSERT ((STACK < 0x50030000), ERROR: Stack overflows the DCCM -- note: lower half of DCCM is allocated in the validation image for remote firmware images)
+OUTPUT(/home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/output/caliptraROMC.elf elf32-littleriscv)
+
+.comment        0x00000000       0x33
+ .comment       0x00000000       0x18 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+                                 0x19 (size before relaxing)
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .comment       0x00000018       0x19 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .comment       0x00000018       0x19 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+ .comment       0x00000018       0x1b /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+                                 0x1c (size before relaxing)
+ .comment       0x00000033       0x1c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+ .comment       0x00000033       0x1c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+
+.note.GNU-stack
+                0x00000000        0x0
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+ .note.GNU-stack
+                0x00000000        0x0 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+
+.riscv.attributes
+                0x00000000       0x33
+ .riscv.attributes
+                0x00000000       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/datavault.o
+ .riscv.attributes
+                0x0000002f       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/ecc.o
+ .riscv.attributes
+                0x00000062       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/hmac.o
+ .riscv.attributes
+                0x00000095       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/mailbox.o
+ .riscv.attributes
+                0x000000c4       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/printf.o
+ .riscv.attributes
+                0x000000f7       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/qspi.o
+ .riscv.attributes
+                0x0000012a       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha256.o
+ .riscv.attributes
+                0x0000015d       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha384.o
+ .riscv.attributes
+                0x0000018c       0x33 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/sha512.o
+ .riscv.attributes
+                0x000001bf       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/soc_ifc.o
+ .riscv.attributes
+                0x000001ee       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/uart.o
+ .riscv.attributes
+                0x0000021d       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/build/x509.o
+ .riscv.attributes
+                0x0000024c       0x2f /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/main.o
+ .riscv.attributes
+                0x0000027b       0x31 /home/houdonghui/cm3_ahbmtx_mcu/user/firmware/caliptra_sw/caliptraRomC/bootrom/src/start.o
+ .riscv.attributes
+                0x000002ac       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+ .riscv.attributes
+                0x000002db       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memmove-stub.o)
+ .riscv.attributes
+                0x0000030a       0x2d /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memset.o)
+ .riscv.attributes
+                0x00000337       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-memcpy.o)
+ .riscv.attributes
+                0x00000366       0x2f /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/../../../../riscv64-unknown-elf/lib/rv32imc/ilp32/libc.a(libc_a-strlen.o)
+
+.debug_info     0x00000000      0x1b6
+ .debug_info    0x00000000      0x1b6 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+
+.debug_abbrev   0x00000000      0x10c
+ .debug_abbrev  0x00000000      0x10c /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+
+.debug_loclists
+                0x00000000       0xad
+ .debug_loclists
+                0x00000000       0xad /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+
+.debug_aranges  0x00000000       0x20
+ .debug_aranges
+                0x00000000       0x20 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+
+.debug_line     0x00000000      0x107
+ .debug_line    0x00000000      0x107 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+
+.debug_str      0x00000000      0x19a
+ .debug_str     0x00000000      0x19a /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+                                0x1fc (size before relaxing)
+
+.debug_line_str
+                0x00000000       0xb2
+ .debug_line_str
+                0x00000000       0xb2 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)
+                                0x12c (size before relaxing)
+
+.debug_frame    0x00000000       0x20
+ .debug_frame   0x00000000       0x20 /home/houdonghui/risc_v_tool_chain/lib/gcc/riscv64-unknown-elf/13.1.1/rv32imc/ilp32/libgcc.a(_lshrdi3.o)

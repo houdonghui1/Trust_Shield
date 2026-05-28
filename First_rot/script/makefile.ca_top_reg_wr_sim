@@ -1,0 +1,33 @@
+SIM_TARGET := ca_top_reg_wr_sim
+SIM_DEFINE := +define+FSDB_DUMP +define+CA_TOP_REG_WR_SIM +define+SRAM_128K +define+PART_TEST +define+SIMULATION +define+RAMPRELOAD_SPI
+SIM_PATH := ${PRJ_SIM_DIR}/${SIM_TARGET}
+DUT_LIST := dut.list
+SIM_LIST := sim.list
+SIM_INC_LIST := sim_inc.list
+SIM_SCRIPTS_PATH := ${PRJ_SIM_DIR}/script
+CMDFILE := ${SIM_SCRIPTS_PATH}/vcs_sim_cmdfile.f
+WAVEFORM := TOP.fsdb
+WAVELIST := ${SIM_SCRIPTS_PATH}/ca_apb.rc
+SHELL := /bin/bash
+
+all: prepare compile sim waveform
+
+prepare:
+	-mkdir ${SIM_PATH}
+	cp ${DUT_LIST} ${SIM_PATH}
+	cp ${SIM_LIST} ${SIM_PATH}
+	cp ${SIM_INC_LIST} ${SIM_PATH}
+	cp ${CMDFILE} ${SIM_PATH}
+	source vcs_sim_prepare.sh ${PRJ_DIR} ${SIM_PATH}
+
+compile:
+	cd ${SIM_PATH} && vcs ${SIM_DEFINE} -full64 -cpp g++-4.4 -cc gcc-4.4 -f ${CMDFILE} -P ${VERDI_DT} ${VERDI_DA} -f ${SIM_INC_LIST} -f ${SIM_LIST} -f ${DUT_LIST} 
+
+sim:
+	cd ${SIM_PATH} && ./simv -l sim.log
+
+waveform:
+	cd ${SIM_PATH} && verdi ${SIM_DEFINE} -f ${CMDFILE} -f ${SIM_INC_LIST} -f ${SIM_LIST} -f ${DUT_LIST} -ssf ${WAVEFORM} -sswr ${WAVELIST} &
+ 
+#clean:
+

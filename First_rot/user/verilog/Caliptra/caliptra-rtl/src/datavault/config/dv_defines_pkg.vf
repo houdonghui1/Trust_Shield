@@ -1,0 +1,3 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/datavault/rtl
+${PRJ_CALIPTRA_ROOT}/src/datavault/rtl/dv_defines_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/datavault/rtl/dv_defines_pkg.sv

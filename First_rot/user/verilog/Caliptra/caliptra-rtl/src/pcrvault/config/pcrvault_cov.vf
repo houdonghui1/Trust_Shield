@@ -1,0 +1,4 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/pcrvault/coverage
+${PRJ_CALIPTRA_ROOT}/src/pcrvault/coverage/pcrvault_cov_if.sv
+${PRJ_CALIPTRA_ROOT}/src/pcrvault/coverage/pcrvault_cov_props.sv
+${PRJ_CALIPTRA_ROOT}/src/pcrvault/coverage/pcrvault_cov_bind.sv

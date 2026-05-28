@@ -1,0 +1,9 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_util_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_alert_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_subreg_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_mubi_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_cipher_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_sparse_fsm_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim/rtl/caliptra_prim_sparse_fsm_pkg.sv

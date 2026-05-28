@@ -1,5 +1,5 @@
 <div align="center">
-<img src="picture/0.png" alt="alt" width="65%" />
+<img src="picture/0.png" alt="alt" width="95%" />
 </div>
 
 
@@ -163,7 +163,7 @@ TCG架构下的证明方案**不能适应复杂的计算环境**，阻碍了可�
 
 三级可信根为集群管理平台上的安全片上系统，负责异构集群自身的安全启动，汇总集群内各个计算平台的二级可信根的启动信息，并通过远程证明完成可信第三方的验证。
 <div align="center">
-<img src="picture/2.png" alt="alt" width="65%" />
+<img src="picture/2.png" alt="alt" width="85%" />
 </div>
 <div align="center">
 多级可信根系统架构图

@@ -1,0 +1,4 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl
+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl/kv_defines_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl/kv_macros.svh
+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl/kv_macros.svh

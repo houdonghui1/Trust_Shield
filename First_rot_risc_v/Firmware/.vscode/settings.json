@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "kprintf.h": "c",
+        "drv_caliptra1x.h": "c",
+        "drv_defines.h": "c",
+        "caliptra_top_reg.h": "c"
+    }
+}

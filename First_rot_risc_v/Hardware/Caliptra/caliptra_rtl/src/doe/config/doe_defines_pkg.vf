@@ -1,0 +1,3 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/doe/rtl
+${PRJ_CALIPTRA_ROOT}/src/doe/rtl/doe_defines_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/doe/rtl/doe_defines_pkg.sv

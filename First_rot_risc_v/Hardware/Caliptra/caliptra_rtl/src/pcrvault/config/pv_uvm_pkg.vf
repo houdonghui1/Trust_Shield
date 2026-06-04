@@ -1,0 +1,2 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/pcrvault/rtl
+${PRJ_CALIPTRA_ROOT}/src/pcrvault/rtl/pv_reg_uvm.sv

@@ -1,0 +1,8 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl
++incdir+${PRJ_CALIPTRA_ROOT}/src/doe/rtl
++incdir+${PRJ_CALIPTRA_ROOT}/src/integration/asserts
+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl/kv_defines_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/keyvault/rtl/kv_macros.svh
+${PRJ_CALIPTRA_ROOT}/src/doe/rtl/doe_defines_pkg.sv
+${PRJ_CALIPTRA_ROOT}/src/integration/asserts/caliptra_top_sva.sv
+${PRJ_CALIPTRA_ROOT}/src/doe/rtl/doe_defines_pkg.sv

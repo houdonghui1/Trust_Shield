@@ -1,0 +1,4 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim_generic/rtl
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim_generic/rtl/caliptra_prim_generic_flop_en.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim_generic/rtl/caliptra_prim_generic_flop.sv
+${PRJ_CALIPTRA_ROOT}/src/caliptra_prim_generic/rtl/caliptra_prim_generic_buf.sv

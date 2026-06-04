@@ -177,6 +177,7 @@ TCG架构下的证明方案**不能适应复杂的计算环境**，阻碍了可�
 | ------------ | ----------- |
 | [一级可信根(ARM)硬件仓库](First_rot/)  | 一级原型SOC的RTL逻辑设计、SIM仿真验证、FPGA原型验证。包括全部system verilog代码，EDA自动化仿真脚本，FPGA构建脚本...... |
 | [一级可信根(ARM)软件代码仓库](First_rot_sw/) | 包括SOC板级支持包、bootroom、runtime源码、SD卡image |
+| [一级可信根(RISC_V)仓库](First_rot_risc_v/) | 基于rocket_chip的一级原型SOC的RTL逻辑设计、FPGA工程。包括全部system verilog代码、软件C代码...... |
 | [二级可信根硬件仓库](Second_rot/) | 二级可信根架构图、硬件原理图、RTL代码、FPGA工程 |
 | [二级可信根软件代码仓库](Second_rot_sw/) | 包括PS端系统image、rot驱动源码、虚拟机源码、SD卡image |
 | [三级级可信根硬件仓库](Third_rot/) | 三级可信根SOC开发仿真环境、RTL代码、自动化脚本、FPGA工程 |

@@ -1,0 +1,4 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/integration/rtl
+${PRJ_CALIPTRA_ROOT}/src/integration/rtl/config_defines.svh
+${PRJ_CALIPTRA_ROOT}/src/integration/rtl/caliptra_reg_defines.svh
+${PRJ_CALIPTRA_ROOT}/src/integration/rtl/caliptra_reg_defines.svh

@@ -1,0 +1,56 @@
+//===============================================
+//
+//	File: drv_defines.h
+//	Author: afterGlow,4ever
+//	Group: Fall For Laboratory
+//	Date: 01032024
+//	Version: v1.0
+//
+// 	This is driver define config.
+//
+//===============================================
+
+#ifndef _DRV_DEFINES_H_
+#define _DRV_DEFINES_H_
+
+//===============================================
+// common define
+//===============================================
+
+#define UART_CLK 40000000
+
+//===============================================
+// printf uart define
+//===============================================
+
+#define PRINTF_HUART huart0
+
+//===============================================
+// driver enable list
+//===============================================
+#ifndef UART_DRIVER
+#define UART_DRIVER
+#endif
+
+#ifndef UART_EX_DRIVER
+#define UART_EX_DRIVER
+#endif
+
+#ifndef COMMON_DRIVER
+#define COMMON_DRIVER
+#endif
+//#define GPIO_DRIVER
+//#define BASTIM_DRIVER
+//#define ETH_DRIVER
+//#define ETH_MAC_DRIVER
+//#define ADVTIM_DRIVER
+
+//===============================================
+// driver header list
+//===============================================
+
+
+#include "drv_caliptra1x.h"
+
+#endif
+

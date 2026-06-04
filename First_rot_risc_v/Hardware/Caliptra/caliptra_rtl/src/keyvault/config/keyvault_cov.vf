@@ -1,0 +1,4 @@
++incdir+${PRJ_CALIPTRA_ROOT}/src/keyvault/coverage
+${PRJ_CALIPTRA_ROOT}/src/keyvault/coverage/keyvault_cov_if.sv
+${PRJ_CALIPTRA_ROOT}/src/keyvault/coverage/keyvault_cov_props.sv
+${PRJ_CALIPTRA_ROOT}/src/keyvault/coverage/keyvault_cov_bind.sv

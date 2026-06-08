@@ -6,12 +6,33 @@
 `vivado 2021.1`
 
 **板子：**
-我们采用xilinx KU060 开发板
+- 我们采用xilinx KU060 开发板
 <div align="center">
 <img src="image/board.png" alt="alt" width="50%" />
 </div>
+购买地址：淘宝璞致旗舰店
 
-- 购买地址：淘宝璞致旗舰店
+- 信号转接板：将特别设计的子板插入FPGA开发板的40P插座上，方便一级可信根通信和JTAG调试信号引出。
+<div align="center">
+<img src="image/connect.png" alt="alt" width="40%" />
+</div>
+
+通过条线可以灵活更改security_state和scan_mode的值  
+  
+BootFSM_BrkPoint 默认为1  
+ 
+| 管脚 | 信号 |  
+|------|------|  
+| AG11 | security_state[0] |  
+| AF12 | security_state[1] |  
+| AE12 | security_state[2] |  
+| AH13 | scan_mode |  
+ 
+**产品模式：**
+security_state = 3'b111   scan_mode = 1'b0  
+**调试模式：**
+security_state = 3'b000   scan_mode = 1'b1  
+
 
 **准备rom程序：**
 

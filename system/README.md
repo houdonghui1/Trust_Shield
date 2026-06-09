@@ -6,6 +6,8 @@
 <img src="system_image/1.png"  />
 </div>
 
+[多级可信根系统实物图](./system_image/system.png)
+
 ### 1.通信接口说明：
 
 - **一级到二级**：目前一级可信根SOC端通过uart连接到uart-usb转接板，再连接至二级PS端USB口
@@ -58,6 +60,7 @@
 
 #### 各级可信根到通信转接板MUTI_UART的连接
 
+[MUTI_UART板子图](./system_image/muti_uart.png)
 
 | 一级ROT信号 | 一级转接板引脚 | MUTI_UART引脚 | 
 |------|------|------|
@@ -100,6 +103,8 @@
 | SPI_DEV_D2 | B24 | PMOD1_5 | 40P_31 |
 | SPI_DEV_D3 | C24 | PMOD1_6 | 40P_37 |
 | SPI_DEV_CS_L | D23 | PMOD1_7 | 40P_39 |
+
+[SAM3X_40P插口引脚位置图](./system_image/pins.png)
 
 > *同时参阅各级FPGA工程的引脚约束*
 

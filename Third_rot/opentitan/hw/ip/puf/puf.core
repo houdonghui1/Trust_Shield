@@ -1,0 +1,98 @@
+CAPI=2:
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+name: "lowrisc:ip:puf:1.0"
+description: "puf unit"
+filesets:
+  files_rtl:
+    depend:
+      - lowrisc:prim:all
+      - lowrisc:prim:lc_sync
+      - lowrisc:prim:lfsr
+      - lowrisc:prim:sparse_fsm
+      - lowrisc:prim:util
+      - lowrisc:ip:tlul
+      - lowrisc:ip:lc_ctrl_pkg
+      - lowrisc:ip:edn_pkg
+      - lowrisc:ip:keymgr_pkg
+      - lowrisc:ip:sm4_pkg
+    files:
+      - rtl/AP0BP1.sv
+      - rtl/Comp.sv
+      - rtl/Counter.sv
+      - rtl/header.sv: {is_include_file: true}
+      - rtl/PUF128.sv
+      - rtl/PUF1bit.sv
+      - rtl/PUF_core.sv
+      - rtl/PUFDec128.sv
+      - rtl/PUFMux128.sv
+      - rtl/puf_reg_pkg.sv
+      - rtl/puf_reg_top.sv
+      - rtl/puf.sv
+      - rtl/rng_puf.sv
+      - rtl/Timer.sv
+      - rtl/Vote.sv
+      - rtl/response_rng4bits.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+      - lowrisc:lint:comportable
+    files:
+      - lint/puf.vlt
+    file_type: vlt
+
+  files_ascentlint_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+      - lowrisc:lint:comportable
+    files:
+      - lint/puf.waiver
+    file_type: waiver
+
+  files_veriblelint_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+      - lowrisc:lint:comportable
+
+parameters:
+  SYNTHESIS:
+    datatype: bool
+    paramtype: vlogdefine
+  
+
+targets:
+  default: &default_target
+    filesets:
+      - tool_verilator   ? (files_verilator_waiver)
+      - tool_ascentlint  ? (files_ascentlint_waiver)
+      - tool_veriblelint ? (files_veriblelint_waiver)
+      - files_rtl
+    toplevel: puf
+
+  lint:
+    <<: *default_target
+    default_tool: verilator
+    parameters:
+      - SYNTHESIS=true
+    tools:
+      verilator:
+        mode: lint-only
+        verilator_options:
+          - "-Wall"
+
+  syn:
+    <<: *default_target
+    # TODO: set default to DC once
+    # this option is available
+    # olofk/edalize#89
+    default_tool: icarus
+    parameters:
+      - SYNTHESIS=true
+
+

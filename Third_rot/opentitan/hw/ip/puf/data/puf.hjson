@@ -1,0 +1,161 @@
+{
+  name:               "puf",
+  human_name:         "puf engine",
+  one_line_desc:      "puf encryption engine ",
+  one_paragraph_desc: '''
+  [Advanced Encryption Standard (puf)][puf] 
+  '''
+  // Unique comportable IP identifier defined under KNOWN_CIP_IDS in the regtool.
+  cip_id:             "36",
+  design_spec:        "../doc",
+  dv_doc:             "../doc/dv",
+  hw_checklist:       "../doc/checklist",
+  sw_checklist:       "/sw/device/lib/dif/dif_puf",
+  version:            "1.0.0",
+  life_stage:         "L1",
+  design_stage:       "D2S",
+  verification_stage: "V2S", 
+  dif_stage:          "S2",
+  clocking: [
+    {clock: "clk_i", reset: "rst_ni"},
+  ]
+    bus_interfaces: [
+    { protocol: "tlul", direction: "device" }
+  ],
+
+//inter IPs signals
+inter_signal_list: [
+    { struct:  "entropy_src_rng_rsp",
+      type:    "uni",
+      name:    "entropy_src_rng",
+      act:     "req",
+      package: "entropy_src_pkg",
+    },
+    { struct:  "sm4_result_req",
+      type:    "uni",
+      name:    "sm4_result",
+      act:     "rcv",
+      package: "sm4_pkg",
+    },
+],
+
+param_list: [
+    { name:    "NumRegs_challenge",
+      type:    "int",
+      default: "4",
+      desc:    "Number registers for challenge",
+      local:   "true"
+    },
+    { name:    "NumRegs_response",
+      type:    "int",
+      default: "8",
+      desc:    "Number registers for response",
+      local:   "true"
+    },
+
+],
+
+//定义寄存器
+
+regwidth: "32",
+registers: [
+##############################################################################
+
+//控制寄存器
+  { name: "CTRL_SIGNALS",
+    desc: '''
+      Control 
+    '''
+    swaccess: "rw",
+    hwaccess: "hrw",
+    hwqe:     "true",
+    fields: [
+      { bits: "0",
+        name: "enable_puf",
+        resval: "0x1",
+        hwaccess: "hrw",
+        desc:  '''
+          enable core to work
+        '''
+      }
+      { bits: "1",
+        name: "mode_puf",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          the mode of puf_core
+        '''
+      }
+      { bits: "2",
+        name: "ready_cha",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          challenge ready signal
+        '''
+      }      
+            ]
+  },
+
+// 状态寄存器
+  { name: "STATE_SIGNALS",
+    desc: '''
+      The puf states 
+    '''
+    swaccess: "ro",
+    hwaccess: "hrw",
+    fields: [
+      { bits: "0",
+        name: "response_valid_bit",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          valid signal of response
+        '''
+      }
+      { bits: "1",
+        name: "response_done_4bit",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          valid signal of response_done_4bit(rng mode)
+        '''
+      }
+            ]
+    },
+
+# input challenge_data
+    { multireg: {
+      name: "Challenge",
+      resval: "0",
+      desc: '''
+        data input
+      '''
+      count: "NumRegs_challenge",
+      cname: "challenge_data_in",
+      swaccess: "rw",
+      hwaccess: "hrw",
+      hwqe:     "true",
+      fields: [
+        { bits: "31:0", name: "challenge_data_in", desc: "challenge_data_in" }
+      ],
+      }
+    },
+# output response
+    { multireg: {
+      name: "Response",
+      resval: "0",
+      desc: '''
+        result output
+      '''
+      count: "NumRegs_response",
+      cname: "response_out",
+      swaccess: "ro",
+      hwaccess: "hrw",
+      fields: [
+        { bits: "31:0", name: "response_out", desc: "response_out" }
+      ],
+      }
+    },
+  ],
+}

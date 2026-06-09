@@ -1,0 +1,97 @@
+CAPI=2:
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+name: "lowrisc:ip:sm3:1.0"
+description: "sm3 unit"
+filesets:
+  files_rtl:
+    depend:
+      - lowrisc:prim:all
+      - lowrisc:prim:lc_sync
+      - lowrisc:prim:lfsr
+      - lowrisc:prim:sparse_fsm
+      - lowrisc:prim:util
+      - lowrisc:ip:tlul
+      - lowrisc:ip:lc_ctrl_pkg
+      - lowrisc:ip:edn_pkg
+      - lowrisc:ip:keymgr_pkg
+    files:
+      - rtl/adder_32b.sv
+      - rtl/csa_adder_3i_32b.sv
+      - rtl/sm3_adder.sv
+      - rtl/sm3_cfg.sv: {is_include_file: true}
+      - rtl/sm3_cmprss_ceil_comb.sv
+      - rtl/sm3_cmprss_core.sv
+      - rtl/sm3_cmprss_core_wrapper.sv
+      - rtl/sm3_core_top.sv
+      - rtl/sm3_expnd_core.sv
+      - rtl/sm3_expnd_core_wrapper.sv
+      - rtl/sm3_if.sv: {is_include_file: true}
+      - rtl/sm3_pad_core.sv
+      - rtl/sm3_pad_core_wrapper.sv
+      - rtl/sm3_reg_pkg.sv
+      - rtl/sm3_reg_top.sv
+      - rtl/sm3.sv
+    file_type: systemVerilogSource
+
+  files_verilator_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+      - lowrisc:lint:comportable
+    files:
+      - lint/sm3.vlt
+    file_type: vlt
+
+  files_ascentlint_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+      - lowrisc:lint:comportable
+    files:
+      - lint/sm3.waiver
+    file_type: waiver
+
+  files_veriblelint_waiver:
+    depend:
+      # common waivers
+      - lowrisc:lint:common
+      - lowrisc:lint:comportable
+
+parameters:
+  SYNTHESIS:
+    datatype: bool
+    paramtype: vlogdefine
+  
+
+targets:
+  default: &default_target
+    filesets:
+      - tool_verilator   ? (files_verilator_waiver)
+      - tool_ascentlint  ? (files_ascentlint_waiver)
+      - tool_veriblelint ? (files_veriblelint_waiver)
+      - files_rtl
+    toplevel: sm3
+
+  lint:
+    <<: *default_target
+    default_tool: verilator
+    parameters:
+      - SYNTHESIS=true
+    tools:
+      verilator:
+        mode: lint-only
+        verilator_options:
+          - "-Wall"
+
+  syn:
+    <<: *default_target
+    # TODO: set default to DC once
+    # this option is available
+    # olofk/edalize#89
+    default_tool: icarus
+    parameters:
+      - SYNTHESIS=true
+
+

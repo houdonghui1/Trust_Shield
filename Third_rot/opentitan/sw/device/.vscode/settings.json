@@ -1,0 +1,27 @@
+{
+    "files.associations": {
+        "makefile.*": "makefile",
+        "system_error": "c",
+        "__bit_reference": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "map": "c",
+        "set": "c",
+        "unordered_map": "c",
+        "unordered_set": "c",
+        "types.h": "c",
+        "rs_decode.h": "c",
+        "base.h": "c",
+        "sm3.h": "c",
+        "puf.h": "c",
+        "top_earlgrey.h": "c",
+        "dif_rv_timer.h": "c",
+        "check.h": "c",
+        "dif_entropy_src.h": "c",
+        "ottf_main.h": "c",
+        "dif_rv_timer_autogen.h": "c",
+        "spi_device_testutils.h": "c",
+        "dif_spi_host.h": "c"
+    }
+}

@@ -1,0 +1,137 @@
+{
+  name:               "rs_encode",
+  human_name:         "rs_encode Accelerator",
+  one_line_desc:      "rs_encode encryption engine ",
+  one_paragraph_desc: '''
+  [Advanced Encryption Standard (rs_encode)][rs_encode] 
+  '''
+  // Unique comportable IP identifier defined under KNOWN_CIP_IDS in the regtool.
+  cip_id:             "34",
+  design_spec:        "../doc",
+  dv_doc:             "../doc/dv",
+  hw_checklist:       "../doc/checklist",
+  sw_checklist:       "/sw/device/lib/dif/dif_rs_encode",
+  version:            "1.0.0",
+  life_stage:         "L1",
+  design_stage:       "D2S",
+  verification_stage: "V2S",
+  dif_stage:          "S2",
+  clocking: [
+    {clock: "clk_i", reset: "rst_ni"},
+  ]
+    bus_interfaces: [
+    { protocol: "tlul", direction: "device" }
+  ],
+
+param_list: [
+    { name:    "NumRegs_Data_in",
+      type:    "int",
+      default: "42",
+      desc:    "Number registers for input data",
+      local:   "true"
+    },
+    { name:    "NumRegs_encoded_data",
+      type:    "int",
+      default: "50",
+      desc:    "Number registers for output data",
+      local:   "true"
+    },
+
+],
+
+//定义寄存器
+
+regwidth: "32",
+registers: [
+##############################################################################
+
+//控制寄存器
+  { name: "CTRL_SIGNALS",
+    desc: '''
+      Control 
+    '''
+    swaccess: "rw",
+    hwaccess: "hrw",
+    hwqe:     "true",
+    fields: [
+      { bits: "0",
+        name: "encode_en",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          enable core to encode
+        '''
+      }
+      { bits: "1",
+        name: "clrn",
+        resval: "0x1",
+        hwaccess: "hrw",
+        desc:  '''
+          la di jiu hui qing ling
+        '''
+      }      
+            ]
+  },
+
+// 状态寄存器
+  { name: "STATE_SIGNALS",
+    desc: '''
+      The rs_encode states 
+    '''
+    swaccess: "ro",
+    hwaccess: "hrw",
+    fields: [
+      { bits: "0",
+        name: "valid_bit",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          valid signal of encoded_data
+        '''
+      }
+      { bits: "1",
+        name: "ready_bit",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          ready signal of rs_encode,can read outdata and start new encode count.
+        '''
+      }
+            ]
+    },
+
+# input data
+    { multireg: {
+      name: "DATA_IN",
+      resval: "0",
+      desc: '''
+        data input
+      '''
+      count: "NumRegs_Data_in",
+      cname: "data_in",
+      swaccess: "rw",
+      hwaccess: "hrw",
+      hwqe:     "true",
+      fields: [
+        { bits: "31:0", name: "data_in", desc: "data_in" }
+      ],
+      }
+    },
+# encoded_data output
+    { multireg: {
+      name: "ENCODED_DATA_OUT",
+      resval: "0",
+      desc: '''
+        result output
+      '''
+      count: "NumRegs_encoded_data",
+      cname: "ENCODED_OUT",
+      swaccess: "ro",
+      hwaccess: "hrw",
+      fields: [
+        { bits: "31:0", name: "encoded_out", desc: "result output" }
+      ],
+      }
+    },
+  ],
+}

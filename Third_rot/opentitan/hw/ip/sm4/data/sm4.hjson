@@ -1,0 +1,199 @@
+// Copyright lowRISC contributors.
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+//
+# SM4 register template
+{
+  name:               "sm4",
+  human_name:         "sm4 Accelerator",
+  one_line_desc:      "sm4 encryption and decryption engine ",
+  one_paragraph_desc: '''
+  [Advanced Encryption Standard (sm4)][sm4] 
+  '''
+  // Unique comportable IP identifier defined under KNOWN_CIP_IDS in the regtool.
+  cip_id:             "32",
+  design_spec:        "../doc",
+  dv_doc:             "../doc/dv",
+  hw_checklist:       "../doc/checklist",
+  sw_checklist:       "/sw/device/lib/dif/dif_sm4",
+  version:            "1.0.0",
+  life_stage:         "L1",
+  design_stage:       "D2S",
+  verification_stage: "V2S",
+  dif_stage:          "S2",
+  clocking: [
+    {clock: "clk_i", reset: "rst_ni"},
+  ]
+  bus_interfaces: [
+    { protocol: "tlul", direction: "device" }
+  ],
+
+//inter IPs signals
+inter_signal_list: [
+    { struct:  "sm4_result_req",
+      type:    "uni",
+      name:    "result_puf",
+      act:     "req",
+      package: "sm4_pkg",
+    },
+],
+
+param_list: [
+    { name:    "NumRegsData",
+      type:    "int",
+      default: "4",
+      desc:    "Number registers for input and output data",
+      local:   "true"
+    },
+    { name:    "NumRegsKey",
+      type:    "int",
+      default: "4",
+      desc:    "Number registers Key",
+      local:   "true"
+    },
+
+],
+
+//定义寄存器
+
+regwidth: "32",
+registers: [
+##############################################################################
+
+//控制寄存器
+  { name: "CTRL_SIGNALS",
+    desc: '''
+      Control 
+    '''
+    swaccess: "rw",
+    hwaccess: "hrw",
+    hwqe:     "true",
+    fields: [
+      { bits: "0",
+        name: "sm4_enable_in",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          enable sm4 core to work
+        '''
+      }
+      { bits: "1",
+        name: "encdec_sel_in",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          select of encryption or decryption
+        '''
+      }
+      { bits: "2",
+        name: "enable_key_exp_in",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          enable key expansion for sm4
+        '''
+      }
+      { bits: "3",
+        name: "user_key_valid_in",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          valid signal of user key
+        '''
+      }
+      { bits: "4",
+        name: "encdec_enable_in",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          enable encryption to work
+        '''
+      }
+      { bits: "5",
+        name: "valid_in",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          valid signal of plain text
+        '''
+      }      
+            ]
+  },
+# SM4状态寄存器
+  { name: "STATE_SIGNALS",
+    desc: '''
+      The sm4 states 
+    '''
+    swaccess: "ro",
+    hwaccess: "hrw",
+    fields: [
+      { bits: "0",
+        name: "key_exp_ready_out",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          ready signal of key expansion
+        '''
+      }
+      { bits: "1",
+        name: "valid_out",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          ready signal of encryption result
+        '''
+      }
+            ]
+    },
+# initial key registers
+    { multireg: {
+      name: "KEY",
+      resval: "0",
+      desc: '''
+        Initial Key Registers 
+      '''
+      count: "NumRegsKey",
+      cname: "KEY",
+      swaccess: "rw",
+      hwaccess: "hrw",
+      hwqe:     "true",
+      fields: [
+        { bits: "31:0", name: "key", desc: "user key" }
+      ],
+      }
+    },
+# data input
+    { multireg: {
+      name: "DATA_IN",
+      resval: "0",
+      desc: '''
+        data input 
+      '''
+      count: "NumRegsData",
+      cname: "DATA_IN",
+      swaccess: "rw",
+      hwaccess: "hrw",
+      hwqe:     "true",
+      fields: [
+        { bits: "31:0", name: "data_in", desc: "data_in" }
+      ],
+      }
+    },
+# result output
+    { multireg: {
+      name: "RESULT_OUT",
+      resval: "0",
+      desc: '''
+        result output
+      '''
+      count: "NumRegsData",
+      cname: "RESULT_OUT",
+      swaccess: "ro",
+      hwaccess: "hrw",
+      fields: [
+        { bits: "31:0", name: "result_out", desc: "result output" }
+      ],
+      }
+    },
+  ],
+}

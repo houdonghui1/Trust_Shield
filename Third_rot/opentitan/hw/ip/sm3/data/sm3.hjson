@@ -1,0 +1,150 @@
+{
+  name:               "sm3",
+  human_name:         "sm3 Accelerator",
+  one_line_desc:      "sm3 encryption and decryption engine ",
+  one_paragraph_desc: '''
+  [Advanced Encryption Standard (sm3)][sm3] 
+  '''
+  // Unique comportable IP identifier defined under KNOWN_CIP_IDS in the regtool.
+  cip_id:             "33",
+  design_spec:        "../doc",
+  dv_doc:             "../doc/dv",
+  hw_checklist:       "../doc/checklist",
+  sw_checklist:       "/sw/device/lib/dif/dif_sm3",
+  version:            "1.0.0",
+  life_stage:         "L1",
+  design_stage:       "D2S",
+  verification_stage: "V2S",
+  dif_stage:          "S2",
+  clocking: [
+    {clock: "clk_i", reset: "rst_ni"},
+  ]
+  bus_interfaces: [
+    { protocol: "tlul", direction: "device" }
+  ],
+
+param_list: [
+    { name:    "ResultData",
+      type:    "int",
+      default: "8",
+      desc:    "Number registers for output data",
+      local:   "true"
+    },
+
+],
+
+//定义寄存器
+
+regwidth: "32",
+registers: [
+##############################################################################
+
+//控制寄存器
+  { name: "CTRL_SIGNALS",
+    desc: '''
+      Control 
+    '''
+    swaccess: "rw",
+    hwaccess: "hrw",
+    hwqe:     "true",
+    fields: [
+      { bits: "0",
+        name: "msg_inpt_lst",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          is the last message
+        '''
+      }
+      { bits: "1",
+        name: "msg_inpt_vld_byte_0",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          
+        '''
+      }
+      { bits: "2",
+        name: "msg_inpt_vld_byte_1",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          
+        '''
+      }
+      { bits: "3",
+        name: "msg_inpt_vld_byte_2",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          
+        '''
+      }
+      { bits: "4",
+        name: "msg_inpt_vld_byte_3",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          
+        '''
+      }      
+            ]
+  },
+
+# SM3状态寄存器
+  { name: "STATE_SIGNALS",
+    desc: '''
+      The sm3 states 
+    '''
+    swaccess: "ro",
+    hwaccess: "hrw",
+    fields: [
+      { bits: "0",
+        name: "cmprss_otpt_vld",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          ready signal of key expansion
+        '''
+      }
+      { bits: "1",
+        name: "msg_inpt_rdy",
+        resval: "0x0",
+        hwaccess: "hrw",
+        desc:  '''
+          ready signal of encryption result
+        '''
+      }
+            ]
+    },
+
+# message input
+    { name: "Message_in",
+      desc: '''input message.
+            ''',
+      swaccess: "rw",
+      hwaccess: "hrw",
+      hwqe: "true",
+      fields: [
+        { bits: "31:0", name:"message", desc: "input message" }
+      ]
+    },
+
+# result output
+    { multireg: {
+      name: "RESULT_OUT",
+      resval: "0",
+      desc: '''
+        result output
+      '''
+      count: "ResultData",
+      cname: "RESULT_OUT",
+      swaccess: "ro",
+      hwaccess: "hrw",
+      fields: [
+        { bits: "31:0", name: "result_out", desc: "result output" }
+      ],
+      }
+    },
+  ],
+}

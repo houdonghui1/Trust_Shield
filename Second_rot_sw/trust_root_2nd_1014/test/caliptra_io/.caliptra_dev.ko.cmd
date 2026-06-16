@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/work/test/caliptra_io/caliptra_dev.ko := ld -r  -EL  -maarch64elf -z noexecstack   --build-id  -T ./scripts/module-common.lds -T ./arch/arm64/kernel/module.lds -o /home/ubuntu/work/test/caliptra_io/caliptra_dev.ko /home/ubuntu/work/test/caliptra_io/caliptra_dev.o /home/ubuntu/work/test/caliptra_io/caliptra_dev.mod.o;  true

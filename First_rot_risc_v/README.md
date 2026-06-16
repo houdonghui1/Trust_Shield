@@ -28,3 +28,24 @@
 ## 3.相关 ##
 - SOC设计主要参考[Chipyard开源工程](https://github.com/ucb-bar/chipyard/)
 - 一级可信根主要参考开源项目Caliptra 1.0的FPGA设计，详细内容可参考[caliptra原文档](https://github.com/chipsalliance/Caliptra/blob/main/doc/caliptra_1x/Caliptra.md#introduction/)
+
+
+## 4.一级可信根RISCV SOC源代码目录
+```
+First_rot_risc_v/
+├── readme.md
+├── Hardware
+│   ├── Caliptra		 Caliptra文件
+│   │   ├── caliptra_rtl        Caliptra RTL库
+│   │   ├── caliptra_ip         Caliptra IP核
+│   │   └── apb3_caliptra.sv    Rocketchip-Caliptra wrapper
+│   ├── Rocketchip		 SoC主文件(Rocketchip)
+│   │   ├── rocketchip_rtl      Rocketchip RTL库
+│   │   ├── rocketchip_ip       Rocketchip IP核
+│   │   └── regmap    		 寄存器地址映射
+│   └── KU060-constraints	 KU060开发板约束文件
+└── Firmware			 SoC固件 Rocketchip、Caliptra ROM固件
+    ├── build      	 固件二进制文件
+    ├── src      		 固件源码
+    |── ...		 编译脚本
+```

@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/work/test/caliptra_io/caliptra_dev.o := ld  -EL  -maarch64elf -z noexecstack     -r -o /home/ubuntu/work/test/caliptra_io/caliptra_dev.o /home/ubuntu/work/test/caliptra_io/caliptra_io.o /home/ubuntu/work/test/caliptra_io/mailbox.o /home/ubuntu/work/test/caliptra_io/mem_utils.o

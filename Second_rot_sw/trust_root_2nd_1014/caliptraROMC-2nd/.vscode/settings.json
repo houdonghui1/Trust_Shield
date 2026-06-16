@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "riscv_hw_if.h": "c",
+        "caliptra_defines.h": "c",
+        "caliptra_reg.h": "c",
+        "string.h": "c"
+    }
+}

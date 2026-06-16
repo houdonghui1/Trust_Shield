@@ -1,0 +1,76 @@
+72a73,75
+> #include <sys/ioctl.h>
+> #include <linux/ioctl.h>
+> 
+77a81,89
+> #define DEVICE_PATH "/dev/caliptra_dev"
+> #define CALIP_TRNG_IOCTL_MAGIC 'C'
+> #define CALIP_TRNG_IOCTL_GEN _IOR(CALIP_TRNG_IOCTL_MAGIC, 1, int)
+> 
+> struct trng_data {
+>     unsigned int size;
+>     unsigned char *buf;
+> };
+> 
+149a162,163
+>     printf("Hello, this is a test!\n");
+>     
+189a204,261
+>     /*add in 2025_8_25*/
+> 
+>     //unsigned char entropy_data[] = {0x12, 0x34, 0x56, 0x78};
+>     //uint16_t entropy_len = sizeof(entropy_data);
+>     unsigned char entropy_data[32] = {0};
+>     uint16_t entropy_len = sizeof(entropy_data);
+>     struct trng_data req;
+> 
+>     req.size = sizeof(entropy_data);
+>     req.buf = entropy_data;
+> 
+>     int fd = open(DEVICE_PATH, O_RDWR);
+>     if (fd < 0) {
+>         perror("Failed to open device");
+>         return -1;
+>     }
+> 
+>     if (ioctl(fd, CALIP_TRNG_IOCTL_GEN, &req) < 0) {
+>         perror("ioctl failed");
+>         close(fd);
+>         return -1;
+>     }
+> 
+>     // 1. 计算命令总长度：头部(10) + InData长度字段(2) + 熵数据长度(4) = 16 字节
+>     uint32_t cmd_total_size = sizeof(struct tpm_req_header) + sizeof(uint16_t) + entropy_len;
+> 
+>     // 2. 分配命令缓冲区（头部 + 后续参数）
+>     unsigned char *cmd_buf = (unsigned char *)malloc(cmd_total_size);
+>     struct tpm_req_header *req_hdr = (struct tpm_req_header *)cmd_buf;
+> 
+>     // 3. 填充头部字段（注意：TPM 要求大端字节序，需转换）
+>     req_hdr->tag = htobe16(TPM2_ST_NO_SESSION); // htons：主机字节序转网络字节序（大端）
+>     req_hdr->size = htobe32(cmd_total_size);  // htonl：32位主机序转大端
+>     req_hdr->ordinal = htobe32(0x00000146);  // StirRandom 命令码, /src/tpm2/TpmTypes.h
+> 
+>     // 4. 填充后续参数（InData 长度 + 熵数据）
+>     unsigned char *param_ptr = cmd_buf + sizeof(struct tpm_req_header);
+>     *(uint16_t *)param_ptr = htobe16(entropy_len);  // InData 长度（大端）
+>     param_ptr += sizeof(uint16_t);
+>     memcpy(param_ptr, entropy_data, entropy_len);  // 熵数据
+> 
+>     command = cmd_buf;
+>     command_length = cmd_total_size;
+> 
+>     rc = TPMLIB_Process(
+>         &rbuffer,          // 输出：响应缓冲区（libtpms 自动分配）
+>         &rlength,          // 输出：响应有效字节数
+>         &rTotal,           // 输出：响应缓冲区总大小
+>         command,           // 输入：生成的 StirRandom 命令
+>         command_length     // 输入：命令长度
+>     );
+>     if (rc != TPM_SUCCESS) {
+>         rc = TPM_SUCCESS;
+>         printf("Stir Failed!\n");
+>     }else{
+>         printf("Stir Successfully!\n");
+>     }
+>     /*add in 2025_8_25*/

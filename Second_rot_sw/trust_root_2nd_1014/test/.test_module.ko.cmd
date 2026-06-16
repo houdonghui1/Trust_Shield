@@ -1,0 +1,1 @@
+cmd_/home/ubuntu/work/test/test_module.ko := aarch64-linux-gnu-ld -r  -EL  -maarch64elf -z noexecstack   --build-id  -T ./scripts/module-common.lds -T ./arch/arm64/kernel/module.lds -o /home/ubuntu/work/test/test_module.ko /home/ubuntu/work/test/test_module.o /home/ubuntu/work/test/test_module.mod.o;  true

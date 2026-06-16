@@ -16,7 +16,8 @@
 
 ## 3.相关 ##
 
-二级可信根主要参考开源项目Caliptra 1.0的FPGA设计，详细内容可参考[caliptra原文档](https://github.com/chipsalliance/Caliptra/blob/main/doc/caliptra_1x/Caliptra.md#introduction/)
+- 二级可信根主要参考开源项目Caliptra 1.0的FPGA设计，详细内容可参考[caliptra原文档](https://github.com/chipsalliance/Caliptra/blob/main/doc/caliptra_1x/Caliptra.md#introduction/)
+- [二级可信根视频](https://space.bilibili.com/388320274/lists/5136178?type=series)
 
 ## 4.在FPGA上进行测试
 

@@ -273,7 +273,7 @@ TODO
 
 多级可信根的物理部署环境决定了其上电顺序：集群管理平台（三级可信根）先行启动，随后计算节点（二级）上电，等待平台管理就绪；最后异构处理器（一级）上电，由计算节点统一调度。
 <div align="center">
-<img src="上电时序.png"  />
+<img src="系统上电与启动.png"  />
 </div>
 
 | 时序阶段 | 启动层级 | 硬件动作 | 预期输出 |
@@ -286,15 +286,12 @@ TODO
 | **T5** | 一级可信根 | Caliptra度量主CPU固件，验证通过后通过Mailbox释放固件 | FMC/Runtime验证通过，主CPU跳转执行已验证固件，输出启动成功日志 |
 
 ### 5.2 各级可信根详细启动流程
-<div align="center">
-<img src="系统启动总流程图.png"  />
-</div>
 
 #### 5.2.1 三级可信根启动流程（OpenTitan）
 
 三级可信根的启动由固化在芯片内部的`test_rom`引导，其流程由生命周期状态（Lifecycle State）动态分流：
 <div align="center">
-<img src="三级可信根启动流程.png" alt="alt" width="40%" />
+<img src="三级可信根启动流程.png" alt="alt" width="70%" />
 </div>
 
 1. **硬件复位与ROM执行**：VCU129上电后，OpenTitan的Ibex核心从`0x00010000`（ROM基地址）取指执行。`test_rom`首先初始化堆栈指针、内存保护区域和基础外设（UART、SPI）。
@@ -333,7 +330,7 @@ TODO
 
 详细流程见**一级可信根软件设计报告**TODO
 <div align="center">
-<img src="一级可信根启动流程.png" alt="alt" width="40%" />
+<img src="一级可信根启动流程.png" alt="alt" width="60%" />
 </div>
 
 一级可信根的启动由Caliptra安全协处理器和SOC共同主导，主CPU在用户固件在验证通过前不可执行：

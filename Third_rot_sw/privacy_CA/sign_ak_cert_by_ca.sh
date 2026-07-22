@@ -92,23 +92,27 @@ EOF
 }
 
 gen_ca_req() {
-    openssl req -new -key "${CA_KEY}" -out "${TEMP_REQ}" \
-        -subj "${AK_SUBJ}" -sha256 \
+    openssl ecparam -name prime256v1 -genkey -noout -out "${WORK_DIR}/dummy_temp.key" 2>/dev/null
+    
+    openssl req -new -key "${WORK_DIR}/dummy_temp.key" -out "${TEMP_REQ}" \
+        -subj "${AK_SUBJ}" -sha384 \
         -config "${WORK_DIR}/extfile.cnf" \
         -extensions v3_req >/dev/null 2>&1 || {
-        echo "Error: Gen CA REQ Failed"; exit 1;
+        echo "Error: Gen Dummy REQ Failed"; exit 1;
     }
+    
+    rm -f "${WORK_DIR}/dummy_temp.key"
 }
 
-raw_sign_ak() {
-    openssl req -new -key "${CA_KEY}" -subj "${AK_SUBJ}" -out "${TEMP_REQ}" \
-        -config "${WORK_DIR}/extfile.cnf" -extensions v3_req 2> openssl_error.log || {
-        echo "Error: Failed to generate CSR - check openssl_error.log"; exit 1;
-    }
 
+raw_sign_ak() {
+    echo "Signing AK Cert with forced public key..."
+    
     openssl x509 -req -in "${TEMP_REQ}" -CA "${CA_CERT}" -CAkey "${CA_KEY}" \
-        -CAserial "${CA_SRL}" -CAcreateserial -days "${AK_DAYS}" -sha256 \
-        -out "${AK_CERT}" -extfile "${WORK_DIR}/extfile.cnf" -extensions v3_ca \
+        -CAserial "${CA_SRL}" -CAcreateserial -days "${AK_DAYS}" -sha384 \
+        -out "${AK_CERT}" \
+        -force_pubkey "${AK_PUB_PEM}" \
+        -extfile "${WORK_DIR}/extfile.cnf" -extensions v3_ca \
         2>> openssl_error.log || {
         echo "Error: OpenSSL sign failed - details below:"
         cat openssl_error.log

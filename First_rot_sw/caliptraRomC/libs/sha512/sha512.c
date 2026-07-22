@@ -33,17 +33,17 @@ uint32_t FMC_expected_digest[16] __attribute__((section(".rodata"))) = {
 };
 
 uint32_t RT_expected_digest[16] __attribute__((section(".rodata"))) = {
-    0x61DEBC3D,0xD9836DD2,0x24CEAEFD,0x964A6071,
-    0xCB48CFD2,0xF35AE84F,0x6E777387,0x3252993C,
-    0x55EC8EAB,0xC8480A9E,0xC959A6EA,0x3AB7BE62,
-    0xA53DEFC4,0x18361B65,0x5BB14BCC,0x98C61A4F
+    0xB52E0E20,0x4D548068,0x1CE3C532,0x98BBAEF6,
+    0x42EFBD34,0xA78E877D,0xC8616306,0x42FFBC39,
+    0x871A4238,0xF390CD8F,0xA7566F4,0x738620A1,
+    0x2D386B5,0x1EA22DD,0x35601421,0x763599E5
 };
 
 uint32_t SOC_expected_digest[16] __attribute__((section(".rodata")))= {
-    0x69ED9531,0xAE722DC9,0x5565BA56,0xFF9321EB,
-    0xB784062E,0x6F2BD34,0x8B99E19B,0xE90F9CFD,
-    0x21EFD8E1,0x8B127353,0xC8E693A4,0x6CA596BF,
-    0x40D5C6ED,0x9B3D17FE,0x7BDCEB99,0x1E7E0170
+    0x34A2E6A,0x261CAC52,0xA77B2F69,0x145E5098,
+    0xF1FA0593,0x99A00A3D,0xBB349D53,0x611820E9,
+    0x1D885219,0x8E1CDB95,0xCF1DA6B0,0x891D6757,
+    0x376AF07F,0x6B8F804C,0xAB2599E1,0xEB271B18 
 };
 
 void wait_for_sha512_intr(){
@@ -196,7 +196,7 @@ void sha512_flow(sha512_io block, uint8_t mode, sha512_io digest){
     lsu_write_32(CLP_SHA512_REG_SHA512_CTRL, (SHA512_REG_SHA512_CTRL_INIT_MASK | (mode << SHA512_REG_SHA512_CTRL_MODE_LOW)) & SHA512_REG_SHA512_CTRL_MODE_MASK);
     
     // wait for SHA to be valid
-    wait_for_sha512_intr();
+    while((lsu_read_32(CLP_SHA256_REG_SHA256_STATUS) & SHA256_REG_SHA256_STATUS_VALID_MASK) == 0);
 
     reg_ptr = (uint32_t *) CLP_SHA512_REG_SHA512_DIGEST_0;
     printf("Load DIGEST data from SHA512\n");
@@ -216,6 +216,91 @@ void sha512_flow(sha512_io block, uint8_t mode, sha512_io digest){
 
 }
 
+void sha512_flow_produce(const uint8_t *data, uint32_t data_len, uint32_t *measure_value){
+    uint64_t bit_len;
+    uint8_t length_bytes[16] = {0};
+    uint32_t remaining_data;
+    uint32_t padded_len;
+    uint32_t copy_len;
+    uint32_t processed_len = 0;
+    uint8_t block[SHA512_BLOCK_SIZE] = {0};
+    volatile uint32_t *block_ptr;
+    //bool match = true;
+    bool Filled = false;
+    volatile uint32_t* reg_ptr = (uint32_t *) CLP_SHA512_REG_SHA512_DIGEST_0;
+    uint32_t i = 0;
+    //printf("func: %s, line: %d\n", __func__, __LINE__);
+
+    bit_len = (uint64_t)data_len * 8;
+    for (int i = 0; i < 8; i++) {
+        length_bytes[15 - i] = (bit_len >> (i * 8)) & 0xFF;
+    }
+    
+    padded_len = ((data_len + 1 + 16 + SHA512_BLOCK_SIZE - 1) / SHA512_BLOCK_SIZE) * SHA512_BLOCK_SIZE;
+
+    while ((lsu_read_32(CLP_SHA512_REG_SHA512_STATUS) & SHA512_REG_SHA512_STATUS_READY_MASK) == 0);
+
+    sha_init(SHA512_512_MODE);
+
+    while (processed_len < padded_len) {
+        memset(block, 0, SHA512_BLOCK_SIZE);
+        
+        remaining_data = data_len - processed_len;
+        if(remaining_data > data_len) { 
+            break;
+        }
+        if (remaining_data > 0) {
+            copy_len = (remaining_data > SHA512_BLOCK_SIZE) ? SHA512_BLOCK_SIZE : remaining_data;
+            memcpy(block, data + processed_len, copy_len);
+            processed_len += copy_len;
+            if (remaining_data < SHA512_BLOCK_SIZE) {
+                block[copy_len] = 0x80;
+                Filled = true;
+                if (SHA512_BLOCK_SIZE - copy_len - 1 >= 16) {
+                    memcpy(block + SHA512_BLOCK_SIZE - 16, length_bytes, 16);
+                    processed_len += SHA512_BLOCK_SIZE;
+                }
+                
+            }
+        } else {
+            if (((processed_len == data_len) && (Filled == false)) || (data_len == SHA512_BLOCK_SIZE)) {
+                block[0] = 0x80;
+            }
+            memcpy(block + SHA512_BLOCK_SIZE - 16, length_bytes, 16);
+            processed_len += SHA512_BLOCK_SIZE;
+        }
+
+/*         for(int i = 0 ; i < SHA512_BLOCK_SIZE; i++) {
+            printf("0x%02x ", block[i]);
+            if (i % 16 == 15) {
+                printf("\n");
+            }
+        }
+ */
+        block_ptr = (uint32_t*)CLP_SHA512_REG_SHA512_BLOCK_0;
+        for (int i = 0; i < SHA512_BLOCK_SIZE / 4; i++) {
+            *block_ptr++ = *(uint32_t*)(block + i * 4);
+        }
+
+        if (i == 0) {
+            sha_init(SHA512_512_MODE);
+        } else if (processed_len < padded_len) {
+            sha_next(SHA512_512_MODE);
+        } else {
+            sha_next_last(SHA512_512_MODE);
+        }
+        i+=1;
+        while((lsu_read_32(CLP_SHA512_REG_SHA512_STATUS) & SHA512_REG_SHA512_STATUS_VALID_MASK) == 0);
+    }
+
+    delay_second(1);
+
+    for (int i = 0; i < 16; i++) {
+        measure_value[i] = *reg_ptr++;
+    }
+
+}
+
 uint32_t measure_soc(const uint8_t *recv_data, uint32_t recv_data_len) {
 
     uint64_t bit_len;
@@ -226,7 +311,8 @@ uint32_t measure_soc(const uint8_t *recv_data, uint32_t recv_data_len) {
     uint32_t processed_len = 0;
     uint8_t block[SHA512_BLOCK_SIZE] = {0};
     volatile uint32_t *block_ptr;
-    bool match = true, Filled = false;
+    bool match = true;
+    bool Filled = false;
     uint32_t measure_value[16] = {0};
     volatile uint32_t* reg_ptr = (uint32_t *) CLP_SHA512_REG_SHA512_DIGEST_0;
     uint32_t i = 0;
@@ -456,7 +542,8 @@ uint32_t measure_fmc(const uint8_t *recv_data, uint32_t recv_data_len) {
     uint32_t processed_len = 0;
     uint8_t block[SHA512_BLOCK_SIZE] = {0};
     volatile uint32_t *block_ptr;
-    bool match = true, Filled = false;
+    bool match = true;
+    bool Filled = false;
     uint32_t measure_value[16] = {0};
     volatile uint32_t* reg_ptr = (uint32_t *) CLP_SHA512_REG_SHA512_DIGEST_0;
     uint32_t i = 0;

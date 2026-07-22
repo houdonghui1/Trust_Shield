@@ -93,8 +93,8 @@ typedef struct caliptra_buffer {
 typedef enum
 {
     CMD_BUSY = 0,
-	DATA_READY,
-	CMD_COMPLETE,
+    DATA_READY,
+    CMD_COMPLETE,
     CMD_FAILURE
 }mbox_status_reg;
 
@@ -158,7 +158,11 @@ enum mailbox_command {
     OP_GET_RT_MEASURE_VALUE 	   = 0x44C0FFF6,
     OP_ECC_SIGN 		   = 0x44C0FFF7,
     OP_ECC_VERIFY 		   = 0x44C0FFF8,
-    OP_RECV_SOC_FW                 = 0x1A2B3C4D,
+    OP_GENERATE_2ND_CERT 	   = 0x44C0FFF9,
+    OP_SAVE_2ND_CERT 		   = 0x44C0FFFA,
+    OP_GET_2ND_CERT 		   = 0x44C0FFFB,
+    OP_SIGN_1ST_CTX 		   = 0x44C0FFFC,
+    OP_VERIFY_1ST_CTX 		   = 0x44C0FFFD,
 };
 
 struct parcel {
@@ -182,6 +186,9 @@ bool caliptra_test_for_completion(void);
 int  caliptra_complete(void);
 int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, uint32_t *bytes_read);
 int pack_and_execute_command(struct parcel *parcel, bool async);
+void caliptra_mbox_write(uint32_t offset, uint32_t data);
+uint32_t caliptra_mbox_read(uint32_t offset);
+
 #endif
 
 

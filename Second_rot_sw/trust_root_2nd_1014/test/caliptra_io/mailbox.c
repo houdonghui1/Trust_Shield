@@ -404,8 +404,8 @@ int pack_and_execute_command(struct parcel *parcel, bool async)
     printk("rx_buf.data size = 0x%lx, rx_buf.len = 0x%lx", sizeof(rx_buf.data), rx_buf.len);
     // Calculate and populate the checksum field
     // Clear the checksum field before calculating
-    *((caliptra_checksum*)tx_buf.data) = 0x0;
-    *((caliptra_checksum*)tx_buf.data) = calculate_caliptra_checksum(parcel->command, tx_buf.data, tx_buf.len);
+    //*((caliptra_checksum*)tx_buf.data) = 0x0;
+    //*((caliptra_checksum*)tx_buf.data) = calculate_caliptra_checksum(parcel->command, tx_buf.data, tx_buf.len);
 
     return caliptra_mailbox_execute(parcel->command, &tx_buf, &rx_buf, async);
 }

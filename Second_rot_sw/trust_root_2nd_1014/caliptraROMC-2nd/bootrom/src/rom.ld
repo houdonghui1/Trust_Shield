@@ -34,17 +34,26 @@ SECTIONS {
   /* Only upper half of DCCM is used for ROM image */
   _data_lma_start = ALIGN(4);
   _data_vma_start = 0x50010000;
-  .data _data_vma_start : AT(_data_lma_start) { *(.*data) *(.rodata*) *(.srodata*) ; . = ALIGN(4);} =0x0000,
+  .data _data_vma_start : AT(_data_lma_start) {
+    *(.data .data.*)
+    *(.sdata .sdata.*)
+    *(.rodata .rodata.*)
+    *(.srodata .srodata.*)
+    . = ALIGN(4);
+  } =0x0000,
+
   _data_lma_end = _data_lma_start + SIZEOF(.data);
   _data_vma_end = _data_vma_start + SIZEOF(.data);
-
-  _bss_lma_start = _data_lma_end;
   _bss_vma_start = _data_vma_end;
-  .bss _bss_vma_start : AT(_bss_lma_start) { *(.sbss) *(.bss) ; . = ALIGN(4);} =0x0000,
-  _bss_lma_end = _bss_lma_start + SIZEOF(.bss);
+  .bss _bss_vma_start (NOLOAD) : {
+    *(.sbss .sbss.*)
+    *(.bss .bss.*)
+    . = ALIGN(4);
+  } =0x0000,
   _bss_vma_end = _bss_vma_start + SIZEOF(.bss);
-
-  _end = _bss_lma_end;
+  _bss_lma_start = _bss_vma_start;
+  _bss_lma_end   = _bss_vma_end;
+  _end = _data_lma_end;
   ASSERT( _end < 0x0 + 200K, "ERROR: ROM size exceeds 200KiB")
 
   /* DCCM as VMA and LMA */

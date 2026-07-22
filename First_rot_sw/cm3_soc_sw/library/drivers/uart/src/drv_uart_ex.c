@@ -16,6 +16,7 @@
 #ifdef UART_EX_DRIVER
 
 extern UART_HandleTypeDef PRINTF_HUART;
+static char buffer[128];
 
 //===============================================
 // uart printf
@@ -34,7 +35,7 @@ int vprintf(const char *fmt, va_list argp)
 void drv_uart_printf(const char *fmt, ...)
 {
 	va_list argp;
-    char buffer[128];
+    
     va_start(argp, fmt);
     vsnprintf(buffer, sizeof(buffer), fmt, argp);
     va_end(argp);

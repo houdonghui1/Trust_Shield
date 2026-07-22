@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
-  16896	   4720	  33344	  54960	   d6b0	/home/jdeng/work/caliptra-sw1-C/rom/dev/caliptraRomC/output/caliptraROMC.elf
+  16792	   4848	  34368	  56008	   dac8	/home/jdeng/work/caliptra-sw1-C/rom/dev/caliptraRomC/output/caliptraROMC.elf

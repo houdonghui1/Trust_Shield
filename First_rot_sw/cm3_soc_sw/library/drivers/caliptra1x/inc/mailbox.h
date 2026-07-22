@@ -92,6 +92,12 @@ enum mailbox_command {
     OP_GET_SOC_MEASURE_VALUE       = 0x44C0FFF4,
     OP_GET_FMC_MEASURE_VALUE       = 0x44C0FFF5,
     OP_GET_RT_MEASURE_VALUE        = 0x44C0FFF6,
+    OP_GET_ECC_SIGN                = 0x44C0FFF7,
+    OP_GET_ECC_VERIFY              = 0x44C0FFF8,
+    OP_GET_ROM_MEASURE_VALUE       = 0x44C0FFF9,
+    OP_SEND_INITIATE               = 0x44C0FFFA,
+    OP_RECV_CLP_CSR                = 0x44C0FFFB,
+    OP_RECV_CLP_CTX                = 0x44C0FFFC,
     OP_RECV_SOC_FW                 = 0x1A2B3C4D,
 };
 

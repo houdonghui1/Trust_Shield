@@ -7,7 +7,7 @@ CA_CSR="${CA_DIR}/ca_root.csr"
 CA_CERT="${CA_DIR}/ca_root.crt"
 CONF="${WORK_DIR}/ca_root.cnf"
 CA_DAYS=3650
-CURVE="prime256v1"
+CURVE="secp384r1"
 CA_SUBJ="/C=CN/ST=BJ/L=BJ/O=TestDevice/OU=TPM-CA/CN=TPM-CA-Root"
 
 check_ca_exists() {
@@ -36,14 +36,14 @@ gen_ca_key() {
 }
 
 gen_ca_csr() {
-    openssl req -new -key "${CA_KEY}" -out "${CA_CSR}" -subj "${CA_SUBJ}" -sha256 >/dev/null 2>&1
+    openssl req -new -key "${CA_KEY}" -out "${CA_CSR}" -subj "${CA_SUBJ}" -sha384 >/dev/null 2>&1
     openssl req -in "${CA_CSR}" -verify -noout >/dev/null 2>&1 || { echo "Error: CA CSR invalid"; exit 1; }
     echo "Gen CA CSR success"
 }
 
 gen_ca_cert() {
     openssl x509 -req -days "${CA_DAYS}" -in "${CA_CSR}" -signkey "${CA_KEY}" -out "${CA_CERT}" \
-        -sha256 -extensions ca_ext -extfile <(cat <<EOF
+        -sha384 -extensions ca_ext -extfile <(cat <<EOF
 [ca_ext]
 basicConstraints = critical,CA:TRUE
 keyUsage = critical,keyCertSign,cRLSign

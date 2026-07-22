@@ -22,7 +22,7 @@
 #define FMC_SIZE                    (20480)
 #define FMC_STORE_SECTOR_OFFSET     (2048)
 
-#define SOC_FW_SIZE                 (8704)
+#define SOC_FW_SIZE                 (9728)
 #define SOC_FW_STORE_SECTOR_OFFSET  (6144)
 
 __attribute__((section(".dccm"))) uint8_t FMC_data[FMC_SIZE] = {0};
@@ -43,8 +43,8 @@ volatile caliptra_intr_received_s cptra_intr_rcv = {
     .kv_notif         = 0,
     .sha512_error     = 0,
     .sha512_notif     = 0,
-    .sha256_error     = 0,
-    .sha256_notif     = 0,
+    .sha512_error     = 0,
+    .sha512_notif     = 0,
     .qspi_error       = 0,
     .qspi_notif       = 0,
     .uart_error       = 0,
@@ -323,7 +323,9 @@ void idevid() {
     size_t tbs_len = sizeof(tbs_der);
     uint8_t cert_der[4096] = {0};
     size_t cert_len = sizeof(cert_der);
-    uint8_t digest[48];
+    mbox_op_s op;
+    uint32_t offset = 0;
+    int ret = 0;
 
     //Derive CDI using UDS in Slot 0 and store in Slot 6
     hmac_io key_cdi = {
@@ -473,6 +475,50 @@ void idevid() {
     tbs_der_store[0].type = CERT_TYPE_ROOT_CA;
     memcpy(tbs_der_store[0].der_data, tbs_der, tbs_len);
 
+#if 1 //CA signed
+    while(1) {
+        op = soc_ifc_read_mbox_cmd();
+        if (op.cmd == MBOX_CMD_RECV_CLP_CSR) {
+            printf("Send idevid CSR command\n");
+
+            mailbox_send_data((uint32_t *)tbs_der, tbs_len);
+            break;
+        }
+    }
+
+    while(1) {
+        op = soc_ifc_read_mbox_cmd();
+        if (op.cmd == MBOX_CMD_RECV_CLP_CTX) {
+            printf("FW: Reading %08d bytes from mailbox\n", (unsigned int)op.dlen);
+
+            cert_len = op.dlen;
+
+            while (offset < op.dlen) {
+                uint32_t data = soc_ifc_mbox_read_dataout_single();
+                
+                memcpy(&cert_der[offset], &data, sizeof(data));
+                printf("dataout: 0x%08x, offset: %d\n", (unsigned int)data, (unsigned int)offset);
+
+                offset += 4;
+            }
+
+            break;
+        }
+    }
+    store_to_datavault(pubkey_x.data, pubkey_y.data, 8, 9);
+
+    printf("cert_len = 0x%x\n", cert_len);
+    printf("IdeVID cert:\n");
+    for(int j = 0; j < cert_len; j++) {
+        printf("%s%X", (cert_der[j] < 0x10) ? "0" : "", cert_der[j]); 
+    }
+    printf("\n");
+    cert_store[0].der_len = cert_len;
+    cert_store[0].type = CERT_TYPE_ROOT_CA;
+    memcpy(cert_store[0].der_data, cert_der, cert_len);
+    mailbox_send_data((uint32_t *)ret, 0x1);
+#else //self signed
+    uint8_t digest[48];
     //Sign the IDevID To Be Signed DER Blob with IDevId Private Key in Key Vault Slot 7
     sha384_digest(tbs_der, tbs_len, (uint64_t*)digest, true);
 
@@ -543,6 +589,7 @@ void idevid() {
     cert_store[0].der_len = cert_len;
     cert_store[0].type = CERT_TYPE_ROOT_CA;
     memcpy(cert_store[0].der_data, cert_der, cert_len);
+#endif
 }
 
 void init_doe() {
@@ -589,9 +636,15 @@ void init_doe() {
 }
 
 void main() {
+    mbox_op_s op;
     uint32_t init_ok = 0;
     uint8_t status;
     uint8_t recv_data[BUFFER_SIZE];
+    uint32_t FMC_sha512_digest[16];
+    uint32_t SOC_sha512_digest[16];
+    uint8_t ROM_median[128];
+    uint32_t ROM_sha512_digest[16];
+
     //uint8_t test_data[129];
 
     //memset(test_data, 0x5a, 129);
@@ -602,6 +655,50 @@ void main() {
     printf("            Caliptra ROM...         \n");
     printf("------------------------------------\n");
     printf("Compiled on: %s at %s\n", __DATE__, __TIME__);
+
+    sha512_flow_produce((uint8_t *)FMC_expected_digest, sizeof(FMC_expected_digest), FMC_sha512_digest);
+    printf("FMC measure value:\n");
+    for(int j = 0; j < 16; j++) {
+        printf("%08x", (unsigned int)FMC_sha512_digest[j]); 
+    }
+    printf("\n");
+
+    sha512_flow_produce((uint8_t *)SOC_expected_digest, sizeof(SOC_expected_digest), SOC_sha512_digest);
+    printf("SOC measure value:\n");
+    for(int j = 0; j < 16; j++) {
+        printf("%08x", (unsigned int)SOC_sha512_digest[j]); 
+    }
+    printf("\n");
+
+    memcpy(ROM_median, SOC_sha512_digest, sizeof(SOC_sha512_digest));
+    memcpy(ROM_median + sizeof(SOC_sha512_digest), FMC_sha512_digest, sizeof(FMC_sha512_digest));
+    sha512_flow_produce(ROM_median, sizeof(ROM_median), ROM_sha512_digest);
+    printf("ROM measure value:\n");
+    for(int j = 0; j < 16; j++) {
+        printf("%08x", (unsigned int)ROM_sha512_digest[j]); 
+    }
+    printf("\n");
+
+    while(1) {
+        op = soc_ifc_read_mbox_cmd();
+        if (op.cmd == MBOX_CMD_GET_ROM_MEASURE_VALUE) {
+            printf("Obtain get ROM value command\n");
+
+            mailbox_send_data(ROM_sha512_digest, sizeof(ROM_sha512_digest));
+            break;
+        }
+    }
+
+    while(1) {
+        op = soc_ifc_read_mbox_cmd();
+        if (op.cmd == MBOX_CMD_INITIATE) {
+            printf("The measurement has passed, starting\n");
+            uint32_t value = MBOX_SUCCESS;
+            uint32_t *send_status = &value;
+            mailbox_send_data(send_status, 0x4);
+            break;
+        }
+    }
 
     init_doe();
     
@@ -653,8 +750,13 @@ void main() {
             printf("Measure SOC start:\n");
             status = measure_soc(SOC_FW_data, SOC_FW_SIZE);
             if(!status) {
-                mailbox_send_data((uint32_t *)SOC_FW_data, SOC_FW_SIZE);
-                init_ok = 1;
+                while(1) {
+                    op = soc_ifc_read_mbox_cmd();
+                    if (op.cmd == MBOX_CMD_RECV_SOC_FW) {
+                        mailbox_send_data((uint32_t *)SOC_FW_data, SOC_FW_SIZE);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -663,9 +765,8 @@ void main() {
         printf("Jump to FMC...\n");
         void (* fmc_entry) (void) = (void*) (RV_ICCM_SADR);
         fmc_entry();
-        //asm volatile("li a0, 0x40000000; jr a0");
     } 
-    else {
+    /* else {
         printf("FMC firmwaire2:\n");
         for(int i = 0; i < FMC_SIZE/BUFFER_SIZE; i++) {
             memset(recv_data, 0xFF, BUFFER_SIZE);
@@ -712,65 +813,17 @@ void main() {
             status = measure_soc(SOC_FW_data, SOC_FW_SIZE);
             if(!status) {
                 mailbox_send_data((uint32_t *)SOC_FW_data, SOC_FW_SIZE);
-                init_ok = 1;
             }
         }
         if (init_ok) {
             printf("Jump to FMC...\n");
             void (* fmc_entry) (void) = (void*) (RV_ICCM_SADR);
             fmc_entry();
-            //asm volatile("li a0, 0x40000000; jr a0");
         } 
-    }
+    } */
 
     printf("------------------------------------\n");
     printf(" Reached end of ROM FW unexpectedly!\n");
     printf("------------------------------------\n");
     while(1);
 }
-
-
-
-/* void main() {
-    mbox_op_s op;
-    int num_randoms = 32;
-    uint8_t randoms[num_randoms];
-
-    init_uart();
-    enable_csrng();
-
-    printf("------------------------------------\n");
-    printf("            Caliptra ROM...         \n");
-    printf("------------------------------------\n");
-    printf("Compiled on: %s at %s\n", __DATE__, __TIME__);
-
-
-    printf("---------------------------\n");
-    printf(" TRNG Smoke Test \n");
-    printf("---------------------------\n");
-
-
-    while(1) {
-        op = soc_ifc_read_mbox_cmd();
-        if (op.cmd & MBOX_CMD_FIELD_RESP_MASK) {
-            printf("Received mailbox command (expecting RESP) from SOC! Got 0x%x\n", op.cmd);
-            if (op.cmd == MBOX_CMD_GET_TRNG) {
-                if (generate_random_numbers(num_randoms, randoms) == 0) {
-                    printf("Get randoms:\n");
-                    for (int i = 0; i < num_randoms; i++) {
-                        printf("%02x ", randoms[i]);
-                    }
-                    mailbox_send_data((uint32_t *)randoms, num_randoms);
-                }
-            }
-        }
-    }
-
-
-
-    printf("\n");
-    printf("------------------------------------\n");
-    printf(" Reached end of ROM FW unexpectedly!\n");
-    printf("------------------------------------\n");
-    while(1);
-} */

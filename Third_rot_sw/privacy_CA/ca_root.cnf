@@ -1,0 +1,49 @@
+[ req ]
+default_md         = sha384
+distinguished_name = req_distinguished_name
+x509_extensions    = v3_ca
+prompt             = no
+encrypt_key        = no
+
+[ req_distinguished_name ]
+C                  = CN
+ST                 = BJ
+L                  = BJ
+O                  = TestDevice
+OU                 = TPM-CA
+CN                 = TPM-CA-Root
+
+[ v3_ca ]
+basicConstraints   = critical, CA:TRUE
+keyUsage           = critical, keyCertSign, cRLSign
+subjectKeyIdentifier = hash
+
+[ ca ]
+default_ca         = CA_default
+
+[ CA_default ]
+dir                = ./ca
+certs              = $dir/certs
+new_certs_dir      = $dir/newcerts
+database           = $dir/index.txt
+serial             = $dir/serial
+default_md         = sha384
+default_days       = 3650
+policy             = policy_anything
+x509_extensions    = usr_cert
+
+[ policy_anything ]
+countryName            = optional
+stateOrProvinceName    = optional
+localityName           = optional
+organizationName       = optional
+organizationalUnitName = optional
+commonName             = supplied
+emailAddress           = optional
+
+[ usr_cert ]
+basicConstraints       = CA:FALSE
+keyUsage               = digitalSignature, nonRepudiation, keyEncipherment
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid,issuer
+

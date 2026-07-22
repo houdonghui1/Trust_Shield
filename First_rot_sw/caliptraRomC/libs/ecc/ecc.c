@@ -15,11 +15,13 @@
 
 #include "caliptra_defines.h"
 #include "riscv_hw_if.h"
-//#include <string.h>
-//#include <stdint.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdbool.h>
 #include "printf.h"
 #include "ecc.h"
 #include "caliptra_isr.h"
+#include "hmac.h"
 
 extern volatile caliptra_intr_received_s cptra_intr_rcv;
 
@@ -416,4 +418,245 @@ void ecc_pcr_signing_flow(ecc_io iv, ecc_io sign_r, ecc_io sign_s){
         offset++;
     }
 
+}
+
+void ecc_sigh_test(uint8_t *data_to_sign, uint8_t *pk_and_sg_value) {
+    uint32_t key_data[] = {0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b,
+                           0x0b0b0b0b};
+    uint32_t block_data[] = {0x48692054,
+                             0x68657265,
+                             0x80000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000000,
+                             0x00000440};
+    uint32_t expected_tag[] = {0xb6a8d563,
+                                0x6f5c6a72,
+                                0x24f9977d,
+                                0xcf7ee6c7,
+                                0xfb6d0c48,
+                                0xcbdee973,
+                                0x7a959796,
+                                0x489bddbc,
+                                0x4c5df61d,
+                                0x5b3297b4,
+                                0xfb68dab9,
+                                0xf1b582c2};
+    //this is a random lfsr_seed 160-bit
+    uint32_t lfsr_seed_data[] = {0xC8F518D4,
+                                 0xF3AA1BD4,
+                                 0x6ED56C1C,
+                                 0x3C9E16FB,
+                                 0x800AF504};
+    hmac_io hmac_key;
+    hmac_io hmac_block;
+    hmac_io hmac_lfsr_seed;
+    hmac_io hmac_tag;
+    ecc_io seed;
+    ecc_io nonce;
+    ecc_io iv;
+    ecc_io privkey;
+    ecc_io pubkey_x;
+    ecc_io pubkey_y;
+    ecc_io sign_r;
+    ecc_io sign_s;
+    ecc_io msg;
+
+    hmac_key.kv_intf = FALSE;
+    hmac_key.data_size = 12;
+    for (int i = 0; i < hmac_key.data_size; i++)
+        hmac_key.data[i] = key_data[i];
+
+    hmac_block.kv_intf = FALSE;
+    hmac_block.data_size = 32;
+    for (int i = 0; i < hmac_block.data_size; i++)
+        hmac_block.data[i] = block_data[i];
+
+    hmac_lfsr_seed.kv_intf = FALSE;
+    hmac_lfsr_seed.data_size = 5;
+    for (int i = 0; i < hmac_lfsr_seed.data_size; i++)
+        hmac_lfsr_seed.data[i] = lfsr_seed_data[i];
+
+    hmac_tag.kv_intf = FALSE;
+    hmac_tag.kv_id = 3;
+    hmac_tag.data_size = 12;
+    for (int i = 0; i < hmac_tag.data_size; i++)
+        hmac_tag.data[i] = expected_tag[i];
+        
+    hmac_flow(hmac_key, hmac_block, hmac_lfsr_seed, hmac_tag);
+
+    seed.kv_intf = 1;
+    seed.kv_id = 3;//store keyvault 3
+    memset(seed.data, 0, sizeof(seed.data));
+
+    nonce.kv_intf = 0;
+    memset(nonce.data, 0, sizeof(nonce.data));
+
+    iv.kv_intf = 0;
+    memset(iv.data, 0, sizeof(iv.data));
+
+    privkey.kv_intf = 1;
+    privkey.kv_id = 4;//store keyvault 4
+    memset(privkey.data, 0, sizeof(privkey.data));
+
+    pubkey_x.kv_intf = 1;
+    memset(pubkey_x.data, 0, sizeof(pubkey_x.data));
+    
+    pubkey_y.kv_intf = 1;
+    memset(pubkey_y.data, 0, sizeof(pubkey_y.data));
+
+    ecc_keygen_flow(&seed, &nonce, &iv, &privkey, &pubkey_x, &pubkey_y);
+
+    printf("pubkey_x.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)pubkey_x.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+    memcpy(pk_and_sg_value, pubkey_x.data, sizeof(pubkey_x.data));
+
+    printf("pubkey_y.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)pubkey_y.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+    memcpy(pk_and_sg_value + 48, pubkey_y.data, sizeof(pubkey_y.data));
+    
+    sign_r.kv_intf = 1;
+    memset(sign_r.data, 0, sizeof(sign_r.data));
+
+    sign_s.kv_intf = 1;
+    memset(sign_s.data, 0, sizeof(sign_s.data));
+
+    memcpy(msg.data, data_to_sign, 48);
+
+    ecc_signing_flow(&privkey, &msg, &iv, &sign_r, &sign_s);
+
+    printf("sign_r.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)sign_r.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+    memcpy(pk_and_sg_value + 96, sign_r.data, sizeof(sign_r.data));
+
+    printf("sign_s.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)sign_s.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+    memcpy(pk_and_sg_value + 144, sign_s.data, sizeof(sign_s.data));
+
+    //kv_clear(KvSlot3)
+    lsu_write_32(CLP_KV_REG_KEY_CTRL_3, KV_REG_KEY_CTRL_3_CLEAR_MASK);
+    while ((lsu_read_32(CLP_KV_REG_KEY_CTRL_3) & KV_REG_KEY_CTRL_3_CLEAR_MASK) != 0);
+    printf("Temporary seed cleared in KeySlot3.\n");
+}
+
+int ecc_verify_test(uint8_t *data_to_verify, uint8_t *pk_and_sg_value) {
+    int status = 1;
+    ecc_io pubkey_x;
+    ecc_io pubkey_y;
+    ecc_io sign_r;
+    ecc_io sign_s;
+    ecc_io msg;
+
+    memcpy(msg.data, data_to_verify, 48);
+
+    memcpy(pubkey_x.data, pk_and_sg_value, 48);
+    printf("pubkey_x.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)pubkey_x.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+    
+    memcpy(pubkey_y.data, pk_and_sg_value + 48, 48);
+    printf("pubkey_y.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)pubkey_y.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+
+
+    memcpy(sign_r.data, pk_and_sg_value + 96, 48);
+    printf("sign_r.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)sign_r.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+
+    memcpy(sign_s.data, pk_and_sg_value + 144, sizeof(sign_s.data));
+    printf("sign_s.data:\n");
+    for(int j = 0; j < 12; j++) {
+        printf("0x%08x ", (unsigned int)sign_s.data[j]);
+        if (j % 16 == 15) {
+            printf("\n");
+        }
+    }
+    printf("\n");
+
+
+    status = ecc_verifying_flow(msg, pubkey_x, pubkey_y, sign_r, sign_s);
+
+    if(!status) {
+        printf("Signature verification successful!\n");
+    } else {
+        printf("Signature verification failed!\n");
+    }
+
+    return status;
 }

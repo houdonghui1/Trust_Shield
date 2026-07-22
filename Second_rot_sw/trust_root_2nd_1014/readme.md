@@ -13,6 +13,7 @@ trust_root_2nd_1014/
     ├── caliptra_io         内核驱动
     ├── caliptra_rom        烧写CaliptraROM的软件源码
     ├── caliptra-sw         PL端的bin文件和烧写脚本
+    ├── secure_boot         安全启动、证书链软件源码/开机自启动脚本
     ├── qemu-virt-tpm       最小虚拟机镜像
     ├── start.sh            自动化启动脚本
     └── mainloop_patch.patch	SWTPM的补丁

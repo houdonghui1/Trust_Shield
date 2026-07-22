@@ -4,7 +4,8 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include "sw/device/my_tests/attestation/sha256/sha256.h"
+#include "sw/device/my_tests/attestation/sha/sha384.h"
+#include "sw/device/my_tests/attestation/ecdsa-p384/ecc.h"
 
 #ifndef ASN1_BOOLEAN
 #define ASN1_BOOLEAN        0x01
@@ -98,6 +99,21 @@ int add_signature_to_cert(
     const uint32_t *sig_s,
     uint8_t *cert_out,
     size_t *cert_len
+);
+
+int add_signature_to_cert_p384_sig(
+    const uint8_t *tbs_der,
+    size_t tbs_len,
+    const uint8_t *sig_r_bytes,
+    const uint8_t *sig_s_bytes,
+    uint8_t *cert_out,
+    size_t *cert_len
+);
+
+int verify_cert(
+    const uint8_t *cert_der, 
+    size_t cert_len, 
+    const uint8_t public_key[ECC_BYTES + 1]
 );
 
 #endif

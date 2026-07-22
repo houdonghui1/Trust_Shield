@@ -75,10 +75,22 @@ cc_library(
 )
 
 cc_library(
-    name = "sha256_lib",
-    srcs = ["sha256/sha256.c"],
-    hdrs = ["sha256/sha256.h"],
+    name = "ecdsa_p384_lib",
+    srcs = ["ecdsa-p384/ecc.c"],
+    hdrs = ["ecdsa-p384/ecc.h"],
     target_compatible_with = [OPENTITAN_CPU],
+    deps = [
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/base:memory",
+    ],
+)
+
+cc_library(
+    name = "sha_lib",
+    srcs = glob(["sha/*.c"]),
+    hdrs = glob(["sha/*.h"]),
+    target_compatible_with = [OPENTITAN_CPU],
+    defines = ["SHA512_SUPPORT=1"],
     deps = [
         "//sw/device/lib/base:macros",
         "//sw/device/lib/base:memory",
@@ -93,7 +105,9 @@ cc_library(
     deps = [
         "//sw/device/lib/base:macros",
         "//sw/device/lib/base:memory",
-        ":sha256_lib",
+        "//sw/device/lib/runtime:log",
+        ":sha_lib",
+        ":ecdsa_p384_lib",
     ],
 )
 
@@ -123,7 +137,8 @@ cc_library(
         "//sw/device/lib/testing:pinmux_testutils",
         ":mldsa87",
         ":x509_lib",
-        ":sha256_lib",
+        ":sha_lib",
+        ":ecdsa_p384_lib",
     ],
 )
 

@@ -53,6 +53,7 @@ void sha512_measure(sha512_io block, uint8_t mode, uint32_t* measurevalue);
 uint32_t measure_fmc(const uint8_t *recv_data, uint32_t recv_data_len);
 uint32_t measure_rt(const uint8_t *recv_data, uint32_t recv_data_len);
 uint32_t measure_soc(const uint8_t *recv_data, uint32_t recv_data_len);
+void sha512_flow_produce(const uint8_t *data, uint32_t data_len, uint32_t *measure_value);
 
 //polls until sha512 is ready to be used
 inline void sha512_poll_ready() {

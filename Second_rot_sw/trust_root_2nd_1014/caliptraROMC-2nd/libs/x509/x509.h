@@ -4,21 +4,48 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include "printf.h"
-#include "datavault.h"
-#include "sha256.h"
+#include <printf.h>
+#include "sha384.h"
+#include "ecdsa-p384.h"
 
-#define ASN1_SEQUENCE       0x30
+#ifndef ASN1_BOOLEAN
+#define ASN1_BOOLEAN        0x01
+#endif
+#ifndef ASN1_INTEGER
 #define ASN1_INTEGER        0x02
+#endif
+#ifndef ASN1_BIT_STRING
 #define ASN1_BIT_STRING     0x03
+#endif
+#ifndef ASN1_OCTET_STRING
 #define ASN1_OCTET_STRING   0x04
-#define ASN1_OID            0x06
-#define ASN1_UTF8_STRING    0x0C
+#endif
+#ifndef ASN1_NULL
+#define ASN1_NULL           0x05
+#endif
+#ifndef ASN1_SEQUENCE
+#define ASN1_SEQUENCE       0x30
+#endif
+#ifndef ASN1_SET
 #define ASN1_SET            0x31
-#define ASN1_CONTEXT_SPECIFIC 0xA0
+#endif
+#ifndef ASN1_UTF8_STRING
+#define ASN1_UTF8_STRING    0x0C
+#endif
+#ifndef ASN1_OID
+#define ASN1_OID            0x06
+#endif
+#ifndef ASN1_CONSTRUCTED
+#define ASN1_CONSTRUCTED    0x20
+#endif
+#ifndef ASN1_CONTEXT_SPECIFIC
+#define ASN1_CONTEXT_SPECIFIC  0x80
+#endif
 
-#define X509_EXT_BASIC_CONSTRAINTS_CA   0x01
-#define X509_EXT_KEY_USAGE_DIGITAL_SIGN 0x02
+#define X509_KU_DIGITAL_SIGNATURE  0x01
+#define X509_KU_KEY_CERT_SIGN      0x04
+#define PTR_DIFF(p1, p2)    ((size_t)((uintptr_t)(p1) - (uintptr_t)(p2)))
+#define MAX_BUF_LEN         1024
 
 #define LDEVID 0x1
 #define FMC    0x2
@@ -31,30 +58,28 @@ typedef enum {
     CERT_TYPE_RT
 } cert_type_t;
 
-// 证书结构体
 typedef struct {
-    uint8_t der_data[512]; // 证书 DER 数据
-    size_t der_len;         // 证书长度
-    uint8_t type;           // 证书类型 (CA,LDEVID, FMC, RT)
+    uint8_t der_data[512];
+    size_t der_len;
+    uint8_t type;
 } cert_t;
 
 extern cert_t tbs_der_store[4];
 
 extern cert_t cert_store[4];
 
-// 证书关键字段结构体
 typedef struct {
-    uint8_t *issuer;        // 颁发者名称
+    uint8_t *issuer;
     size_t issuer_len;
-    uint8_t *subject;       // 主题名称
+    uint8_t *subject;
     size_t subject_len;
-    uint8_t *pubkey;        // 公钥
+    uint8_t *pubkey;
     size_t pubkey_len;
-    uint8_t *signature;     // 签名
+    uint8_t *signature;
     size_t signature_len;
-    uint8_t *validity;      // 有效期
+    uint8_t *validity;
     size_t validity_len;
-    uint8_t *serial;        // 序列号
+    uint8_t *serial;
     size_t serial_len;
 } x509_cert_t;
 
@@ -69,16 +94,16 @@ int generate_intermediate_tbs_der(
 );
 
 int add_signature_to_cert(
-    const uint8_t *tbs_der,
-    size_t tbs_len,
-    const uint32_t *sig_r,
-    const uint32_t *sig_s,
-    uint8_t *cert_out,
-    size_t *cert_len
+    const uint8_t *tbs_der, size_t tbs_len,
+    const uint8_t *sig_r,
+    const uint8_t *sig_s,
+    uint8_t *cert_out, size_t *cert_len
 );
 
-int parse_tbs_certificate(const uint8_t **p, x509_cert_t *cert);
-
-int parse_x509_cert(const uint8_t *der_data, size_t der_len, x509_cert_t *cert, bool parse_full);
+int verify_cert(
+    const uint8_t *cert_der, 
+    size_t cert_len, 
+    const uint8_t public_key[ECC_BYTES + 1]
+);
 
 #endif

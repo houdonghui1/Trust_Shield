@@ -15,7 +15,8 @@
 
 #ifndef ECC_H
   #define ECC_H
-
+  
+#include <string.h>
 #include "caliptra_defines.h"
 #include "caliptra_reg.h"
 #include "riscv_hw_if.h"
@@ -36,5 +37,7 @@ int ecc_verifying_flow(ecc_io msg, ecc_io pubkey_x, ecc_io pubkey_y, ecc_io sign
 void ecc_pcr_signing_flow(ecc_io iv, ecc_io sign_r, ecc_io sign_s);
 void ecc_zeroize();
 void wait_for_ecc_intr();
+void ecc_sigh_test(uint8_t *data_to_sign, uint8_t *pk_and_sg_value);
+int ecc_verify_test(uint8_t *data_to_verify, uint8_t *pk_and_sg_value);
 
 #endif

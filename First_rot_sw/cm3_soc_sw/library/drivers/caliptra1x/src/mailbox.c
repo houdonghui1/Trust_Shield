@@ -64,21 +64,20 @@ static int caliptra_mailbox_read_fifo(struct caliptra_buffer *buffer, uint32_t *
 {
 
     uint32_t remaining_len = caliptra_mbox_read_dlen();
-
+    
     // Check that the buffer is not null
-    if (buffer == NULL)
+    if (buffer == NULL) {
         return INVALID_PARAMS;
+    }
 
     if (bytes_read) {
         *bytes_read = 0;
     }
-
     // Check we have enough room in the buffer
-    if (buffer->len < remaining_len || !buffer->data)
+    if (buffer->len < remaining_len || !buffer->data) {
         return INVALID_PARAMS;
-
+    }
     uint32_t *data_dw = (uint32_t *)buffer->data;
-
     // Copy DWord multiples
     while (remaining_len >= sizeof(uint32_t))
     {
@@ -88,7 +87,6 @@ static int caliptra_mailbox_read_fifo(struct caliptra_buffer *buffer, uint32_t *
             *bytes_read += 4;
         }
     }
-
     // if un-aligned dword reminder...
     if (remaining_len)
     {
@@ -175,10 +173,8 @@ int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, u
     if (bytes_read == NULL) {
         return API_INTERNAL_ERROR;
     }
-
     // Check the Mailbox Status
     uint8_t mbx_status = caliptra_mbox_read_status();
-
     if (mbx_status == CALIPTRA_MBOX_STATUS_CMD_FAILURE)
     {
         caliptra_mbox_write_execute(false);
@@ -193,16 +189,15 @@ int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, u
     {
         return MBX_STATUS_UNKNOWN;
     }
-
     // Read Buffer
     int status = caliptra_mailbox_read_fifo(mbox_rx_buffer, bytes_read);
-
     // Execute False
     caliptra_mbox_write_execute(false);
     // Wait (HW model is halted whenever we aren't calling wait())
     delay_ms(1000);
     if (caliptra_mbox_read_status_fsm() != CALIPTRA_MBOX_STATUS_FSM_IDLE)
         return MBX_STATUS_NOT_IDLE;
+
     return status;
 }
 
@@ -341,20 +336,16 @@ int caliptra_mailbox_send_complete(struct caliptra_buffer *mbox_rx_buffer, bool 
     } else {
         g_caliptra_mbox_pending_rx_buffer = (struct caliptra_buffer){NULL, 0};
     }
-
     // Set Execute bit
     caliptra_mbox_write_execute(true);
-
     // Stop here if this is async (user will poll and complete)
     if (async) {
         return 0;
     }
-
     // Wait indefinitely for completion
     while (!caliptra_test_for_completion()){
         delay_ms(10);
     }
-
     return caliptra_complete();
 };
 
@@ -376,13 +367,11 @@ int caliptra_mailbox_execute(uint32_t cmd, const struct caliptra_buffer *mbox_tx
     if (status) {
         return status;
     }
-
     // Mailbox send data
     status = caliptra_mailbox_send_data(mbox_tx_buffer);
     if (status) {
         return status;
     }
-
     // Mailbox send complete
     return caliptra_mailbox_send_complete(mbox_rx_buffer, async);
 }
@@ -424,9 +413,9 @@ int pack_and_execute_command(struct parcel *parcel, bool async)
 
     // Calculate and populate the checksum field
     // Clear the checksum field before calculating
-    *((caliptra_checksum*)tx_buf.data) = 0x0;
+/*     *((caliptra_checksum*)tx_buf.data) = 0x0;
     *((caliptra_checksum*)tx_buf.data) = calculate_caliptra_checksum(parcel->command, tx_buf.data, tx_buf.len);
-
+ */
     return caliptra_mailbox_execute(parcel->command, &tx_buf, &rx_buf, async);
 }
 
@@ -461,22 +450,18 @@ int caliptra_complete()
     if (!caliptra_test_for_completion()) {
         return MBX_BUSY;
     }
-
     // Store the buffer locally and clear the global var
     // The global should never be set when we don't have the mbx HW lock
     // (HW lock protects this from race conditions)
     struct caliptra_buffer rx_buffer = g_caliptra_mbox_pending_rx_buffer;
     g_caliptra_mbox_pending_rx_buffer = (struct caliptra_buffer){NULL, 0};
-
     // Complete the transaction and read back a response if applicable
     uint32_t bytes_read = 0;
     int status = caliptra_check_status_get_response(&rx_buffer, &bytes_read);
-
     if (status)
     {
         return status;
     }
-
     // Verify the header data from the response
     if (rx_buffer.data != NULL) {
         //return check_command_response(rx_buffer.data, bytes_read);

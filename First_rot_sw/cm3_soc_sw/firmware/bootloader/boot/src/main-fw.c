@@ -72,7 +72,7 @@ int main_fw(void)
 
         if (input_len != 1)
         {
-            drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-5).\n");
+            drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-8).\n");
             drv_uart_printf("---------------------------------------------\n");
             drv_uart_printf("(1) start certificate chain verification\n");
             drv_uart_printf("(2) get CA certificate\n");
@@ -247,7 +247,7 @@ int main_fw(void)
                 drv_uart_printf("\n");
                 break;
             default:
-                drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-5).\n");
+                drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-8).\n");
                 drv_uart_printf("---------------------------------------------\n");
                 drv_uart_printf("(1) start certificate chain verification\n");
                 drv_uart_printf("(2) get CA certificate\n");

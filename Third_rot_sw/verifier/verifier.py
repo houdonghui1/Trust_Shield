@@ -17,9 +17,9 @@ BAUDRATE = 115200
 PARITY = serial.PARITY_NONE
 STOPBITS = serial.STOPBITS_ONE
 BYTESIZE = serial.EIGHTBITS
-READ_TIMEOUT_TOTAL = 30            
+READ_TIMEOUT_TOTAL = 120
 READ_INTERVAL = 0.05               
-NO_NEW_DATA_THRESHOLD = 60         
+NO_NEW_DATA_THRESHOLD = 2400
 SERIAL_BUFFER_SIZE = 65536         
 NONCE_SEND_TIMEOUT = 2             
 SERIAL_WRITE_CHUNK = 8             
@@ -28,6 +28,10 @@ AK_LEN_HEX_LEN = 4
 PCR_VALID_LEN = 64
 NONCE_VALID_LEN = 64
 MLDSA_SIGN_VALID_LEN = 4627*2
+CERT_CHAIN_FLAG_HEX_LEN = 2
+
+CERT_CHAIN_SUCCESS = 0xaa
+CERT_CHAIN_FAILURE = 0xba
 
 MLDSA_PK_EXTENSION_OID = "1.3.6.1.4.1.311.21.99"
 
@@ -211,16 +215,17 @@ try:
 except Exception as e:
     error(f"Failed to load ML-DSA verify library: {e}")
 
-def verify_mldsa_signature(pcr_hex, nonce_hex, mldsa_sig_hex, mldsa_pk_bin):
+def verify_mldsa_signature(pcr_hex, nonce_hex, flag_byte, mldsa_sig_hex, mldsa_pk_bin):
     info("\n========== Start ML-DSA Signature Verification ==========")
-    
+
     pk_hex_check = binascii.hexlify(mldsa_pk_bin).decode('utf-8').lower()
     info(f"Verify using ML-DSA PK (first 100 chars): {pk_hex_check[:100]}")
-    
+
     try:
         pcr_bin = binascii.unhexlify(pcr_hex)
         nonce_bin = binascii.unhexlify(nonce_hex)
         sig_bin = binascii.unhexlify(mldsa_sig_hex)
+        flag_bin = bytes([flag_byte])
         with open("extracted_sig.bin", "wb") as f:
             f.write(sig_bin)
         info(f"Extracted signature saved to: extracted_sig.bin (len: {len(sig_bin)} bytes)")
@@ -228,9 +233,10 @@ def verify_mldsa_signature(pcr_hex, nonce_hex, mldsa_sig_hex, mldsa_pk_bin):
     except binascii.Error as e:
         error(f"HEX to BIN conversion failed: {e}")
 
-    msg_concat_bin = pcr_bin + nonce_bin
-    info(f"PCR+Nonce concat length: {len(msg_concat_bin)} bytes (PCR: {len(pcr_bin)}, Nonce: {len(nonce_bin)})")
-    
+    msg_concat_bin = pcr_bin + nonce_bin + flag_bin
+    info(f"PCR+Nonce+Flag concat length: {len(msg_concat_bin)} bytes "
+         f"(PCR: {len(pcr_bin)}, Nonce: {len(nonce_bin)}, Flag: 0x{flag_byte:02x})")
+
     import hashlib
     sha256 = hashlib.sha256()
     sha256.update(msg_concat_bin)
@@ -242,7 +248,7 @@ def verify_mldsa_signature(pcr_hex, nonce_hex, mldsa_sig_hex, mldsa_pk_bin):
     pk_arr = (c_uint8 * len(pk_bin)).from_buffer_copy(pk_bin)
 
     debug(f"MLDSA Verify Params: sig_len={len(sig_bin)}, msg_len={len(msg_digest_bin)}, pk_len={len(pk_bin)}")
-    
+
     rc = lib.mldsa_verify_wrapper(
         sig_arr, len(sig_bin),
         msg_arr, len(msg_digest_bin),
@@ -353,8 +359,11 @@ def read_and_parse_quote_data(nonce_bytes):
     ser.close()
     debug("Serial port closed")
 
+    with open("raw_received.bin", "wb") as f:
+        f.write(raw_data)
+    info(f"Raw received data saved to raw_received.bin ({len(raw_data)} bytes)")
+
     raw_str = raw_data.decode('utf-8', errors='replace')
-    
     raw_str = raw_str.replace('\n', '').replace('\r', '').replace(' ', '').replace('j', '')
     
     start = raw_str.find("#QUOTE#")
@@ -378,8 +387,12 @@ def parse_quote_and_verify(quote_hex, sent_nonce_hex):
     info(f"Parsed AK certificate length: {ak_cert_hex_len} chars")
     
     total_required_len = (
-        AK_LEN_HEX_LEN + ak_cert_hex_len + 
-        PCR_VALID_LEN + NONCE_VALID_LEN + MLDSA_SIGN_VALID_LEN
+        AK_LEN_HEX_LEN + 
+        ak_cert_hex_len + 
+        PCR_VALID_LEN + 
+        NONCE_VALID_LEN + 
+        CERT_CHAIN_FLAG_HEX_LEN +
+        MLDSA_SIGN_VALID_LEN
     )
     if len(quote_hex) < total_required_len:
         error(f"Insufficient Quote data: need {total_required_len} chars, have {len(quote_hex)} chars")
@@ -394,6 +407,15 @@ def parse_quote_and_verify(quote_hex, sent_nonce_hex):
     nonce_hex = quote_hex[offset : offset + NONCE_VALID_LEN]
     offset += NONCE_VALID_LEN
     
+    flag_hex = quote_hex[offset : offset + CERT_CHAIN_FLAG_HEX_LEN]
+    offset += CERT_CHAIN_FLAG_HEX_LEN
+    try:
+        flag_byte = int(flag_hex, 16)
+    except ValueError:
+        error(f"Cert chain flag parsing failed: {flag_hex}")
+    if flag_byte not in (CERT_CHAIN_SUCCESS, CERT_CHAIN_FAILURE):
+        warn(f"Unexpected cert chain flag value: 0x{flag_byte:02x}, expected 0x9a or 0xaa. Proceeding anyway.")
+
     mldsa_sign_hex = quote_hex[offset : offset + MLDSA_SIGN_VALID_LEN]
     offset += MLDSA_SIGN_VALID_LEN
 
@@ -401,18 +423,21 @@ def parse_quote_and_verify(quote_hex, sent_nonce_hex):
     info(f"   AK Cert    : {len(ak_cert_hex)} chars")
     info(f"   PCR        : {len(pcr_hex)} chars")
     info(f"   Nonce      : {len(nonce_hex)} chars")
+    info(f"   Cert Flag  : 0x{flag_byte:02x} ({'SUCCESS' if flag_byte == CERT_CHAIN_SUCCESS else 'FAILURE' if flag_byte == CERT_CHAIN_FAILURE else 'UNKNOWN'})")
     info(f"   ML-DSA Sig : {len(mldsa_sign_hex)} chars")
 
     info("\n========== Start Verification ==========")
     verify_ak_certificate(ak_cert_hex, ak_cert_hex_len)
     mldsa_pk_bin, mldsa_pk_hex = extract_mldsa_pk_from_ak_cert()
     
-    reversed_pcr_hex = reverse_pcr_endian(pcr_hex)
-    verify_pcr(reversed_pcr_hex) 
+    verify_pcr(pcr_hex)
     
     verify_nonce(nonce_hex, sent_nonce_hex)
     
-    verify_mldsa_signature(pcr_hex, nonce_hex, mldsa_sign_hex, mldsa_pk_bin)
+    verify_mldsa_signature(pcr_hex, nonce_hex, flag_byte, mldsa_sign_hex, mldsa_pk_bin)
+
+    info(f"Cert chain verification status (from Quote, verified): "
+         f"{'PASS' if flag_byte == CERT_CHAIN_SUCCESS else 'FAIL'}")
 
 def main():
     info("========================================")

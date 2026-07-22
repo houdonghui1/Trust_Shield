@@ -347,7 +347,7 @@ TODO
 
 5. **主CPU固件释放**：主CPU固件阶段验证通过后，Caliptra通过Mailbox向主CPU发送“启动允许”信号，释放主CPU复位。主CPU从指定地址（FW_store）开始执行已验证的应用固件。
 
-6. **DICE证书链生成**：在整个引导过程中，Caliptra的ROM/固件按照DICE标准逐级派生密钥并生成证书链（IDevID→LDevID→Alias_FMC→Alias_RT）。最终证书链存储于Caliptra内部，可供二级可信根通过Mailbox读取。
+6. **DICE证书链生成**：在整个引导过程中，Caliptra的ROM/固件按照DICE标准逐级派生密钥并生成证书链（IDevID→LDevID→Alias_FMC→Alias_RT）。最终证书链存储于Caliptra内部，可供二级可信根通过专有UART通路读取。
 
 ### 5.3 信任链聚合与PCR扩展时序
 

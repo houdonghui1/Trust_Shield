@@ -26,7 +26,9 @@
 #include "sw/device/lib/base/abs_mmio.h"
 #include "sw/device/my_tests/attestation/x509/x509.h"
 #include "sw/device/my_tests/attestation/vendor_mldsa/mldsa_native.h"
-#include "sw/device/my_tests/attestation/sha256/sha256.h"
+#include "sw/device/my_tests/attestation/sha/sha256.h"
+#include "sw/device/my_tests/attestation/sha/sha384.h"
+#include "sw/device/my_tests/attestation/ecdsa-p384/ecc.h"
 
 #include "hw/top_earlgrey/sw/autogen/top_earlgrey.h"
 #include "hw/ip/aes/model/aes_modes.h"
@@ -40,20 +42,22 @@
 #define UART_RX_TIMEOUT_TICKS 1000U
 #define UART_RECV_IDLE_TIMEOUT_MS 5000U
 #define NONCE_LENGTH 32U
-#define QUOTE_BUFFER_SIZE 2048U
+//#define QUOTE_BUFFER_SIZE 2048U
 #define MLDSA_QUOTE_BUFFER_SIZE 22528u
-#define ECC_SIGN_LEN 64U
+//#define ECC_SIGN_LEN 64U
 #define CERT_RECV_BUF_MAX 8192U
 #define CERT_HEX_BUF_MAX (CERT_RECV_BUF_MAX * 2U + 1U + LOG_CHUNK_SIZE)
 #define AES_BLOCK_SIZE 16U
 #define AES_TIMEOUT (10 * 1000 * 1000)
 #define ROM_TOTAL_SIZE        2880U
-#define ROM_RECV_BUF_MAX      4096U
+#define DATA_RECV_BUF_MAX      4096U
+#define CSR_RECV_MAX_RETRY 3
+#define CSR_MIN_VALID_LEN  16
 
 static size_t g_actual_cert_byte_len = 0U;
 static size_t g_actual_cert_hex_len = 0U;
-static char cert_hex_buf[CERT_HEX_BUF_MAX] = {0};
-static uint8_t g_cert_total_buf[CERT_RECV_BUF_MAX] = {0};
+static char ctx_hex_buf[CERT_HEX_BUF_MAX] = {0};
+static char ctx_general_buf[800] = {0};
 static size_t g_cert_recv_idx = 0U;
 static bool g_marker_matched = false;
 static size_t g_marker_match_cnt = 0U;
@@ -61,20 +65,29 @@ static bool g_ak_cert_received = false;
 static uint32_t g_uart_idle_ticks = 0U;
 static size_t g_quote_hex_total_len = 0U;
 static uint8_t uart_rx_buf[NONCE_LENGTH] = {0};
-static uint8_t quote_buf[QUOTE_BUFFER_SIZE] = {0};
+//static uint8_t quote_buf[QUOTE_BUFFER_SIZE] = {0};
 static uint8_t firmware_hash[NONCE_LENGTH] = {0};
 static uint8_t nonce_bin[NONCE_LENGTH] = {0};
-static uint8_t quote_signature[ECC_SIGN_LEN] = {0};
+//static uint8_t quote_signature[ECC_SIGN_LEN] = {0};
 static uint8_t mldsa_pk[MLDSA87_PK_SIZE] = {0};
 static uint8_t mldsa_sk[MLDSA87_SK_SIZE] = {0};
 static uint8_t mldsa_sig[MLDSA87_SIG_SIZE] = {0};
 static uint8_t quote_buf_mldsa[MLDSA_QUOTE_BUFFER_SIZE] = {0};
 static char g_pack_quote_work_buf[MLDSA_QUOTE_BUFFER_SIZE] = {0};
-static uint8_t g_rom_recv_buf[ROM_RECV_BUF_MAX] = {0};
-static size_t  g_rom_recv_idx = 0U;
-static size_t  g_actual_rom_byte_len = 0U;
-static bool    g_rom_received = false;
-static uint32_t g_rom_idle_ticks = 0U;
+static uint8_t g_data_recv_buf[DATA_RECV_BUF_MAX] = {0};
+static size_t  g_data_recv_idx = 0U;
+static size_t  g_actual_data_byte_len = 0U;
+static bool    g_data_received = false;
+static uint32_t g_data_idle_ticks = 0U;
+static uint8_t rom_sha256_digest[SHA256_DIGEST_SIZE] = {0};
+static uint8_t verify_status = 0U;
+
+const uint8_t trigger_msg[] = "0x5a";
+const uint8_t start_2nd_msg[] = "0x6a";
+const uint8_t recv_csr_msg[] = "0x7a";
+const uint8_t send_cxt_msg[] = "0x8a";
+const uint8_t send_verify_msg[] = "0x9a";
+const uint8_t error_msg[] = "0x11";
 
 const uint8_t g_aes_key[32] = {
     0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
@@ -84,10 +97,10 @@ const uint8_t g_aes_key[32] = {
 };
 
 const uint8_t g_2nd_rom_expected_val[32] = {
-    0xe1,0x70,0x77,0xe8,0x91,0xea,0xbd,0xa5,
-    0x40,0x26,0xf1,0x4d,0xb3,0x01,0x46,0x5c,
-    0x81,0x17,0xf5,0xc7,0x8c,0xd8,0x73,0xa7,
-    0x1e,0xb1,0xb7,0x38,0xa9,0xf1,0x67,0x8b
+    0xaa,0xd2,0xd9,0x21,0x94,0x0c,0x54,0x9f,
+    0x78,0xc3,0xb9,0xec,0xce,0x47,0x4f,0xeb,
+    0xa0,0xce,0x03,0x57,0x08,0x40,0x58,0x15,
+    0x1b,0x1e,0x98,0xc9,0xfa,0x3d,0x46,0x35
 };
 
 enum {
@@ -159,17 +172,6 @@ static const uint8_t ek_public_key[64] = {
     0xce, 0x2f, 0x1c, 0xf4,
     0x6e, 0xd3, 0x34, 0xff,
     0x84, 0xf1, 0xbc, 0x07
-};
-
-static const uint32_t pcr_extend[8] = {
-    0x7e6d5c4b,
-    0x3a2f1e0d,
-    0x9c8b7a6f,
-    0x5e4d3c2b,
-    0x1a0f8f9b,
-    0x9e8d7c6b,
-    0x5a4f3e2d,
-    0x1c0b9a8f
 };
 
 OTTF_DEFINE_TEST_CONFIG();
@@ -248,7 +250,7 @@ void attestation_uart_init(dif_uart_t *uart, uint32_t uart_num) {
     static dif_pinmux_t pinmux;
 
     switch (uart_num) {
-      case 0:
+      case 0://privacy ca
         CHECK_DIF_OK(dif_uart_init(mmio_region_from_addr(TOP_EARLGREY_UART0_BASE_ADDR), uart));
         CHECK(kUartBaudrate <= UINT32_MAX, "kUartBaudrate overflow");
         CHECK(kClockFreqPeripheralHz <= UINT32_MAX, "kClockFreqPeripheralHz overflow");
@@ -260,8 +262,8 @@ void attestation_uart_init(dif_uart_t *uart, uint32_t uart_num) {
             .tx_enable = kDifToggleEnabled,
             .rx_enable = kDifToggleEnabled,
         }));
-      break;
-      case 1:
+        break;
+      case 1://verifier
         CHECK_DIF_OK(dif_pinmux_init(mmio_region_from_addr(TOP_EARLGREY_PINMUX_AON_BASE_ADDR), &pinmux));
         pinmux_testutils_init(&pinmux);
         CHECK_DIF_OK(dif_uart_init(mmio_region_from_addr(TOP_EARLGREY_UART1_BASE_ADDR), uart));
@@ -283,8 +285,8 @@ void attestation_uart_init(dif_uart_t *uart, uint32_t uart_num) {
                     .tx_enable = kDifToggleEnabled,
                     .rx_enable = kDifToggleEnabled,
                 }));
-      break;
-      case 2:
+        break;
+      case 2://2nd
         CHECK_DIF_OK(dif_pinmux_init(mmio_region_from_addr(TOP_EARLGREY_PINMUX_AON_BASE_ADDR), &pinmux));
         pinmux_testutils_init(&pinmux);
         CHECK_DIF_OK(dif_uart_init(mmio_region_from_addr(TOP_EARLGREY_UART2_BASE_ADDR), uart));
@@ -306,8 +308,14 @@ void attestation_uart_init(dif_uart_t *uart, uint32_t uart_num) {
                     .tx_enable = kDifToggleEnabled,
                     .rx_enable = kDifToggleEnabled,
                 }));
-      break;
+        break;
+      default:
+        LOG_INFO("No such serial port");
     }
+
+    CHECK_DIF_OK(dif_uart_fifo_reset(uart, kDifUartDatapathRx));
+    CHECK_DIF_OK(dif_uart_fifo_reset(uart, kDifUartDatapathTx));
+    CHECK_DIF_OK(dif_uart_enable_rx_timeout(uart, UART_RX_TIMEOUT_TICKS));
 }
 
 static dif_result_t receive_block_cert(dif_uart_t *uart) {
@@ -347,7 +355,7 @@ static dif_result_t receive_block_cert(dif_uart_t *uart) {
         LOG_INFO("Marker mismatch (0x%02x != 0x%02x), reset cnt to 0", curr_byte, AK_CERT_MARKER[0]);
       }
     } else {
-      g_cert_total_buf[g_cert_recv_idx++] = curr_byte;
+      g_data_recv_buf[g_cert_recv_idx++] = curr_byte;
       LOG_INFO("Recv byte: 0x%02x (idx: %u)", curr_byte, (uint32_t)g_cert_recv_idx);
     }
   }
@@ -358,17 +366,17 @@ static dif_result_t receive_block_cert(dif_uart_t *uart) {
   return kDifOk;
 }
 
-static dif_result_t receive_block_rom(dif_uart_t *uart) {
+static dif_result_t receive_block_data(dif_uart_t *uart) {
   size_t avail_bytes = 0U;
   CHECK_DIF_OK(dif_uart_rx_bytes_available(uart, &avail_bytes));
   const size_t valid_avail = (avail_bytes > UART_FIFO_SIZE) ? UART_FIFO_SIZE : avail_bytes;
 
   if (valid_avail == 0U) {
-    g_rom_idle_ticks++;
+    g_data_idle_ticks++;
     return kDifOk;
   }
 
-  g_rom_idle_ticks = 0U;
+  g_data_idle_ticks = 0U;
   uint8_t temp_buf[UART_FIFO_SIZE] = {0};
   size_t bytes_read = 0U;
   memset(temp_buf, 0, sizeof(temp_buf));
@@ -377,11 +385,10 @@ static dif_result_t receive_block_rom(dif_uart_t *uart) {
     return kDifOk;
   }
 
-  LOG_INFO("Recv: %u bytes (current ROM idx: %u)", 
-           (uint32_t)bytes_read, (uint32_t)g_rom_recv_idx);
+  LOG_INFO("Recv: %u bytes (current data idx: %u)", (uint32_t)bytes_read, (uint32_t)g_data_recv_idx);
 
-  for (size_t i = 0; i < bytes_read && g_rom_recv_idx < ROM_RECV_BUF_MAX; ++i) {
-      g_rom_recv_buf[g_rom_recv_idx++] = temp_buf[i];
+  for (size_t i = 0; i < bytes_read && g_data_recv_idx < DATA_RECV_BUF_MAX; ++i) {
+      g_data_recv_buf[g_data_recv_idx++] = temp_buf[i];
   }
 
   CHECK_DIF_OK(dif_uart_byte_send_polled(uart, UART_ACK_BYTE));
@@ -451,22 +458,15 @@ static status_t aes_ecb256_decrypt(const uint8_t *ciphertext, size_t ciphertext_
   return OK_STATUS();
 }
 
-int ricv_cert(void) {
+int recv_ak_cert(dif_uart_t uart0) {
     LOG_INFO("Waiting for AK certificate from UART...");
-    dif_uart_t uart = {0};
     size_t bytes_read = 0U;
     uint8_t input_buffer[32] = {0};
-
-    attestation_uart_init(&uart, 0);
-
-    CHECK_DIF_OK(dif_uart_fifo_reset(&uart, kDifUartDatapathRx));
-    CHECK_DIF_OK(dif_uart_fifo_reset(&uart, kDifUartDatapathTx));
-    CHECK_DIF_OK(dif_uart_enable_rx_timeout(&uart, UART_RX_TIMEOUT_TICKS));
 
     g_ak_cert_received = false;
     g_uart_idle_ticks = 0U;
     while (!g_ak_cert_received) {
-      (void)receive_block_cert(&uart);
+      (void)receive_block_cert(&uart0);
       sleep_ms(20);
 
       if (g_marker_matched && g_uart_idle_ticks > (UART_RECV_IDLE_TIMEOUT_MS / 20)) {
@@ -483,17 +483,17 @@ int ricv_cert(void) {
     }
 
     g_actual_cert_hex_len = g_actual_cert_byte_len * 2U;
-    memset(cert_hex_buf, 0, CERT_HEX_BUF_MAX);
+    memset(ctx_hex_buf, 0, CERT_HEX_BUF_MAX);
     LOG_INFO("Actual AK cert HEX length: 0x%x", g_actual_cert_hex_len);
 
     LOG_INFO("Press '1' to print the certificate.");
     while (true) {
       memset(input_buffer, 0, sizeof(input_buffer));
-      CHECK_DIF_OK(dif_uart_bytes_receive(&uart, sizeof(input_buffer), input_buffer, &bytes_read));
+      CHECK_DIF_OK(dif_uart_bytes_receive(&uart0, sizeof(input_buffer), input_buffer, &bytes_read));
 
       if (bytes_read > 0U) {
         if (g_actual_cert_byte_len > 0) {
-          const uint8_t *ciphertext = g_cert_total_buf;
+          const uint8_t *ciphertext = g_data_recv_buf;
           size_t ciphertext_len = g_actual_cert_byte_len;
           const char hex_chars[] = "0123456789abcdef";
 
@@ -502,20 +502,20 @@ int ricv_cert(void) {
 
           LOG_INFO("AK Cert ciphertext:");
           size_t cipher_hex_len = ciphertext_len * 2U;
-          memset(cert_hex_buf, 0, CERT_HEX_BUF_MAX);
+          memset(ctx_hex_buf, 0, CERT_HEX_BUF_MAX);
           for (size_t i = 0U; i < ciphertext_len; ++i) {
             const uint8_t cert_byte = ciphertext[i];
-            cert_hex_buf[i*2U]   = hex_chars[(cert_byte >> 4U) & 0x0FU];
-            cert_hex_buf[i*2U+1] = hex_chars[cert_byte & 0x0FU];
+            ctx_hex_buf[i*2U]   = hex_chars[(cert_byte >> 4U) & 0x0FU];
+            ctx_hex_buf[i*2U+1] = hex_chars[cert_byte & 0x0FU];
           }
-          cert_hex_buf[cipher_hex_len] = '\0';
+          ctx_hex_buf[cipher_hex_len] = '\0';
           for (size_t i = 0U; i < cipher_hex_len; i += CERT_HEX_BUF_MAX) {
             const size_t remaining = cipher_hex_len - i;
             const size_t chunk_size = (remaining > CERT_HEX_BUF_MAX) ? CERT_HEX_BUF_MAX : remaining;
-            char temp = cert_hex_buf[i + chunk_size];
-            cert_hex_buf[i + chunk_size] = '\0';
-            LOG_INFO("%s", cert_hex_buf + i);
-            cert_hex_buf[i + chunk_size] = temp;
+            char temp = ctx_hex_buf[i + chunk_size];
+            ctx_hex_buf[i + chunk_size] = '\0';
+            LOG_INFO("%s", ctx_hex_buf + i);
+            ctx_hex_buf[i + chunk_size] = temp;
           }
 
           if (status_ok(aes_ecb256_decrypt(ciphertext, ciphertext_len, g_ak_cert_plain, &g_ak_cert_plain_len))) {
@@ -523,20 +523,20 @@ int ricv_cert(void) {
 
             LOG_INFO("AK Cert plaintext:");
             size_t plain_hex_len = g_ak_cert_plain_len * 2U;
-            memset(cert_hex_buf, 0, CERT_HEX_BUF_MAX);
+            memset(ctx_hex_buf, 0, CERT_HEX_BUF_MAX);
             for (size_t i = 0U; i < g_ak_cert_plain_len; ++i) {
               const uint8_t cert_byte = g_ak_cert_plain[i];
-              cert_hex_buf[i*2U]   = hex_chars[(cert_byte >> 4U) & 0x0FU];
-              cert_hex_buf[i*2U+1] = hex_chars[cert_byte & 0x0FU];
+              ctx_hex_buf[i*2U]   = hex_chars[(cert_byte >> 4U) & 0x0FU];
+              ctx_hex_buf[i*2U+1] = hex_chars[cert_byte & 0x0FU];
             }
-            cert_hex_buf[plain_hex_len] = '\0';
+            ctx_hex_buf[plain_hex_len] = '\0';
             for (size_t i = 0U; i < plain_hex_len; i += CERT_HEX_BUF_MAX) {
               const size_t remaining = plain_hex_len - i;
               const size_t chunk_size = (remaining > CERT_HEX_BUF_MAX) ? CERT_HEX_BUF_MAX : remaining;
-              char temp = cert_hex_buf[i + chunk_size];
-              cert_hex_buf[i + chunk_size] = '\0';
-              LOG_INFO("%s", cert_hex_buf + i);
-              cert_hex_buf[i + chunk_size] = temp;
+              char temp = ctx_hex_buf[i + chunk_size];
+              ctx_hex_buf[i + chunk_size] = '\0';
+              LOG_INFO("%s", ctx_hex_buf + i);
+              ctx_hex_buf[i + chunk_size] = temp;
             }
             break;
           } else {
@@ -552,126 +552,105 @@ int ricv_cert(void) {
   return 0;
 }
 
-#if 0
-int ricv_cert(void) {
-    LOG_INFO("Waiting for AK certificate from UART...");
-    dif_uart_t uart = {0};
+int recv_csr(void) {
     size_t bytes_read = 0U;
-    const char *print_trigger = "1";
-    uint8_t input_buffer[32] = {0};
-
-    attestation_uart_init(&uart, 0);
-
-    CHECK_DIF_OK(dif_uart_fifo_reset(&uart, kDifUartDatapathRx));
-    CHECK_DIF_OK(dif_uart_fifo_reset(&uart, kDifUartDatapathTx));
-    CHECK_DIF_OK(dif_uart_enable_rx_timeout(&uart, UART_RX_TIMEOUT_TICKS));
-
-    g_ak_cert_received = false;
-    g_uart_idle_ticks = 0U;
-    while (!g_ak_cert_received) {
-      (void)receive_block_cert(&uart);
-      sleep_ms(20);
-
-      if (g_marker_matched && g_uart_idle_ticks > (UART_RECV_IDLE_TIMEOUT_MS / 20)) {
-        g_ak_cert_received = true;
-        g_actual_cert_byte_len = g_cert_recv_idx;
-        LOG_INFO("Cert receive complete! Actual cert byte len: %u", (uint32_t)g_actual_cert_byte_len);
-      }
-
-      if (g_cert_recv_idx >= CERT_RECV_BUF_MAX) {
-        g_ak_cert_received = true;
-        g_actual_cert_byte_len = CERT_RECV_BUF_MAX;
-        LOG_WARNING("Cert buffer full! Max len: %u", (uint32_t)CERT_RECV_BUF_MAX);
-      }
-    }
-
-
-    g_actual_cert_hex_len = g_actual_cert_byte_len * 2U;
-    memset(cert_hex_buf, 0, CERT_HEX_BUF_MAX);
-    LOG_INFO("Actual AK cert HEX length: 0x%x", g_actual_cert_hex_len);
-
-    LOG_INFO("Press '1' to print the certificate.");
-    while (true) {
-      memset(input_buffer, 0, sizeof(input_buffer));
-      CHECK_DIF_OK(dif_uart_bytes_receive(&uart, sizeof(input_buffer), input_buffer, &bytes_read));
-
-      if (bytes_read > 0U) {
-        if (strstr((char *)input_buffer, print_trigger) != NULL) {
-          const char hex_chars[] = "0123456789abcdef";
-          for (size_t i = 0U; i < g_actual_cert_byte_len; ++i) {
-            const uint8_t cert_byte = g_cert_total_buf[i];
-            cert_hex_buf[i*2U]   = hex_chars[(cert_byte >> 4U) & 0x0FU];
-            cert_hex_buf[i*2U+1] = hex_chars[cert_byte & 0x0FU];
-          }
-          cert_hex_buf[g_actual_cert_hex_len] = '\0';
-
-          for (size_t i = 0U; i < g_actual_cert_hex_len; i += CERT_HEX_BUF_MAX) {
-            const size_t remaining = g_actual_cert_hex_len - i;
-            const size_t chunk_size = (remaining > CERT_HEX_BUF_MAX) ? CERT_HEX_BUF_MAX : remaining;
-            char temp = cert_hex_buf[i + chunk_size];
-            cert_hex_buf[i + chunk_size] = '\0';
-            LOG_INFO("%s", cert_hex_buf + i);
-            cert_hex_buf[i + chunk_size] = temp;
-          }
-          break;
-        } else {
-          LOG_INFO("Invalid input. Press '1' to print.");
-        }
-      }
-      sleep_ms(100);
-    }
-
-  return 0;
-}
-#endif
-
-int ricv_measure_rom(void) {
-    LOG_INFO("Waiting for Secondary ROM from UART...");
     dif_uart_t uart2 = {0};
-    const uint8_t trigger_msg[] = "0x5a";
-    const uint8_t start_2nd_msg[] = "0x6a";
-    size_t bytes_written = 0U;
-    uint8_t rom_sha256_digest[SHA256_DIGEST_SIZE] = {0};
+
+    LOG_INFO("Waiting for 2nd csr from uart2...");
 
     attestation_uart_init(&uart2, 2);
     CHECK_DIF_OK(dif_uart_fifo_reset(&uart2, kDifUartDatapathRx));
     CHECK_DIF_OK(dif_uart_fifo_reset(&uart2, kDifUartDatapathTx));
     CHECK_DIF_OK(dif_uart_enable_rx_timeout(&uart2, UART_RX_TIMEOUT_TICKS));
+    sleep_ms(1000);
+
+    while (1) {
+        CHECK_DIF_OK(dif_uart_fifo_reset(&uart2, kDifUartDatapathRx));
+        g_data_received = false;
+        g_data_idle_ticks = 0U;
+        g_data_recv_idx = 0U;
+        size_t last_recv_idx = 0;
+
+        CHECK_DIF_OK(dif_uart_bytes_send(&uart2, recv_csr_msg, sizeof(recv_csr_msg) - 1, &bytes_read));
+
+        while (!g_data_received) {
+            (void)receive_block_data(&uart2);
+            sleep_ms(20);
+
+            if (g_data_recv_idx == last_recv_idx) {
+                g_data_idle_ticks++;
+            } else {
+                g_data_idle_ticks = 0;
+                last_recv_idx = g_data_recv_idx;
+            }
+
+            if (g_data_idle_ticks > 500) {
+                g_data_received = true;
+                g_actual_data_byte_len = g_data_recv_idx;
+            }
+
+            if (g_data_recv_idx >= DATA_RECV_BUF_MAX) {
+                g_data_received = true;
+                g_actual_data_byte_len = g_data_recv_idx;
+            }
+        }
+
+        if (g_actual_data_byte_len >= CSR_MIN_VALID_LEN) {
+            LOG_INFO("CSR receive complete! Received %d bytes (0x%x)", (uint32_t)g_actual_data_byte_len, (uint32_t)g_actual_data_byte_len);
+            break;
+        }
+
+        LOG_INFO("No valid CSR data yet (got 0x%x bytes), retrying...", g_actual_data_byte_len);
+        sleep_ms(500);
+    }
+    memset(ctx_general_buf, 0, sizeof(ctx_general_buf));
+    
+    memcpy(ctx_general_buf, g_data_recv_buf, g_actual_data_byte_len);
+    LOG_INFO("Actual 2nd CSR DER length: 0x%x bytes", g_actual_data_byte_len);
+    print_hex_buffer("2nd CSR DER", ctx_general_buf, g_actual_data_byte_len);
+
+    return 0;
+}
+
+int recv_measure_rom(dif_uart_t uart2) {
+    LOG_INFO("Waiting for 2nd ROM from UART...");
+
+    size_t bytes_written = 0U;
 
     LOG_INFO("Send trigger signal: 0x5a to UART...");
     CHECK_DIF_OK(dif_uart_bytes_send(&uart2, trigger_msg, sizeof(trigger_msg)-1, &bytes_written));
 
-    g_rom_received = false;
-    g_rom_idle_ticks = 0U;
-    g_rom_recv_idx = 0U;
-    g_actual_rom_byte_len = 0U;
+    g_data_received = false;
+    g_data_idle_ticks = 0U;
+    g_data_recv_idx = 0U;
+    g_actual_data_byte_len = 0U;
 
-    while (!g_rom_received) {
-      (void)receive_block_rom(&uart2);
+    while (!g_data_received) {
+      (void)receive_block_data(&uart2);
       sleep_ms(20);
 
-      if (g_rom_recv_idx >= ROM_TOTAL_SIZE) {
-        g_rom_received = true;
-        g_actual_rom_byte_len = ROM_TOTAL_SIZE;
+      if (g_data_recv_idx >= ROM_TOTAL_SIZE) {
+        g_data_received = true;
+        g_actual_data_byte_len = ROM_TOTAL_SIZE;
         LOG_INFO("ROM receive complete! 2880 bytes (0x1680)");
         break;
       }
 
-      if (g_rom_idle_ticks > 500) {
-        g_rom_received = true;
-        g_actual_rom_byte_len = g_rom_recv_idx;
-        LOG_INFO("ROM receive timeout! Received len: 0x%x", (uint32_t)g_actual_rom_byte_len);
+      if (g_data_idle_ticks > 5000) {
+        g_data_received = true;
+        g_actual_data_byte_len = g_data_recv_idx;
+        LOG_INFO("ROM receive timeout! Received len: 0x%x", (uint32_t)g_actual_data_byte_len);
       }
 
-      if (g_rom_recv_idx >= ROM_RECV_BUF_MAX) {
-        g_rom_received = true;
-        g_actual_rom_byte_len = g_rom_recv_idx;
+      if (g_data_recv_idx >= DATA_RECV_BUF_MAX) {
+        g_data_received = true;
+        g_actual_data_byte_len = g_data_recv_idx;
       }
     }
 
-    print_hex_buffer("Received ROM Data", g_rom_recv_buf, g_actual_rom_byte_len);
+    print_hex_buffer("Received ROM Data", g_data_recv_buf, g_actual_data_byte_len);
     LOG_INFO("Calculating ROM SHA256...");
-    SHA256_hash(g_rom_recv_buf, g_actual_rom_byte_len, rom_sha256_digest);
+    SHA256_hash(g_data_recv_buf, g_actual_data_byte_len, rom_sha256_digest);
     print_hex_buffer("ROM SHA256 Digest", rom_sha256_digest, SHA256_DIGEST_SIZE);
 
     bool measure_pass = true;
@@ -688,13 +667,15 @@ int ricv_measure_rom(void) {
         CHECK_DIF_OK(dif_uart_bytes_send(&uart2, start_2nd_msg, sizeof(start_2nd_msg)-1, &bytes_written));
     } else {
         LOG_ERROR("ROM Measure FAIL, ROM is tampered!");
+        //CHECK_DIF_OK(dif_uart_bytes_send(&uart2, start_2nd_msg, sizeof(start_2nd_msg)-1, &bytes_written));
+        CHECK_DIF_OK(dif_uart_bytes_send(&uart2, error_msg, sizeof(error_msg)-1, &bytes_written));
         return -1;
     }
     
     return 0;
 }
 
-int ecdsa_sign_hash_nonce(crypto_blinded_key_t quote_privatekey ,crypto_unblinded_key_t quote_publickey) {
+/* int ecdsa_sign_hash_nonce(crypto_blinded_key_t quote_privatekey ,crypto_unblinded_key_t quote_publickey) {
     LOG_INFO("Quote Private key (keyblob, %d words):", keyblob_num_words(kPrivateKeyConfig));
     for (size_t i = 0; i < keyblob_num_words(kPrivateKeyConfig); i++) {
       LOG_INFO("  word[%d]: 0x%08x", (int)i, quote_privatekey.keyblob[i]);
@@ -758,15 +739,16 @@ int ecdsa_sign_hash_nonce(crypto_blinded_key_t quote_privatekey ,crypto_unblinde
         &kCurveP256, &verificationResult));
 
     return 0;
-}
+} */
 
 int mldsa_sign_hash_nonce(void) {
-    uint8_t data_to_sign[64];
+    uint8_t data_to_sign[32 + 32 + 1];
     uint8_t msg[32];
     memcpy(data_to_sign, firmware_hash, 32);
     memcpy(data_to_sign + 32, nonce_bin, 32);
+    data_to_sign[64] = verify_status;
     
-    SHA256_hash(data_to_sign, 64, msg);
+    SHA256_hash(data_to_sign, sizeof(data_to_sign), msg);
 
     print_hex_buffer("pcr", firmware_hash, 32);
 
@@ -783,13 +765,6 @@ int mldsa_sign_hash_nonce(void) {
     }
     LOG_INFO("MLDSA87 sign SUCCESS! ret code: %d", sign_ret);
     //print_hex_buffer("mldsa-mldsa_sig", mldsa_sig, MLDSA87_SIG_SIZE);
-
-/*     for (int i = 0; i < kP256SignatureWords; i++) {
-        quote_signature[i*4]   = mldsa_sig[i] & 0xFF;
-        quote_signature[i*4+1] = (mldsa_sig[i] >> 8) & 0xFF;
-        quote_signature[i*4+2] = (mldsa_sig[i] >> 16) & 0xFF;
-        quote_signature[i*4+3] = (mldsa_sig[i] >> 24) & 0xFF;
-    } */
 
     // Verify the signature.
     LOG_INFO("Verifying...");
@@ -815,7 +790,7 @@ size_t bin_to_hex(const uint8_t *bin, size_t bin_len, char *hex_out) {
     return bin_len * 2;
 }
 
-void pack_quote(void) {
+/* void pack_quote(void) {
     char quote_hex_buf[QUOTE_BUFFER_SIZE * 2 + 100] = {0};
     char *p = quote_hex_buf;
 
@@ -837,7 +812,7 @@ void pack_quote(void) {
 
     // 3. AK证书HEX
     if (g_actual_cert_hex_len > 0 && g_actual_cert_hex_len < CERT_HEX_BUF_MAX) {
-        strcpy(p, cert_hex_buf);
+        strcpy(p, ctx_hex_buf);
         p += g_actual_cert_hex_len;
         LOG_INFO("Packed AK certificate HEX: %d bytes", g_actual_cert_hex_len);
     } else {
@@ -878,7 +853,7 @@ void pack_quote(void) {
 
     LOG_INFO("Full quote HEX package: %d bytes", quote_hex_total_len);
     LOG_INFO("Quote HEX preview: %.*s", 50, quote_hex_buf);
-}
+} */
 
 void pack_quote_mldsa(void) {
     char *p = g_pack_quote_work_buf;
@@ -901,7 +876,7 @@ void pack_quote_mldsa(void) {
 
     // 3. AK证书HEX
     if (g_actual_cert_hex_len > 0 && g_actual_cert_hex_len < CERT_HEX_BUF_MAX) {
-        strcpy(p, cert_hex_buf);
+        strcpy(p, ctx_hex_buf);
         p += g_actual_cert_hex_len;
         LOG_INFO("Packed AK certificate HEX: %d bytes", g_actual_cert_hex_len);
     } else {
@@ -923,16 +898,19 @@ void pack_quote_mldsa(void) {
     p += nonce_hex_len;
     LOG_INFO("Packed Nonce HEX: %d bytes", nonce_hex_len);
 
-    // 6. MLDSA签名转HEX字符串
+    // 6. 证书链验证状态标志
+    *p++ = hex_chars[(verify_status >> 4) & 0x0F];
+    *p++ = hex_chars[ verify_status       & 0x0F];
+    LOG_INFO("Cert chain verify flag: 0x%02x", (uint8_t)*(p-1));
+
+    // 7. MLDSA签名转HEX字符串
     char sign_hex[MLDSA87_SIG_SIZE * 2 + 1] = {0};
-
     size_t sign_hex_len = bin_to_hex(mldsa_sig, MLDSA87_SIG_SIZE, sign_hex);
-
     strcpy(p, sign_hex);
     p += sign_hex_len;
     LOG_INFO("Packed Signature HEX: %d bytes", sign_hex_len);
 
-    // 7. 结束分隔符
+    // 8. 结束分隔符
     strcpy(p, "#END#");
     p += strlen("#END#");
 
@@ -971,88 +949,9 @@ void uart_send_hex_chunked(dif_uart_t *uart, const uint8_t *data, size_t len,
     LOG_INFO("All data sent: %d bytes total", (uint32_t)len);
 }
 
-int remote_attestation(crypto_blinded_key_t ak_privatekey ,crypto_unblinded_key_t ak_publickey) {
-    dif_uart_t uart = {0};
-    size_t bytes_read;
+int remote_attestation_mldsa(dif_uart_t uart1) {
 
-    attestation_uart_init(&uart, 1);
-
-    memset(uart_rx_buf, 0, sizeof(uart_rx_buf));
-    memset(nonce_bin, 0, sizeof(nonce_bin));
-    memset(quote_signature, 0, sizeof(quote_signature));
-    
-    LOG_INFO("Waiting to receive [nonce].");
-    do {
-      memset(uart_rx_buf, 0x0, sizeof(uart_rx_buf));
-      CHECK_DIF_OK(dif_uart_bytes_receive(&uart, sizeof(uart_rx_buf), uart_rx_buf, &bytes_read));
-      sleep_ms(100); 
-      if(bytes_read > 0) {
-        LOG_INFO("Received %u bytes", bytes_read);
-      }
-      
-      if (bytes_read == NONCE_LENGTH) {
-        memcpy(nonce_bin, uart_rx_buf, NONCE_LENGTH);
-        LOG_INFO("Received nonce:");
-        for (int i = 0; i < 32; i++) {
-          LOG_INFO("%02x", nonce_bin[i]);
-        }
-      }
-    } while(bytes_read != NONCE_LENGTH);
-    
-    for (int i = 0; i < 8; i++) {
-        firmware_hash[i*4]   = pcr_extend[i] & 0xFF;
-        firmware_hash[i*4+1] = (pcr_extend[i] >> 8) & 0xFF;
-        firmware_hash[i*4+2] = (pcr_extend[i] >> 16) & 0xFF;
-        firmware_hash[i*4+3] = (pcr_extend[i] >> 24) & 0xFF;
-    }
-
-    ecdsa_sign_hash_nonce(ak_privatekey, ak_publickey);
-
-    pack_quote();
-
-    size_t quote_total_len = strlen((char *)quote_buf);
-    LOG_INFO("Sending quote HEX package, total length: 0x%x bytes", quote_total_len);
-
-    uart_send_hex_chunked(&uart, quote_buf, quote_total_len, 32, 10);
-
-    LOG_INFO("Quote package sent completely");
-    return 0;
-}
-
-int remote_attestation_mldsa(void) {
-    dif_uart_t uart = {0};
-    size_t bytes_read;
-
-    attestation_uart_init(&uart, 1);
-
-    memset(uart_rx_buf, 0, sizeof(uart_rx_buf));
-    memset(nonce_bin, 0, sizeof(nonce_bin));
-    memset(quote_signature, 0, sizeof(quote_signature));
-    
-    LOG_INFO("Waiting to receive [nonce].");
-    do {
-      memset(uart_rx_buf, 0x0, sizeof(uart_rx_buf));
-      CHECK_DIF_OK(dif_uart_bytes_receive(&uart, sizeof(uart_rx_buf), uart_rx_buf, &bytes_read));
-      sleep_ms(100); 
-      if(bytes_read > 0) {
-        LOG_INFO("Received %u bytes", bytes_read);
-      }
-      
-      if (bytes_read == NONCE_LENGTH) {
-        memcpy(nonce_bin, uart_rx_buf, NONCE_LENGTH);
-        LOG_INFO("Received nonce:");
-        for (int i = 0; i < 32; i++) {
-          LOG_INFO("%02x", nonce_bin[i]);
-        }
-      }
-    } while(bytes_read != NONCE_LENGTH);
-    
-    for (int i = 0; i < 8; i++) {
-        firmware_hash[i*4]   = pcr_extend[i] & 0xFF;
-        firmware_hash[i*4+1] = (pcr_extend[i] >> 8) & 0xFF;
-        firmware_hash[i*4+2] = (pcr_extend[i] >> 16) & 0xFF;
-        firmware_hash[i*4+3] = (pcr_extend[i] >> 24) & 0xFF;
-    }
+    memcpy(firmware_hash, rom_sha256_digest, 32);
 
     if (mldsa_sign_hash_nonce() != 0) {
         LOG_ERROR("mldsa_sign_hash_nonce failed.");
@@ -1064,98 +963,157 @@ int remote_attestation_mldsa(void) {
     size_t quote_total_len = g_quote_hex_total_len;
     LOG_INFO("Sending quote HEX package, total length: 0x%x bytes", quote_total_len);
 
-    uart_send_hex_chunked(&uart, quote_buf_mldsa, quote_total_len, 32, 10);
+    uart_send_hex_chunked(&uart1, quote_buf_mldsa, quote_total_len, 32, 10);
 
     LOG_INFO("Quote package sent completely");
     return 0;
 }
 
-void sw_mldsa_test(void) {
-    const uint8_t test_msg[] = "Attestation with MLDSA87";
-    const size_t msg_len = sizeof(test_msg) - 1;
+int X509_sign_ctx(dif_uart_t uart2, uint8_t *private_key_bytes, uint8_t *public_key_bytes) {
+    uint8_t signature[ECC_BYTES * 2] = {0};
+    size_t bytes_read = 0U;
+    LOG_INFO("start sign 2nd certificates");
+    memset(ctx_general_buf, 0, sizeof(ctx_general_buf));
 
-    LOG_INFO("Generating MLDSA87 key pair...");
-    int keypair_ret = PQCP_MLDSA_NATIVE_MLDSA87_keypair(mldsa_pk, mldsa_sk);
-    if (keypair_ret != 0) {
-        LOG_ERROR("MLDSA87 sign FAILED! ret code: %d", keypair_ret);
-        return;
-    }
-    LOG_INFO("MLDSA87 keypair SUCCESS! ret code: %d", keypair_ret);
-    //print_hex_buffer("mldsa-mldsa_pk", mldsa_pk, MLDSA87_PK_SIZE);
-    //print_hex_buffer("mldsa-mldsa_sk", mldsa_sk, MLDSA87_SK_SIZE);
+    recv_csr();
 
-    LOG_INFO("Signing test message...");
-    int sign_ret = PQCP_MLDSA_NATIVE_MLDSA87_sign(mldsa_sig, test_msg, msg_len, mldsa_sk);
-    if (sign_ret != 0) {
-        LOG_ERROR("MLDSA87 sign FAILED! ret code: %d", sign_ret);
-        return;
-    }
-    LOG_INFO("MLDSA87 sign SUCCESS! ret code: %d", sign_ret);
-    //print_hex_buffer("mldsa-mldsa_sig", mldsa_sig, MLDSA87_SIG_SIZE);
+    uint8_t msg_hash[48];
 
-    LOG_INFO("Verifying MLDSA87 signature...");
-    int verify_ret = PQCP_MLDSA_NATIVE_MLDSA87_verify(mldsa_sig, test_msg, msg_len, mldsa_pk);
-    
-    if (verify_ret == 0) {
-        LOG_INFO("MLDSA87 verify SUCCESS! ret code: %d", verify_ret);
-    } else {
-        LOG_ERROR("MLDSA87 verify FAILED! ret code: %d", verify_ret);
+    SHA384_hash((const uint8_t *)ctx_general_buf, g_actual_data_byte_len, msg_hash);
+    LOG_INFO("TBS SHA384 digest generated");
+    print_hex_buffer("TBS SHA384 digest", msg_hash, sizeof(msg_hash));
+
+    int ret = ecdsa_sign(private_key_bytes, msg_hash, signature);
+    if (ret != 1) {
+        LOG_ERROR("ECDSA-P384 sign failed! ret=%d", ret);
+        return -1;
+    }
+    LOG_INFO("TBS signed with ECDSA-P384");
+    print_hex_buffer("ECDSA-P384 Signature", signature, sizeof(signature));
+
+    LOG_INFO("Verifying P-384 signature...");
+    ret = ecdsa_verify(public_key_bytes, msg_hash, signature);
+    if (ret != 1) {
+        LOG_ERROR("ECDSA-P384 verify failed! ret=%d", ret);
+        return -1;
+    }
+    LOG_INFO("Verify Success! P-384 signature is valid");
+
+    const uint8_t *sig_r_bytes = &signature[0];
+    const uint8_t *sig_s_bytes = &signature[ECC_BYTES];
+    print_hex_buffer("sig_r", sig_r_bytes, ECC_BYTES);
+    print_hex_buffer("sig_s", sig_s_bytes, ECC_BYTES);
+
+    uint8_t cert_der[SEND_MAX_CERT_SIZE];
+    size_t cert_len = sizeof(cert_der);
+
+    int result = add_signature_to_cert_p384_sig((uint8_t *)ctx_general_buf, g_actual_data_byte_len, sig_r_bytes, sig_s_bytes, cert_der, &cert_len);
+    if (result != 0) {
+        LOG_ERROR("Failed to add P-384 signature to certificate, err=%d", result);
+        return -1;
     }
 
-    uint8_t tampered_msg[] = "Attestation with MLDSA87_TAMPERED";
-    int tamper_verify_ret = PQCP_MLDSA_NATIVE_MLDSA87_verify(mldsa_sig, tampered_msg, sizeof(tampered_msg)-1, mldsa_pk);
-    if (tamper_verify_ret != 0) {
-        LOG_INFO("MLDSA87 verify (tampered msg) EXPECTED FAILED! ret code: %d", tamper_verify_ret);
-    } else {
-        LOG_ERROR("MLDSA87 verify (tampered msg) UNEXPECTED SUCCESS! ret code: %d", tamper_verify_ret);
+    if (cert_len > SEND_MAX_CERT_SIZE || cert_len == 0) {
+        LOG_ERROR("Invalid cert length: %d (max allowed: %d)", cert_len, SEND_MAX_CERT_SIZE);
+        return -1;
     }
+    LOG_INFO("Complete X509 Certificate generated, DER length=%d bytes", cert_len);
+
+    CHECK_DIF_OK(dif_uart_bytes_send(&uart2, send_cxt_msg, sizeof(send_cxt_msg)-1, &bytes_read));
+
+    print_hex_buffer("2nd Certificate DER", cert_der, cert_len);
+
+    uart_send_hex_chunked(&uart2, cert_der, cert_len, 32, 10);
+    return 0;
 }
 
-status_t rom_measure_sha256(const uint8_t *data_buf, size_t data_len, bool is_first, bool is_last, uint8_t out_digest[32])
-{
-    static hash_context_t measure_ctx;
-
-    if (is_first)
-    {
-        TRY(otcrypto_hash_init(&measure_ctx, kHashModeSha256));
+int verify_cert_chain(dif_uart_t uart2, uint8_t *public_key_bytes) {
+    int status = 0;
+    uint8_t input_buffer[32] = {0};
+    size_t bytes_read = 0U;
+    status = recv_measure_rom(uart2);
+    if (status != 0) {
+      return -1;
     }
 
-    if (data_buf != NULL && data_len > 0)
-    {
-        crypto_const_byte_buf_t msg_buf = {
-            .data = (uint8_t *)data_buf,
-            .len = data_len,
-        };
-        TRY(otcrypto_hash_update(&measure_ctx, msg_buf));
+    LOG_INFO("Waiting for 2nd certificate from UART...");
+
+    while (1) {
+        CHECK_DIF_OK(dif_uart_fifo_reset(&uart2, kDifUartDatapathRx));
+        g_data_received = false;
+        g_data_idle_ticks = 0U;
+        g_data_recv_idx = 0U;
+        size_t last_recv_idx = 0;
+
+        while (!g_data_received) {
+            (void)receive_block_data(&uart2);
+            sleep_ms(20);
+
+            if (g_data_recv_idx == last_recv_idx) {
+                g_data_idle_ticks++;
+            } else {
+                g_data_idle_ticks = 0;
+                last_recv_idx = g_data_recv_idx;
+            }
+
+            if (g_data_idle_ticks > 500) {
+                g_data_received = true;
+                g_actual_data_byte_len = g_data_recv_idx;
+            }
+
+            if (g_data_recv_idx >= DATA_RECV_BUF_MAX) {
+                g_data_received = true;
+                g_actual_data_byte_len = g_data_recv_idx;
+            }
+        }
+
+        if (g_actual_data_byte_len >= CSR_MIN_VALID_LEN) {
+            LOG_INFO("2nd cert receive complete! Received %d bytes (0x%x)", (uint32_t)g_actual_data_byte_len, (uint32_t)g_actual_data_byte_len);
+            break;
+        }
+
+        LOG_INFO("No valid 2nd cert data yet (got 0x%x bytes), retrying...", g_actual_data_byte_len);
+        sleep_ms(500);
     }
 
-    if (is_last)
-    {
-        uint32_t digest_words[8] = {0};
-        hash_digest_t digest_buf = {
-            .data = digest_words,
-            .len = 8,
-            .mode = kHashModeSha256,
-        };
-        TRY(otcrypto_hash_final(&measure_ctx, &digest_buf));
+    memcpy(ctx_general_buf, g_data_recv_buf, g_actual_data_byte_len);
+    LOG_INFO("Actual 2nd cert DER length: 0x%x bytes", g_actual_data_byte_len);
+    print_hex_buffer("2nd cert DER", ctx_general_buf, g_actual_data_byte_len);
 
-        for (int i = 0; i < 8; i++)
-        {
-            out_digest[i*4+0] = (digest_words[i] >> 0)  & 0xFF;
-            out_digest[i*4+1] = (digest_words[i] >> 8)  & 0xFF;
-            out_digest[i*4+2] = (digest_words[i] >> 16) & 0xFF;
-            out_digest[i*4+3] = (digest_words[i] >> 24) & 0xFF;
+    int ret = verify_cert((uint8_t *)ctx_general_buf, g_actual_data_byte_len, public_key_bytes);
+    if (ret == 1) {
+        LOG_INFO("2nd cert verify success");
+        CHECK_DIF_OK(dif_uart_bytes_send(&uart2, send_verify_msg, sizeof(send_verify_msg)-1, &bytes_read));
+    } else {
+        LOG_INFO("2nd cert verify failed, ret = %d", ret);
+        CHECK_DIF_OK(dif_uart_bytes_send(&uart2, error_msg, sizeof(error_msg)-1, &bytes_read));
+        return -1;
+    }
+
+    LOG_INFO("Waiting for 2nd verify 1st certificate ...");
+
+    while(1) {
+        memset(input_buffer, 0x0, sizeof(input_buffer));
+        CHECK_DIF_OK(dif_uart_bytes_receive(&uart2, sizeof(input_buffer), input_buffer, &bytes_read));
+        sleep_ms(1000); 
+        if(bytes_read > 0) {
+           if(input_buffer[0] == 0xaa) {
+              verify_status = 0xaa;
+              return 0;
+           } else if (input_buffer[0] == 0xba){
+              verify_status = 0xba;
+              return -1;
+           }
         }
     }
-
-    return OK_STATUS();
 }
 
 bool test_main(void) {
     int status = 0;
+    dif_uart_t uart = {0};
 
     CHECK_STATUS_OK(entropy_complex_init());
-      
+
     uint32_t ek_keyblob[keyblob_num_words(kPrivateKeyConfig)];
     crypto_blinded_key_t ek_privatekey = {
         .config = kPrivateKeyConfig,
@@ -1270,34 +1228,19 @@ bool test_main(void) {
     //Printing this certificate is equivalent to sending it to the privacy CA via UART0
     print_hex_buffer("EK Certificate DER", cert_der, cert_len);
 
-    uint32_t ak_keyblob[keyblob_num_words(kPrivateKeyConfig)];
-    crypto_blinded_key_t ak_privatekey = {
-        .config = kPrivateKeyConfig,
-        .keyblob_length = sizeof(ak_keyblob),
-        .keyblob = ak_keyblob,
-    };
-
-    uint32_t ak_pk[kP256PublicKeyWords] = {0};
-    crypto_unblinded_key_t ak_publickey = {
-        .key_mode = kKeyModeEcdsa,
-        .key_length = sizeof(ak_pk),
-        .key = ak_pk,
-    };
-
-    CHECK_STATUS_OK(generate_fixed_keypair(&ak_privatekey, &ak_publickey));
-
-    LOG_INFO("AK Private key (keyblob, %d words):", keyblob_num_words(kPrivateKeyConfig));
-    for (size_t i = 0; i < keyblob_num_words(kPrivateKeyConfig); i++) {
-      LOG_INFO("  word[%d]: 0x%08x", (int)i, ak_privatekey.keyblob[i]);
+    uint8_t public_key[ECC_BYTES + 1];
+    uint8_t private_key[ECC_BYTES];
+    int ret;
+    ret = ecc_make_key(public_key, private_key);
+    if (ret != 1)
+    {
+        LOG_INFO("Key Generate Failed!\n");
+        return -1;
     }
-
-    LOG_INFO("AK Public key (total %d words):", kP256PublicKeyWords);
-    for (size_t i = 0; i < kP256PublicKeyWords; i++) {
-      LOG_INFO("  word[%d]: 0x%08x", (int)i, ak_publickey.key[i]);
-    }
+    LOG_INFO("Key Generate Success!\n");
+    print_hex_buffer("ecdsa-p384 test public_key", public_key, sizeof(public_key));
+    print_hex_buffer("ecdsa-p384 test private_key", private_key, sizeof(private_key));
     
-    print_hex_buffer("AK Public key", ak_publickey.key, kP256PublicKeyWords * sizeof(uint32_t));
-
     LOG_INFO("Generating MLDSA87 key pair...");
     int keypair_ret = PQCP_MLDSA_NATIVE_MLDSA87_keypair(mldsa_pk, mldsa_sk);
     if (keypair_ret != 0) {
@@ -1308,24 +1251,56 @@ bool test_main(void) {
 
     print_hex_buffer("MLDSA Public Key", mldsa_pk, MLDSA87_PK_SIZE);
 
-    status = ricv_cert();
+    attestation_uart_init(&uart, 0);
+    status = recv_ak_cert(uart);
     if (status != 0) {
-      return false;
+        return false;
     }
     
-/*     status = ricv_measure_rom();
+    attestation_uart_init(&uart, 2);
+    status = recv_measure_rom(uart);
     if (status != 0) {
-      return false;
-    } */
-   
-#if 0
-    while(1) {
-      remote_attestation(ak_privatekey, ak_publickey);
+        return false;
     }
-#else 
-    while(1) {
-      remote_attestation_mldsa();
+
+    status = X509_sign_ctx(uart, private_key, public_key);
+    if (status != 0) {
+        return false;
     }
-#endif
+
+    attestation_uart_init(&uart, 1);
+    size_t bytes_read = 0;
+    while(1) {
+        memset(nonce_bin, 0, sizeof(nonce_bin));
+        LOG_INFO("Waiting to receive [nonce].");
+        do {
+            memset(uart_rx_buf, 0x0, sizeof(uart_rx_buf));
+            CHECK_DIF_OK(dif_uart_bytes_receive(&uart, sizeof(uart_rx_buf), uart_rx_buf, &bytes_read));
+            sleep_ms(100); 
+            if(bytes_read > 0) {
+                LOG_INFO("Received %u bytes", bytes_read);
+            }
+            
+            if (bytes_read == NONCE_LENGTH) {
+                memcpy(nonce_bin, uart_rx_buf, NONCE_LENGTH);
+                LOG_INFO("Received nonce:");
+                for (int i = 0; i < 32; i++) {
+                    LOG_INFO("%02x", nonce_bin[i]);
+                }
+            }
+        } while(bytes_read != NONCE_LENGTH);
+
+        attestation_uart_init(&uart, 2);
+        status = verify_cert_chain(uart, public_key);
+        if(status != 0) {
+            LOG_ERROR("Multi-level Trusted Root Certificate chain verification failed");
+        } else {
+            LOG_ERROR("Multi-level Trusted Root Certificate chain verification success");
+        }
+
+        attestation_uart_init(&uart, 1);
+        remote_attestation_mldsa(uart);
+    }
+
     return true;
 }

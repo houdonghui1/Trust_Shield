@@ -1,10 +1,4 @@
 #include "x509.h"
-#include <stdint.h>
-#include <string.h>
-#include <stddef.h>
-
-
-#define PTR_DIFF(p1, p2)    ((size_t)((uintptr_t)(p1) - (uintptr_t)(p2)))
 
 size_t strlen(const char *s) {
     size_t len = 0;
@@ -253,4 +247,135 @@ int add_signature_to_cert(
 
     *cert_len = PTR_DIFF(p, cert_out);
     return 0;
+}
+
+int add_signature_to_cert_p384_sig(
+    const uint8_t *tbs_der,
+    size_t tbs_len,
+    const uint8_t *sig_r_bytes,
+    const uint8_t *sig_s_bytes,
+    uint8_t *cert_out,
+    size_t *cert_len)
+{
+    if (!tbs_der || !sig_r_bytes || !sig_s_bytes || !cert_out || !cert_len || *cert_len < 768) {
+        return -1;
+    }
+
+    uint8_t *p = cert_out;
+
+    uint8_t sig_der[192], *sig_p = sig_der;
+    *sig_p++ = ASN1_SEQUENCE;
+    uint8_t *sig_len_pos = sig_p++;
+    
+    size_t r_len = 48;
+    while (r_len > 1 && sig_r_bytes[48 - r_len] == 0) r_len--;
+    asn1_write_tag(&sig_p, ASN1_INTEGER, sig_r_bytes + (48 - r_len), r_len);
+    
+    size_t s_len = 48;
+    while (s_len > 1 && sig_s_bytes[48 - s_len] == 0) s_len--;
+    asn1_write_tag(&sig_p, ASN1_INTEGER, sig_s_bytes + (48 - s_len), s_len);
+    
+    *sig_len_pos = (uint8_t)(PTR_DIFF(sig_p, sig_der) - 2);
+    size_t sig_der_len = PTR_DIFF(sig_p, sig_der);
+
+    uint8_t cert_temp[1024], *temp_p = cert_temp;
+    const uint8_t sig_alg[] = {0x30, 0x0A, 0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x03, 0x03};
+    memcpy(temp_p, tbs_der, tbs_len);
+    temp_p += tbs_len;
+    memcpy(temp_p, sig_alg, sizeof(sig_alg));
+    temp_p += sizeof(sig_alg);
+    uint8_t sig_bitstring[1 + sig_der_len];
+    sig_bitstring[0] = 0x00;
+    memcpy(sig_bitstring + 1, sig_der, sig_der_len);
+    asn1_write_tag(&temp_p, ASN1_BIT_STRING, sig_bitstring, sizeof(sig_bitstring));
+
+    size_t cert_inner_len = PTR_DIFF(temp_p, cert_temp);
+    *p++ = ASN1_SEQUENCE;
+    asn1_write_length(&p, cert_inner_len);
+    memcpy(p, cert_temp, cert_inner_len);
+    p += cert_inner_len;
+
+    *cert_len = PTR_DIFF(p, cert_out);
+    return 0;
+}
+
+static int extract_ecc_int(const uint8_t **p, uint8_t out[48]) {
+    if (*(*p)++ != 0x02) return -1;
+    size_t len = *(*p)++;
+    if (len > 0x80) return -1;
+    if (len == 49) {
+        if (*(*p)++ != 0x00) return -1;
+        len = 48;
+    } else if (len > 48) {
+        return -1;
+    }
+    size_t pad = 48 - len;
+    memset(out, 0, pad);
+    memcpy(out + pad, *p, len);
+    *p += len;
+    return 0;
+}
+
+int verify_cert(const uint8_t *cert_der, size_t cert_len, const uint8_t public_key[ECC_BYTES + 1]) {
+    const uint8_t *p = cert_der;
+
+    if (*p++ != 0x30) return 0;
+    size_t len = *p++;
+    if (len > 0x80) {
+        size_t bytes = len & 0x7F;
+        len = 0;
+        while (bytes--) len = (len << 8) | *p++;
+    }
+
+    const uint8_t *tbs_start = p;
+    if (*p++ != 0x30) return 0;
+    size_t tbs_content_len = *p++;
+    size_t tbs_len_len = 1;
+    if (tbs_content_len > 0x80) {
+        size_t bytes = tbs_content_len & 0x7F;
+        tbs_len_len += bytes;
+        tbs_content_len = 0;
+        while (bytes--) tbs_content_len = (tbs_content_len << 8) | *p++;
+    }
+
+    size_t tbs_total_len = 1 + tbs_len_len + tbs_content_len;
+    const uint8_t *tbs_data = tbs_start;
+
+    p = tbs_start + tbs_total_len;
+
+    const uint8_t sig_alg[12] = {
+        0x30, 0x0A, 0x06, 0x08, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x04, 0x03, 0x03
+    };
+    if (memcmp(p, sig_alg, 12) != 0) return 0;
+    p += 12;
+
+    if (*p++ != 0x03) return 0;
+    len = *p++;
+    if (len > 0x80) {
+        size_t bytes = len & 0x7F;
+        len = 0;
+        while (bytes--) len = (len << 8) | *p++;
+    }
+    if (*p++ != 0x00) return 0;
+
+    if (*p++ != 0x30) return 0;
+    len = *p++;
+    if (len > 0x80) {
+        size_t bytes = len & 0x7F;
+        len = 0;
+        while (bytes--) len = (len << 8) | *p++;
+    }
+
+    uint8_t r[48], s[48];
+    if (extract_ecc_int(&p, r) != 0) return 0;
+    if (extract_ecc_int(&p, s) != 0) return 0;
+
+    uint8_t signature[96];
+    memcpy(signature,       r, 48);
+    memcpy(signature + 48, s, 48);
+
+    uint8_t hash[48];
+    SHA384_hash(tbs_data, tbs_total_len, hash);
+
+    return ecdsa_verify(public_key, hash, signature);
 }

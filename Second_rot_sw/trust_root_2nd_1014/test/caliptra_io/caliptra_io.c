@@ -17,6 +17,11 @@
 #define CALIP_TRNG_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 1, int)
 #define CALIP_ECC_SIGH_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 2, int)
 #define CALIP_ECC_VERIFY_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 3, int)
+#define CALIP_GENERATE_2ND_CXT_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 4, int)
+#define CALIP_SAVE_2ND_CTX_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 5, int)
+#define CALIP_GET_2ND_CTX_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 6, int)
+#define CALIP_SIGN_1ST_CTX_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 7, int)
+#define CALIP_VERIFY_1ST_CTX_IOCTL_GEN _IOR(CALIP_IOCTL_MAGIC, 8, int)
 
 struct ioctl_data {
     unsigned int size;
@@ -53,11 +58,16 @@ static ssize_t caliptra_write(struct file *filp, const char __user *buf, size_t 
 static long caliptra_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
     struct ioctl_data req;
+    struct ecc_verify_data ecc_verify_req;
     struct parcel parcel = {0};
-    uint32_t j;
+    uint32_t j = 0;
     uint8_t tx_buffer[4] = {0};
+    uint8_t *ecc_verify_tx_buffer;
     uint8_t *rx_buffer;
+    uint8_t *tx_ctx_buffer;
     int ret = 0;
+    uint16_t content_len;
+    int value;
 
     switch (cmd) {
         case CALIP_TRNG_IOCTL_GEN:
@@ -102,8 +112,449 @@ static long caliptra_ioctl(struct file *filp, unsigned int cmd, unsigned long ar
             kfree(rx_buffer);
 	    break;
 
+	case CALIP_ECC_SIGH_IOCTL_GEN:
+            if (copy_from_user(&req, (struct ioctl_data __user *)arg, sizeof(req)))
+                return -EFAULT;
+
+            if (req.size > 4096)
+                return -EINVAL;
+
+            rx_buffer = kmalloc(req.size, GFP_KERNEL| __GFP_ZERO);
+            if (!rx_buffer) {
+                return -ENOMEM;
+            }
+
+            if (memory_map_init(0x90000000, 0x100000) != 0) {
+                kfree(rx_buffer);
+                return -ENOMEM;
+            }
+            printk("req.size = 0x%x\n",req.size);
+            
+	    parcel.command = OP_ECC_SIGN;
+            parcel.tx_buffer = tx_buffer;
+            parcel.tx_bytes = sizeof(tx_buffer);
+            parcel.rx_buffer = rx_buffer;
+            parcel.rx_bytes = req.size;
+
+            pack_and_execute_command(&parcel, false);
+            udelay(1000);
+            printk("recv:\n");
+            for(j = 0; j < parcel.rx_bytes; j++) {
+                printk("0x%02x ", parcel.rx_buffer[j]);
+                if (j % 16 == 15) {
+                    printk("\n");
+                }
+            }
+
+            if (copy_to_user(req.buf, parcel.rx_buffer, req.size)) {
+                kfree(rx_buffer);
+                return -EFAULT;
+            }
+
+            kfree(rx_buffer);
+
+	    break;
+
+	case CALIP_ECC_VERIFY_IOCTL_GEN:
+            if (copy_from_user(&ecc_verify_req, (struct ecc_verify_data __user *)arg, sizeof(ecc_verify_req)))
+                return -EFAULT;
+
+            if (ecc_verify_req.send_size > 4096)
+                return -EINVAL;
+
+            ecc_verify_tx_buffer = kmalloc(ecc_verify_req.send_size, GFP_KERNEL| __GFP_ZERO);
+            if (!ecc_verify_tx_buffer) {
+                return -ENOMEM;
+            }
+
+	    printk("111-ecc_verify_req.recv_size = 0x%x", ecc_verify_req.recv_size);
+            rx_buffer = kmalloc(ecc_verify_req.recv_size, GFP_KERNEL| __GFP_ZERO);
+            if (!rx_buffer) {
+                return -ENOMEM;
+            }
+
+            if (memory_map_init(0x90000000, 0x100000) != 0) {
+                kfree(ecc_verify_tx_buffer);
+		kfree(rx_buffer);
+                return -ENOMEM;
+            }
+
+            printk("ecc_verify_req.send_size = 0x%x\n",ecc_verify_req.send_size);
+            printk("ecc_verify_req.recv_size = 0x%x\n",ecc_verify_req.recv_size);
+            
+	    //memcpy(ecc_verify_tx_buffer, ecc_verify_req.send_buf, ecc_verify_req.send_size);
+	    if (copy_from_user(ecc_verify_tx_buffer, ecc_verify_req.send_buf, ecc_verify_req.send_size)) {
+        	kfree(ecc_verify_tx_buffer);
+        	kfree(rx_buffer);
+        	return -EFAULT;
+    	    }
+
+	    parcel.command = OP_ECC_VERIFY;
+            parcel.tx_buffer = ecc_verify_tx_buffer;
+            parcel.tx_bytes = ecc_verify_req.send_size;
+            parcel.rx_buffer = rx_buffer;
+            parcel.rx_bytes = ecc_verify_req.recv_size;
+
+            pack_and_execute_command(&parcel, false);
+            udelay(10000);
+            printk("recv:\n");
+            for(j = 0; j < parcel.rx_bytes; j++) {
+                printk("0x%02x ", parcel.rx_buffer[j]);
+                if (j % 16 == 15) {
+                    printk("\n");
+                }
+            }
+
+	    if (copy_to_user(ecc_verify_req.recv_buf, parcel.rx_buffer, parcel.rx_bytes)) {
+    		kfree(ecc_verify_tx_buffer);
+    		kfree(rx_buffer);
+    		return -EFAULT;
+	    }
+
+	    kfree(ecc_verify_tx_buffer);
+            kfree(rx_buffer);
+
+            break;
+
+	case CALIP_GENERATE_2ND_CXT_IOCTL_GEN:
+    	    if (copy_from_user(&req, (struct ioctl_data __user *)arg, sizeof(req)))
+        	return -EFAULT;
+
+   	    if (req.size > 4096)
+        	return -EINVAL;
+
+    	    rx_buffer = kmalloc(req.size, GFP_KERNEL | __GFP_ZERO);
+    	    if (!rx_buffer) {
+        	return -ENOMEM;
+    	    }
+
+    	    if (memory_map_init(0x90000000, 0x100000) != 0) {
+        	kfree(rx_buffer);
+        	return -ENOMEM;
+    	    }
+    	    printk("user input size = 0x%x\n", req.size);
+
+    	    parcel.command = OP_GENERATE_2ND_CERT;
+            parcel.tx_buffer = tx_buffer;
+    	    parcel.tx_bytes = sizeof(tx_buffer);
+    	    parcel.rx_buffer = rx_buffer;
+   	    parcel.rx_bytes = req.size;
+
+    	    pack_and_execute_command(&parcel, false);
+    	    udelay(1000);
+
+    	    if (parcel.rx_buffer[0] != 0x30 || parcel.rx_buffer[1] != 0x82) {
+                printk("invalid TBS DER header\n");
+        	kfree(rx_buffer);
+        	return -EPROTO;
+    	    }
+
+
+    	    content_len = (parcel.rx_buffer[j+2] << 8) | parcel.rx_buffer[j+3];
+            value = 4 + content_len;
+
+    	    if (value > req.size) {
+        	printk("tbs too large: 0x%x > buffer 0x%x\n", value, req.size);
+        	kfree(rx_buffer);
+        	return -ENOSPC;
+    	    }
+
+    	    printk("tbs actual len = 0x%x\n", value);
+    	    printk("tbs data:\n");
+    	    for (j = 0; j < value; j++) {
+        	printk("0x%02x ", parcel.rx_buffer[j]);
+        	if (j % 16 == 15) {
+            	    printk("\n");
+                }
+    	    }
+
+    	   parcel.rx_bytes = value;
+    	   req.size = value;
+
+    	   if (copy_to_user(req.buf, parcel.rx_buffer, req.size)) {
+           	kfree(rx_buffer);
+           	return -EFAULT;
+           }
+
+    	   if (copy_to_user((struct ioctl_data __user *)arg, &req, sizeof(req))) {
+        	kfree(rx_buffer);
+        	return -EFAULT;
+    	   }
+
+    	   kfree(rx_buffer);
+    	   break;
+
+        case CALIP_SAVE_2ND_CTX_IOCTL_GEN:
+            if (copy_from_user(&req, (struct ioctl_data __user *)arg, sizeof(req)))
+                return -EFAULT;
+
+            if (req.size > 4096)
+                return -EINVAL;
+
+            tx_ctx_buffer = kmalloc(req.size, GFP_KERNEL | __GFP_ZERO);
+            if (!tx_ctx_buffer) {
+                return -ENOMEM;
+            }
+
+            if (copy_from_user(tx_ctx_buffer, req.buf, req.size)) {
+                kfree(tx_ctx_buffer);
+                return -EFAULT;
+            }
+
+            rx_buffer = kmalloc(4096, GFP_KERNEL | __GFP_ZERO);
+            if (!rx_buffer) {
+                kfree(tx_ctx_buffer);
+                return -ENOMEM;
+            }
+
+            if (memory_map_init(0x90000000, 0x100000) != 0) {
+                kfree(tx_ctx_buffer);
+                kfree(rx_buffer);
+                return -ENOMEM;
+            }
+
+            printk("send ctx input size = 0x%x\n", req.size);
+
+            parcel.command = OP_SAVE_2ND_CERT;
+            parcel.tx_buffer = tx_ctx_buffer;
+            parcel.tx_bytes = req.size;
+            parcel.rx_buffer = rx_buffer;
+            parcel.rx_bytes = 0x1;
+
+            pack_and_execute_command(&parcel, false);
+            udelay(1000);
+
+            parcel.rx_bytes = value;
+            req.size = value;
+
+            if (copy_to_user(req.buf, rx_buffer, req.size)) {
+                kfree(tx_ctx_buffer);
+                kfree(rx_buffer);
+                return -EFAULT;
+            }
+
+            if (copy_to_user((struct ioctl_data __user *)arg, &req, sizeof(req))) {
+                kfree(tx_ctx_buffer);
+                kfree(rx_buffer);
+                return -EFAULT;
+            }
+
+            kfree(tx_ctx_buffer);
+            kfree(rx_buffer);
+            break;
+
+	case CALIP_SIGN_1ST_CTX_IOCTL_GEN:
+    	    if (copy_from_user(&req, (struct ioctl_data __user *)arg, sizeof(req)))
+        	return -EFAULT;
+    	
+	    if (req.size > 4096)
+        	return -EINVAL;
+
+   	    tx_ctx_buffer = kmalloc(req.size, GFP_KERNEL | __GFP_ZERO);
+    	    if (!tx_ctx_buffer) {
+        	return -ENOMEM;
+    	    }
+    	
+	    if (copy_from_user(tx_ctx_buffer, req.buf, req.size)) {
+        	kfree(tx_ctx_buffer);
+        	return -EFAULT;
+    	    }
+
+    	    rx_buffer = kmalloc(4096, GFP_KERNEL | __GFP_ZERO);
+    	    if (!rx_buffer) {
+        	kfree(tx_ctx_buffer);
+        	return -ENOMEM;
+    	    }
+
+    	    if (memory_map_init(0x90000000, 0x100000) != 0) {
+        	kfree(tx_ctx_buffer);
+        	kfree(rx_buffer);
+        	return -ENOMEM;
+    	    }
+
+    	    printk("send ctx input size = 0x%x\n", req.size);
+
+    	    parcel.command = OP_SIGN_1ST_CTX;
+    	    parcel.tx_buffer = tx_ctx_buffer; 
+    	    parcel.tx_bytes = req.size; 
+    	    parcel.rx_buffer = rx_buffer; 
+    	    parcel.rx_bytes = 4096; 
+
+    	    pack_and_execute_command(&parcel, false);
+    	    udelay(1000);
+
+	    content_len = (parcel.rx_buffer[j+2] << 8) | parcel.rx_buffer[j+3];
+            value = 4 + content_len;
+
+            if (value > 4096) {
+                printk("tbs too large: 0x%x > buffer 0x%x\n", value, req.size);
+                kfree(rx_buffer);
+                return -ENOSPC;
+            }
+
+	    printk("cert actual len = 0x%x\n", value);
+            printk("cert data:\n");
+            for (j = 0; j < value; j++) {
+                printk("0x%02x ", parcel.rx_buffer[j]);
+                if (j % 16 == 15) {
+                    printk("\n");
+                }
+            }
+
+           parcel.rx_bytes = value;
+           req.size = value;
+
+    	   if (copy_to_user(req.buf, rx_buffer, req.size)) {
+        	kfree(tx_ctx_buffer);
+        	kfree(rx_buffer);
+        	return -EFAULT;
+    	   }
+
+           if (copy_to_user((struct ioctl_data __user *)arg, &req, sizeof(req))) {
+                kfree(tx_ctx_buffer);
+                kfree(rx_buffer);
+                return -EFAULT;
+           }
+
+    	   kfree(tx_ctx_buffer);
+    	   kfree(rx_buffer);
+    	   break;
+
+	case CALIP_GET_2ND_CTX_IOCTL_GEN:
+            if (copy_from_user(&req, (struct ioctl_data __user *)arg, sizeof(req)))
+                return -EFAULT;
+
+            if (req.size > 4096)
+                return -EINVAL;
+
+            rx_buffer = kmalloc(req.size, GFP_KERNEL | __GFP_ZERO);
+            if (!rx_buffer) {
+                return -ENOMEM;
+            }
+
+            if (memory_map_init(0x90000000, 0x100000) != 0) {
+                kfree(rx_buffer);
+                return -ENOMEM;
+            }
+            printk("user input size = 0x%x\n", req.size);
+
+            parcel.command = OP_GET_2ND_CERT;
+            parcel.tx_buffer = tx_buffer;
+            parcel.tx_bytes = sizeof(tx_buffer);
+            parcel.rx_buffer = rx_buffer;
+            parcel.rx_bytes = req.size;
+
+            pack_and_execute_command(&parcel, false);
+            udelay(1000);
+
+            if (parcel.rx_buffer[0] != 0x30 || parcel.rx_buffer[1] != 0x82) {
+                printk("invalid cert header\n");
+                kfree(rx_buffer);
+                return -EPROTO;
+            }
+
+
+            content_len = (parcel.rx_buffer[j+2] << 8) | parcel.rx_buffer[j+3];
+            value = 4 + content_len;
+
+            if (value > req.size) {
+                printk("cert too large: 0x%x > buffer 0x%x\n", value, req.size);
+                kfree(rx_buffer);
+                return -ENOSPC;
+            }
+
+            printk("cert actual len = 0x%x\n", value);
+            printk("cert data:\n");
+            for (j = 0; j < value; j++) {
+                printk("0x%02x ", parcel.rx_buffer[j]);
+                if (j % 16 == 15) {
+                    printk("\n");
+                }
+            }
+
+           parcel.rx_bytes = value;
+           req.size = value;
+
+           if (copy_to_user(req.buf, parcel.rx_buffer, req.size)) {
+                kfree(rx_buffer);
+                return -EFAULT;
+           }
+
+           if (copy_to_user((struct ioctl_data __user *)arg, &req, sizeof(req))) {
+                kfree(rx_buffer);
+                return -EFAULT;
+           }
+
+           kfree(rx_buffer);
+           break;
+
+        case CALIP_VERIFY_1ST_CTX_IOCTL_GEN:
+           if (copy_from_user(&req, (struct ioctl_data __user *)arg, sizeof(req)))
+               return -EFAULT;
+
+           if (req.size > 4096)
+               return -EINVAL;
+
+           tx_ctx_buffer = kmalloc(req.size, GFP_KERNEL | __GFP_ZERO);
+           if (!tx_ctx_buffer) {
+               return -ENOMEM;
+           }
+
+           if (copy_from_user(tx_ctx_buffer, req.buf, req.size)) {
+               kfree(tx_ctx_buffer);
+               return -EFAULT;
+           }
+
+           rx_buffer = kmalloc(4096, GFP_KERNEL | __GFP_ZERO);
+           if (!rx_buffer) {
+               kfree(tx_ctx_buffer);
+               return -ENOMEM;
+           }
+
+           if (memory_map_init(0x90000000, 0x100000) != 0) {
+               kfree(tx_ctx_buffer);
+               kfree(rx_buffer);
+               return -ENOMEM;
+           }
+
+           printk("send ctx input size = 0x%x\n", req.size);
+
+           parcel.command = OP_VERIFY_1ST_CTX;
+           parcel.tx_buffer = tx_ctx_buffer;
+           parcel.tx_bytes = req.size;
+           parcel.rx_buffer = rx_buffer;
+           parcel.rx_bytes = 0x4;
+
+	   pack_and_execute_command(&parcel, false);
+           udelay(1000);
+           
+	    if (parcel.rx_bytes > 0) {
+        	printk("received data: 0x%02x, 0x%02x, 0x%02x, 0x%02x\n", parcel.rx_buffer[0], parcel.rx_buffer[1], parcel.rx_buffer[2], parcel.rx_buffer[3]);
+    	    } else {
+        	printk("no data received!\n");
+   	    }
+
+	   req.size = parcel.rx_bytes;
+
+    	   if (copy_to_user(req.buf, parcel.rx_buffer, req.size)) {
+               kfree(tx_ctx_buffer);
+               kfree(rx_buffer);
+               return -EFAULT;
+    	   }
+
+           if (copy_to_user((struct ioctl_data __user *)arg, &req, sizeof(req))) {
+        	kfree(tx_ctx_buffer);
+         	kfree(rx_buffer);
+        	return -EFAULT;
+    	   }
+
+
+	   kfree(tx_ctx_buffer);
+           kfree(rx_buffer);
+	   break;
+
 	default:
-            return -ENOTTY;
+           return -ENOTTY;
     }
 
     memory_map_cleanup();

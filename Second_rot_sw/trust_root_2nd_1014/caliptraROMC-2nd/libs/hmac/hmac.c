@@ -44,10 +44,10 @@ void hmac_flow(hmac_io key, hmac_io block, hmac_io lfsr_seed, hmac_io tag){
 
     uint32_t hmac_tag   [12];
 
-
+    printf("func: %s, line: %d\n", __func__, __LINE__);
     // wait for HMAC to be ready
     while((lsu_read_32(CLP_HMAC_REG_HMAC384_STATUS) & HMAC_REG_HMAC384_STATUS_READY_MASK) == 0);
-
+    printf("func: %s, line: %d\n", __func__, __LINE__);
     if (key.kv_intf){
         // Program KEY Read with 12 dwords from key_kv_id
         lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL, HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK |
@@ -89,7 +89,7 @@ void hmac_flow(hmac_io key, hmac_io block, hmac_io lfsr_seed, hmac_io tag){
     while (reg_ptr <= (uint32_t*) CLP_HMAC_REG_HMAC384_LFSR_SEED_4) {
         *reg_ptr++ = lfsr_seed.data[offset++];
     }
-
+    printf("func: %s, line: %d\n", __func__, __LINE__);
     // if we want to store the results into kv
     // set tag DEST to write
     if (tag.kv_intf){
@@ -107,7 +107,7 @@ void hmac_flow(hmac_io key, hmac_io block, hmac_io lfsr_seed, hmac_io tag){
 
     // wait for HMAC process to be done
     //wait_for_hmac_intr();
-
+    printf("func: %s, line: %d\n", __func__, __LINE__);
     if (tag.kv_intf){
         // wait for HMAC process - check dest done
         printf("Load TAG data from HMAC to KV\n");

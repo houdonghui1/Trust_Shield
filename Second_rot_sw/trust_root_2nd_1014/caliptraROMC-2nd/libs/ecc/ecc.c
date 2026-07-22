@@ -51,7 +51,7 @@ void ecc_keygen_flow(ecc_io* seed, ecc_io* nonce, ecc_io* iv, ecc_io* privkey, e
     uint32_t ecc_privkey  [12];
     uint32_t ecc_pubkey_x [12];
     uint32_t ecc_pubkey_y [12];
-    
+    printf("func: %s, line: %d\n", __func__, __LINE__);
     // wait for ECC to be ready
     while((lsu_read_32(CLP_ECC_REG_ECC_STATUS) & ECC_REG_ECC_STATUS_READY_MASK) == 0);
 

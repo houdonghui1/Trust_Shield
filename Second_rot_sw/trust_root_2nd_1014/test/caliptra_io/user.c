@@ -50,6 +50,35 @@ int main()
     }
     printf("\n");
 
+    req.size = sizeof(ecc_sign_buf);
+    req.buf = ecc_sign_buf;
+
+    if (ioctl(fd, CALIP_ECC_SIGH_IOCTL_GEN, &req) < 0) {
+        perror("ioctl failed");
+        close(fd);
+        return -1;
+    }
+    
+    printf("recv: ");
+    for (int i = 0; i < 192; i++) {
+        printf("%02x", ecc_sign_buf[i]);
+    }
+    printf("\n");
+
+    ecc_verify_req.send_size = sizeof(ecc_sign_buf);
+    ecc_verify_req.send_buf = ecc_sign_buf;
+    ecc_verify_req.recv_size = sizeof(ecc_verify_buf);
+    ecc_verify_req.recv_buf = ecc_verify_buf;
+    
+    if (ioctl(fd, CALIP_ECC_VERIFY_IOCTL_GEN, &ecc_verify_req) < 0) {
+        perror("ioctl failed");
+        close(fd);
+        return -1;
+    }
+
+    printf("recv: ");
+    printf("%x", ecc_verify_buf[0]);
+
     close(fd);
     return 0;
 }

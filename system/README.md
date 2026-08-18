@@ -117,3 +117,4 @@
 ## 系统整体设计报告
 
 [系统整体设计报告](system_top3.md)
+[动画演示](./TS_visualization/README.md)

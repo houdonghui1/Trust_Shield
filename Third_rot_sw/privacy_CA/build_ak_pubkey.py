@@ -64,7 +64,7 @@ def save_file(data, filename, is_binary=True):
 def main():
     # Check cmdline args
     if len(sys.argv) != 2:
-        print("Usage: python3 tpm_ak_pubgen.py <128-hex-tpm-ak-pubkey>")
+        print("Usage: python3 build_ak_pubkey.py <compressed-P384-or-legacy-P256-hex>")
         sys.exit(1)
     raw_hex = sys.argv[1].strip()
     # Validate hex format
@@ -75,13 +75,22 @@ def main():
         sys.exit(1)
     
     try:
-        tpm_words = hex_to_le32_words(raw_hex)
-        ak_65_bytes, ak_65_hex, x_bytes, y_bytes = generate_correct_ak_pubkey(tpm_words)
-        ak_pubkey = load_tpm_ak_pubkey(ak_65_bytes, TPM_CURVE)
+        if len(raw_hex) == 98:
+            encoded_key = binascii.unhexlify(raw_hex)
+            ak_pubkey = load_tpm_ak_pubkey(encoded_key, ec.SECP384R1())
+        elif len(raw_hex) == 128:
+            tpm_words = hex_to_le32_words(raw_hex)
+            ak_65_bytes, _, _, _ = generate_correct_ak_pubkey(tpm_words)
+            ak_pubkey = load_tpm_ak_pubkey(ak_65_bytes, TPM_CURVE)
+        else:
+            raise ValueError(
+                "Pubkey must be 98 hex characters (compressed P-384) "
+                "or 128 hex characters (legacy P-256)"
+            )
         pem_pubkey = ak_pubkey.public_bytes(Encoding.PEM, PublicFormat.SubjectPublicKeyInfo)
         save_file(pem_pubkey, "ak_pub.pem")
         print("Info: All operations completed successfully")
-        print(f"Info: Validated pubkey point on {TPM_CURVE.name} curve")
+        print(f"Info: Validated pubkey point on {ak_pubkey.curve.name} curve")
     except ValueError as e:
         print(f"Error: {e}")
         sys.exit(1)

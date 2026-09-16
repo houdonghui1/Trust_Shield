@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 python3 serial_capture_ak_ek.py
 
 ./create_ca_root.sh

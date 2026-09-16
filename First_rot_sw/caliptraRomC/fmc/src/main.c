@@ -17,10 +17,10 @@
 #include "datavault.h"
 #include "x509.h"
 
-#define RT_SIZE                (20480)
+#define RT_SIZE                (37376)
 #define RT_STORE_SECTOR_OFFSET (4096)
 
-__attribute__((section(".dccm"))) uint8_t RT_data[RT_SIZE];
+__attribute__((section(".rt_staging"))) uint8_t RT_data[RT_SIZE];
 
 __attribute__((section(".tbs_der_store"))) cert_t tbs_der_store[4];
 __attribute__((section(".cert_store"))) cert_t cert_store[4];
@@ -207,7 +207,7 @@ void alias_fmc() {
 
     //Generate the To Be Signed DER Blob of the  Alias FMC  Certificate
     status = generate_intermediate_tbs_der(alisafmc_pubkey_x.data, alisafmc_pubkey_y.data, "Caliptra 1.0 LDevID", "Caliptra 1.0 FMC Alias", tbs_der, &tbs_len, CERT_TYPE_FMC);
-    if(!status && tbs_len <= 2048) {
+    if(!status && tbs_len <= sizeof(tbs_der_store[2].der_data)) {
         printf("cert_len = 0x%x\n", tbs_len);
         printf("AliasFMC tbs der:\n");
         for(int j = 0; j < tbs_len; j++) {
@@ -307,7 +307,7 @@ void alias_fmc() {
         //Write the signature into the certificate
 
     status = add_signature_to_cert(tbs_der, tbs_len, sign_r.data, sign_s.data, cert_der, &cert_len);
-    if(!status && cert_len <= 4096) {
+    if(!status && cert_len <= sizeof(cert_store[2].der_data)) {
         printf("cert_len = 0x%x\n", cert_len);
         printf("AliasFMC cert:\n");
         for(int j = 0; j < cert_len; j++) {

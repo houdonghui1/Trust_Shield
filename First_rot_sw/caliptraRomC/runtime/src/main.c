@@ -20,12 +20,20 @@
 #include "x509.h"
 #include "soc_ifc.h"
 #include "mailbox.h"
+#include "cluster_bls_l1.h"
+#include "cluster_bls_scale_node.h"
+#include "ecdsa_scale_caliptra.h"
+#define MBOX_CMD_ECDSA_SCALE_SIGN 0x44C0FFE6U
 
 uint8_t rt_sign_r[48];
 uint8_t rt_sign_s[48];
 
 __attribute__((section(".tbs_der_store"))) cert_t tbs_der_store[4];
 __attribute__((section(".cert_store"))) cert_t cert_store[4];
+/* Must match ROM's fixed NOLOAD state so the certified IDevID BLS identity
+ * survives the FMC/RT handoff without re-deriving from a later CDI. */
+__attribute__((section(".cluster_bls_state")))
+static cluster_bls_l1_persistent_state_t g_cluster_bls_l1_state;
 
 volatile caliptra_intr_received_s cptra_intr_rcv = {
     .doe_error        = 0,
@@ -59,6 +67,179 @@ volatile caliptra_intr_received_s cptra_intr_rcv = {
 
 void nmi_handler();
 void caliptra_rt();
+
+static bool cluster_bls_rt_read_mailbox_exact(mbox_op_s *op, uint8_t *out,
+                                              size_t expected_len) {
+    size_t offset = 0;
+    if (op == NULL || out == NULL || op->dlen != expected_len) {
+        return false;
+    }
+    while (offset < expected_len) {
+        uint32_t word = soc_ifc_mbox_dir_read_single((uint32_t)offset);
+        size_t chunk = expected_len - offset;
+        if (chunk > sizeof(word)) {
+            chunk = sizeof(word);
+        }
+        for (size_t i = 0; i < chunk; ++i) {
+            out[offset + i] = (uint8_t)(word >> (8 * i));
+        }
+        offset += chunk;
+    }
+    return true;
+}
+
+#if CLUSTER_BLS_SCALE_TEST_ENABLE
+enum {
+    kClusterBlsScaleCachedL1Keys = 10,
+};
+
+typedef struct {
+    uint8_t secret_keys[kClusterBlsScaleCachedL1Keys][kOtBlsSecretKeyBytes];
+    uint64_t setup_cycles[kClusterBlsScaleCachedL1Keys];
+    uint32_t first_index;
+    uint16_t setup_reported_mask;
+    bool valid;
+} cluster_bls_scale_l1_key_cache_t;
+
+__attribute__((section(".dccm.cluster_bls_scale_cache")))
+static cluster_bls_scale_l1_key_cache_t g_cluster_bls_scale_l1_key_cache;
+
+static void cluster_bls_scale_reset_l1_key_cache(void) {
+    cluster_bls_scale_wipe(&g_cluster_bls_scale_l1_key_cache,
+                           sizeof(g_cluster_bls_scale_l1_key_cache));
+}
+
+static bool cluster_bls_scale_get_l1_secret_key(
+    uint32_t index, const uint8_t **secret_key, uint64_t *setup_cycles) {
+    uint32_t first_index;
+    uint32_t slot;
+
+    if (index == 0U || index > kClusterBlsScaleMaxL1Nodes ||
+        secret_key == NULL || setup_cycles == NULL) {
+        return false;
+    }
+    first_index = ((index - 1U) / kClusterBlsScaleCachedL1Keys) *
+                      kClusterBlsScaleCachedL1Keys +
+                  1U;
+    if (!g_cluster_bls_scale_l1_key_cache.valid ||
+        g_cluster_bls_scale_l1_key_cache.first_index != first_index) {
+        cluster_bls_scale_reset_l1_key_cache();
+        for (uint32_t i = 0U; i < kClusterBlsScaleCachedL1Keys; ++i) {
+            if (!cluster_bls_scale_node_key_setup(
+                    1U, first_index + i,
+                    g_cluster_bls_scale_l1_key_cache.secret_keys[i],
+                    &g_cluster_bls_scale_l1_key_cache.setup_cycles[i])) {
+                cluster_bls_scale_reset_l1_key_cache();
+                return false;
+            }
+        }
+        g_cluster_bls_scale_l1_key_cache.first_index = first_index;
+        g_cluster_bls_scale_l1_key_cache.valid = true;
+    }
+    slot = index - first_index;
+    *secret_key = g_cluster_bls_scale_l1_key_cache.secret_keys[slot];
+    if ((g_cluster_bls_scale_l1_key_cache.setup_reported_mask &
+         (uint16_t)(1U << slot)) == 0U) {
+        *setup_cycles = g_cluster_bls_scale_l1_key_cache.setup_cycles[slot];
+        g_cluster_bls_scale_l1_key_cache.setup_reported_mask |=
+            (uint16_t)(1U << slot);
+    } else {
+        *setup_cycles = 0U;
+    }
+    return true;
+}
+
+static bool cluster_bls_rt_sign_scale_request(mbox_op_s *op) {
+    static const uint8_t kMagic[4] = {'S', 'C', 'L', '2'};
+    uint8_t request[kClusterBlsScaleRequestBytes];
+    uint32_t response_words[kClusterBlsScaleResponseBytes / sizeof(uint32_t)];
+    uint8_t *response = (uint8_t *)response_words;
+    const uint8_t *secret_key;
+    uint32_t index;
+    uint64_t setup_cycles;
+    uint64_t sign_cycles;
+    uint64_t start;
+    bool signed_ok;
+
+    if (!cluster_bls_rt_read_mailbox_exact(op, request, sizeof(request)) ||
+        memcmp(request, kMagic, sizeof(kMagic)) != 0) {
+        return false;
+    }
+    index = cluster_bls_scale_read_u32(request + 4U);
+    if (!cluster_bls_scale_get_l1_secret_key(index, &secret_key,
+                                             &setup_cycles)) {
+        return false;
+    }
+    start = cluster_bls_scale_cycles();
+    signed_ok = ot_bls_pop_sign(secret_key, request + 8U,
+                                kClusterBlsDigestBytes, response + 20U);
+    sign_cycles = cluster_bls_scale_cycles() - start;
+    if (!signed_ok) {
+        return false;
+    }
+    cluster_bls_scale_write_u32(response, index);
+    cluster_bls_scale_write_u64(response + 4U, setup_cycles);
+    cluster_bls_scale_write_u64(response + 12U, sign_cycles);
+    mailbox_send_data(response_words, sizeof(response_words));
+    return true;
+}
+#endif
+
+static bool cluster_bls_rt_handle_command(mbox_op_s *op) {
+    cluster_bls_registration_t registration;
+    uint8_t registration_wire[kClusterBlsRegistrationWireBytes];
+    uint8_t challenge_digest[kClusterBlsDigestBytes];
+    uint8_t signature[kOtBlsSignatureBytes];
+
+    if (op == NULL ||
+        !cluster_bls_l1_persistent_state_valid(&g_cluster_bls_l1_state)) {
+        return false;
+    }
+    if (op->cmd == MBOX_CMD_BLS_GET_REGISTRATION) {
+        if (op->dlen != 0 || !cluster_bls_l1_registration(
+                                  &g_cluster_bls_l1_state.service,
+                                  &registration) ||
+            !cluster_bls_registration_encode(&registration, registration_wire)) {
+            return false;
+        }
+        mailbox_send_data((uint32_t *)registration_wire, sizeof(registration_wire));
+        return true;
+    }
+    if (op->cmd != MBOX_CMD_BLS_SIGN_CHALLENGE ||
+        !g_cluster_bls_l1_state.certificate_installed) {
+        return false;
+    }
+    if (op->dlen == sizeof(challenge_digest)) {
+        if (!cluster_bls_rt_read_mailbox_exact(op, challenge_digest,
+                                               sizeof(challenge_digest)) ||
+            !cluster_bls_l1_sign_challenge(&g_cluster_bls_l1_state.service,
+                                           challenge_digest, signature)) {
+            return false;
+        }
+    } else {
+#if CLUSTER_BLS_SCALE_TEST_ENABLE
+        return cluster_bls_rt_sign_scale_request(op);
+#else
+        return false;
+#endif
+    }
+    mailbox_send_data((uint32_t *)signature, sizeof(signature));
+    return true;
+}
+
+static bool ecdsa_scale_rt_handle_command(mbox_op_s *op) {
+    uint8_t request[ECDSA_SCALE_REQUEST_BYTES];
+    uint32_t response_words[
+        ECDSA_SCALE_RESPONSE_BYTES / sizeof(uint32_t)] = {0};
+    if (op == NULL ||
+        !cluster_bls_rt_read_mailbox_exact(op, request, sizeof(request)) ||
+        !ecdsa_scale_caliptra_sign(1U, request, sizeof(request),
+                                  (uint8_t *)response_words)) {
+        return false;
+    }
+    mailbox_send_data(response_words, sizeof(response_words));
+    return true;
+}
 
 uint32_t verify_certificate_chain() {
     uint32_t status = 0;
@@ -409,6 +590,9 @@ void caliptra_rt() {
     uint32_t temp;
     uint32_t *status;
     uint32_t value;
+#if CLUSTER_BLS_SCALE_TEST_ENABLE
+    cluster_bls_scale_reset_l1_key_cache();
+#endif
     printf("------------------------------------\n");
     printf("            Caliptra RT!!           \n");
     printf("------------------------------------\n");
@@ -421,7 +605,18 @@ void caliptra_rt() {
     printf("Compiled on: %s at %s\n", __DATE__, __TIME__);
     while(1) {
                 //read the mbox command
+                read_data = lsu_read_32(CLP_MBOX_CSR_MBOX_STATUS);
                 op = soc_ifc_read_mbox_cmd();
+                if (op.cmd == MBOX_CMD_BLS_GET_REGISTRATION ||
+                    op.cmd == MBOX_CMD_BLS_SIGN_CHALLENGE ||
+                    op.cmd == MBOX_CMD_ECDSA_SCALE_SIGN) {
+                    if (((read_data &
+                          MBOX_CSR_MBOX_STATUS_MBOX_FSM_PS_MASK) >>
+                         MBOX_CSR_MBOX_STATUS_MBOX_FSM_PS_LOW) !=
+                            MBOX_EXECUTE_UC) {
+                        continue;
+                    }
+                }
                 if (op.cmd & MBOX_CMD_FIELD_FW_MASK) {
                     printf("Received mailbox firmware command from SOC! Got 0x%x\n", op.cmd);
                     if (op.cmd & MBOX_CMD_FIELD_RESP_MASK) {
@@ -511,6 +706,20 @@ void caliptra_rt() {
                             reg_addr = reg_addr + 4;
                         }
                         soc_ifc_sha_accel_clr_lock();
+                    }
+                    else if (op.cmd == MBOX_CMD_ECDSA_SCALE_SIGN) {
+                        if (!ecdsa_scale_rt_handle_command(&op)) {
+                            value = MBOX_FAILED;
+                            mailbox_send_data(&value, sizeof(value));
+                        }
+                    }
+                    else if (op.cmd == MBOX_CMD_BLS_GET_REGISTRATION ||
+                             op.cmd == MBOX_CMD_BLS_SIGN_CHALLENGE) {
+                        if (!cluster_bls_rt_handle_command(&op)) {
+                            value = MBOX_FAILED;
+                            mailbox_send_data(&value, sizeof(value));
+                            printf("Rejected cluster-BLS runtime command\n");
+                        }
                     }
                     else if (op.cmd == MBOX_CMD_VERIFY_CERT) {
                         printf("Received verify certificate chain command\n");

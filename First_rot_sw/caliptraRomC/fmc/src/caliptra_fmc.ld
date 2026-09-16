@@ -60,21 +60,17 @@ SECTIONS {
   _dccm_vma_end = .;
   _dccm_lma_end = _dccm_lma_start + SIZEOF(.dccm);
 
-  _cert_store_start = 0x5001E000;
-  _cert_store_end = 0x5001E800;
-
-  _tbs_der_store_start = 0x5001E820;
-  _ctbs_der_store_end = 0x5001F020;
-
-  .cert_store _cert_store_start (NOLOAD) : {
-      KEEP(*(.cert_store))
-      . = ALIGN(4); 
+  .rt_staging 0x50010000 (NOLOAD) : {
+    _rt_staging_start = .;
+    KEEP(*(.rt_staging))
+    . = ALIGN(4);
+    _rt_staging_end = .;
   } > DCCM
 
-  .tbs_der_store _tbs_der_store_start (NOLOAD) : {
-      KEEP(*(.tbs_der_store))
-      . = ALIGN(4); 
-  } > DCCM
+  INCLUDE persistent_layout.ld
+
+  ASSERT(_rt_staging_end <= _cert_store_start,
+         "ERROR: RT staging buffer overlaps the persistent certificate store")
 
   ASSERT(( _dccm_lma_end < ORIGIN(DCCM) + LENGTH(DCCM)), "ERROR: FMC firmware image overflows DCCM size")
 
@@ -87,6 +83,9 @@ SECTIONS {
    * Stack is at the end of DCCM after .data
    * --------------------- */
   STACK = ALIGN(_dccm_vma_end,16) + 0x4000;
+
+  ASSERT( STACK < _cert_store_start,
+          "ERROR: stack overlaps the reserved certificate store")
 
   ASSERT( (STACK > 0x50000000), "ERROR: Stack not in the expected address range")
   ASSERT( (STACK < 0x50010000), "ERROR: Stack overflows the lower half of DCCM in FMC image -- note: upper half of DCCM is used by RT code")

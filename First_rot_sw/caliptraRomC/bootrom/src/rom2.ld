@@ -18,6 +18,7 @@ ENTRY(_start)
 MEMORY {
     ROM     (rx) : ORIGIN = 0x00000000, LENGTH = 48K
     ICCM    (rx) : ORIGIN = 0x40000000, LENGTH = 128K
+    DCCM_FW (rw) : ORIGIN = 0x50000000, LENGTH = 64K
     DCCM    (rw) : ORIGIN = 0x50010000, LENGTH = 64K
     PROT_IO (rw) : ORIGIN = 0x20000000, LENGTH = 64K
 }
@@ -69,6 +70,17 @@ SECTIONS {
   .data_iccm2 0x40000000 : AT(iccm_code2_start) {*(.data_iccm2) ; . = ALIGN(4); } =0x0000, /* iccm_code2_start, after .data, as LMA */
   iccm_code2_end = iccm_code2_start + SIZEOF(.data_iccm2);
 
+  .fw_staging (NOLOAD) : {
+      _fw_staging_start = .;
+      *(.fw_staging*)
+      . = ALIGN(4);
+      _fw_staging_end = .;
+  } > DCCM_FW
+  ASSERT(SIZEOF(.fw_staging) <= LENGTH(DCCM_FW),
+         "ERROR: firmware staging buffers overflow lower DCCM")
+
+  INCLUDE persistent_layout.ld
+
   .protected_io : {
     KEEP(*(.protected_io))
   } > PROT_IO
@@ -76,5 +88,7 @@ SECTIONS {
   /* Stack is at the end of DCCM after .data_iccm2 */
   . = ALIGN(iccm_code2_end,16);
   STACK = ALIGN(16) + 0x4000;
-  ASSERT( (STACK < 0x50020000), "ERROR: Stack overflows the DCCM -- note: lower half of DCCM is allocated in the validation image for remote firmware images")
+  ASSERT(STACK < _cert_store_start,
+         "ERROR: stack overlaps the reserved certificate store")
+  ASSERT( (STACK < 0x50020000), "ERROR: Stack overflows the upper 64KiB DCCM bank")
 }

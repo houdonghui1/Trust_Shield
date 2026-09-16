@@ -9,6 +9,7 @@
 #include "sha256.h"
 
 #define ASN1_SEQUENCE       0x30
+#define ASN1_BOOLEAN        0x01
 #define ASN1_INTEGER        0x02
 #define ASN1_BIT_STRING     0x03
 #define ASN1_OCTET_STRING   0x04
@@ -16,9 +17,11 @@
 #define ASN1_UTF8_STRING    0x0C
 #define ASN1_SET            0x31
 #define ASN1_CONTEXT_SPECIFIC 0xA0
+#define ASN1_CONSTRUCTED    0x20
 
 #define X509_EXT_BASIC_CONSTRAINTS_CA   0x01
 #define X509_EXT_KEY_USAGE_DIGITAL_SIGN 0x02
+#define X509_CERT_STORE_DER_MAX 1024U
 
 #define LDEVID 0x1
 #define FMC    0x2
@@ -33,10 +36,14 @@ typedef enum {
 
 // 证书结构体
 typedef struct {
-    uint8_t der_data[512]; // 证书 DER 数据
+    /* Covers a P-384 certificate carrying the ~210-byte BLS/PoP binding. */
+    uint8_t der_data[X509_CERT_STORE_DER_MAX]; // 证书 DER 数据
     size_t der_len;         // 证书长度
     uint8_t type;           // 证书类型 (CA,LDEVID, FMC, RT)
 } cert_t;
+
+typedef char cert_store_slot_size_must_be_0x408[
+    sizeof(cert_t) == 0x408U ? 1 : -1];
 
 extern cert_t tbs_der_store[4];
 
@@ -80,5 +87,7 @@ int add_signature_to_cert(
 int parse_tbs_certificate(const uint8_t **p, x509_cert_t *cert);
 
 int parse_x509_cert(const uint8_t *der_data, size_t der_len, x509_cert_t *cert, bool parse_full);
+int x509_get_tbs_der(const uint8_t *cert_der, size_t cert_len,
+                     const uint8_t **tbs_der, size_t *tbs_len);
 
 #endif

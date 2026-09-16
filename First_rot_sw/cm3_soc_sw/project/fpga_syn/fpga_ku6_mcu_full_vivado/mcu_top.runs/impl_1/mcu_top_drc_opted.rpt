@@ -1,0 +1,116 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
+| Date         : Tue Mar 18 14:56:54 2025
+| Host         : secure-Precision-3660 running 64-bit Ubuntu 20.04.6 LTS
+| Command      : report_drc -file mcu_top_drc_opted.rpt -pb mcu_top_drc_opted.pb -rpx mcu_top_drc_opted.rpx
+| Design       : mcu_top
+| Device       : xcku060-ffva1156-2-i
+| Speed File   : -2
+| Design State : Synthesized
+------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 14
++---------+----------+---------------------------------+------------+
+| Rule    | Severity | Description                     | Violations |
++---------+----------+---------------------------------+------------+
+| DPIP-2  | Warning  | Input pipelining                | 6          |
+| DPOP-3  | Warning  | PREG Output pipelining          | 3          |
+| DPOP-4  | Warning  | MREG Output pipelining          | 3          |
+| PLCK-58 | Warning  | Clock Placer Checks             | 1          |
+| RPBF-3  | Warning  | IO port buffering is incomplete | 1          |
++---------+----------+---------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+DPIP-2#1 Warning
+Input pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-2#2 Warning
+Input pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-2#3 Warning
+Input pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-2#4 Warning
+Input pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-2#5 Warning
+Input pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-2#6 Warning
+Input pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPOP-3#1 Warning
+PREG Output pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 output u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-3#2 Warning
+PREG Output pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 output u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-3#3 Warning
+PREG Output pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 output u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-4#1 Warning
+MREG Output pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 multiplier stage u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+DPOP-4#2 Warning
+MREG Output pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 multiplier stage u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+DPOP-4#3 Warning
+MREG Output pipelining  
+DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 multiplier stage u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+PLCK-58#1 Warning
+Clock Placer Checks  
+Sub-optimal placement for a global clock-capable IO pin and BUFG pair.
+Resolution: A dedicated routing path between the two can be used if: (a) The global clock-capable IO (GCIO) is placed on a GCIO capable site (b) The BUFG is placed in the same bank of the device as the GCIO pin. Both the above conditions must be met at the same time, else it may lead to longer and less predictable clock insertion delays.
+ This is normally an ERROR but the CLOCK_DEDICATED_ROUTE constraint is set to FALSE allowing your design to continue. The use of this override is highly discouraged as it may lead to very poor timing results. It is recommended that this error condition be corrected in the design.
+
+	TCK_IBUF_inst/IBUFCTRL_INST (in TCK_IBUF_inst macro) (IBUFCTRL.O) is locked to AH12
+	TCK_IBUF_BUFG_inst (BUFGCE.I) cannot be placed
+
+Related violations: <none>
+
+RPBF-3#1 Warning
+IO port buffering is incomplete  
+Device port MDIO expects both input and output buffering but the buffers are incomplete.
+Related violations: <none>
+
+

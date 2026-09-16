@@ -1,11 +1,12 @@
 #include "mailbox.h"
+#include <linux/delay.h>
 
 struct caliptra_buffer g_caliptra_mbox_pending_rx_buffer;
+static uint32_t g_caliptra_mbox_last_rx_bytes;
 
-void delay_ms(unsigned int milliseconds) {
-    while (milliseconds != 0) {
-        milliseconds--;
-    }
+uint32_t caliptra_mbox_last_response_size(void)
+{
+    return g_caliptra_mbox_last_rx_bytes;
 }
 
 void caliptra_mbox_write(uint32_t offset, uint32_t data)
@@ -46,7 +47,7 @@ uint8_t caliptra_mbox_write_execute_busy_wait(bool ex)
     caliptra_mbox_write(MBOX_CSR_MBOX_EXECUTE, ex);
     while((status = (uint8_t)(caliptra_mbox_read(MBOX_CSR_MBOX_STATUS) & MBOX_CSR_MBOX_STATUS_STATUS_MASK)) == CALIPTRA_MBOX_STATUS_BUSY)
     {
-       delay_ms(10);
+       usleep_range(1000, 2000);
     }
 
     return status;
@@ -65,6 +66,19 @@ bool caliptra_mbox_is_busy(void)
 uint8_t caliptra_mbox_read_status_fsm(void)
 {
     return (uint8_t)(caliptra_mbox_read(MBOX_CSR_MBOX_STATUS) & MBOX_CSR_MBOX_STATUS_MBOX_FSM_PS_MASK) >> MBOX_CSR_MBOX_STATUS_MBOX_FSM_PS_LOW;
+}
+
+static int caliptra_mbox_wait_idle(void)
+{
+    uint32_t poll;
+
+    for (poll = 0; poll < 1000; ++poll) {
+        if (caliptra_mbox_read_status_fsm() ==
+            CALIPTRA_MBOX_STATUS_FSM_IDLE)
+            return 0;
+        usleep_range(1000, 2000);
+    }
+    return MBX_STATUS_NOT_IDLE;
 }
 
 uint32_t caliptra_mbox_read_dlen(void)
@@ -192,11 +206,15 @@ int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, u
     if (mbx_status == CALIPTRA_MBOX_STATUS_CMD_FAILURE)
     {
         caliptra_mbox_write_execute(false);
+        if (caliptra_mbox_wait_idle() != 0)
+            return MBX_STATUS_NOT_IDLE;
         return MBX_STATUS_FAILED;
     }
     else if (mbx_status == CALIPTRA_MBOX_STATUS_CMD_COMPLETE)
     {
         caliptra_mbox_write_execute(false);
+        if (caliptra_mbox_wait_idle() != 0)
+            return MBX_STATUS_NOT_IDLE;
         return 0;
     }
     else if (mbx_status == CALIPTRA_MBOX_STATUS_BUSY)
@@ -208,9 +226,7 @@ int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, u
     status = caliptra_mailbox_read_fifo(mbox_rx_buffer, bytes_read);
 
     caliptra_mbox_write_execute(false);
-    // Wait (HW model is halted whenever we aren't calling wait())
-    delay_ms(1000);
-    if (caliptra_mbox_read_status_fsm() != CALIPTRA_MBOX_STATUS_FSM_IDLE)
+    if (caliptra_mbox_wait_idle() != 0)
         return MBX_STATUS_NOT_IDLE;
     return status;
 }
@@ -264,6 +280,7 @@ uint32_t calculate_caliptra_checksum(uint32_t cmd, const uint8_t *buffer, uint32
 int caliptra_mailbox_send_start(uint32_t cmd, uint32_t data_size)
 {
     int value = 0;
+    g_caliptra_mbox_last_rx_bytes = 0;
     if (data_size > CALIPTRA_MAILBOX_MAX_SIZE)
     {
         return INVALID_PARAMS;
@@ -331,10 +348,9 @@ int caliptra_mailbox_send_complete(struct caliptra_buffer *mbox_rx_buffer, bool 
         return 0;
     }
     // Wait indefinitely for completion
-    while (!caliptra_test_for_completion()){
-        delay_ms(10);
-    }
-    delay_ms(10000);
+    usleep_range(1000, 2000);
+    while (!caliptra_test_for_completion())
+        usleep_range(1000, 2000);
     return caliptra_complete();
 }
 
@@ -436,6 +452,8 @@ int caliptra_complete()
     int status;
     struct caliptra_buffer rx_buffer;
 
+    g_caliptra_mbox_last_rx_bytes = 0;
+
     // Return an error if no message is pending (execute is not set)
     if (caliptra_mbox_read_execute() == 0) {
         return MBX_NO_MSG_PENDING;
@@ -458,6 +476,7 @@ int caliptra_complete()
     {
         return status;
     }
+    g_caliptra_mbox_last_rx_bytes = bytes_read;
 
     // Verify the header data from the response
     if (rx_buffer.data == NULL) {

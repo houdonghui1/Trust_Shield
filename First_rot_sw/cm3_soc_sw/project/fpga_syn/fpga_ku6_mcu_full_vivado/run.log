@@ -1,0 +1,1719 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Mon Mar 17 18:41:36 2025
+# Process ID: 2739588
+# Current directory: /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado
+# Command line: vivado -mode tcl -source mcu_top.tcl -log run.log
+# Log file: /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/run.log
+# Journal file: /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/vivado.jou
+#-----------------------------------------------------------
+source mcu_top.tcl
+# file mkdir ./checkpoint
+# set FPGA_NAME xcku060-ffva1156-2-i
+# set PROJECT_NAME mcu_top 
+# if {[ catch {create_project $PROJECT_NAME -part $FPGA_NAME} ]} {
+# 	open_project $PROJECT_NAME
+# }
+# read_verilog design_define.v
+# source fpga_7020_ip.tcl
+## read_ip /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k.xci
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2021.1/data/ip'.
+## read_ip /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_8k/ram_8k.xci
+## read_ip /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xci
+# source fpga_7020_dut.tcl
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/fpga_verilog/fpga_platform.v
+# source dut.tcl
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/gray_code_gen.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/clock_gen.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/pulse_sync.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/rst_sync.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/crc.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sp_sram/sp_sram_1k_256x32_wrapper.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sp_sram/sp_sram_2k_2048x8_wrapper.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sp_sram/sp_sram_2k_512x32_wrapper.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cm3/cortexm3ds_logic.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cm3/CORTEXM3INTEGRATIONDS.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_lite.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM1.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS2.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM6.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM7.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM8.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM0.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM6.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM7.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM8.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS1.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS4.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_default_slave.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS0.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_p.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb/verilog/cmsdk_ahb_to_apb.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_syn.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_sram/verilog/cmsdk_ahb_to_sram.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_fpga_sram/verilog/cmsdk_fpga_sram.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/library/gen_apb/debug0_apb_cfg.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/fp_domain.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb0_top.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb1_top.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb2_top.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/sram/sram_top.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_rx.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_tx.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_core.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_apb_cfg.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_data_buffer.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_regs_wrap.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_top.v
+## read_verilog /home/houdonghui/cm3_ahbmtx_mcu/user/verilog/mcu_top.v
+# source fpga_7020_mcu_full_cfg.tcl
+## set_property file_type "Verilog Header" [ get_files design_define.v ]
+## set_property is_global_include true [ get_files design_define.v ]
+# read_xdc fpga_ku6_mcu_full_pin_assignments.xdc
+# read_xdc fpga_ku6_mcu_full_timing_constrain.xdc
+# synth_ip [get_ips]
+INFO: [Vivado 12-3435] The given sub-design is up-to-date, no action was taken.  If a regeneration is desired, use the '-force' option: /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xci
+CRITICAL WARNING: [Vivado 12-5447] synth_ip is not supported in project mode, please use non-project mode.
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'ram_128k'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'ram_128k'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'ram_128k'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'ram_128k'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'ram_128k'...
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2021.1/data/ip'.
+Command: synth_design -top ram_128k -part xcku060-ffva1156-2-i -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcku060'
+INFO: [Device 21-403] Loading part xcku060-ffva1156-2-i
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2739644
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2573.891 ; gain = 0.000 ; free physical = 19592 ; free virtual = 35830
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'ram_128k' [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/synth/ram_128k.vhd:70]
+	Parameter C_FAMILY bound to: kintexu - type: string 
+	Parameter C_XDEVICEFAMILY bound to: kintexu - type: string 
+	Parameter C_ELABORATION_DIR bound to: ./ - type: string 
+	Parameter C_INTERFACE_TYPE bound to: 0 - type: integer 
+	Parameter C_AXI_TYPE bound to: 1 - type: integer 
+	Parameter C_AXI_SLAVE_TYPE bound to: 0 - type: integer 
+	Parameter C_USE_BRAM_BLOCK bound to: 0 - type: integer 
+	Parameter C_ENABLE_32BIT_ADDRESS bound to: 0 - type: integer 
+	Parameter C_CTRL_ECC_ALGO bound to: NONE - type: string 
+	Parameter C_HAS_AXI_ID bound to: 0 - type: integer 
+	Parameter C_AXI_ID_WIDTH bound to: 4 - type: integer 
+	Parameter C_MEM_TYPE bound to: 0 - type: integer 
+	Parameter C_BYTE_SIZE bound to: 8 - type: integer 
+	Parameter C_ALGORITHM bound to: 1 - type: integer 
+	Parameter C_PRIM_TYPE bound to: 1 - type: integer 
+	Parameter C_LOAD_INIT_FILE bound to: 1 - type: integer 
+	Parameter C_INIT_FILE_NAME bound to: ram_128k.mif - type: string 
+	Parameter C_INIT_FILE bound to: ram_128k.mem - type: string 
+	Parameter C_USE_DEFAULT_DATA bound to: 1 - type: integer 
+	Parameter C_DEFAULT_DATA bound to: 0 - type: string 
+	Parameter C_HAS_RSTA bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_A bound to: CE - type: string 
+	Parameter C_RSTRAM_A bound to: 0 - type: integer 
+	Parameter C_INITA_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENA bound to: 1 - type: integer 
+	Parameter C_HAS_REGCEA bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEA bound to: 1 - type: integer 
+	Parameter C_WEA_WIDTH bound to: 4 - type: integer 
+	Parameter C_WRITE_MODE_A bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_A bound to: 32 - type: integer 
+	Parameter C_READ_WIDTH_A bound to: 32 - type: integer 
+	Parameter C_WRITE_DEPTH_A bound to: 32768 - type: integer 
+	Parameter C_READ_DEPTH_A bound to: 32768 - type: integer 
+	Parameter C_ADDRA_WIDTH bound to: 15 - type: integer 
+	Parameter C_HAS_RSTB bound to: 0 - type: integer 
+	Parameter C_RST_PRIORITY_B bound to: CE - type: string 
+	Parameter C_RSTRAM_B bound to: 0 - type: integer 
+	Parameter C_INITB_VAL bound to: 0 - type: string 
+	Parameter C_HAS_ENB bound to: 0 - type: integer 
+	Parameter C_HAS_REGCEB bound to: 0 - type: integer 
+	Parameter C_USE_BYTE_WEB bound to: 1 - type: integer 
+	Parameter C_WEB_WIDTH bound to: 4 - type: integer 
+	Parameter C_WRITE_MODE_B bound to: WRITE_FIRST - type: string 
+	Parameter C_WRITE_WIDTH_B bound to: 32 - type: integer 
+	Parameter C_READ_WIDTH_B bound to: 32 - type: integer 
+	Parameter C_WRITE_DEPTH_B bound to: 32768 - type: integer 
+	Parameter C_READ_DEPTH_B bound to: 32768 - type: integer 
+	Parameter C_ADDRB_WIDTH bound to: 15 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MEM_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_MUX_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_MUX_PIPELINE_STAGES bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_INPUT_REGS_A bound to: 0 - type: integer 
+	Parameter C_HAS_SOFTECC_OUTPUT_REGS_B bound to: 0 - type: integer 
+	Parameter C_USE_SOFTECC bound to: 0 - type: integer 
+	Parameter C_USE_ECC bound to: 0 - type: integer 
+	Parameter C_EN_ECC_PIPE bound to: 0 - type: integer 
+	Parameter C_READ_LATENCY_A bound to: 1 - type: integer 
+	Parameter C_READ_LATENCY_B bound to: 1 - type: integer 
+	Parameter C_HAS_INJECTERR bound to: 0 - type: integer 
+	Parameter C_SIM_COLLISION_CHECK bound to: ALL - type: string 
+	Parameter C_COMMON_CLK bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_COLL bound to: 0 - type: integer 
+	Parameter C_EN_SLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_USE_URAM bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRA_CHG bound to: 0 - type: integer 
+	Parameter C_EN_RDADDRB_CHG bound to: 0 - type: integer 
+	Parameter C_EN_DEEPSLEEP_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SHUTDOWN_PIN bound to: 0 - type: integer 
+	Parameter C_EN_SAFETY_CKT bound to: 0 - type: integer 
+	Parameter C_DISABLE_WARN_BHV_RANGE bound to: 0 - type: integer 
+	Parameter C_COUNT_36K_BRAM bound to: 32 - type: string 
+	Parameter C_COUNT_18K_BRAM bound to: 0 - type: string 
+	Parameter C_EST_POWER_SUMMARY bound to: Estimated Power for IP     :     4.683895 mW - type: string 
+INFO: [Synth 8-3491] module 'blk_mem_gen_v8_4_4' declared at '/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/hdl/blk_mem_gen_v8_4_vhsyn_rfs.vhd:195321' bound to instance 'U0' of component 'blk_mem_gen_v8_4_4' [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/synth/ram_128k.vhd:236]
+INFO: [Synth 8-256] done synthesizing module 'ram_128k' (11#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/synth/ram_128k.vhd:70]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2911.867 ; gain = 337.977 ; free physical = 20170 ; free virtual = 36408
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2911.867 ; gain = 337.977 ; free physical = 20176 ; free virtual = 36415
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2911.867 ; gain = 337.977 ; free physical = 20176 ; free virtual = 36415
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2911.867 ; gain = 0.000 ; free physical = 20164 ; free virtual = 36403
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k_ooc.xdc] for cell 'U0'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k_ooc.xdc] for cell 'U0'
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2987.773 ; gain = 0.000 ; free physical = 20113 ; free virtual = 36351
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2987.773 ; gain = 0.000 ; free physical = 20113 ; free virtual = 36351
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20175 ; free virtual = 36413
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcku060-ffva1156-2-i
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20175 ; free virtual = 36413
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for U0. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20175 ; free virtual = 36413
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20167 ; free virtual = 36407
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	                4 Bit    Registers := 2     
++---Muxes : 
+	   2 Input    1 Bit        Muxes := 32    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 2760 (col length:120)
+BRAMs: 2160 (col length: RAMB18 120 RAMB36 60)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20147 ; free virtual = 36396
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20873 ; free virtual = 37122
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20871 ; free virtual = 37120
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20867 ; free virtual = 37115
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |LUT4     |     8|
+|2     |LUT6     |    64|
+|3     |MUXF7    |    32|
+|4     |RAMB36E2 |    32|
+|9     |FDRE     |     3|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20866 ; free virtual = 37114
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2987.773 ; gain = 337.977 ; free physical = 20885 ; free virtual = 37133
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 2987.773 ; gain = 413.883 ; free physical = 20885 ; free virtual = 37133
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2987.773 ; gain = 0.000 ; free physical = 20974 ; free virtual = 37222
+INFO: [Netlist 29-17] Analyzing 32 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k_ooc.xdc] for cell 'U0'
+INFO: [Vivado 12-4761] HD.CLK_SRC property is set on port clka. The net connecting to the port drives either clock PIN or hierarchical black box. Use the create_clock constraint to create a clock on this port prior to setting HD.CLK_SRC.  [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k_ooc.xdc:54]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k_ooc.xdc] for cell 'U0'
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[10].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[11].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[12].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[13].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[14].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[15].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[16].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[17].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[18].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[19].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[20].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[21].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[22].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[23].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[24].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[25].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[26].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[27].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[28].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[29].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[30].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[31].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[5].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[6].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[7].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[8].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+INFO: [Opt 31-422] The CLOCK_DOMAINS attribute on the BRAM cell U0/inst_blk_mem_gen/gnbram.gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[9].ram.r/prim_init.ram/DEVICE_8SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram has been changed from INDEPENDENT to COMMON to match the clocking topology used for the BRAM.
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2987.773 ; gain = 0.000 ; free physical = 20904 ; free virtual = 37152
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 859fa3bd
+INFO: [Common 17-83] Releasing license: Synthesis
+54 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:29 . Memory (MB): peak = 2987.773 ; gain = 421.887 ; free physical = 21061 ; free virtual = 37309
+INFO: [Coretcl 2-1174] Renamed 69 cell refs.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k.dcp' has been generated.
+INFO: [Vivado 12-3435] The given sub-design is up-to-date, no action was taken.  If a regeneration is desired, use the '-force' option: /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_8k/ram_8k.xci
+INFO: [Vivado 12-3441] generate_netlist_ip - operation complete
+synth_ip: Time (s): cpu = 00:00:32 ; elapsed = 00:00:30 . Memory (MB): peak = 3003.789 ; gain = 481.160 ; free physical = 21114 ; free virtual = 37355
+# update_compile_order
+# synth_design -top $PROJECT_NAME
+Command: synth_design -top mcu_top
+Starting synth_design
+Using part: xcku060-ffva1156-2-i
+Attempting to get a license for feature 'Synthesis' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcku060'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+WARNING: [Synth 8-2306] macro TRN_IDLE redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:117]
+WARNING: [Synth 8-2306] macro TRN_BUSY redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:118]
+WARNING: [Synth 8-2306] macro TRN_NONSEQ redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:119]
+WARNING: [Synth 8-2306] macro TRN_SEQ redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:120]
+WARNING: [Synth 8-2306] macro BUR_SINGLE redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:123]
+WARNING: [Synth 8-2306] macro BUR_INCR redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:124]
+WARNING: [Synth 8-2306] macro BUR_WRAP4 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:125]
+WARNING: [Synth 8-2306] macro BUR_INCR4 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:126]
+WARNING: [Synth 8-2306] macro BUR_WRAP8 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:127]
+WARNING: [Synth 8-2306] macro BUR_INCR8 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:128]
+WARNING: [Synth 8-2306] macro BUR_WRAP16 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:129]
+WARNING: [Synth 8-2306] macro BUR_INCR16 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:130]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 3035.805 ; gain = 0.000 ; free physical = 20137 ; free virtual = 36379
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mcu_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/mcu_top.v:18]
+INFO: [Synth 8-6157] synthesizing module 'fp_domain' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/fp_domain.v:16]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix.v:49]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_i' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:32]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:417]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:433]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_i' (1#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:32]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS0.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_default_slave' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_default_slave.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_default_slave' (2#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_default_slave.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS0' (3#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS0.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS1.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS1' (4#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS1.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS2' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS2.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS2' (5#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS2.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS4' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS4.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS4' (6#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS4.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM0.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:35]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:172]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:175]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM0' (7#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:35]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM0' (8#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM0.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM1.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:35]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:169]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:172]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM1' (9#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:35]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM1' (10#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM1.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM6' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM6.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM6' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM6.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM6' (11#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM6.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM6' (12#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM6.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM7' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM7.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM7' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM7.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM7' (13#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM7.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM7' (14#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM7.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM8' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM8.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM8' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM8.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM8' (15#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM8.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM8' (16#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM8.v:38]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix' (17#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix.v:49]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb/verilog/cmsdk_ahb_to_apb.v:31]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb' (18#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb/verilog/cmsdk_ahb_to_apb.v:31]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async.v:29]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async_h' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v:27]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v:179]
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async_h' (19#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v:27]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async_syn' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_syn.v:28]
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async_syn' (20#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_syn.v:28]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async_p' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_p.v:27]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async_p' (21#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_p.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async' (22#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async.v:29]
+INFO: [Synth 8-6157] synthesizing module 'CORTEXM3INTEGRATIONDS' [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/CORTEXM3INTEGRATIONDS.v:24]
+INFO: [Synth 8-6157] synthesizing module 'cortexm3ds_logic' [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/cortexm3ds_logic.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'cortexm3ds_logic' (23#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/cortexm3ds_logic.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'CORTEXM3INTEGRATIONDS' (24#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/CORTEXM3INTEGRATIONDS.v:24]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff_2d' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:79]
+	Parameter WIDTH bound to: 16 - type: integer 
+	Parameter DEFAULT_VAL bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff_2d' (25#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:79]
+INFO: [Synth 8-6157] synthesizing module 'sram_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/sram/sram_top.v:30]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_sram' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_sram/verilog/cmsdk_ahb_to_sram.v:26]
+	Parameter AW bound to: 17 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_sram' (26#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_sram/verilog/cmsdk_ahb_to_sram.v:26]
+INFO: [Synth 8-6157] synthesizing module 'ram_128k' [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/.Xil/Vivado-2739588-secure-Precision-3660/realtime/ram_128k_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ram_128k' (27#1) [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/.Xil/Vivado-2739588-secure-Precision-3660/realtime/ram_128k_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'sram_top' (28#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/sram/sram_top.v:30]
+INFO: [Synth 8-6157] synthesizing module 'apb0_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb0_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_apb_slave_mux' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+	Parameter PORT0_ENABLE bound to: 1 - type: integer 
+	Parameter PORT1_ENABLE bound to: 1 - type: integer 
+	Parameter PORT2_ENABLE bound to: 1 - type: integer 
+	Parameter PORT3_ENABLE bound to: 0 - type: integer 
+	Parameter PORT4_ENABLE bound to: 0 - type: integer 
+	Parameter PORT5_ENABLE bound to: 0 - type: integer 
+	Parameter PORT6_ENABLE bound to: 0 - type: integer 
+	Parameter PORT7_ENABLE bound to: 0 - type: integer 
+	Parameter PORT8_ENABLE bound to: 0 - type: integer 
+	Parameter PORT9_ENABLE bound to: 0 - type: integer 
+	Parameter PORT10_ENABLE bound to: 1 - type: integer 
+	Parameter PORT11_ENABLE bound to: 0 - type: integer 
+	Parameter PORT12_ENABLE bound to: 0 - type: integer 
+	Parameter PORT13_ENABLE bound to: 0 - type: integer 
+	Parameter PORT14_ENABLE bound to: 0 - type: integer 
+	Parameter PORT15_ENABLE bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_apb_slave_mux' (29#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+INFO: [Synth 8-6157] synthesizing module 'debug0_apb_cfg' [/home/houdonghui/cm3_ahbmtx_mcu/library/gen_apb/debug0_apb_cfg.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'debug0_apb_cfg' (30#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/gen_apb/debug0_apb_cfg.v:1]
+INFO: [Synth 8-6157] synthesizing module 'uart_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_top.v:19]
+INFO: [Synth 8-6157] synthesizing module 'uart_regs_wrap' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_regs_wrap.v:13]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+	Parameter WIDTH bound to: 1 - type: integer 
+	Parameter DEFAULT_VAL bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff' (31#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+INFO: [Synth 8-6157] synthesizing module 'uart_apb_cfg' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_apb_cfg.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'uart_apb_cfg' (32#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_apb_cfg.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'uart_regs_wrap' (33#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_regs_wrap.v:13]
+INFO: [Synth 8-6157] synthesizing module 'uart_data_buffer' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_data_buffer.v:13]
+INFO: [Synth 8-6157] synthesizing module 'fifo_sync' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v:23]
+	Parameter ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter DATA_WIDTH bound to: 10 - type: integer 
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v:83]
+INFO: [Synth 8-6155] done synthesizing module 'fifo_sync' (34#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'uart_data_buffer' (35#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_data_buffer.v:13]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff_3d_en' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:185]
+	Parameter WIDTH bound to: 1 - type: integer 
+	Parameter DEFAULT_VAL bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff_3d_en' (36#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:185]
+INFO: [Synth 8-6157] synthesizing module 'uart_pe_core' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_core.v:18]
+INFO: [Synth 8-6157] synthesizing module 'posedge_detect' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+INFO: [Synth 8-6155] done synthesizing module 'posedge_detect' (37#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+INFO: [Synth 8-6157] synthesizing module 'uart_pe_tx' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_tx.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'uart_pe_tx' (38#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_tx.v:13]
+INFO: [Synth 8-6157] synthesizing module 'uart_pe_rx' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_rx.v:13]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff__parameterized0' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+	Parameter WIDTH bound to: 1 - type: integer 
+	Parameter DEFAULT_VAL bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff__parameterized0' (38#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+INFO: [Synth 8-6157] synthesizing module 'negedge_detect' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:61]
+INFO: [Synth 8-6155] done synthesizing module 'negedge_detect' (39#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:61]
+INFO: [Synth 8-6155] done synthesizing module 'uart_pe_rx' (40#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_rx.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'uart_pe_core' (41#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_core.v:18]
+INFO: [Synth 8-6157] synthesizing module 'posedge_detect__parameterized0' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+	Parameter WIDTH bound to: 9 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'posedge_detect__parameterized0' (41#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+INFO: [Synth 8-6157] synthesizing module 'interrupt_gen' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:16]
+	Parameter WIDTH bound to: 9 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'interrupt_bit_gen' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'interrupt_bit_gen' (42#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'interrupt_gen' (43#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:16]
+INFO: [Synth 8-6155] done synthesizing module 'uart_top' (44#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_top.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'apb0_top' (45#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb0_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'apb1_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb1_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_apb_slave_mux__parameterized0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+	Parameter PORT0_ENABLE bound to: 1 - type: integer 
+	Parameter PORT1_ENABLE bound to: 0 - type: integer 
+	Parameter PORT2_ENABLE bound to: 0 - type: integer 
+	Parameter PORT3_ENABLE bound to: 0 - type: integer 
+	Parameter PORT4_ENABLE bound to: 0 - type: integer 
+	Parameter PORT5_ENABLE bound to: 0 - type: integer 
+	Parameter PORT6_ENABLE bound to: 0 - type: integer 
+	Parameter PORT7_ENABLE bound to: 0 - type: integer 
+	Parameter PORT8_ENABLE bound to: 0 - type: integer 
+	Parameter PORT9_ENABLE bound to: 0 - type: integer 
+	Parameter PORT10_ENABLE bound to: 0 - type: integer 
+	Parameter PORT11_ENABLE bound to: 0 - type: integer 
+	Parameter PORT12_ENABLE bound to: 0 - type: integer 
+	Parameter PORT13_ENABLE bound to: 0 - type: integer 
+	Parameter PORT14_ENABLE bound to: 0 - type: integer 
+	Parameter PORT15_ENABLE bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_apb_slave_mux__parameterized0' (45#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+INFO: [Synth 8-6155] done synthesizing module 'apb1_top' (46#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb1_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'apb2_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb2_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_apb_slave_mux__parameterized1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+	Parameter PORT0_ENABLE bound to: 1 - type: integer 
+	Parameter PORT1_ENABLE bound to: 1 - type: integer 
+	Parameter PORT2_ENABLE bound to: 0 - type: integer 
+	Parameter PORT3_ENABLE bound to: 0 - type: integer 
+	Parameter PORT4_ENABLE bound to: 0 - type: integer 
+	Parameter PORT5_ENABLE bound to: 0 - type: integer 
+	Parameter PORT6_ENABLE bound to: 0 - type: integer 
+	Parameter PORT7_ENABLE bound to: 0 - type: integer 
+	Parameter PORT8_ENABLE bound to: 0 - type: integer 
+	Parameter PORT9_ENABLE bound to: 0 - type: integer 
+	Parameter PORT10_ENABLE bound to: 0 - type: integer 
+	Parameter PORT11_ENABLE bound to: 0 - type: integer 
+	Parameter PORT12_ENABLE bound to: 0 - type: integer 
+	Parameter PORT13_ENABLE bound to: 0 - type: integer 
+	Parameter PORT14_ENABLE bound to: 0 - type: integer 
+	Parameter PORT15_ENABLE bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_apb_slave_mux__parameterized1' (46#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+INFO: [Synth 8-6155] done synthesizing module 'apb2_top' (47#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb2_top.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'fp_domain' (48#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/fp_domain.v:16]
+INFO: [Synth 8-6157] synthesizing module 'fpga_platform' [/home/houdonghui/cm3_ahbmtx_mcu/user/fpga_verilog/fpga_platform.v:16]
+INFO: [Synth 8-6157] synthesizing module 'pll_50m' [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/.Xil/Vivado-2739588-secure-Precision-3660/realtime/pll_50m_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'pll_50m' (49#1) [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/.Xil/Vivado-2739588-secure-Precision-3660/realtime/pll_50m_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_even_division' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/clock_gen.v:36]
+	Parameter N bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'clk_even_division' (50#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/clock_gen.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'fpga_platform' (51#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/fpga_verilog/fpga_platform.v:16]
+INFO: [Synth 8-6155] done synthesizing module 'mcu_top' (52#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/mcu_top.v:18]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 3910.219 ; gain = 874.414 ; free physical = 18508 ; free virtual = 34972
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 3910.219 ; gain = 874.414 ; free physical = 18723 ; free virtual = 35233
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 3910.219 ; gain = 874.414 ; free physical = 18723 ; free virtual = 35233
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.25 . Memory (MB): peak = 3910.219 ; gain = 0.000 ; free physical = 18644 ; free virtual = 35167
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc] for cell 'u_fpga_platform/u_pll0'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc] for cell 'u_fpga_platform/u_pll0'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_itcm'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_itcm'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_dtcm'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_dtcm'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]
+WARNING: [Vivado 12-584] No ports matched 'ETH_RST'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc:30]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]
+WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/mcu_top_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/mcu_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/mcu_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc]
+CRITICAL WARNING: [Constraints 18-1056] Clock 'hse' completely overrides clock 'CLK'.
+New: create_clock -period 5.000 -name hse -waveform {0.000 2.500} [get_ports CLK], [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:14]
+Previous: create_clock -period 5.000 [get_ports CLK], [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc:1]
+Resolution: Review the constraint files and remove the redundant clock definition(s). If the clock constraints are not saved in a file, you can first save the constraints to an XDC file and reload the design once the constraints have been corrected.
+CRITICAL WARNING: [Designutils 20-1307] Command 'derive_pll_clocks' is not supported in the xdc constraint file. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:17]
+WARNING: [Vivado 12-627] No clocks matched 'clk_out1_pll_50m'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+INFO: [Vivado 12-626] No clocks found. Please use 'create_clock' or 'create_generated_clock' command to create clocks. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group [get_clocks clk_out1_pll_50m]'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-627] No clocks matched 'clk_out2_pll_50m'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+INFO: [Vivado 12-626] No clocks found. Please use 'create_clock' or 'create_generated_clock' command to create clocks. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group [get_clocks clk_out2_pll_50m]'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-627] No clocks matched 'clk_out3_pll_50m'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+INFO: [Vivado 12-626] No clocks found. Please use 'create_clock' or 'create_generated_clock' command to create clocks. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group [get_clocks clk_out3_pll_50m]'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-507] No nets matched 'TCK_IBUF'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:27]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc]
+WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/mcu_top_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3942.234 ; gain = 0.000 ; free physical = 18538 ; free virtual = 35070
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 3942.234 ; gain = 0.000 ; free physical = 18537 ; free virtual = 35070
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:37 ; elapsed = 00:00:39 . Memory (MB): peak = 3942.234 ; gain = 906.430 ; free physical = 19412 ; free virtual = 35779
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcku060-ffva1156-2-i
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:37 ; elapsed = 00:00:39 . Memory (MB): peak = 3942.234 ; gain = 906.430 ; free physical = 19411 ; free virtual = 35779
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property IO_BUFFER_TYPE = NONE for CLK. (constraint file  /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc, line 5).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for CLK. (constraint file  /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc, line 6).
+Applied set_property KEEP_HIERARCHY = SOFT for u_fpga_platform/u_pll0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for u_fp_domain/u_sram_top/u_dtcm. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for u_fp_domain/u_sram_top/u_itcm. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:37 ; elapsed = 00:00:39 . Memory (MB): peak = 3942.234 ; gain = 906.430 ; free physical = 19407 ; free virtual = 35775
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg_reg' in module 'cmsdk_ahb_to_apb'
+INFO: [Synth 8-802] inferred FSM for state register 'curr_state_reg' in module 'cmsdk_ahb_to_apb_async_h'
+INFO: [Synth 8-802] inferred FSM for state register 'curr_state_reg' in module 'cmsdk_ahb_to_apb_async_p'
+INFO: [Synth 8-802] inferred FSM for state register 'current_state_reg' in module 'uart_pe_tx'
+INFO: [Synth 8-802] inferred FSM for state register 'current_state_reg' in module 'uart_pe_rx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 ST_IDLE |                          0001000 |                              000
+             ST_APB_WAIT |                          0000100 |                              001
+             ST_APB_TRNF |                          0000010 |                              010
+            ST_APB_TRNF2 |                          1000000 |                              011
+             ST_APB_ERR1 |                          0010000 |                              101
+             ST_APB_ERR2 |                          0000001 |                              110
+            ST_APB_ENDOK |                          0100000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg_reg' using encoding 'one-hot' in module 'cmsdk_ahb_to_apb'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                fsm_idle |                               11 |                               00
+                fsm_wait |                               00 |                               11
+                fsm_done |                               01 |                               01
+                 fsm_wr1 |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_reg' using encoding 'sequential' in module 'cmsdk_ahb_to_apb_async_h'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            fsm_apb_idle |                              001 |                               00
+            fsm_apb_cyc1 |                              010 |                               01
+            fsm_apb_wait |                              100 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_reg' using encoding 'one-hot' in module 'cmsdk_ahb_to_apb_async_p'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+*
+                 TX_IDLE |                          0000001 |                          0000001
+                TX_START |                          0000010 |                          0000010
+                 TX_DATA |                          0000100 |                          0000100
+               TX_PARITY |                          0001000 |                          0001000
+                 TX_STOP |                          0010000 |                          0010000
+             TX_INTERVAL |                          0100000 |                          0100000
+                  TX_END |                          1000000 |                          1000000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'current_state_reg' in module 'uart_pe_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+*
+                 RX_IDLE |                           000001 |                           000001
+                RX_START |                           000010 |                           000010
+                 RX_DATA |                           000100 |                           000100
+               RX_PARITY |                           001000 |                           001000
+                 RX_STOP |                           010000 |                           010000
+                  RX_END |                           100000 |                           100000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'current_state_reg' in module 'uart_pe_rx'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:34 ; elapsed = 00:01:38 . Memory (MB): peak = 3942.234 ; gain = 906.430 ; free physical = 15231 ; free virtual = 31617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   34 Bit       Adders := 11    
+	   2 Input   33 Bit       Adders := 6     
+	   2 Input   32 Bit       Adders := 3     
+	   3 Input   32 Bit       Adders := 2     
+	   2 Input   31 Bit       Adders := 1     
+	   3 Input   31 Bit       Adders := 1     
+	   2 Input   24 Bit       Adders := 1     
+	   2 Input   21 Bit       Adders := 1     
+	   2 Input   18 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 1     
+	   2 Input   14 Bit       Adders := 1     
+	   2 Input   13 Bit       Adders := 1     
+	   2 Input   12 Bit       Adders := 7     
+	   2 Input    9 Bit       Adders := 1     
+	   3 Input    7 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 3     
+	   3 Input    6 Bit       Adders := 1     
+	   3 Input    5 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 2     
+	   2 Input    4 Bit       Adders := 18    
+	   2 Input    2 Bit       Adders := 4     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1256  
+	   3 Input      1 Bit         XORs := 2     
+	   4 Input      1 Bit         XORs := 1     
++---XORs : 
+	               11 Bit    Wide XORs := 1     
+	               10 Bit    Wide XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 17    
+	               30 Bit    Registers := 3     
+	               16 Bit    Registers := 2     
+	               15 Bit    Registers := 2     
+	               12 Bit    Registers := 4     
+	               11 Bit    Registers := 2     
+	               10 Bit    Registers := 35    
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 8     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 4     
+	                4 Bit    Registers := 35    
+	                3 Bit    Registers := 8     
+	                2 Bit    Registers := 29    
+	                1 Bit    Registers := 5809  
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 40    
+	   4 Input   32 Bit        Muxes := 8     
+	   3 Input   32 Bit        Muxes := 2     
+	   2 Input   15 Bit        Muxes := 2     
+	   2 Input   12 Bit        Muxes := 4     
+	   4 Input   11 Bit        Muxes := 1     
+	   5 Input   11 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 2     
+	   2 Input   10 Bit        Muxes := 3     
+	   5 Input   10 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 8     
+	   7 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 19    
+	   8 Input    7 Bit        Muxes := 1     
+	   5 Input    7 Bit        Muxes := 1     
+	   3 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 6     
+	   3 Input    6 Bit        Muxes := 2     
+	   7 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 13    
+	   3 Input    5 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 48    
+	   3 Input    4 Bit        Muxes := 2     
+	   4 Input    4 Bit        Muxes := 6     
+	   5 Input    4 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 34    
+	   4 Input    3 Bit        Muxes := 3     
+	   7 Input    3 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 3     
+	   2 Input    2 Bit        Muxes := 52    
+	   4 Input    2 Bit        Muxes := 5     
+	   5 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 5     
+	   2 Input    1 Bit        Muxes := 2298  
+	   4 Input    1 Bit        Muxes := 22    
+	   3 Input    1 Bit        Muxes := 9     
+	   5 Input    1 Bit        Muxes := 3     
+	   9 Input    1 Bit        Muxes := 2     
+	   7 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 2760 (col length:120)
+BRAMs: 2160 (col length: RAMB18 120 RAMB36 60)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+DSP Report: Generating DSP Glym17, operation Mode is: A*B.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: Generating DSP Glym17, operation Mode is: A*B.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: Generating DSP Glym17, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:04:03 ; elapsed = 00:04:10 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16737 ; free virtual = 33183
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below)
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name      | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|cortexm3ds_logic | A*B            | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cortexm3ds_logic | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cortexm3ds_logic | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:04:04 ; elapsed = 00:04:10 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16736 ; free virtual = 33181
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:04:05 ; elapsed = 00:04:12 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16721 ; free virtual = 33168
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:04:11 ; elapsed = 00:04:18 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16765 ; free virtual = 33210
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:04:13 ; elapsed = 00:04:20 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16765 ; free virtual = 33210
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:04:13 ; elapsed = 00:04:20 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16765 ; free virtual = 33210
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:04:14 ; elapsed = 00:04:21 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16764 ; free virtual = 33209
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:04:15 ; elapsed = 00:04:21 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16764 ; free virtual = 33209
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:04:15 ; elapsed = 00:04:22 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16763 ; free virtual = 33208
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:04:15 ; elapsed = 00:04:22 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16763 ; free virtual = 33208
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |ram_128k      |         2|
+|2     |pll_50m       |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |pll_50m         |     1|
+|2     |ram_128k        |     2|
+|4     |BUFG            |     1|
+|5     |CARRY8          |   153|
+|6     |DSP_ALU         |     3|
+|7     |DSP_A_B_DATA    |     3|
+|8     |DSP_C_DATA      |     3|
+|9     |DSP_MULTIPLIER  |     3|
+|10    |DSP_M_DATA      |     3|
+|11    |DSP_OUTPUT      |     3|
+|12    |DSP_PREADD      |     3|
+|13    |DSP_PREADD_DATA |     3|
+|14    |LUT1            |   256|
+|15    |LUT2            |  1263|
+|16    |LUT3            |  1513|
+|17    |LUT4            |  2915|
+|18    |LUT5            |  3370|
+|19    |LUT6            |  8232|
+|20    |MUXF7           |    62|
+|21    |MUXF8           |    14|
+|22    |FDCE            |  3919|
+|23    |FDPE            |   136|
+|24    |FDRE            |  2233|
+|25    |IBUF            |     5|
+|26    |IOBUF           |     1|
+|27    |OBUF            |    10|
+|28    |OBUFT           |     1|
++------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:04:15 ; elapsed = 00:04:22 . Memory (MB): peak = 4258.258 ; gain = 1222.453 ; free physical = 16762 ; free virtual = 33207
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:04:14 ; elapsed = 00:04:22 . Memory (MB): peak = 4262.168 ; gain = 1194.348 ; free physical = 21131 ; free virtual = 37576
+Synthesis Optimization Complete : Time (s): cpu = 00:04:19 ; elapsed = 00:04:26 . Memory (MB): peak = 4262.168 ; gain = 1226.363 ; free physical = 21131 ; free virtual = 37576
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Project 1-454] Reading design checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k.dcp' for cell 'u_fp_domain/u_sram_top/u_itcm'
+INFO: [Project 1-454] Reading design checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.dcp' for cell 'u_fpga_platform/u_pll0'
+Netlist sorting complete. Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.12 . Memory (MB): peak = 4262.168 ; gain = 0.000 ; free physical = 21120 ; free virtual = 37565
+INFO: [Netlist 29-17] Analyzing 305 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'mcu_top' is not ideal for floorplanning, since the cellview 'cortexm3ds_logic' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-479] Netlist was created with Vivado 2021.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
+WARNING: [Opt 31-32] Removing redundant IBUF since it is not being driven by a top-level port. u_fpga_platform/u_pll0/inst/clkin1_ibuf 
+Resolution: The tool has removed redundant IBUF. To resolve this warning, check for redundant IBUF in the input design.
+WARNING: [Constraints 18-550] Could not create 'IBUF_LOW_PWR' constraint because net 'u_fpga_platform/u_pll0/clk_in1' is not directly connected to top level port. Synthesis is ignored for IBUF_LOW_PWR but preserved for implementation.
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m_board.xdc] for cell 'u_fpga_platform/u_pll0/inst'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m_board.xdc] for cell 'u_fpga_platform/u_pll0/inst'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xdc] for cell 'u_fpga_platform/u_pll0/inst'
+INFO: [Timing 38-35] Done setting XDC timing constraints. [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xdc:57]
+INFO: [Timing 38-2] Deriving generated clocks [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xdc:57]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xdc] for cell 'u_fpga_platform/u_pll0/inst'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]
+WARNING: [Vivado 12-584] No ports matched 'ETH_RST'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc:30]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc:30]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc]
+CRITICAL WARNING: [Designutils 20-1307] Command 'derive_pll_clocks' is not supported in the xdc constraint file. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:17]
+INFO: [Vivado 12-4777] Setting CLOCK_DEDICATED_ROUTE constraint on the PARENT net instead of the specified net segment (net name: TCK_IBUF). Placer only honors CLOCK_DEDICATED_ROUTE when set on the PARENT net, e.g. net segment directly connected to the driver. To eliminate this message, please update your constraint to specify the PARENT net instead. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:27]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc]
+INFO: [Project 1-538] Using original IP XDC constraints instead of the XDC constraints in dcp '/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k.dcp'
+INFO: [Project 1-538] Using original IP XDC constraints instead of the XDC constraints in dcp '/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k.dcp'
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4306.281 ; gain = 0.000 ; free physical = 21091 ; free virtual = 37536
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 11 instances were transformed.
+  BUFG => BUFGCE: 1 instance 
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 3 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 6 instances
+  IOBUF => IOBUF (IBUFCTRL, INBUF, OBUFT): 1 instance 
+
+Synth Design complete, checksum: f70cbc82
+INFO: [Common 17-83] Releasing license: Synthesis
+155 Infos, 23 Warnings, 10 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:04:23 ; elapsed = 00:04:29 . Memory (MB): peak = 4306.281 ; gain = 1270.477 ; free physical = 21298 ; free virtual = 37743
+# write_checkpoint -force ./checkpoint/synthesis
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.01 . Memory (MB): peak = 4346.301 ; gain = 0.000 ; free physical = 21293 ; free virtual = 37741
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/checkpoint/synthesis.dcp' has been generated.
+# report_utilization -file ./checkpoint/synthesis_util.rpt
+# report_utilization -hierarchical -hierarchical_depth 3 -file ./checkpoint/synthesis_hier.rpt
+# report_clocks -file ./checkpoint/synthesis_clk.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+# opt_design
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcku060'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+WARNING: [DRC RPBF-3] IO port buffering is incomplete: Device port MDIO expects both input and output buffering but the buffers are incomplete.
+INFO: [Project 1-461] DRC finished with 0 Errors, 1 Warnings
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.53 . Memory (MB): peak = 4370.312 ; gain = 24.012 ; free physical = 21267 ; free virtual = 37716
+
+Starting Cache Timing Information Task
+Ending Cache Timing Information Task | Checksum: 1ecc2d42b
+
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21267 ; free virtual = 37716
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 9 inverter(s) to 1322 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: 1410ee047
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.70 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21258 ; free virtual = 37707
+INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 160 cells
+INFO: [Opt 31-1021] In phase Retarget, 1 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: 134696d09
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.85 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21257 ; free virtual = 37706
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 1c388b193
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21252 ; free virtual = 37701
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
+
+Phase 4 BUFG optimization
+INFO: [Opt 31-1077] Phase BUFG optimization inserted 0 global clock buffer(s) for CLOCK_LOW_FANOUT.
+Phase 4 BUFG optimization | Checksum: 1c388b193
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21251 ; free virtual = 37700
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 5 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 5 Shift Register Optimization | Checksum: 1c388b193
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21251 ; free virtual = 37700
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 6 Post Processing Netlist
+Phase 6 Post Processing Netlist | Checksum: 1c388b193
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21251 ; free virtual = 37699
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               0  |             160  |                                              1  |
+|  Constant propagation         |               0  |               0  |                                              0  |
+|  Sweep                        |               0  |               0  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21251 ; free virtual = 37700
+Ending Logic Optimization Task | Checksum: 22e8f1f10
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 4370.312 ; gain = 0.000 ; free physical = 21251 ; free virtual = 37700
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+INFO: [Pwropt 34-9] Applying IDT optimizations ...
+INFO: [Pwropt 34-10] Applying ODC optimizations ...
+
+
+Starting PowerOpt Patch Enables Task
+INFO: [Pwropt 34-162] WRITE_MODE attribute of 0 BRAM(s) out of a total of 64 has been updated to save power. Run report_power_opt to get a complete listing of the BRAMs updated.
+INFO: [Pwropt 34-201] Structural ODC has moved 0 WE to EN ports
+Number of BRAM Ports augmented: 0 newly gated: 0 Total Ports: 128
+Ending PowerOpt Patch Enables Task | Checksum: 22e8f1f10
+
+Time (s): cpu = 00:00:00.23 ; elapsed = 00:00:00.23 . Memory (MB): peak = 4442.348 ; gain = 0.000 ; free physical = 21315 ; free virtual = 37764
+Ending Power Optimization Task | Checksum: 22e8f1f10
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:06 . Memory (MB): peak = 4442.348 ; gain = 72.035 ; free physical = 21319 ; free virtual = 37768
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 22e8f1f10
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4442.348 ; gain = 0.000 ; free physical = 21319 ; free virtual = 37768
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 4442.348 ; gain = 0.000 ; free physical = 21319 ; free virtual = 37768
+Ending Netlist Obfuscation Task | Checksum: 22e8f1f10
+
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 4442.348 ; gain = 0.000 ; free physical = 21319 ; free virtual = 37768
+INFO: [Common 17-83] Releasing license: Implementation
+23 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:09 . Memory (MB): peak = 4442.348 ; gain = 96.047 ; free physical = 21319 ; free virtual = 37768
+# write_checkpoint -force ./checkpoint/opt
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.02 . Memory (MB): peak = 4442.348 ; gain = 0.000 ; free physical = 21316 ; free virtual = 37767
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/checkpoint/opt.dcp' has been generated.
+# place_design
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+WARNING: [DRC RPBF-3] IO port buffering is incomplete: Device port MDIO expects both input and output buffering but the buffers are incomplete.
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 1 Warnings
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20876 ; free virtual = 37329
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 18185ccea
+
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.05 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20876 ; free virtual = 37329
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20876 ; free virtual = 37329
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 13e1ce5dd
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.61 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20904 ; free virtual = 37356
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1aa24687b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:03 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20910 ; free virtual = 37362
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1aa24687b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:03 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20910 ; free virtual = 37362
+Phase 1 Placer Initialization | Checksum: 1aa24687b
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:03 . Memory (MB): peak = 4750.121 ; gain = 0.000 ; free physical = 20910 ; free virtual = 37362
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 18794a24d
+
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 4758.125 ; gain = 8.004 ; free physical = 20863 ; free virtual = 37316
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 149bffc88
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 4758.125 ; gain = 8.004 ; free physical = 20863 ; free virtual = 37315
+
+Phase 2.3 Post-Processing in Floorplanning
+Phase 2.3 Post-Processing in Floorplanning | Checksum: 149bffc88
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 4758.125 ; gain = 8.004 ; free physical = 20863 ; free virtual = 37315
+
+Phase 2.4 Global Placement Core
+
+Phase 2.4.1 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 0 LUTNM shape to break, 634 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 0, two critical 0, total 0, new lutff created 0
+INFO: [Physopt 32-1138] End 1 Pass. Optimized 220 nets or LUTs. Breaked 0 LUT, combined 220 existing LUTs and moved 0 existing LUT
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-670] No setup violation found.  DSP Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register to Pipeline Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  URAM Register Optimization was not performed.
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20737 ; free virtual = 37189
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |            0  |            220  |                   220  |           0  |           1  |  00:00:00  |
+|  Retime                                           |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |            0  |            220  |                   220  |           0  |           4  |  00:00:00  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.4.1 Physical Synthesis In Placer | Checksum: 18803c3ca
+
+Time (s): cpu = 00:00:49 ; elapsed = 00:00:16 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20735 ; free virtual = 37187
+Phase 2.4 Global Placement Core | Checksum: 1d5e68f1b
+
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:16 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20727 ; free virtual = 37179
+Phase 2 Global Placement | Checksum: 1d5e68f1b
+
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:16 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20740 ; free virtual = 37192
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 1e978d994
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:17 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20742 ; free virtual = 37195
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 2102fc993
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:17 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20739 ; free virtual = 37192
+
+Phase 3.3 Small Shape DP
+
+Phase 3.3.1 Small Shape Clustering
+Phase 3.3.1 Small Shape Clustering | Checksum: 1fb551f73
+
+Time (s): cpu = 00:00:56 ; elapsed = 00:00:19 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20722 ; free virtual = 37174
+
+Phase 3.3.2 DP Optimization
+Phase 3.3.2 DP Optimization | Checksum: 214a22a56
+
+Time (s): cpu = 00:01:05 ; elapsed = 00:00:22 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20714 ; free virtual = 37166
+
+Phase 3.3.3 Flow Legalize Slice Clusters
+Phase 3.3.3 Flow Legalize Slice Clusters | Checksum: 1a9cb1c0b
+
+Time (s): cpu = 00:01:05 ; elapsed = 00:00:22 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20712 ; free virtual = 37164
+
+Phase 3.3.4 Slice Area Swap
+Phase 3.3.4 Slice Area Swap | Checksum: 1bb4d05d0
+
+Time (s): cpu = 00:01:07 ; elapsed = 00:00:23 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20686 ; free virtual = 37139
+Phase 3.3 Small Shape DP | Checksum: 18cf13c4c
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:24 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20714 ; free virtual = 37166
+
+Phase 3.4 Re-assign LUT pins
+Phase 3.4 Re-assign LUT pins | Checksum: 1b3b5f5df
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:25 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20713 ; free virtual = 37165
+
+Phase 3.5 Pipeline Register Optimization
+Phase 3.5 Pipeline Register Optimization | Checksum: 1fbfa10e5
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:25 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20713 ; free virtual = 37165
+Phase 3 Detail Placement | Checksum: 1fbfa10e5
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:00:25 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20713 ; free virtual = 37165
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: 1a3c48c57
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 8 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=4.002 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: 1c993e6c0
+
+Time (s): cpu = 00:00:00.92 ; elapsed = 00:00:00.18 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20707 ; free virtual = 37159
+INFO: [Place 46-35] Processed net u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Yfqg07_i_2_n_0, inserted BUFG to drive 1381 loads.
+INFO: [Place 46-56] BUFG insertion identified 1 candidate nets. Inserted BUFG: 1, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
+Ending Physical Synthesis Task | Checksum: 16ddb2692
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.52 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20705 ; free virtual = 37158
+Phase 4.1.1.1 BUFG Insertion | Checksum: 2107d57a2
+
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:28 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20705 ; free virtual = 37158
+
+Phase 4.1.1.2 Post Placement Timing Optimization
+INFO: [Place 30-746] Post Placement Timing Summary WNS=4.002. For the most accurate timing information please run report_timing.
+Phase 4.1.1.2 Post Placement Timing Optimization | Checksum: 1978b0c40
+
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:28 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20706 ; free virtual = 37158
+
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:28 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20706 ; free virtual = 37158
+Phase 4.1 Post Commit Optimization | Checksum: 1978b0c40
+
+Time (s): cpu = 00:01:20 ; elapsed = 00:00:28 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20706 ; free virtual = 37158
+Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.05 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20706 ; free virtual = 37159
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 267839c81
+
+Time (s): cpu = 00:01:21 ; elapsed = 00:00:29 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20716 ; free virtual = 37168
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                4x4|                8x8|
+|___________|___________________|___________________|
+|      South|                1x1|                4x4|
+|___________|___________________|___________________|
+|       East|                1x1|                8x8|
+|___________|___________________|___________________|
+|       West|                1x1|                8x8|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 267839c81
+
+Time (s): cpu = 00:01:21 ; elapsed = 00:00:29 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20716 ; free virtual = 37169
+Phase 4.3 Placer Reporting | Checksum: 267839c81
+
+Time (s): cpu = 00:01:21 ; elapsed = 00:00:29 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20716 ; free virtual = 37169
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20716 ; free virtual = 37169
+
+Time (s): cpu = 00:01:21 ; elapsed = 00:00:29 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20716 ; free virtual = 37169
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 26aca2446
+
+Time (s): cpu = 00:01:21 ; elapsed = 00:00:29 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20716 ; free virtual = 37168
+Ending Placer Task | Checksum: 1e8053da3
+
+Time (s): cpu = 00:01:21 ; elapsed = 00:00:29 . Memory (MB): peak = 4774.133 ; gain = 24.012 ; free physical = 20716 ; free virtual = 37168
+INFO: [Common 17-83] Releasing license: Implementation
+30 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:01:37 ; elapsed = 00:00:42 . Memory (MB): peak = 4774.133 ; gain = 331.785 ; free physical = 20862 ; free virtual = 37315
+# write_checkpoint -force ./checkpoint/place
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.61 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20832 ; free virtual = 37311
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/checkpoint/place.dcp' has been generated.
+# phys_opt_design
+Command: phys_opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. Skipping all physical synthesis optimizations.
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+4 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+# phys_opt_design -aggressive_hold_fix
+Command: phys_opt_design -aggressive_hold_fix
+Attempting to get a license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.250 ns. Skipping all physical synthesis optimizations.
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+4 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+# write_checkpoint -force ./checkpoint/phy_opt
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.61 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20791 ; free virtual = 37279
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/checkpoint/phy_opt.dcp' has been generated.
+# route_design
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcku060'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+WARNING: [DRC PLCK-58] Clock Placer Checks: Sub-optimal placement for a global clock-capable IO pin and BUFG pair.
+Resolution: A dedicated routing path between the two can be used if: (a) The global clock-capable IO (GCIO) is placed on a GCIO capable site (b) The BUFG is placed in the same bank of the device as the GCIO pin. Both the above conditions must be met at the same time, else it may lead to longer and less predictable clock insertion delays.
+ This is normally an ERROR but the CLOCK_DEDICATED_ROUTE constraint is set to FALSE allowing your design to continue. The use of this override is highly discouraged as it may lead to very poor timing results. It is recommended that this error condition be corrected in the design.
+
+	TCK_IBUF_inst/IBUFCTRL_INST (IBUFCTRL.O) is locked to IOB_X2Y22
+	TCK_IBUF_BUFG_inst (BUFGCE.I) is provisionally placed by clockplacer on BUFGCE_X1Y96
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 1 Warnings
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+Checksum: PlaceDB: 5b367a47 ConstDB: 0 ShapeSum: bcd6331b RouteDB: cff89041
+
+Phase 1 Build RT Design
+Phase 1 Build RT Design | Checksum: 5953d276
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:43 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20588 ; free virtual = 37055
+Post Restoration Checksum: NetGraph: c64e7c01 NumContArr: b4264f8e Constraints: 5d66cd17 Timing: 0
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 1d7db98a6
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:43 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20533 ; free virtual = 37000
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 1d7db98a6
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:43 . Memory (MB): peak = 4774.133 ; gain = 0.000 ; free physical = 20533 ; free virtual = 37000
+
+Phase 2.3 Global Clock Net Routing
+ Number of Nodes with overlaps = 0
+Phase 2.3 Global Clock Net Routing | Checksum: 16728d43a
+
+Time (s): cpu = 00:01:06 ; elapsed = 00:00:51 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20529 ; free virtual = 36996
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 1a81f4df2
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:53 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20532 ; free virtual = 36999
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=3.791  | TNS=0.000  | WHS=-0.070 | THS=-0.609 |
+
+Phase 2 Router Initialization | Checksum: 1b62d5705
+
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:55 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20526 ; free virtual = 36993
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.00246081 %
+  Global Horizontal Routing Utilization  = 0.000881475 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 21946
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 12134
+  Number of Partially Routed Nets     = 9812
+  Number of Node Overlaps             = 2
+
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 1b62d5705
+
+Time (s): cpu = 00:01:19 ; elapsed = 00:00:55 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20537 ; free virtual = 37004
+Phase 3 Initial Routing | Checksum: 131e5ed26
+
+Time (s): cpu = 00:01:28 ; elapsed = 00:00:58 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20505 ; free virtual = 36972
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 5664
+ Number of Nodes with overlaps = 311
+ Number of Nodes with overlaps = 19
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=4.105  | TNS=0.000  | WHS=0.020  | THS=0.000  |
+
+Phase 4.1 Global Iteration 0 | Checksum: 24b5aa900
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:24 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20495 ; free virtual = 36962
+
+Phase 4.2 Additional Iteration for Hold
+Phase 4.2 Additional Iteration for Hold | Checksum: 1edbd8d63
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:24 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20495 ; free virtual = 36962
+Phase 4 Rip-up And Reroute | Checksum: 1edbd8d63
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:24 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20494 ; free virtual = 36961
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 1edbd8d63
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:24 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20496 ; free virtual = 36963
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 1edbd8d63
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:24 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20496 ; free virtual = 36963
+Phase 5 Delay and Skew Optimization | Checksum: 1edbd8d63
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:24 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20496 ; free virtual = 36963
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 236cbf3fd
+
+Time (s): cpu = 00:02:15 ; elapsed = 00:01:25 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20497 ; free virtual = 36964
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=4.105  | TNS=0.000  | WHS=0.020  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 19847e2f0
+
+Time (s): cpu = 00:02:15 ; elapsed = 00:01:25 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20497 ; free virtual = 36964
+Phase 6 Post Hold Fix | Checksum: 19847e2f0
+
+Time (s): cpu = 00:02:15 ; elapsed = 00:01:25 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20497 ; free virtual = 36964
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 1.11107 %
+  Global Horizontal Routing Utilization  = 0.818908 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 26c1841cc
+
+Time (s): cpu = 00:02:18 ; elapsed = 00:01:26 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20490 ; free virtual = 36958
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 26c1841cc
+
+Time (s): cpu = 00:02:18 ; elapsed = 00:01:26 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20490 ; free virtual = 36957
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 26c1841cc
+
+Time (s): cpu = 00:02:19 ; elapsed = 00:01:27 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20488 ; free virtual = 36955
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=4.105  | TNS=0.000  | WHS=0.020  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 26c1841cc
+
+Time (s): cpu = 00:02:21 ; elapsed = 00:01:28 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20492 ; free virtual = 36959
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:02:21 ; elapsed = 00:01:28 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20585 ; free virtual = 37052
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+12 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:02:26 ; elapsed = 00:01:29 . Memory (MB): peak = 4833.121 ; gain = 58.988 ; free physical = 20585 ; free virtual = 37052
+# write_checkpoint -force ./checkpoint/route
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.75 . Memory (MB): peak = 4833.121 ; gain = 0.000 ; free physical = 20547 ; free virtual = 37050
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/checkpoint/route.dcp' has been generated.
+# set_property SEVERITY {Warning} [get_drc_checks NSTD-1]
+# set_property SEVERITY {Warning} [get_drc_checks UCIO-1]
+# write_bitstream -bin_file -force ./bitstream
+Command: write_bitstream -bin_file -force ./bitstream
+Attempting to get a license for feature 'Implementation' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcku060'
+Running DRC as a precondition to command write_bitstream
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 8 threads
+WARNING: [DRC DPIP-2] Input pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-2] Input pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-2] Input pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-2] Input pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-2] Input pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-2] Input pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 input u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPOP-3] PREG Output pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 output u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-3] PREG Output pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 output u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-3] PREG Output pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 output u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-4] MREG Output pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 multiplier stage u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-4] MREG Output pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 multiplier stage u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-4] MREG Output pipelining: DSP u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 multiplier stage u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+INFO: [Vivado 12-3199] DRC finished with 0 Errors, 12 Warnings
+INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
+INFO: [Designutils 20-2272] Running write_bitstream with 8 threads.
+Loading data files...
+Loading site data...
+Loading route data...
+Processing options...
+Creating bitmap...
+Creating bitstream...
+Bitstream compression saved 146959264 bits.
+Writing bitstream ./bitstream.bit...
+Writing bitstream ./bitstream.bin...
+INFO: [Vivado 12-1842] Bitgen Completed Successfully.
+INFO: [Common 17-83] Releasing license: Implementation
+8 Infos, 12 Warnings, 0 Critical Warnings and 0 Errors encountered.
+write_bitstream completed successfully
+write_bitstream: Time (s): cpu = 00:00:24 ; elapsed = 00:00:20 . Memory (MB): peak = 4833.121 ; gain = 0.000 ; free physical = 20546 ; free virtual = 37034
+# write_xdc -no_fixed_only -force ./checkpoint/implementation_clk.xdc
+# report_timing_summary -file ./checkpoint/sta_summary.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Temperature grade: I, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# report_timing -sort_by group -max_paths 1000 -path_type summary -file ./checkpoint/sta.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2, Temperature grade: I, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1000 -nworst 1 -delay_type max -sort_by group.
+# report_utilization -file ./checkpoint/implementation_util.rpt
+# report_utilization -hierarchical -hierarchical_depth 3 -file ./checkpoint/implementation_hier.rpt
+# report_clock_utilization -quiet -write_xdc /checkpoint/implementation_clk.xdc
+Command: report_drc -file ./checkpoint/implementation_drc.rpt
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/checkpoint/implementation_drc.rpt.
+report_drc completed successfully
+INFO: [Common 17-206] Exiting Vivado at Mon Mar 17 18:49:54 2025...

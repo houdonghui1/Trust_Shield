@@ -163,6 +163,14 @@ enum mailbox_command {
     OP_GET_2ND_CERT 		   = 0x44C0FFFB,
     OP_SIGN_1ST_CTX 		   = 0x44C0FFFC,
     OP_VERIFY_1ST_CTX 		   = 0x44C0FFFD,
+    /* Cluster-BLS commands use a separate ABI from the legacy certificate
+     * demo commands above. */
+    OP_BLS_GET_REGISTRATION      = 0x44C0FFE0,
+    OP_BLS_REGISTER_L1          = 0x44C0FFE1,
+    OP_BLS_REVOKE_L1            = 0x44C0FFE2,
+    OP_BLS_SIGN_CHALLENGE       = 0x44C0FFE3,
+    OP_BLS_AGGREGATE_CHALLENGE  = 0x44C0FFE4,
+    OP_BLS_SIGN_L1_CERT         = 0x44C0FFE5,
 };
 
 struct parcel {
@@ -184,11 +192,10 @@ enum mailbox_results {
 
 bool caliptra_test_for_completion(void);
 int  caliptra_complete(void);
+uint32_t caliptra_mbox_last_response_size(void);
 int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, uint32_t *bytes_read);
 int pack_and_execute_command(struct parcel *parcel, bool async);
 void caliptra_mbox_write(uint32_t offset, uint32_t data);
 uint32_t caliptra_mbox_read(uint32_t offset);
 
 #endif
-
-

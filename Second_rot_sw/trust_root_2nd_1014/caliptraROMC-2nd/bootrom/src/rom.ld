@@ -16,9 +16,9 @@
 OUTPUT_ARCH( "riscv" )
 ENTRY(_start)
 MEMORY {
-    ROM     (rx) : ORIGIN = 0x0, LENGTH = 200K
+    ROM     (rx) : ORIGIN = 0x0, LENGTH = 48K
     ICCM    (rx) : ORIGIN = 0x40000000, LENGTH = 128K
-    DCCM    (rw) : ORIGIN = 0x50010000, LENGTH = 128K
+    DCCM    (rw) : ORIGIN = 0x50010000, LENGTH = 64K
 }
 
 SECTIONS {
@@ -54,7 +54,7 @@ SECTIONS {
   _bss_lma_start = _bss_vma_start;
   _bss_lma_end   = _bss_vma_end;
   _end = _data_lma_end;
-  ASSERT( _end < 0x0 + 200K, "ERROR: ROM size exceeds 200KiB")
+  ASSERT( _end <= 0x0000C000, "ERROR: ROM size exceeds the 48KiB hardware ROM")
 
   /* DCCM as VMA and LMA */
   . = _bss_vma_end;
@@ -77,11 +77,18 @@ SECTIONS {
   .data_iccm2 0x40000000 : AT(iccm_code2_start) {*(.data_iccm2) ; . = ALIGN(4); } =0x0000, /* iccm_code2_start, after .data, as LMA */
   iccm_code2_end = iccm_code2_start + SIZEOF(.data_iccm2);
 
-  _cert_store_start = 0x5001E000;
-  _cert_store_end = 0x5001E800;
+  /* Four bounded 2KiB certificate slots. */
+  _cert_store_start = 0x5001D000;
+  _cert_store_end = 0x5001F020;
 
-  _tbs_der_store_start = 0x5001E820;
-  _tbs_der_store_end = 0x5001F020;
+  _tbs_der_store_start = 0x5001F040;
+  _tbs_der_store_end = 0x5001F040;
+
+  /* L2 owns a larger state record because it tracks up to 16 direct L1
+   * registrations.  Keep the final 0xF00 bytes of the physical DCCM bank for
+   * that record and leave a guard gap after the TBS store. */
+  _cluster_bls_state_start = 0x5001F100;
+  _cluster_bls_state_end = 0x50020000;
 
   .cert_store _cert_store_start (NOLOAD) : {
       KEEP(*(.cert_store))
@@ -93,8 +100,24 @@ SECTIONS {
       . = ALIGN(4); 
   } > DCCM
 
+  .cluster_bls_state _cluster_bls_state_start (NOLOAD) : {
+      KEEP(*(.cluster_bls_state))
+      . = ALIGN(4);
+  } > DCCM
+
+  ASSERT(SIZEOF(.cert_store) <= (_cert_store_end - _cert_store_start),
+         "ERROR: certificate store exceeds its reserved DCCM range")
+  ASSERT(SIZEOF(.tbs_der_store) <=
+         (_tbs_der_store_end - _tbs_der_store_start),
+         "ERROR: TBS store exceeds its reserved DCCM range")
+  ASSERT(SIZEOF(.cluster_bls_state) <=
+         (_cluster_bls_state_end - _cluster_bls_state_start),
+         "ERROR: L2 BLS state exceeds its reserved DCCM range")
+
   /* Stack is at the end of DCCM after .data_iccm2 */
   . = ALIGN(iccm_code2_end,16);
   STACK = ALIGN(16) + 0x4000;
-  ASSERT( (STACK < 0x50030000), "ERROR: Stack overflows the DCCM -- note: lower half of DCCM is allocated in the validation image for remote firmware images")
+  ASSERT(STACK < _cert_store_start,
+         "ERROR: stack overlaps the reserved certificate/BLS stores")
+  ASSERT( (STACK < 0x50020000), "ERROR: Stack overflows the upper 64KiB DCCM bank")
 }

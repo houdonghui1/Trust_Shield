@@ -431,6 +431,7 @@ uint32_t init_sd_card() {
     } while ((res != 0x01) && retry--);
     //printf("func: %s, line: %d\n", __func__, __LINE__);
     if((res == 0x01)){
+      retry = 20;
       do {
         res = sd_send_cmd(SD_CARD_CMD8, 0x1AA, NULL, 0);
       } while ((res != 0x01) && retry--);
@@ -473,6 +474,7 @@ uint32_t init_sd_card() {
       //printf("func: %s, line: %d\n", __func__, __LINE__);
       return 0;
     } 
+    printf("SD card init failed: response=0x%02x\n", res);
     //printf("func: %s, line: %d\n", __func__, __LINE__);
     return -1;
 }

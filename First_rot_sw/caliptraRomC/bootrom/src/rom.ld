@@ -16,9 +16,10 @@
 OUTPUT_ARCH( "riscv" )
 ENTRY(_start)
 MEMORY {
-    ROM     (rx) : ORIGIN = 0x0, LENGTH = 200K
+    ROM     (rx) : ORIGIN = 0x0, LENGTH = 48K
     ICCM    (rx) : ORIGIN = 0x40000000, LENGTH = 128K
-    DCCM    (rw) : ORIGIN = 0x50010000, LENGTH = 128K
+    DCCM_FW (rw) : ORIGIN = 0x50000000, LENGTH = 64K
+    DCCM    (rw) : ORIGIN = 0x50010000, LENGTH = 64K
 }
 
 SECTIONS {
@@ -45,7 +46,7 @@ SECTIONS {
   _bss_vma_end = _bss_vma_start + SIZEOF(.bss);
 
   _end = _bss_lma_end;
-  ASSERT( _end < 0x0 + 200K, "ERROR: ROM size exceeds 200KiB")
+  ASSERT( _end <= 0x0000C000, "ERROR: ROM size exceeds the 48KiB hardware ROM")
   /* DCCM as VMA and LMA */
   . = _bss_vma_end;
   _dccm_lma_start = _bss_vma_end; /* ----\___ SAME */
@@ -67,24 +68,23 @@ SECTIONS {
   .data_iccm2 0x40000000 : AT(iccm_code2_start) {*(.data_iccm2) ; . = ALIGN(4); } =0x0000, /* iccm_code2_start, after .data, as LMA */
   iccm_code2_end = iccm_code2_start + SIZEOF(.data_iccm2);
 
-  _cert_store_start = 0x5001E000;
-  _cert_store_end = 0x5001E800;
+  /* ROM-only firmware receive buffers.  FMC/RT may reuse this lower bank
+   * after ROM has authenticated and handed off the images. */
+  .fw_staging (NOLOAD) : {
+      _fw_staging_start = .;
+      *(.fw_staging*)
+      . = ALIGN(4);
+      _fw_staging_end = .;
+  } > DCCM_FW
+  ASSERT(SIZEOF(.fw_staging) <= LENGTH(DCCM_FW),
+         "ERROR: firmware staging buffers overflow lower DCCM")
 
-  _tbs_der_store_start = 0x5001E820;
-  _tbs_der_store_end = 0x5001F020;
-
-  .cert_store _cert_store_start (NOLOAD) : {
-      KEEP(*(.cert_store))
-      . = ALIGN(4); 
-  } > DCCM
-
-  .tbs_der_store _tbs_der_store_start (NOLOAD) : {
-      KEEP(*(.tbs_der_store))
-      . = ALIGN(4); 
-  } > DCCM
+  INCLUDE persistent_layout.ld
 
   /* Stack is at the end of DCCM after .data_iccm2 */
   . = ALIGN(iccm_code2_end,16);
   STACK = ALIGN(16) + 0x4000;
-  ASSERT( (STACK < 0x50030000), "ERROR: Stack overflows the DCCM -- note: lower half of DCCM is allocated in the validation image for remote firmware images")
+  ASSERT( STACK < _cert_store_start,
+          "ERROR: stack overlaps the reserved certificate store")
+  ASSERT( (STACK < 0x50020000), "ERROR: Stack overflows the upper 64KiB DCCM bank")
 }

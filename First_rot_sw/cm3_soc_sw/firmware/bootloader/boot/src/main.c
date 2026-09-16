@@ -13,9 +13,21 @@
 //===============================================
 
 #include "main.h"
+#include "cluster_bls_bridge.h"
+
+/*
+ * The CM3 is the transport endpoint for the L1 trusted root.  BLS private-key
+ * operations remain inside Caliptra; the CM3 only relays bounded enrollment
+ * and proof frames to the L2 controller.
+ */
+#ifndef CLUSTER_BLS_ENROLLMENT_ENABLED
+#define CLUSTER_BLS_ENROLLMENT_ENABLED 0
+#endif
 
 #define FWSTORE_ADDR 0x00040000
-#define RX_BUF_SIZE 9728
+#define SOC_FW_SIZE 9728U
+#define RX_BUF_SIZE 7168
+#define CLUSTER_BLS_CBR1_HEADER_BYTES 7U
 
 UART_HandleTypeDef huart0;
 
@@ -26,15 +38,6 @@ typedef struct {
     uint32_t* initial_sp;
     void (*fwstore)(void);
 } FWstore_t;
-
-static inline void memcpy_fw_to_fwstore(const void *src, void *dest, uint32_t size) {
-  uint32_t *src_ptr = (uint32_t *)src;
-  uint32_t *dest_ptr = (uint32_t *)dest;
-
-  for (uint32_t i = 0; i < size / sizeof(uint32_t); i++) {
-      dest_ptr[i] = src_ptr[i];
-  }
-}
 
 int Validate_TargetBootloader(uint32_t target_base) 
 {
@@ -183,10 +186,12 @@ int main(void)
 {
     uint32_t status;
     uint8_t tx_buffer[4] = {0};
+#if !CLUSTER_BLS_ENROLLMENT_ENABLED
     uint8_t input_buffer[32] = {0};
     uint32_t input_len = 0;
-    uint8_t ch;
     uint32_t value = 0;
+#endif
+    uint8_t ch;
 	huart0.regs = UART0;
     huart0.cfg.ignore_error = UART_ERROR_IGNORE;
 
@@ -210,6 +215,10 @@ int main(void)
 
 	status = caliptra1x_drv_init(&info,false);
 	drv_uart_printf("func: %s, line: %d, status = %d\n", __func__, __LINE__, status);
+    if (status != 0) {
+        drv_uart_printf("Caliptra initialization failed; BLS enrollment blocked\n");
+        return -1;
+    }
 
     drv_uart_printf("Soc start\n");
 
@@ -220,6 +229,22 @@ int main(void)
         .rx_buffer = NULL,
         .rx_bytes = 0
     };
+
+#if CLUSTER_BLS_ENROLLMENT_ENABLED
+    {
+        cluster_bls_bridge_status_t bls_status;
+
+        drv_uart_printf("Cluster-BLS L1 enrollment started\n");
+        bls_status = cluster_bls_bridge_enroll(&huart0, rx_buffer,
+                                               sizeof(rx_buffer));
+        if (bls_status != CLUSTER_BLS_BRIDGE_OK) {
+            drv_uart_printf("Cluster-BLS L1 enrollment failed: %u\n",
+                            (uint32_t)bls_status);
+            return -1;
+        }
+        drv_uart_printf("Cluster-BLS L1 enrollment complete\n");
+    }
+#else
     //Obtain the caliptra PCR value and send it to the secondary trusted root for measurement
     while(1) {
         memset(input_buffer, 0, sizeof(input_buffer));
@@ -244,7 +269,7 @@ int main(void)
                 status = pack_and_execute_command(&parcel, false);
                 drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
             }
-            value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+            value = caliptra_mbox_last_response_size();
             drv_uart_printf("ROM Measure value:\n");
             for(uint32_t j = 0; j < value; j++) {
                 drv_uart_printf("%02x", parcel.rx_buffer[j]);
@@ -299,10 +324,34 @@ int main(void)
             drv_uart_printf("SOC FW measurement failed!\n");
         }
     }
-    value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+    value = caliptra_mbox_last_response_size();
+    if (value < CLUSTER_BLS_CBR1_HEADER_BYTES +
+                    CLUSTER_BLS_BRIDGE_REGISTRATION_BYTES ||
+        memcmp(rx_buffer, "CBR1", 4) != 0 || rx_buffer[4] != 1) {
+        drv_uart_printf("Invalid L1 certificate request: len=%u head=%02x%02x%02x%02x\n",
+                        value, rx_buffer[0], rx_buffer[1], rx_buffer[2],
+                        rx_buffer[3]);
+        return -1;
+    }
+    uint32_t tbs_len = ((uint32_t)rx_buffer[5] << 8) | rx_buffer[6];
+    if (tbs_len == 0 ||
+        value != CLUSTER_BLS_CBR1_HEADER_BYTES +
+                     CLUSTER_BLS_BRIDGE_REGISTRATION_BYTES + tbs_len) {
+        drv_uart_printf("Invalid L1 certificate request length\n");
+        return -1;
+    }
+    uint8_t *bls_registration =
+        rx_buffer + CLUSTER_BLS_CBR1_HEADER_BYTES;
+    uint8_t *l1_tbs = bls_registration +
+                      CLUSTER_BLS_BRIDGE_REGISTRATION_BYTES;
     drv_uart_printf("CSR :\n");
-    for(uint32_t j = 0; j < value; j++) {
-        drv_uart_printf("%02x", parcel.rx_buffer[j]);
+    for(uint32_t j = 0; j < tbs_len; j++) {
+        drv_uart_printf("%02x", l1_tbs[j]);
+    }
+    drv_uart_printf("\n");
+    drv_uart_printf("BLS_REG :\n");
+    for(uint32_t j = 0; j < CLUSTER_BLS_BRIDGE_REGISTRATION_BYTES; j++) {
+        drv_uart_printf("%02x", bls_registration[j]);
     }
     drv_uart_printf("\n");
 
@@ -322,16 +371,20 @@ int main(void)
             drv_uart_printf("Received command 4, waiting for certificate...\n");
             drv_uart_printf("READY\n");
             
-            uint8_t *ctx_ptr = rx_buffer;                // 偏移0：接收hex字符串，最大1024字节
-            uint8_t *hex_backup_ptr = rx_buffer + 1024;  // 偏移1024：备份hex，最大2048字节
-            uint8_t *cert_bin_ptr = rx_buffer + 3072;    // 偏移3072：二进制证书，最大1024字节
+            uint8_t *ctx_ptr = rx_buffer;
+            uint8_t *cert_bin_ptr = rx_buffer;
 
-            uint16_t cert_len = drv_uart_rx_data_u8(&huart0, ctx_ptr, 1024);
+            uint16_t cert_len = drv_uart_rx_data_u8(&huart0, ctx_ptr,
+                                                     RX_BUF_SIZE);
             
             if (cert_len > 0) {
-                memcpy(hex_backup_ptr, ctx_ptr, cert_len);
                 drv_uart_printf("Received certificate hex string successfully\n");
-                int der_len = hex2bin(hex_backup_ptr, cert_len, cert_bin_ptr, 1024);
+                if ((cert_len & 1U) != 0U) {
+                    drv_uart_printf("Certificate transmission error!\n");
+                    return -1;
+                }
+                int der_len = hex2bin(ctx_ptr, cert_len, cert_bin_ptr,
+                                      RX_BUF_SIZE);
                 
                 drv_uart_printf("Certificate binary length: %d bytes\n", der_len);
                 drv_uart_printf("Received certificate: \n");
@@ -365,13 +418,14 @@ int main(void)
             break;
         }
     }
+#endif
 
     //Obtain soc FW and execute the jump
     parcel.command = OP_RECV_SOC_FW;
     parcel.tx_buffer = tx_buffer;
     parcel.tx_bytes = sizeof(tx_buffer);
-    parcel.rx_buffer = rx_buffer;
-    parcel.rx_bytes = sizeof(rx_buffer);
+    parcel.rx_buffer = (uint8_t *)FWSTORE_ADDR;
+    parcel.rx_bytes = SOC_FW_SIZE;
     drv_uart_printf("func: %s, line: %d\n", __func__, __LINE__);
     status = 1;
     while(status){
@@ -390,7 +444,6 @@ int main(void)
         }
     }
 
-    memcpy_fw_to_fwstore(parcel.rx_buffer, (void *)FWSTORE_ADDR, parcel.rx_bytes);
 	if(!Validate_TargetBootloader(FWSTORE_ADDR)) {
 		drv_uart_printf("func: %s, line: %d \r\n", __func__, __LINE__);
 		jump_to_FWstore(FWSTORE_ADDR);

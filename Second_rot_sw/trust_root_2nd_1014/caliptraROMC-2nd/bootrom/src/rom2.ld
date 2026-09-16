@@ -69,6 +69,26 @@ SECTIONS {
   .data_iccm2 0x40000000 : AT(iccm_code2_start) {*(.data_iccm2) ; . = ALIGN(4); } =0x0000, /* iccm_code2_start, after .data, as LMA */
   iccm_code2_end = iccm_code2_start + SIZEOF(.data_iccm2);
 
+  _cert_store_start = 0x5001D000;
+  _cert_store_end = 0x5001F020;
+  _cluster_bls_state_start = 0x5001F100;
+  _cluster_bls_state_end = 0x50020000;
+
+  .cert_store _cert_store_start (NOLOAD) : {
+      KEEP(*(.cert_store))
+      . = ALIGN(4);
+  } > DCCM
+
+  .cluster_bls_state _cluster_bls_state_start (NOLOAD) : {
+      KEEP(*(.cluster_bls_state))
+      . = ALIGN(4);
+  } > DCCM
+  ASSERT(SIZEOF(.cluster_bls_state) <=
+         (_cluster_bls_state_end - _cluster_bls_state_start),
+         "ERROR: L2 BLS state exceeds its reserved DCCM range")
+  ASSERT(SIZEOF(.cert_store) <= (_cert_store_end - _cert_store_start),
+         "ERROR: certificate store exceeds its reserved DCCM range")
+
   .protected_io : {
     KEEP(*(.protected_io))
   } > PROT_IO
@@ -76,5 +96,7 @@ SECTIONS {
   /* Stack is at the end of DCCM after .data_iccm2 */
   . = ALIGN(iccm_code2_end,16);
   STACK = ALIGN(16) + 0x4000;
+  ASSERT(STACK < _cert_store_start,
+         "ERROR: stack overlaps the reserved certificate/BLS stores")
   ASSERT( (STACK < 0x50020000), "ERROR: Stack overflows the DCCM -- note: lower half of DCCM is allocated in the validation image for remote firmware images")
 }

@@ -14,6 +14,12 @@
 
 #define CALIPTRA_API_GLOBAL_SECTION_ATTRIBUTE
 static struct caliptra_buffer g_caliptra_mbox_pending_rx_buffer CALIPTRA_API_GLOBAL_SECTION_ATTRIBUTE;
+static uint32_t g_caliptra_mbox_last_rx_bytes CALIPTRA_API_GLOBAL_SECTION_ATTRIBUTE;
+
+uint32_t caliptra_mbox_last_response_size(void)
+{
+    return g_caliptra_mbox_last_rx_bytes;
+}
 
 static int caliptra_mailbox_write_fifo(const struct caliptra_buffer *buffer)
 {
@@ -441,6 +447,8 @@ bool caliptra_test_for_completion()
  */
 int caliptra_complete()
 {
+    g_caliptra_mbox_last_rx_bytes = 0;
+
     // Return an error if no message is pending (execute is not set)
     if (caliptra_mbox_read_execute() == 0) {
         return MBX_NO_MSG_PENDING;
@@ -462,6 +470,7 @@ int caliptra_complete()
     {
         return status;
     }
+    g_caliptra_mbox_last_rx_bytes = bytes_read;
     // Verify the header data from the response
     if (rx_buffer.data != NULL) {
         //return check_command_response(rx_buffer.data, bytes_read);

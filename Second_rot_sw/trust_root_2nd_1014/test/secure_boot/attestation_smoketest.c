@@ -16,6 +16,8 @@
 #include <openssl/pem.h>
 #include <openssl/rand.h>
 
+#include "cluster_bls_relay.h"
+
 #define UART_DEV_1          "/dev/ttyCH343_PORT1"
 #define UART_DEV_3          "/dev/ttyCH343_PORT3"
 #define DEVICE_PATH         "/dev/caliptra_dev"
@@ -26,7 +28,7 @@
 #define VERIFY_CERT_FAILED  0xba
 #define BUFFER_SIZE         4096
 #define CERT_TARGET         "CA certificate:"
-#define CERT_HEX_LEN        1024
+#define CERT_HEX_LEN        (BUFFER_SIZE * 2)
 #define ROM_PACKET_SIZE     32
 
 #define CALIP_IOCTL_MAGIC 'C'
@@ -113,8 +115,9 @@ uint64_t get_ms(void) {
 
 void send_cmd(int fd, char c) {
     char cmd[2] = {c, '\r'};
-    write(fd, cmd, 2);
     tcflush(fd, TCIFLUSH);
+    write(fd, cmd, 2);
+    tcdrain(fd);
     usleep(100000);
 }
 
@@ -187,7 +190,6 @@ int verify_1st() {
     printf("\nwait receive cert...\n");
 
     memset(recv_buf, 0, sizeof(recv_buf));
-    tcflush(fd, TCIFLUSH);
 
     int found_target = 0;
     uint64_t last_rx_time = get_ms();
@@ -271,12 +273,16 @@ int verify_2nd() {
 
     while (1) {
         read(fd, &c, 1);
+        if (c == 0xa5) {
+            continue;
+        }
         printf("Received: %c (0x%02X)\n", c, c);
 
-        recv_buf[idx++] = c;
-        idx %= 4;
+        memmove(recv_buf, recv_buf + 1, 3);
+        recv_buf[3] = c;
+        recv_buf[4] = '\0';
 
-        if (strstr(recv_buf, TRIGGER_STR) != NULL) {
+        if (strcmp(recv_buf, TRIGGER_STR) == 0) {
             printf("\nReceived measurement signal\n");
 
             int rom_fd = open("/home/ubuntu/work/test/caliptra_rom/caliptraROMC.bin", O_RDONLY);
@@ -293,14 +299,28 @@ int verify_2nd() {
                 if (len <= 0)
                     break;
 
-                write(fd, buf, len);
+                ssize_t written = write(fd, buf, (size_t)len);
+                if (written != len) {
+                    perror("Failed to send ROM block");
+                    close(rom_fd);
+                    close(fd);
+                    return -1;
+                }
                 total += len;
 
                 if (total % 100 == 0) {
                     printf("Sent: %d\n", total);
                 }
 
-                read(fd, &ack_byte, 1);
+                do {
+                    ssize_t ack_read = read(fd, &ack_byte, 1);
+                    if (ack_read != 1) {
+                        perror("Failed to receive ROM ACK");
+                        close(rom_fd);
+                        close(fd);
+                        return -1;
+                    }
+                } while (ack_byte != 0x06);
             }
             close(rom_fd);
 
@@ -394,29 +414,22 @@ int verify_2nd() {
 }
 
 int main() {
-    int ret = 0;
-
     setbuf(stdout, NULL);
+    for (;;) {
+        int fd;
 
-    ret = verify_2nd();
-    if(ret !=0) {
-        return -1;
+        printf("Opening L3 attestation UART service...\n");
+        fd = open(UART_DEV_1, O_RDWR | O_NOCTTY);
+        if (fd < 0) {
+            perror("open L3 UART");
+            sleep(1);
+            continue;
+        }
+        init_dev_uart(fd, 1);
+        if (cluster_bls_relay_run(UART_DEV_3, fd) != 0) {
+            fprintf(stderr,
+                    "L3 attestation UART service disconnected; retrying...\n");
+            sleep(1);
+        }
     }
-
-    sleep(3);
-
-    ret = verify_1st();
-
-    int fd = open(UART_DEV_1, O_RDWR | O_NOCTTY);
-    init_dev_uart(fd, 1);
-
-    if(ret != 0) {
-        send_cmd(fd, VERIFY_CERT_FAILED);
-        return -1;
-    }
-
-    send_cmd(fd, VERIFY_CERT_SUCCESS);
-
-
-    return 0;
 }

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Mar 18 14:51:07 2025
+# Process ID: 3101683
+# Current directory: /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1
+# Command line: vivado -log mcu_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source mcu_top.tcl
+# Log file: /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/mcu_top.vds
+# Journal file: /home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source mcu_top.tcl -notrace

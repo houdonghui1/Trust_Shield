@@ -1,6 +1,19 @@
 # 系统整体说明
 
-## 一、系统连接关系
+## 一、系统整体设计报告
+
+[系统整体设计报告](system_top3.md)
+
+[多级可信根系统软件设计报告](多级可信根系统软件设计.md)
+
+[系统测试](系统测试.md)
+
+[计算集群可信根冷热迁移和密钥分发](计算集群可信根冷热迁移和密钥分发.md)
+
+[视频演示](https://space.bilibili.com/388320274/lists/5172152?type=series)
+
+
+## 二、系统连接关系
 
 <div align="center">
 <img src="system_image/1.png"  />
@@ -113,12 +126,4 @@
 [二级ROT引脚约束](/Second_rot/fpga/src/jtag_constraints.xdc)
 
 [三级ROT引脚约束](/Third_rot/xdc_129/pins_vcu129.xdc)
-
-## 系统整体设计报告
-
-[系统整体设计报告](system_top3.md)
-
-[系统测试](系统测试.md)
-
-[计算集群可信根冷热迁移和密钥分发](计算集群可信根冷热迁移和密钥分发.md)
 

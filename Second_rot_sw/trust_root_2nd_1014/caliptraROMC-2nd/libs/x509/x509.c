@@ -64,17 +64,22 @@ static void build_x509_extension(uint8_t **ext_p, const uint8_t *extnID, size_t 
 
 static size_t build_key_usage_der(uint8_t *out, cert_type_t cert_type) {
     uint8_t *p = out;
-    uint8_t key_usage_byte = 0x00;
+    uint8_t key_usage[2];
 
     switch (cert_type) {
-        case CERT_TYPE_ROOT_CA:    key_usage_byte = X509_KU_KEY_CERT_SIGN; break;
-        case CERT_TYPE_LDEVID:     key_usage_byte = X509_KU_DIGITAL_SIGNATURE; break;
-        case CERT_TYPE_FMC:        key_usage_byte = X509_KU_DIGITAL_SIGNATURE; break;
-        case CERT_TYPE_RT:         key_usage_byte = X509_KU_DIGITAL_SIGNATURE; break;
-        default:                   key_usage_byte = X509_KU_DIGITAL_SIGNATURE; break;
+        case CERT_TYPE_ROOT_CA:
+            /* unused-bits=2, digitalSignature(bit 0) + keyCertSign(bit 5). */
+            key_usage[0] = 2;
+            key_usage[1] = 0x84;
+            break;
+        default:
+            /* unused-bits=7, digitalSignature(bit 0). */
+            key_usage[0] = 7;
+            key_usage[1] = 0x80;
+            break;
     }
 
-    asn1_write_tag(&p, ASN1_BIT_STRING, &key_usage_byte, 1);
+    asn1_write_tag(&p, ASN1_BIT_STRING, key_usage, sizeof(key_usage));
     return PTR_DIFF(p, out);
 }
 
@@ -194,17 +199,39 @@ int add_signature_to_cert(
     const uint8_t *sig_s,
     uint8_t *cert_out, size_t *cert_len)
 {
+    uint8_t r_value[49];
+    uint8_t s_value[49];
     uint8_t *p = cert_out;
 
     uint8_t tmp[200], *tp = tmp;
 
+    if (tbs_der == NULL || sig_r == NULL || sig_s == NULL ||
+        cert_out == NULL || cert_len == NULL || tbs_len > 0xffff ||
+        *cert_len < tbs_len + 128) {
+        return -1;
+    }
+
     size_t r_len = 48;
     while (r_len > 1 && sig_r[48 - r_len] == 0) r_len--;
-    asn1_write_tag(&tp, 0x02, sig_r + (48 - r_len), r_len);
+    bool r_pad = (sig_r[48 - r_len] & 0x80) != 0;
+    if (r_pad) {
+        r_value[0] = 0;
+        memcpy(r_value + 1, sig_r + (48 - r_len), r_len);
+    } else {
+        memcpy(r_value, sig_r + (48 - r_len), r_len);
+    }
+    asn1_write_tag(&tp, 0x02, r_value, r_len + (r_pad ? 1U : 0U));
 
     size_t s_len = 48;
     while (s_len > 1 && sig_s[48 - s_len] == 0) s_len--;
-    asn1_write_tag(&tp, 0x02, sig_s + (48 - s_len), s_len);
+    bool s_pad = (sig_s[48 - s_len] & 0x80) != 0;
+    if (s_pad) {
+        s_value[0] = 0;
+        memcpy(s_value + 1, sig_s + (48 - s_len), s_len);
+    } else {
+        memcpy(s_value, sig_s + (48 - s_len), s_len);
+    }
+    asn1_write_tag(&tp, 0x02, s_value, s_len + (s_pad ? 1U : 0U));
 
     uint8_t sig_der[200], *sp = sig_der;
     asn1_write_tag(&sp, 0x30, tmp, tp - tmp);
@@ -495,6 +522,66 @@ int parse_and_print_certificates() {
     return 0;
 }
 
+static int x509_read_bounded_length(const uint8_t **cursor,
+                                    const uint8_t *end, size_t *length)
+{
+    uint8_t first;
+    size_t count;
+    size_t value = 0;
+
+    if (!cursor || !*cursor || !end || !length || *cursor >= end)
+        return -1;
+    first = *(*cursor)++;
+    if ((first & 0x80) == 0) {
+        value = first;
+    } else {
+        count = first & 0x7f;
+        if (count == 0 || count > sizeof(size_t) ||
+            (size_t)(end - *cursor) < count || (*cursor)[0] == 0)
+            return -1;
+        for (size_t i = 0; i < count; ++i)
+            value = (value << 8) | *(*cursor)++;
+        if (value < 128)
+            return -1;
+    }
+    if (value > (size_t)(end - *cursor))
+        return -1;
+    *length = value;
+    return 0;
+}
+
+int x509_get_tbs_der(const uint8_t *cert_der, size_t cert_len,
+                     const uint8_t **tbs_der, size_t *tbs_len)
+{
+    const uint8_t *cursor;
+    const uint8_t *end;
+    const uint8_t *outer_content;
+    const uint8_t *tbs_start;
+    size_t outer_len;
+    size_t tbs_content_len;
+
+    if (!cert_der || !tbs_der || !tbs_len || cert_len < 4)
+        return -1;
+    cursor = cert_der;
+    end = cert_der + cert_len;
+    if (*cursor++ != ASN1_SEQUENCE ||
+        x509_read_bounded_length(&cursor, end, &outer_len) != 0)
+        return -1;
+    outer_content = cursor;
+    if (outer_len != (size_t)(end - outer_content) || cursor >= end)
+        return -1;
+
+    tbs_start = cursor;
+    if (*cursor++ != ASN1_SEQUENCE ||
+        x509_read_bounded_length(&cursor, end, &tbs_content_len) != 0 ||
+        tbs_content_len > (size_t)(end - cursor))
+        return -1;
+    *tbs_der = tbs_start;
+    *tbs_len = (size_t)(cursor - tbs_start) + tbs_content_len;
+    return 0;
+}
+
+
 int verify_cert(const uint8_t *cert_der, size_t cert_len,
                 const uint8_t public_key[ECC_BYTES + 1])
 {
@@ -521,8 +608,16 @@ int verify_cert(const uint8_t *cert_der, size_t cert_len,
     size_t tbs_total_len = 1 + tbs_len_len + tbs_content_len;
     const uint8_t *tbs_data = tbs_start;
 
+    uint64_t hash_words[6] = {0};
     uint8_t hash[48];
-    sha384_digest((uint8_t *)tbs_data, tbs_total_len, (uint64_t *)hash, true);
+    sha384_digest((uint8_t *)tbs_data, tbs_total_len, hash_words, true);
+    for (size_t i = 0; i < 6; ++i) {
+        for (size_t j = 0; j < 8; ++j) {
+            hash[i * 8 + j] =
+                (uint8_t)(hash_words[i] >> (56 - j * 8));
+        }
+    }
+    memset(hash_words, 0, sizeof(hash_words));
 
     const uint8_t sig_alg_seq[] = {
         0x30, 0x0A, 0x06, 0x08,

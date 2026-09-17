@@ -13,8 +13,20 @@
 //===============================================
 
 #include "main.h"
+#include "cluster_bls_bridge.h"
+
+/*
+ * Production CM3 firmware is a transport endpoint, not a BLS signer.  Leave
+ * the legacy UART menu reachable by default.  Dedicated unattended images
+ * may set CLUSTER_BLS_RUNTIME_PROXY_AUTOSTART=1 at build time.
+ */
+#ifndef CLUSTER_BLS_RUNTIME_PROXY_AUTOSTART
+#define CLUSTER_BLS_RUNTIME_PROXY_AUTOSTART 0
+#endif
 
 UART_HandleTypeDef huart0;
+static uint8_t __attribute__((aligned(4)))
+    g_fw_transfer_buffer[CLUSTER_BLS_BRIDGE_MAX_PAYLOAD];
 
 int main_fw(void)
 {
@@ -22,13 +34,11 @@ int main_fw(void)
     uint32_t status;
     uint8_t tx_buffer[4] = {0};
     uint8_t rx_buffer[4] = {0};
-    uint8_t cert_buffer[1024] = {0};
     uint32_t value = 0;
-    uint8_t input_buffer[32] = {0};
-    uint32_t input_len = 0;
 
 	huart0.regs = UART0;
 	drv_uart_default_config(&huart0);
+    huart0.cfg.ignore_error = UART_ERROR_IGNORE;
 	drv_uart_init(&huart0);
 
     drv_uart_printf("------------------------------------\n");
@@ -36,6 +46,13 @@ int main_fw(void)
     drv_uart_printf("------------------------------------\n");
     drv_uart_printf("Compiled on: %s at %s\n", __DATE__, __TIME__);
     drv_uart_printf("\n");
+
+#if CLUSTER_BLS_RUNTIME_PROXY_AUTOSTART
+    drv_uart_printf("Cluster-BLS L1 proxy ready\n");
+    cluster_bls_bridge_serve(&huart0, g_fw_transfer_buffer,
+                             sizeof(g_fw_transfer_buffer));
+#endif
+
     delay_ms(500000);
     drv_uart_printf("---------------------------------------------\n");
     drv_uart_printf("(1) start certificate chain verification\n");
@@ -46,6 +63,7 @@ int main_fw(void)
     drv_uart_printf("(6) get SOC measure value\n");
     drv_uart_printf("(7) get FMC measure value\n");
     drv_uart_printf("(8) get RT measure value\n");
+    drv_uart_printf("(9) start Cluster-BLS proxy service\n");
     drv_uart_printf("---------------------------------------------\n");
     
     struct parcel parcel = {
@@ -59,33 +77,17 @@ int main_fw(void)
 
 	while(1)
 	{
-        memset(input_buffer, 0, sizeof(input_buffer));
-        input_len = 0;
-        while (input_len < sizeof(input_buffer) - 1)
-        {
-            if (drv_uart_getchar(&huart0, &input_buffer[input_len]) != 0)
-                break;
-            if (input_buffer[input_len] == '\r' || input_buffer[input_len] == '\n')
-                break;
-            input_len++;
-        }
-
-        if (input_len != 1)
-        {
-            drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-8).\n");
-            drv_uart_printf("---------------------------------------------\n");
-            drv_uart_printf("(1) start certificate chain verification\n");
-            drv_uart_printf("(2) get CA certificate\n");
-            drv_uart_printf("(3) get LdevID certificate\n");
-            drv_uart_printf("(4) get FMC certificate\n");
-            drv_uart_printf("(5) get RT certificate\n");
-            drv_uart_printf("(6) get SOC measure value\n");
-            drv_uart_printf("(7) get FMC measure value\n");
-            drv_uart_printf("(8) get RT measure value\n");
-            drv_uart_printf("---------------------------------------------\n");
+        if (drv_uart_getchar(&huart0, &ch) != 0) {
             continue;
         }
-        ch = input_buffer[0];
+        if (ch == '\r' || ch == '\n') {
+            continue;
+        }
+        if (ch == 'C') {
+            cluster_bls_bridge_serve_prefixed(&huart0, g_fw_transfer_buffer,
+                                              sizeof(g_fw_transfer_buffer));
+            continue;
+        }
         switch (ch)
         {
             case '1': 
@@ -112,14 +114,14 @@ int main_fw(void)
                 parcel.command = OP_GET_CA_CERT;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("CA certificate:\n\n");
                 for(uint32_t j = 0; j < value; j++) {
                     drv_uart_printf("%02x", parcel.rx_buffer[j]);
@@ -130,14 +132,14 @@ int main_fw(void)
                 parcel.command = OP_GET_LDEVID_CERT;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("LdevID certificate:\n\n");
                 for(uint32_t j = 0; j < value; j++) {
                     drv_uart_printf("%02x", parcel.rx_buffer[j]);
@@ -148,14 +150,14 @@ int main_fw(void)
                 parcel.command = OP_GET_FMC_CERT;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("FMC certificate:\n\n");
                 for(uint32_t j = 0; j < value; j++) {
                     drv_uart_printf("%02x", parcel.rx_buffer[j]);
@@ -166,14 +168,14 @@ int main_fw(void)
                 parcel.command = OP_GET_RT_CERT;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("RT certificate:\n\n");
                 for(uint32_t j = 0; j < value; j++) {
                     drv_uart_printf("%02x", parcel.rx_buffer[j]);
@@ -184,14 +186,14 @@ int main_fw(void)
                 parcel.command = OP_GET_SOC_MEASURE_VALUE;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("SOC measure value:\n\n");
                 for (uint32_t j = 0; j < value; j += 4) {
                     uint32_t *ptr = (uint32_t *)&parcel.rx_buffer[j];
@@ -206,14 +208,14 @@ int main_fw(void)
                 parcel.command = OP_GET_FMC_MEASURE_VALUE;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("FMC measure value:\n\n");
                 for (uint32_t j = 0; j < value; j += 4) {
                     uint32_t *ptr = (uint32_t *)&parcel.rx_buffer[j];
@@ -228,14 +230,14 @@ int main_fw(void)
                 parcel.command = OP_GET_RT_MEASURE_VALUE;
                 parcel.tx_buffer = tx_buffer;
                 parcel.tx_bytes = sizeof(tx_buffer);
-                parcel.rx_buffer = cert_buffer;
-                parcel.rx_bytes = sizeof(cert_buffer);
+                parcel.rx_buffer = g_fw_transfer_buffer;
+                parcel.rx_bytes = sizeof(g_fw_transfer_buffer);
                 status = 1;
                 while(status){
                     status = pack_and_execute_command(&parcel, false);
                     drv_uart_printf("func: %s, line: %d, status = 0x%x\n", __func__, __LINE__, status);
                 }
-                value = caliptra_mbox_read(MBOX_CSR_MBOX_DLEN);
+                value = caliptra_mbox_last_response_size();
                 drv_uart_printf("RT measure value:\n\n");
                 for (uint32_t j = 0; j < value; j += 4) {
                     uint32_t *ptr = (uint32_t *)&parcel.rx_buffer[j];
@@ -246,8 +248,11 @@ int main_fw(void)
                 }
                 drv_uart_printf("\n");
                 break;
+            case '9':
+                drv_uart_printf("Cluster-BLS L1 proxy ready\n");
+                break;
             default:
-                drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-8).\n");
+                drv_uart_printf("[ERROR] Invalid input: Please enter a single character (1-9).\n");
                 drv_uart_printf("---------------------------------------------\n");
                 drv_uart_printf("(1) start certificate chain verification\n");
                 drv_uart_printf("(2) get CA certificate\n");
@@ -257,6 +262,7 @@ int main_fw(void)
                 drv_uart_printf("(6) get SOC measure value\n");
                 drv_uart_printf("(7) get FMC measure value\n");
                 drv_uart_printf("(8) get RT measure value\n");
+                drv_uart_printf("(9) start Cluster-BLS proxy service\n");
                 drv_uart_printf("---------------------------------------------\n");
                 break;
         }

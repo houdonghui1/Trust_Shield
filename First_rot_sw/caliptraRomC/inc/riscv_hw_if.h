@@ -25,9 +25,9 @@
 // information.  We cast to uint32_t since the value pointed to is definitively
 // coded as a 32-bit register (uint32_t).
 inline void lsu_write_32(uintptr_t addr, uint32_t data) {
-  asm volatile ("fence r,r" ::: "memory");
+  __asm__ volatile ("fence r,r" ::: "memory");
   volatile uint32_t *ptr = (volatile uint32_t *)addr;
-  asm volatile ("fence r,r" ::: "memory");
+  __asm__ volatile ("fence r,r" ::: "memory");
   *ptr = data;
 }
 
@@ -38,9 +38,9 @@ inline uint32_t lsu_read_32(uintptr_t addr) {
 
 // lsu_write_8 writes 1 byte (8 bits) to a given address pointer.
 inline void lsu_write_8(uintptr_t addr, uint8_t data) {
-  asm volatile ("fence r,r" ::: "memory");
+  __asm__ volatile ("fence r,r" ::: "memory");
   volatile uint8_t *ptr = (volatile uint8_t *)addr;
-  asm volatile ("fence r,r" ::: "memory");
+  __asm__ volatile ("fence r,r" ::: "memory");
   *ptr = data;
 }
 

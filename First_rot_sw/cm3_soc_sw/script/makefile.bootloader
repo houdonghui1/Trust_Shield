@@ -39,6 +39,7 @@ compile:
 	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/caliptra1x/src/drv_caliptra1x.c -o ${BUILD_PATH}/drv_caliptra1x.c.o
 	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${PRJ_DRV_DIR}/caliptra1x/src/mailbox.c -o ${BUILD_PATH}/mailbox.c.o
 
+	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${FW_PATH}/boot/src/cluster_bls_bridge.c -o ${BUILD_PATH}/cluster_bls_bridge.o
 	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${FW_PATH}/boot/src/main.c -o ${BUILD_PATH}/main.o
 	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${FW_PATH}/boot/src/interrupt.c -o ${BUILD_PATH}/interrupt.o
 	cd ${BUILD_PATH} && arm-none-eabi-gcc ${SDK_DEFINE} ${FLAG} ${INC_PATH} -c ${STARTUP_S} -o ${BUILD_PATH}/startup_CM3DS.o
@@ -58,4 +59,3 @@ build:
 
 dump:
 	cd ${OUTPUT_PATH} && arm-none-eabi-objdump -D ${SDK_TARGET}.elf > ${SDK_TARGET}.asm
-

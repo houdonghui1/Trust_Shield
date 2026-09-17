@@ -19,6 +19,8 @@
 #include "caliptra_defines.h"
 #include "caliptra_reg.h"
 #include "riscv_hw_if.h"
+#include <stdbool.h>
+#include <stddef.h>
 
 typedef uint8_t BOOL;
 #define FALSE 0u
@@ -32,6 +34,9 @@ typedef struct {
 }hmac_io;
 
 void hmac_flow(hmac_io hmac_key, hmac_io block, hmac_io lfsr_seed, hmac_io tag);
+/* Derive bytes from a KeyVault-resident CDI without exporting the CDI itself. */
+bool hmac_kdf_from_kv(uint8_t kv_id, const uint8_t *context,
+                      size_t context_len, uint8_t *out, size_t out_len);
 void hmac_zeroize();
 
 #endif

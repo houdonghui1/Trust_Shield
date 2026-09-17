@@ -44,8 +44,9 @@
 
 #define X509_KU_DIGITAL_SIGNATURE  0x01
 #define X509_KU_KEY_CERT_SIGN      0x04
+#define X509_CERT_STORE_DER_MAX    2048U
 #define PTR_DIFF(p1, p2)    ((size_t)((uintptr_t)(p1) - (uintptr_t)(p2)))
-#define MAX_BUF_LEN         1024
+#define MAX_BUF_LEN         4096
 
 #define LDEVID 0x1
 #define FMC    0x2
@@ -59,7 +60,9 @@ typedef enum {
 } cert_type_t;
 
 typedef struct {
-    uint8_t der_data[512];
+    /* A P-384 certificate plus the 210-byte BLS/PoP binding does not fit in
+     * the historical 512-byte slot.  All callers still validate der_len. */
+    uint8_t der_data[X509_CERT_STORE_DER_MAX];
     size_t der_len;
     uint8_t type;
 } cert_t;
@@ -99,6 +102,9 @@ int add_signature_to_cert(
     const uint8_t *sig_s,
     uint8_t *cert_out, size_t *cert_len
 );
+
+int x509_get_tbs_der(const uint8_t *cert_der, size_t cert_len,
+                     const uint8_t **tbs_der, size_t *tbs_len);
 
 int verify_cert(
     const uint8_t *cert_der, 

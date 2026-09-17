@@ -19,7 +19,7 @@ __FLASH_SIZE = 0x0002FFFF;
 MEMORY
 {
   FLASH (rx) : ORIGIN = __FLASH_BASE, LENGTH = __FLASH_SIZE /* 32K */
-  RAM (rwx)  : ORIGIN =	__RAM_BASE,   LENGTH = __RAM_SIZE   /*  8K */
+  RAM (rwx)  : ORIGIN =	__RAM_BASE,   LENGTH = __RAM_SIZE   /* 12K */
 }
 
 /* Linker script to place sections and symbol values. Should be used together
@@ -162,4 +162,3 @@ SECTIONS
   /* Check if data + heap + stack exceeds RAM limit */
   ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")
 }
-

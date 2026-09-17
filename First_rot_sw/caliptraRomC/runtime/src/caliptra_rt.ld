@@ -51,7 +51,12 @@ SECTIONS {
 
   _bss_vma_start = .;
   _bss_lma_start = _data_lma_end;
-  .bss _bss_vma_start : AT(_bss_lma_start) { *(.bss) *(.sbss) ; . = ALIGN(4); } =0x0000,
+  .bss _bss_vma_start : AT(_bss_lma_start) {
+    *(.bss .bss.*)
+    *(.sbss .sbss.*)
+    *(COMMON)
+    . = ALIGN(4);
+  } =0x0000,
   _bss_lma_end = _bss_lma_start + SIZEOF(.bss);
 
   _dccm_vma_start = .;
@@ -60,21 +65,7 @@ SECTIONS {
   _dccm_vma_end = .;
   _dccm_lma_end = _dccm_lma_start + SIZEOF(.dccm);
 
-  _cert_store_start = 0x5001E000;
-  _cert_store_end = 0x5001E800;
-
-  _tbs_der_store_start = 0x5001E820;
-  _ctbs_der_store_end = 0x5001F020;
-
-  .cert_store _cert_store_start (NOLOAD) : {
-      KEEP(*(.cert_store))
-      . = ALIGN(4); 
-  } > DCCM
-
-  .tbs_der_store _tbs_der_store_start (NOLOAD) : {
-      KEEP(*(.tbs_der_store))
-      . = ALIGN(4); 
-  } > DCCM
+  INCLUDE persistent_layout.ld
     
    ASSERT(( _dccm_lma_end < ORIGIN(DCCM) + LENGTH(DCCM)), "ERROR: FMC firmware image overflows DCCM size")
 
@@ -87,6 +78,9 @@ SECTIONS {
    * Stack is at the end of DCCM after .data
    * --------------------- */
   STACK = ALIGN(_dccm_vma_end,16) + 0x4000;
+
+  ASSERT( STACK < _cert_store_start,
+          "ERROR: stack overlaps the reserved certificate store")
 
   ASSERT( (STACK > 0x50010000), "ERROR: Stack not in the expected address range")
   ASSERT( (STACK < 0x50020000), "ERROR: Stack overflows the DCCM in runtime image -- note: lower half of DCCM is used by FMC code")

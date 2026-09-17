@@ -24,9 +24,88 @@ exports_files(glob([
     "*.h",
     "x509/*.c",
     "x509/*.h",
-    "sha256/*.c",
-    "sha256/*.h",
+    "sha/*.c",
+    "sha/*.h",
+    "bls/*.c",
+    "bls/*.h",
 ]))
+
+cc_library(
+    name = "blst",
+    srcs = ["bls/blst/src/server.c"],
+    textual_hdrs = glob(
+        ["bls/blst/src/*.c"],
+        exclude = ["bls/blst/src/server.c"],
+    ),
+    hdrs = glob([
+        "bls/blst/bindings/*.h",
+        "bls/blst/src/**/*.h",
+    ]),
+    includes = ["bls/blst/bindings"],
+    target_compatible_with = [OPENTITAN_CPU],
+    copts = [
+        "-std=c99",
+        "-march=rv32imc",
+        "-mabi=ilp32",
+        "-mcmodel=medany",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-stack-protector",
+        "-ffunction-sections",
+        "-fdata-sections",
+        # BLST is vendored third-party code.  OpenTitan promotes conversion
+        # warnings to errors globally, while upstream BLST intentionally uses
+        # bitwise integer idioms that trigger Clang's sign-conversion warning.
+        "-Wno-sign-conversion",
+        "-D__BLST_NO_ASM__",
+        "-D__BLST_NO_CPUID__",
+        "-DMILLER_LOOP_N_MAX=1",
+    ],
+    deps = [
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/base:memory",
+    ],
+)
+
+cc_library(
+    name = "bls_opentitan",
+    srcs = ["bls/bls_opentitan.c"],
+    hdrs = ["bls/bls_opentitan.h"],
+    includes = ["bls"],
+    target_compatible_with = [OPENTITAN_CPU],
+    deps = [":blst"],
+)
+
+# Protocol glue deliberately has no OpenTitan-specific secret source.  Each
+# role provides CDI-derived IKM through its platform adapter, which prevents a
+# test seed from becoming a production BLS identity.
+cc_library(
+    name = "cluster_bls_protocol",
+    srcs = ["bls/cluster_bls_protocol.c"],
+    hdrs = ["bls/cluster_bls_protocol.h"],
+    includes = ["bls"],
+    target_compatible_with = [OPENTITAN_CPU],
+    deps = [":bls_opentitan"],
+)
+
+cc_library(
+    name = "cluster_bls_l3",
+    srcs = ["bls/cluster_bls_l3.c"],
+    hdrs = ["bls/cluster_bls_l3.h"],
+    includes = ["bls"],
+    target_compatible_with = [OPENTITAN_CPU],
+    deps = [":cluster_bls_protocol"],
+)
+
+cc_library(
+    name = "cluster_bls_x509",
+    srcs = ["bls/cluster_bls_x509.c"],
+    hdrs = ["bls/cluster_bls_x509.h"],
+    includes = ["bls"],
+    target_compatible_with = [OPENTITAN_CPU],
+    deps = [":cluster_bls_protocol"],
+)
 
 cc_library(
     name = "mldsa87",
@@ -64,8 +143,6 @@ cc_library(
         "-Wno-missing-prototypes",
         "-Wno-unused-function",
         "-Wno-unused-variable",
-        "-DOTT_STACK_SIZE=0x20000",
-        "-DOTT_HEAP_SIZE=0x4000",
         "-DMLD_CONFIG_MONOBUILD_KEEP_SHARED_HEADERS=1",
         "-DMLD_SYS_RISCV32=1",
     ],
@@ -108,6 +185,7 @@ cc_library(
         "//sw/device/lib/runtime:log",
         ":sha_lib",
         ":ecdsa_p384_lib",
+        ":bls_opentitan",
     ],
 )
 
@@ -116,9 +194,6 @@ cc_library(
     srcs = ["attestation.c"],
     hdrs = ["attestation.h"],
     target_compatible_with = [OPENTITAN_CPU],
-    copts = [
-        "-DOTT_STACK_SIZE=0x20000",
-    ],
     deps = [
         "//sw/device/lib/crypto/drivers:otbn",
         "//sw/device/lib/crypto/drivers:entropy",
@@ -139,12 +214,22 @@ cc_library(
         ":x509_lib",
         ":sha_lib",
         ":ecdsa_p384_lib",
+        ":bls_opentitan",
+        ":cluster_bls_protocol",
+        ":cluster_bls_l3",
+        ":cluster_bls_x509",
     ],
 )
 
 opentitan_functest(
     name = "attestation_smoketest",
-    srcs = ["attestation_smoketest.c"],
+    srcs = [
+        "attestation_smoketest.c",
+        "cluster_bls_scale_config.h",
+        "ecdsa_scale.h",
+        "ecdsa_scale_opentitan.h",
+        "ecdsa_scale_stream.h",
+    ],
     targets = [
         "cw310_test_rom",
         "verilator",

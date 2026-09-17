@@ -20,17 +20,21 @@ ROM_DIR=${ROMC_DIR}/bootrom/src
 FMC_DIR=${ROMC_DIR}/fmc/src
 RT_DIR=${ROMC_DIR}/runtime/src
 LIB_DIR=${ROMC_DIR}/libs
+BLS_DIR := ${LIB_DIR}/bls
 BUILD_DIR=${ROMC_DIR}/build
 OUTPUT_DIR=${ROMC_DIR}/output
 INC_PATH := -I ${ROMC_DIR}/inc -I ${LIB_DIR}/caliptra_isr -I ${LIB_DIR}/soc_ifc -I ${LIB_DIR}/uart -I ${LIB_DIR}/qspi -I ${LIB_DIR}/printf -I ${LIB_DIR}/mailbox -I ${LIB_DIR}/hmac \
 			-I ${LIB_DIR}/ecc -I ${LIB_DIR}/sha256 -I ${LIB_DIR}/sha384 -I ${LIB_DIR}/sha512 -I ${LIB_DIR}/keyvault -I ${LIB_DIR}/datavault -I ${LIB_DIR}/x509 -I ${LIB_DIR}/sm3 \
-			-I ${LIB_DIR}/trng -I ${LIB_DIR}/ecdsa-p384
+			-I ${LIB_DIR}/trng -I ${LIB_DIR}/ecdsa-p384 \
+			-I ${BLS_DIR} -I ${BLS_DIR}/blst/bindings
 GCC_PREFIX = riscv64-unknown-elf
 ABI = -mabi=ilp32 -march=rv32imc_zicsr_zifencei
 RUST_ELF_DIR = /home/jdeng/work/test/target/riscv32imac-unknown-none-elf/release
 PLAYBOOK_RANDOM_SEED ?= ${shell date +%s}
 BUILD_CFLAGS ?= 
-TEST_CFLAGS = -Wall -g0 -Os  -ffunction-sections -fdata-sections -DMY_RANDOM_SEED=${PLAYBOOK_RANDOM_SEED} ${BUILD_CFLAGS} -Wno-main 
+TEST_CFLAGS = -Wall -g0 -Os -ffunction-sections -fdata-sections -DMY_RANDOM_SEED=${PLAYBOOK_RANDOM_SEED} ${BUILD_CFLAGS} -std=gnu99 -Wno-main
+BLS_CFLAGS = -D__BLST_NO_ASM__ -D__BLST_NO_CPUID__ \
+	-DCLUSTER_BLS_FIXED_DEMO_KEYS
 
 SHELL := /bin/bash
 
@@ -82,6 +86,11 @@ libs:
 	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} -c ${LIB_DIR}/sm3/sm3.c -o ${BUILD_DIR}/sm3.o
 	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} -c ${LIB_DIR}/trng/trng.c -o ${BUILD_DIR}/trng.o
 	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} -c ${LIB_DIR}/ecdsa-p384/ecdsa-p384.c -o ${BUILD_DIR}/ecdsa-p384.o
+	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} ${BLS_CFLAGS} -c ${BLS_DIR}/blst/src/server.c -o ${BUILD_DIR}/blst-server.o
+	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} ${BLS_CFLAGS} -c ${BLS_DIR}/bls_opentitan.c -o ${BUILD_DIR}/bls_opentitan.o
+	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} ${BLS_CFLAGS} -c ${BLS_DIR}/cluster_bls_protocol.c -o ${BUILD_DIR}/cluster_bls_protocol.o
+	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} ${BLS_CFLAGS} -c ${BLS_DIR}/cluster_bls_x509.c -o ${BUILD_DIR}/cluster_bls_x509.o
+	${GCC_PREFIX}-gcc ${ABI} ${INC_PATH} ${TEST_CFLAGS} ${BLS_CFLAGS} -c ${ROM_DIR}/cluster_bls_l2.c -o ${BUILD_DIR}/cluster_bls_l2.o
 
 clean:
 	rm -rf ${BUILD_DIR} ${OUTPUT_DIR} 

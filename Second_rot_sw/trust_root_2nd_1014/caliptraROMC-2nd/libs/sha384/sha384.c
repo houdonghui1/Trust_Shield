@@ -115,6 +115,11 @@ void sha384_core(uint8_t* blocks, size_t blocks_len, uint64_t digest[]) {
 
 void sha384_digest(uint8_t* message, size_t message_len, uint64_t digest[], bool debug) {
 
+    /* SHA-384 has eight internal 64-bit state words but exposes only the
+     * first six.  Keep the full state local so a caller-provided 48-byte
+     * output buffer is never overrun. */
+    uint64_t state[8];
+
     size_t padding_len = 128 - ((message_len + 16) % 128);
     (padding_len == 0) ? (padding_len = 128) : (padding_len = padding_len);
 
@@ -127,16 +132,16 @@ void sha384_digest(uint8_t* message, size_t message_len, uint64_t digest[], bool
         printf("- (1/4) | total_len: %d, message_len: %d, padding_len: %d, final_block_len: %d \n", total_len, message_len, padding_len, final_block_len);
     }
 
-    digest[0] = (uint64_t)h0;
-    digest[1] = (uint64_t)h1;
-    digest[2] = (uint64_t)h2;
-    digest[3] = (uint64_t)h3;
-    digest[4] = (uint64_t)h4;
-    digest[5] = (uint64_t)h5;
-    digest[6] = (uint64_t)h6;
-    digest[7] = (uint64_t)h7;
+    state[0] = (uint64_t)h0;
+    state[1] = (uint64_t)h1;
+    state[2] = (uint64_t)h2;
+    state[3] = (uint64_t)h3;
+    state[4] = (uint64_t)h4;
+    state[5] = (uint64_t)h5;
+    state[6] = (uint64_t)h6;
+    state[7] = (uint64_t)h7;
 
-    sha384_core(message, total_len - final_block_len, digest);
+    sha384_core(message, total_len - final_block_len, state);
 
     if (debug == true) {
         printf("- (2/4) | sha384_core() initial digest done.\n");
@@ -164,10 +169,11 @@ void sha384_digest(uint8_t* message, size_t message_len, uint64_t digest[], bool
         printf("- (3/4) | sha384 padding done.\n");
     }
 
-    sha384_core(final_block, final_block_len, digest);
+    sha384_core(final_block, final_block_len, state);
+    memcpy(digest, state, 6 * sizeof(uint64_t));
+    memset(state, 0, sizeof(state));
     if (debug == true) {
         printf("- (4/4) | sha384_core() final digest done.\n");
     } 
 }
-
 

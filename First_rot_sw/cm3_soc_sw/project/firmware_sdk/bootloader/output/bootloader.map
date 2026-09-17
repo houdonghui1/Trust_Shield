@@ -103,8 +103,12 @@ Discarded input sections
                 0x0000000000000000       0x70 drv_uart.o
  .text.drv_uart_tx_data
                 0x0000000000000000       0x40 drv_uart.o
+ .text.drv_uart_putchar
+                0x0000000000000000       0x2a drv_uart.o
  .text.drv_uart_rx_data
                 0x0000000000000000       0xc4 drv_uart.o
+ .text.drv_uart_getchar
+                0x0000000000000000       0xaa drv_uart.o
  .text.drv_uart_getchar_timeout
                 0x0000000000000000       0xbc drv_uart.o
  .text.drv_uart_rx_data_it
@@ -117,8 +121,33 @@ Discarded input sections
  .text          0x0000000000000000        0x0 mailbox.c.o
  .data          0x0000000000000000        0x0 mailbox.c.o
  .bss           0x0000000000000000        0x0 mailbox.c.o
+ .text.caliptra_mailbox_read_fifo
+                0x0000000000000000       0x74 mailbox.c.o
+ .text.caliptra_mailbox_write_fifo
+                0x0000000000000000       0x50 mailbox.c.o
+ .text.caliptra_check_status_get_response
+                0x0000000000000000       0x68 mailbox.c.o
+ .text.caliptra_mailbox_send_start
+                0x0000000000000000       0x30 mailbox.c.o
+ .text.caliptra_mailbox_send_data
+                0x0000000000000000        0x8 mailbox.c.o
+ .text.caliptra_test_for_completion
+                0x0000000000000000       0x14 mailbox.c.o
+ .text.caliptra_complete
+                0x0000000000000000       0x48 mailbox.c.o
+ .text.caliptra_mailbox_send_complete
+                0x0000000000000000       0x44 mailbox.c.o
+ .text.caliptra_mailbox_execute
+                0x0000000000000000       0x2e mailbox.c.o
+ .text.pack_and_execute_command
+                0x0000000000000000       0x3c mailbox.c.o
  .text.caliptra_upload_fw
                 0x0000000000000000       0x1c mailbox.c.o
+ .bss.g_caliptra_mbox_pending_rx_buffer
+                0x0000000000000000        0x8 mailbox.c.o
+ .comment       0x0000000000000000       0x5a mailbox.c.o
+ .ARM.attributes
+                0x0000000000000000       0x2d mailbox.c.o
  .text          0x0000000000000000        0x0 main.o
  .data          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
@@ -283,7 +312,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
                 0x0000000000020000                __RAM_BASE = 0x20000
                 0x0000000000003000                __RAM_SIZE = 0x3000
 
-.text           0x0000000000000000     0x23f8
+.text           0x0000000000000000     0x18a4
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0x88 startup_CM3DS.o
                 0x0000000000000000                __isr_vector
@@ -331,189 +360,157 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  .text.drv_uart_putchars
                 0x0000000000000414       0x3e drv_uart.o
                 0x0000000000000414                drv_uart_putchars
- .text.drv_uart_putchar
-                0x0000000000000452       0x2a drv_uart.o
-                0x0000000000000452                drv_uart_putchar
- .text.drv_uart_getchar
-                0x000000000000047c       0xaa drv_uart.o
-                0x000000000000047c                drv_uart_getchar
  .text.uart_int_tx_done_callback
-                0x0000000000000526        0x2 drv_uart.o
-                0x0000000000000526                uart_int_tx_done_callback
+                0x0000000000000452        0x2 drv_uart.o
+                0x0000000000000452                uart_int_tx_done_callback
  .text.uart_int_rx_stop_callback
-                0x0000000000000528        0x2 drv_uart.o
-                0x0000000000000528                uart_int_rx_stop_callback
+                0x0000000000000454        0x2 drv_uart.o
+                0x0000000000000454                uart_int_rx_stop_callback
  .text.uart_int_rx_parity_error_callback
-                0x000000000000052a        0x2 drv_uart.o
-                0x000000000000052a                uart_int_rx_parity_error_callback
+                0x0000000000000456        0x2 drv_uart.o
+                0x0000000000000456                uart_int_rx_parity_error_callback
  .text.uart_int_rx_noise_detect_callback
-                0x000000000000052c        0x2 drv_uart.o
-                0x000000000000052c                uart_int_rx_noise_detect_callback
+                0x0000000000000458        0x2 drv_uart.o
+                0x0000000000000458                uart_int_rx_noise_detect_callback
  .text.uart_int_rx_stop_detect_callback
-                0x000000000000052e        0x2 drv_uart.o
-                0x000000000000052e                uart_int_rx_stop_detect_callback
+                0x000000000000045a        0x2 drv_uart.o
+                0x000000000000045a                uart_int_rx_stop_detect_callback
  .text.uart_int_tx_fifo_empty_callback
-                0x0000000000000530        0x2 drv_uart.o
-                0x0000000000000530                uart_int_tx_fifo_empty_callback
+                0x000000000000045c        0x2 drv_uart.o
+                0x000000000000045c                uart_int_tx_fifo_empty_callback
  .text.uart_int_tx_fifo_thres_callback
-                0x0000000000000532        0x2 drv_uart.o
-                0x0000000000000532                uart_int_tx_fifo_thres_callback
+                0x000000000000045e        0x2 drv_uart.o
+                0x000000000000045e                uart_int_tx_fifo_thres_callback
  .text.uart_int_rx_fifo_noempty_callback
-                0x0000000000000534        0x2 drv_uart.o
-                0x0000000000000534                uart_int_rx_fifo_noempty_callback
+                0x0000000000000460        0x2 drv_uart.o
+                0x0000000000000460                uart_int_rx_fifo_noempty_callback
  .text.uart_int_rx_fifo_thres_callback
-                0x0000000000000536        0x2 drv_uart.o
-                0x0000000000000536                uart_int_rx_fifo_thres_callback
+                0x0000000000000462        0x2 drv_uart.o
+                0x0000000000000462                uart_int_rx_fifo_thres_callback
  .text.drv_uart_interrupt_handler
-                0x0000000000000538      0x258 drv_uart.o
-                0x0000000000000538                drv_uart_interrupt_handler
+                0x0000000000000464      0x258 drv_uart.o
+                0x0000000000000464                drv_uart_interrupt_handler
  .text.NMI_Handler
-                0x0000000000000790        0x2 interrupt.o
-                0x0000000000000790                NMI_Handler
+                0x00000000000006bc        0x2 interrupt.o
+                0x00000000000006bc                NMI_Handler
  .text.HardFault_Handler
-                0x0000000000000792        0x2 interrupt.o
-                0x0000000000000792                HardFault_Handler
+                0x00000000000006be        0x2 interrupt.o
+                0x00000000000006be                HardFault_Handler
  .text.MemManage_Handler
-                0x0000000000000794        0x2 interrupt.o
-                0x0000000000000794                MemManage_Handler
+                0x00000000000006c0        0x2 interrupt.o
+                0x00000000000006c0                MemManage_Handler
  .text.BusFault_Handler
-                0x0000000000000796        0x2 interrupt.o
-                0x0000000000000796                BusFault_Handler
+                0x00000000000006c2        0x2 interrupt.o
+                0x00000000000006c2                BusFault_Handler
  .text.UsageFault_Handler
-                0x0000000000000798        0x2 interrupt.o
-                0x0000000000000798                UsageFault_Handler
+                0x00000000000006c4        0x2 interrupt.o
+                0x00000000000006c4                UsageFault_Handler
  .text.SVC_Handler
-                0x000000000000079a        0x2 interrupt.o
-                0x000000000000079a                SVC_Handler
+                0x00000000000006c6        0x2 interrupt.o
+                0x00000000000006c6                SVC_Handler
  .text.DebugMon_Handler
-                0x000000000000079c        0x2 interrupt.o
-                0x000000000000079c                DebugMon_Handler
+                0x00000000000006c8        0x2 interrupt.o
+                0x00000000000006c8                DebugMon_Handler
  .text.PendSV_Handler
-                0x000000000000079e        0x2 interrupt.o
-                0x000000000000079e                PendSV_Handler
+                0x00000000000006ca        0x2 interrupt.o
+                0x00000000000006ca                PendSV_Handler
  .text.SysTick_Handler
-                0x00000000000007a0        0x2 interrupt.o
-                0x00000000000007a0                SysTick_Handler
- *fill*         0x00000000000007a2        0x2 
+                0x00000000000006cc        0x2 interrupt.o
+                0x00000000000006cc                SysTick_Handler
+ *fill*         0x00000000000006ce        0x2 
  .text.Uart0_Handler
-                0x00000000000007a4       0x1c interrupt.o
-                0x00000000000007a4                Uart0_Handler
- .text.caliptra_mailbox_read_fifo
-                0x00000000000007c0       0x74 mailbox.c.o
- .text.caliptra_mailbox_write_fifo
-                0x0000000000000834       0x50 mailbox.c.o
- .text.caliptra_check_status_get_response
-                0x0000000000000884       0x68 mailbox.c.o
-                0x0000000000000884                caliptra_check_status_get_response
- .text.caliptra_mailbox_send_start
-                0x00000000000008ec       0x30 mailbox.c.o
-                0x00000000000008ec                caliptra_mailbox_send_start
- .text.caliptra_mailbox_send_data
-                0x000000000000091c        0x8 mailbox.c.o
-                0x000000000000091c                caliptra_mailbox_send_data
- .text.caliptra_test_for_completion
-                0x0000000000000924       0x14 mailbox.c.o
-                0x0000000000000924                caliptra_test_for_completion
- .text.caliptra_complete
-                0x0000000000000938       0x48 mailbox.c.o
-                0x0000000000000938                caliptra_complete
- .text.caliptra_mailbox_send_complete
-                0x0000000000000980       0x44 mailbox.c.o
-                0x0000000000000980                caliptra_mailbox_send_complete
- .text.caliptra_mailbox_execute
-                0x00000000000009c4       0x2e mailbox.c.o
-                0x00000000000009c4                caliptra_mailbox_execute
- .text.pack_and_execute_command
-                0x00000000000009f2       0x3c mailbox.c.o
-                0x00000000000009f2                pack_and_execute_command
- .text.Validate_TargetBootloader
-                0x0000000000000a2e       0x1c main.o
-                0x0000000000000a2e                Validate_TargetBootloader
- *fill*         0x0000000000000a4a        0x2 
- .text.jump_to_FWstore
-                0x0000000000000a4c       0x18 main.o
-                0x0000000000000a4c                jump_to_FWstore
- .text.drv_uart_rx_data_u8
-                0x0000000000000a64       0xe0 main.o
-                0x0000000000000a64                drv_uart_rx_data_u8
- .text.hex2bin  0x0000000000000b44       0x66 main.o
-                0x0000000000000b44                hex2bin
- *fill*         0x0000000000000baa        0x2 
- .text.main     0x0000000000000bac      0x4a4 main.o
-                0x0000000000000bac                main
- .text          0x0000000000001050       0x78 startup_CM3DS.o
-                0x0000000000001050                Reset_Handler
-                0x00000000000010a4                Uart1_Handler
-                0x00000000000010a6                Resv2_Handler
-                0x00000000000010a8                Resv3_Handler
-                0x00000000000010aa                EthDma_Handler
-                0x00000000000010ac                Gpioa_Handler
-                0x00000000000010ae                Resv6_Handler
-                0x00000000000010b0                Resv7_Handler
-                0x00000000000010b2                Bastim_Ch0_Handler
-                0x00000000000010b4                Bastim_Ch1_Handler
-                0x00000000000010b6                Bastim_Ch2_Handler
-                0x00000000000010b8                Bastim_Ch3_Handler
-                0x00000000000010ba                EthSma_Handler
-                0x00000000000010bc                EthTx_Handler
-                0x00000000000010be                EthRx_Handler
-                0x00000000000010c0                Resv15_Handler
-                0x00000000000010c2                AdvtimGen_Handler
-                0x00000000000010c4                AdvtimCap_Handler
- .text          0x00000000000010c8       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
-                0x00000000000010c8                exit
- .text          0x00000000000010f0       0xec /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memcpy.o)
-                0x00000000000010f0                memcpy
- .text          0x00000000000011dc       0xcc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memmove.o)
-                0x00000000000011dc                memmove
- .text          0x00000000000012a8       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
-                0x00000000000012a8                memset
- .text          0x0000000000001348       0xc8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strchr.o)
-                0x0000000000001348                strchr
- .text          0x0000000000001410       0x5c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen-stub.o)
-                0x0000000000001410                strlen
- .text          0x000000000000146c       0x84 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-vsnprintf.o)
-                0x000000000000146c                _vsnprintf_r
-                0x000000000000146c                _vsniprintf_r
-                0x00000000000014d4                vsnprintf
-                0x00000000000014d4                vsniprintf
- .text          0x00000000000014f0       0x9c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
-                0x00000000000014f0                __call_exitprocs
- .text          0x000000000000158c      0x434 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
-                0x000000000000158c                __ssputs_r
-                0x0000000000001650                __ssprint_r
-                0x0000000000001748                _svfprintf_r
-                0x0000000000001748                _svfiprintf_r
- .text          0x00000000000019c0      0x3bc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x00000000000019c0                _printf_common
-                0x0000000000001ae8                _printf_i
- .text          0x0000000000001d7c       0x8c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memchr-stub.o)
-                0x0000000000001d7c                memchr
- .text          0x0000000000001e08       0xa8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-freer.o)
-                0x0000000000001e08                _free_r
- .text          0x0000000000001eb0       0xc8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-mallocr.o)
-                0x0000000000001eb0                _malloc_r
- .text          0x0000000000001f78       0x4c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-reallocr.o)
-                0x0000000000001f78                _realloc_r
- .text          0x0000000000001fc4       0x24 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-sbrkr.o)
-                0x0000000000001fc4                _sbrk_r
- .text          0x0000000000001fe8        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-mlock.o)
-                0x0000000000001fe8                __malloc_lock
-                0x0000000000001fec                __malloc_unlock
- .text          0x0000000000001ff0       0x10 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-msizer.o)
-                0x0000000000001ff0                _malloc_usable_size_r
- .text          0x0000000000002000       0x1c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
-                0x0000000000002000                _sbrk
- .text          0x000000000000201c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
-                0x000000000000201c                _exit
+                0x00000000000006d0       0x1c interrupt.o
+                0x00000000000006d0                Uart0_Handler
+ .text.soc_ifc_sha_accel_acquire_lock
+                0x00000000000006ec       0x10 main.o
+                0x00000000000006ec                soc_ifc_sha_accel_acquire_lock
+ .text.soc_ifc_sha_accel_wr_mode
+                0x00000000000006fc       0x14 main.o
+                0x00000000000006fc                soc_ifc_sha_accel_wr_mode
+ .text.soc_ifc_sha_accel_execute
+                0x0000000000000710        0xc main.o
+                0x0000000000000710                soc_ifc_sha_accel_execute
+ .text.soc_ifc_sha_accel_poll_status
+                0x000000000000071c       0x10 main.o
+                0x000000000000071c                soc_ifc_sha_accel_poll_status
+ .text.soc_ifc_sha_accel_clr_lock
+                0x000000000000072c        0xc main.o
+                0x000000000000072c                soc_ifc_sha_accel_clr_lock
+ .text.main     0x0000000000000738       0xa4 main.o
+                0x0000000000000738                main
+ .text          0x00000000000007dc       0x78 startup_CM3DS.o
+                0x00000000000007dc                Reset_Handler
+                0x0000000000000830                Uart1_Handler
+                0x0000000000000832                Resv2_Handler
+                0x0000000000000834                Resv3_Handler
+                0x0000000000000836                EthDma_Handler
+                0x0000000000000838                Gpioa_Handler
+                0x000000000000083a                Resv6_Handler
+                0x000000000000083c                Resv7_Handler
+                0x000000000000083e                Bastim_Ch0_Handler
+                0x0000000000000840                Bastim_Ch1_Handler
+                0x0000000000000842                Bastim_Ch2_Handler
+                0x0000000000000844                Bastim_Ch3_Handler
+                0x0000000000000846                EthSma_Handler
+                0x0000000000000848                EthTx_Handler
+                0x000000000000084a                EthRx_Handler
+                0x000000000000084c                Resv15_Handler
+                0x000000000000084e                AdvtimGen_Handler
+                0x0000000000000850                AdvtimCap_Handler
+ .text          0x0000000000000854       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
+                0x0000000000000854                exit
+ .text          0x000000000000087c       0xec /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memcpy.o)
+                0x000000000000087c                memcpy
+ .text          0x0000000000000968       0xcc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memmove.o)
+                0x0000000000000968                memmove
+ .text          0x0000000000000a34       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
+                0x0000000000000a34                memset
+ .text          0x0000000000000ad4       0xc8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strchr.o)
+                0x0000000000000ad4                strchr
+ .text          0x0000000000000b9c       0x5c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen-stub.o)
+                0x0000000000000b9c                strlen
+ .text          0x0000000000000bf8       0x84 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-vsnprintf.o)
+                0x0000000000000bf8                _vsnprintf_r
+                0x0000000000000bf8                _vsniprintf_r
+                0x0000000000000c60                vsnprintf
+                0x0000000000000c60                vsniprintf
+ .text          0x0000000000000c7c       0x9c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
+                0x0000000000000c7c                __call_exitprocs
+ .text          0x0000000000000d18      0x434 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x0000000000000d18                __ssputs_r
+                0x0000000000000ddc                __ssprint_r
+                0x0000000000000ed4                _svfprintf_r
+                0x0000000000000ed4                _svfiprintf_r
+ .text          0x000000000000114c      0x3bc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x000000000000114c                _printf_common
+                0x0000000000001274                _printf_i
+ .text          0x0000000000001508       0x8c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memchr-stub.o)
+                0x0000000000001508                memchr
+ .text          0x0000000000001594       0xa8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-freer.o)
+                0x0000000000001594                _free_r
+ .text          0x000000000000163c       0xc8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-mallocr.o)
+                0x000000000000163c                _malloc_r
+ .text          0x0000000000001704       0x4c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-reallocr.o)
+                0x0000000000001704                _realloc_r
+ .text          0x0000000000001750       0x24 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000000001750                _sbrk_r
+ .text          0x0000000000001774        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-mlock.o)
+                0x0000000000001774                __malloc_lock
+                0x0000000000001778                __malloc_unlock
+ .text          0x000000000000177c       0x10 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-msizer.o)
+                0x000000000000177c                _malloc_usable_size_r
+ .text          0x000000000000178c       0x1c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
+                0x000000000000178c                _sbrk
+ .text          0x00000000000017a8        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
+                0x00000000000017a8                _exit
  *(.init)
- .init          0x0000000000002020        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
-                0x0000000000002020                _init
- .init          0x0000000000002024        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
+ .init          0x00000000000017ac        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
+                0x00000000000017ac                _init
+ .init          0x00000000000017b0        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *(.fini)
- .fini          0x000000000000202c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
-                0x000000000000202c                _fini
- .fini          0x0000000000002030        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
+ .fini          0x00000000000017b8        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crti.o
+                0x00000000000017b8                _fini
+ .fini          0x00000000000017bc        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -526,62 +523,57 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
  *(.dtors)
  *(.rodata*)
  .rodata.caliptra1x_drv_init.str1.4
-                0x0000000000002038       0x1a drv_caliptra1x.c.o
- *fill*         0x0000000000002052        0x2 
+                0x00000000000017c4       0x1a drv_caliptra1x.c.o
+ *fill*         0x00000000000017de        0x2 
  .rodata.default_field_entropy
-                0x0000000000002054       0x20 drv_caliptra1x.c.o
+                0x00000000000017e0       0x20 drv_caliptra1x.c.o
  .rodata.default_uds_seed
-                0x0000000000002074       0x30 drv_caliptra1x.c.o
- .rodata.drv_uart_rx_data_u8.str1.4
-                0x00000000000020a4       0xc3 main.o
- *fill*         0x0000000000002167        0x1 
+                0x0000000000001800       0x30 drv_caliptra1x.c.o
  .rodata.main.str1.4
-                0x0000000000002168      0x242 main.o
-                                        0x246 (size before relaxing)
- *fill*         0x00000000000023aa        0x2 
- .rodata.__func__.6327
-                0x00000000000023ac        0x5 main.o
- *fill*         0x00000000000023b1        0x3 
- .rodata        0x00000000000023b4        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
-                0x00000000000023b4                _global_impure_ptr
+                0x0000000000001830       0x10 main.o
+ .rodata.test_val
+                0x0000000000001840       0x20 main.o
+                0x0000000000001840                test_val
+ .rodata        0x0000000000001860        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
+                0x0000000000001860                _global_impure_ptr
  .rodata.str1.4
-                0x00000000000023b8       0x13 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
- *fill*         0x00000000000023cb        0x1 
+                0x0000000000001864       0x13 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
+ *fill*         0x0000000000001877        0x1 
  .rodata.str1.4
-                0x00000000000023cc       0x25 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x0000000000001878       0x25 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_i.o)
  *(.eh_frame*)
- *fill*         0x00000000000023f1        0x3 
- .eh_frame      0x00000000000023f4        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
- .eh_frame      0x00000000000023f4        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
+ *fill*         0x000000000000189d        0x3 
+ .eh_frame      0x00000000000018a0        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+ .eh_frame      0x00000000000018a0        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.glue_7         0x00000000000023f8        0x0
- .glue_7        0x00000000000023f8        0x0 linker stubs
+.glue_7         0x00000000000018a4        0x0
+ .glue_7        0x00000000000018a4        0x0 linker stubs
 
-.glue_7t        0x00000000000023f8        0x0
- .glue_7t       0x00000000000023f8        0x0 linker stubs
+.glue_7t        0x00000000000018a4        0x0
+ .glue_7t       0x00000000000018a4        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000023f8        0x0
- .vfp11_veneer  0x00000000000023f8        0x0 linker stubs
+.vfp11_veneer   0x00000000000018a4        0x0
+ .vfp11_veneer  0x00000000000018a4        0x0 linker stubs
 
-.v4_bx          0x00000000000023f8        0x0
- .v4_bx         0x00000000000023f8        0x0 linker stubs
+.v4_bx          0x00000000000018a4        0x0
+ .v4_bx         0x00000000000018a4        0x0 linker stubs
 
-.iplt           0x00000000000023f8        0x0
- .iplt          0x00000000000023f8        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.iplt           0x00000000000018a4        0x0
+ .iplt          0x00000000000018a4        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
-.rel.dyn        0x00000000000023f8        0x0
- .rel.iplt      0x00000000000023f8        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
+.rel.dyn        0x00000000000018a4        0x0
+ .rel.iplt      0x00000000000018a4        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000000023f8                __exidx_start = .
+                0x00000000000018a4                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00000000000023f8                __exidx_end = .
-                0x00000000000023f8                __etext = .
+                0x00000000000018a4                __exidx_end = .
+                0x00000000000018a4                __etext = .
 
-.data           0x0000000000020000       0x6c load address 0x00000000000023f8
+.data           0x0000000000020000       0x6c load address 0x00000000000018a4
                 0x0000000000020000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -608,53 +600,45 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
                 0x000000000002006c                __data_end__ = .
 
 .tm_clone_table
-                0x000000000002006c        0x0 load address 0x0000000000002464
+                0x000000000002006c        0x0 load address 0x0000000000001910
  .tm_clone_table
                 0x000000000002006c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
  .tm_clone_table
                 0x000000000002006c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
 
-.igot.plt       0x000000000002006c        0x0 load address 0x0000000000002464
+.igot.plt       0x000000000002006c        0x0 load address 0x0000000000001910
  .igot.plt      0x000000000002006c        0x0 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 
-.bss            0x000000000002006c     0x27d4 load address 0x0000000000002464
+.bss            0x000000000002006c       0xcc load address 0x0000000000001910
                 0x000000000002006c                . = ALIGN (0x4)
                 0x000000000002006c                __bss_start__ = .
  *(.bss*)
  .bss           0x000000000002006c       0x1c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
  .bss.buffer    0x0000000000020088       0x80 drv_uart_ex.o
- .bss.g_caliptra_mbox_pending_rx_buffer
-                0x0000000000020108        0x8 mailbox.c.o
- .bss.rx_buffer
-                0x0000000000020110     0x2600 main.o
-                0x0000000000020110                rx_buffer
- .bss.rx_byte_buffer
-                0x0000000000022710      0x100 main.o
-                0x0000000000022710                rx_byte_buffer
- .bss           0x0000000000022810        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
-                0x0000000000022810                _global_atexit
- .bss           0x0000000000022814        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-mallocr.o)
-                0x0000000000022814                __malloc_free_list
-                0x0000000000022818                __malloc_sbrk_start
- .bss           0x000000000002281c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
+ .bss           0x0000000000020108        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
+                0x0000000000020108                _global_atexit
+ .bss           0x000000000002010c        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-mallocr.o)
+                0x000000000002010c                __malloc_free_list
+                0x0000000000020110                __malloc_sbrk_start
+ .bss           0x0000000000020114        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
  *(COMMON)
- COMMON         0x0000000000022820       0x1c main.o
-                0x0000000000022820                huart0
- COMMON         0x000000000002283c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-reent.o)
-                0x000000000002283c                errno
-                0x0000000000022840                . = ALIGN (0x4)
-                0x0000000000022840                __bss_end__ = .
+ COMMON         0x0000000000020118       0x1c main.o
+                0x0000000000020118                huart0
+ COMMON         0x0000000000020134        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-reent.o)
+                0x0000000000020134                errno
+                0x0000000000020138                . = ALIGN (0x4)
+                0x0000000000020138                __bss_end__ = .
 
-.heap           0x0000000000022840        0x0
-                0x0000000000022840                __end__ = .
-                0x0000000000022840                end = __end__
+.heap           0x0000000000020138        0x0
+                0x0000000000020138                __end__ = .
+                0x0000000000020138                end = __end__
  *(.heap*)
- .heap          0x0000000000022840        0x0 startup_CM3DS.o
-                0x0000000000022840                __HeapLimit = .
+ .heap          0x0000000000020138        0x0 startup_CM3DS.o
+                0x0000000000020138                __HeapLimit = .
 
-.stack_dummy    0x0000000000022840      0x200
+.stack_dummy    0x0000000000020138      0x200
  *(.stack*)
- .stack         0x0000000000022840      0x200 startup_CM3DS.o
+ .stack         0x0000000000020138      0x200 startup_CM3DS.o
                 0x0000000000023000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
                 0x0000000000022e00                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
                 0x0000000000023000                PROVIDE (__stack = __StackTop)
@@ -679,57 +663,55 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000000000000fe       0x2d interrupt.o
  .ARM.attributes
-                0x000000000000012b       0x2d mailbox.c.o
+                0x000000000000012b       0x2d main.o
  .ARM.attributes
-                0x0000000000000158       0x2d main.o
+                0x0000000000000158       0x1b startup_CM3DS.o
  .ARM.attributes
-                0x0000000000000185       0x1b startup_CM3DS.o
+                0x0000000000000173       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
  .ARM.attributes
-                0x00000000000001a0       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
+                0x00000000000001a0       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000000000001cd       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
+                0x00000000000001cd       0x1b /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memcpy.o)
  .ARM.attributes
-                0x00000000000001fa       0x1b /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memcpy.o)
+                0x00000000000001e8       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memmove.o)
  .ARM.attributes
-                0x0000000000000215       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memmove.o)
+                0x0000000000000215       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
  .ARM.attributes
-                0x0000000000000242       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
+                0x0000000000000242       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strchr.o)
  .ARM.attributes
-                0x000000000000026f       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strchr.o)
+                0x000000000000026f       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen-stub.o)
  .ARM.attributes
-                0x000000000000029c       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen-stub.o)
+                0x000000000000029c       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-vsnprintf.o)
  .ARM.attributes
-                0x00000000000002c9       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-vsnprintf.o)
+                0x00000000000002c9       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x00000000000002f6       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
+                0x00000000000002f6       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
  .ARM.attributes
-                0x0000000000000323       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x0000000000000323       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_i.o)
  .ARM.attributes
-                0x0000000000000350       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x0000000000000350       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memchr-stub.o)
  .ARM.attributes
-                0x000000000000037d       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memchr-stub.o)
+                0x000000000000037d       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-freer.o)
  .ARM.attributes
-                0x00000000000003aa       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-freer.o)
+                0x00000000000003aa       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-mallocr.o)
  .ARM.attributes
-                0x00000000000003d7       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000000000003d7       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-reallocr.o)
  .ARM.attributes
-                0x0000000000000404       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-reallocr.o)
+                0x0000000000000404       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-sbrkr.o)
  .ARM.attributes
-                0x0000000000000431       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000000000431       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-mlock.o)
  .ARM.attributes
-                0x000000000000045e       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-mlock.o)
+                0x000000000000045e       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-msizer.o)
  .ARM.attributes
-                0x000000000000048b       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-msizer.o)
+                0x000000000000048b       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-reent.o)
  .ARM.attributes
-                0x00000000000004b8       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-reent.o)
+                0x00000000000004b8       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
  .ARM.attributes
-                0x00000000000004e5       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
+                0x00000000000004e5       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
  .ARM.attributes
-                0x0000000000000512       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
+                0x0000000000000512       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
  .ARM.attributes
-                0x000000000000053f       0x2d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtend.o
- .ARM.attributes
-                0x000000000000056c       0x1d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
+                0x000000000000053f       0x1d /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtn.o
 
 .comment        0x0000000000000000       0xa7
  .comment       0x0000000000000000       0x59 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
@@ -739,7 +721,6 @@ LOAD linker stubs
  .comment       0x0000000000000059       0x5a drv_uart_ex.o
  .comment       0x0000000000000059       0x5a drv_uart.o
  .comment       0x0000000000000059       0x5a interrupt.o
- .comment       0x0000000000000059       0x5a mailbox.c.o
  .comment       0x0000000000000059       0x5a main.o
  .comment       0x0000000000000059       0x4e /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
                                          0x4f (size before relaxing)
@@ -1000,7 +981,6 @@ SysTick_Handler                                   interrupt.o
 Uart0_Handler                                     interrupt.o
 Uart1_Handler                                     startup_CM3DS.o
 UsageFault_Handler                                interrupt.o
-Validate_TargetBootloader                         main.o
 _ITM_deregisterTMCloneTable                       /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 _ITM_registerTMCloneTable                         /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/crtbegin.o
 __HEAP_SIZE                                       startup_CM3DS.o
@@ -1129,7 +1109,6 @@ drv_uart_default_config                           drv_uart.o
                                                   main.o
 drv_uart_deinit                                   drv_uart.o
 drv_uart_getchar                                  drv_uart.o
-                                                  main.o
 drv_uart_getchar_timeout                          drv_uart.o
 drv_uart_init                                     drv_uart.o
                                                   main.o
@@ -1139,12 +1118,10 @@ drv_uart_printf                                   drv_uart_ex.o
                                                   main.o
                                                   drv_caliptra1x.c.o
 drv_uart_putchar                                  drv_uart.o
-                                                  main.o
 drv_uart_putchars                                 drv_uart.o
                                                   drv_uart_ex.o
 drv_uart_rx_data                                  drv_uart.o
 drv_uart_rx_data_it                               drv_uart.o
-drv_uart_rx_data_u8                               main.o
 drv_uart_set_config                               drv_uart.o
 drv_uart_tx_data                                  drv_uart.o
 end                                               /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
@@ -1154,11 +1131,9 @@ exit                                              /usr/lib/gcc/arm-none-eabi/9.2
                                                   startup_CM3DS.o
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 hardware_init_hook                                /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
-hex2bin                                           main.o
 huart0                                            main.o
                                                   interrupt.o
                                                   drv_uart_ex.o
-jump_to_FWstore                                   main.o
 main                                              main.o
                                                   startup_CM3DS.o
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
@@ -1169,7 +1144,6 @@ memchr                                            /usr/lib/gcc/arm-none-eabi/9.2
 memcpy                                            /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memcpy.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-reallocr.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
-                                                  main.o
                                                   mailbox.c.o
 memmove                                           /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memmove.o)
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-svfprintf.o)
@@ -1180,14 +1154,17 @@ memset                                            /usr/lib/gcc/arm-none-eabi/9.2
                                                   /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 opk_hash                                          drv_caliptra1x.c.o
 pack_and_execute_command                          mailbox.c.o
-                                                  main.o
-rx_buffer                                         main.o
-rx_byte_buffer                                    main.o
+soc_ifc_sha_accel_acquire_lock                    main.o
+soc_ifc_sha_accel_clr_lock                        main.o
+soc_ifc_sha_accel_execute                         main.o
+soc_ifc_sha_accel_poll_status                     main.o
+soc_ifc_sha_accel_wr_mode                         main.o
 software_init_hook                                /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 strchr                                            /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strchr.o)
                                                   drv_uart_ex.o
 strlen                                            /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-strlen-stub.o)
                                                   drv_uart_ex.o
+test_val                                          main.o
 uart_int_rx_fifo_noempty_callback                 drv_uart.o
 uart_int_rx_fifo_thres_callback                   drv_uart.o
 uart_int_rx_noise_detect_callback                 drv_uart.o

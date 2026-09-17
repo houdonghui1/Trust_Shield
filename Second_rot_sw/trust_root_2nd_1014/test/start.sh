@@ -3,6 +3,12 @@
 CUR_PATH="/home/ubuntu/work/test"
 WORK_PATH="/home/ubuntu/work"
 PL_PATH="$WORK_PATH/caliptra-sw/hw/fpga"
+ROM_IMAGE="$CUR_PATH/caliptra_rom/caliptraROMC.bin"
+
+if ! grep -aFq "BLS L1 certificate request rejected" "$ROM_IMAGE"; then
+        echo "[ERROR] $ROM_IMAGE is not the BLS-enabled L2 Caliptra ROM"
+        exit 1
+fi
 
 cd "$PL_PATH"
 
@@ -27,7 +33,12 @@ sudo /usr/bin/devmem2 0x900300B0 w 0x1
 
 cd "$CUR_PATH/caliptra_io"
 
-sudo insmod caliptra_dev.ko
+
+if grep -q '^caliptra_dev ' /proc/modules; then
+        sudo rmmod caliptra_dev || exit 1
+fi
+
+sudo insmod caliptra_dev.ko || exit 1
 
 if [ "$1" = "qemu" ]; then
 cd "$CUR_PATH/qemu-virt-tpm"
@@ -57,4 +68,3 @@ sudo chmod 660 /tmp/mytpm1/swtpm-sock
 
 ./start_minimal_ubuntu.sh
 fi
-

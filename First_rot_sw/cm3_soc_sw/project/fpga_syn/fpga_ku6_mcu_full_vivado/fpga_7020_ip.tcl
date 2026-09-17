@@ -1,0 +1,4 @@
+read_ip /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k.xci
+read_ip /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_8k/ram_8k.xci
+read_ip /home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m.xci
+

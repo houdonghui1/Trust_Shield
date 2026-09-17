@@ -1,0 +1,221 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
+| Date         : Tue Mar 18 14:59:07 2025
+| Host         : secure-Precision-3660 running 64-bit Ubuntu 20.04.6 LTS
+| Command      : report_methodology -file mcu_top_methodology_drc_routed.rpt -pb mcu_top_methodology_drc_routed.pb -rpx mcu_top_methodology_drc_routed.rpx
+| Design       : mcu_top
+| Device       : xcku060-ffva1156-2-i
+| Speed File   : -2
+| Design State : Fully Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 29
++-----------+------------------+-------------------------------------------------------------------+------------+
+| Rule      | Severity         | Description                                                       | Violations |
++-----------+------------------+-------------------------------------------------------------------+------------+
+| TIMING-4  | Critical Warning | Invalid primary clock redefinition on a clock tree                | 1          |
+| TIMING-17 | Critical Warning | Non-clocked sequential cell                                       | 8          |
+| TIMING-27 | Critical Warning | Invalid primary clock on hierarchical pin                         | 1          |
+| CKLD-2    | Warning          | Clock Net has IO Driver, not a Clock Buf, and/or non-Clock loads  | 1          |
+| HPDR-1    | Warning          | Port pin direction inconsistency                                  | 1          |
+| LUTAR-1   | Warning          | LUT drives async reset alert                                      | 3          |
+| SYNTH-10  | Warning          | Wide multiplier                                                   | 3          |
+| TIMING-9  | Warning          | Unknown CDC Logic                                                 | 1          |
+| TIMING-10 | Warning          | Missing property on synchronizer                                  | 1          |
+| TIMING-18 | Warning          | Missing input or output delay                                     | 4          |
+| TIMING-28 | Warning          | Auto-derived clock referenced by a timing constraint              | 3          |
+| TIMING-47 | Warning          | False path or asynchronous clock group between synchronous clocks | 2          |
++-----------+------------------+-------------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-4#1 Critical Warning
+Invalid primary clock redefinition on a clock tree  
+Invalid clock redefinition on a clock tree. The primary clock u_fpga_platform/u_pll0/inst/clk_in1 is defined downstream of clock hse and overrides its insertion delay and/or waveform definition
+Related violations: <none>
+
+TIMING-17#1 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_p/FSM_onehot_curr_state_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#2 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_p/FSM_onehot_curr_state_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#3 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_p/FSM_onehot_curr_state_reg[2]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#4 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_p/last_s_req_p_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#5 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_p/reg_s_ack_p_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#6 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_p/s_trans_valid_reg_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#7 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_syn_1/sync_reg_1_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#8 Critical Warning
+Non-clocked sequential cell  
+The clock pin u_fp_domain/u_apb1_async/u_ahb_to_apb_async_syn_1/sync_reg_2_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-27#1 Critical Warning
+Invalid primary clock on hierarchical pin  
+A primary clock u_fpga_platform/u_pll0/inst/clk_in1 is created on an inappropriate internal pin u_fpga_platform/u_pll0/inst/clk_in1. It is not recommended to create a primary clock on a hierarchical pin when its driver pin has a fanout connected to multiple clock pins
+Related violations: <none>
+
+CKLD-2#1 Warning
+Clock Net has IO Driver, not a Clock Buf, and/or non-Clock loads  
+Clock net CLK_IBUF_inst/O is directly driven by an IO rather than a Clock Buffer or may be an IO driving a mix of Clock Buffer and non-Clock loads. This connectivity should be reviewed and corrected as appropriate. Driver(s): CLK_IBUF_inst/O
+Related violations: <none>
+
+HPDR-1#1 Warning
+Port pin direction inconsistency  
+Hierarchical port(pin) MDIO direction INOUT is not consistent with the directions of the cell pins/ports found at that level of the netlist hierarchy. Please review the design and consider changing the port(pin) direction. Both drivers and loads were expected for the net (MDIO) connected to this Port, but both were not found.
+Related violations: <none>
+
+LUTAR-1#1 Warning
+LUT drives async reset alert  
+LUT cell u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Yamu07_i_2, with 2 or more inputs, drives asynchronous preset/clear pin(s) u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/A5yt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/A6ut07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Acat07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Ad8t07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Albt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Anct07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Aolt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Apit07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Apnt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Avlt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Awwt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Ax1u07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Axgt07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Axst07_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Ayjt07_reg/CLR
+ (the first 15 of 344 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#2 Warning
+LUT drives async reset alert  
+LUT cell u_fpga_platform/Zk2nz6_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Ql2nz6_reg/CLR,
+u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Zk2nz6_reg/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders0/data_out_port_reg[0]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders0/data_out_port_reg[3]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders0/u_ahb_bus_matrix_default_slave/i_hreadyout_reg/PRE,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders0/u_ahb_bus_matrix_default_slave/i_hresp_reg[0]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders1/data_out_port_reg[0]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders1/data_out_port_reg[3]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders1/u_ahb_bus_matrix_default_slave/i_hreadyout_reg/PRE,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders1/u_ahb_bus_matrix_default_slave/i_hresp_reg[0]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders2/data_out_port_reg[0]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders2/data_out_port_reg[1]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders2/data_out_port_reg[2]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders2/data_out_port_reg[3]/CLR,
+u_fp_domain/u_ahb_bus_matrix/u_ahb_bus_matrix_decoders2/u_ahb_bus_matrix_default_slave/i_hresp_reg[0]/CLR
+ (the first 15 of 677 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+LUTAR-1#3 Warning
+LUT drives async reset alert  
+LUT cell u_fpga_platform/reset0, with 2 or more inputs, drives asynchronous preset/clear pin(s) u_fpga_platform/u_pll0/inst/mmcme3_adv_inst/RST. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+SYNTH-10#1 Warning
+Wide multiplier  
+Detected multiplier at u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17 of size 16x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#2 Warning
+Wide multiplier  
+Detected multiplier at u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__0 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#3 Warning
+Wide multiplier  
+Detected multiplier at u_fp_domain/u_CORTEXM3INTEGRATION/u_cortexm3ds_logic/Glym17__1 of size 18x16, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+TIMING-9#1 Warning
+Unknown CDC Logic  
+One or more asynchronous Clock Domain Crossing has been detected between 2 clock domains through a set_false_path or a set_clock_groups or set_max_delay -datapath_only constraint but no double-registers logic synchronizer has been found on the side of the capture clock. It is recommended to run report_cdc for a complete and detailed CDC coverage. Please consider using XPM_CDC to avoid Critical severities
+Related violations: <none>
+
+TIMING-10#1 Warning
+Missing property on synchronizer  
+One or more logic synchronizer has been detected between 2 clock domains but the synchronizer does not have the property ASYNC_REG defined on one or both registers. It is recommended to run report_cdc for a complete and detailed CDC coverage
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on TDI relative to clock(s) jtag_tck
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on TMS relative to clock(s) jtag_tck
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on TRST relative to clock(s) jtag_tck
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An output delay is missing on TDO relative to clock(s) jtag_tck
+Related violations: <none>
+
+TIMING-28#1 Warning
+Auto-derived clock referenced by a timing constraint  
+The auto-derived clock clk_out1_pll_50m is referenced by name inside timing constraint (see constraint position 5 in the Timing Constraint window in Vivado IDE). It is recommended to reference an auto-derived clock by the pin name attached to the clock: get_clocks -of_objects [get_pins u_fpga_platform/u_pll0/inst/mmcme3_adv_inst/CLKOUT0]
+Related violations: <none>
+
+TIMING-28#2 Warning
+Auto-derived clock referenced by a timing constraint  
+The auto-derived clock clk_out2_pll_50m is referenced by name inside timing constraint (see constraint position 6 in the Timing Constraint window in Vivado IDE). It is recommended to reference an auto-derived clock by the pin name attached to the clock: get_clocks -of_objects [get_pins u_fpga_platform/u_pll0/inst/mmcme3_adv_inst/CLKOUT1]
+Related violations: <none>
+
+TIMING-28#3 Warning
+Auto-derived clock referenced by a timing constraint  
+The auto-derived clock clk_out3_pll_50m is referenced by name inside timing constraint (see constraint position 7 in the Timing Constraint window in Vivado IDE). It is recommended to reference an auto-derived clock by the pin name attached to the clock: get_clocks -of_objects [get_pins u_fpga_platform/u_pll0/inst/mmcme3_adv_inst/CLKOUT2]
+Related violations: <none>
+
+TIMING-47#1 Warning
+False path or asynchronous clock group between synchronous clocks  
+A Clock Group timing constraint is set between synchronous clocks clk_out1_pll_50m and clk_out2_pll_50m (see constraint position 5 in the Timing Constraint window in Vivado IDE). Masking entire synchronous clock domains via set_false_path or set_clock_groups may result in failure in hardware.
+Related violations: <none>
+
+TIMING-47#2 Warning
+False path or asynchronous clock group between synchronous clocks  
+A Clock Group timing constraint is set between synchronous clocks clk_out2_pll_50m and clk_out1_pll_50m (see constraint position 5 in the Timing Constraint window in Vivado IDE). Masking entire synchronous clock domains via set_false_path or set_clock_groups may result in failure in hardware.
+Related violations: <none>
+
+

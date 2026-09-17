@@ -11,9 +11,12 @@ AK_CERT="${WORK_DIR}/ak_cert.pem"
 TEMP_REQ="${WORK_DIR}/ca_temp.req"
 EK_CERT="${WORK_DIR}/ek_cert.pem"
 DEV_PUBKEY_WHITELIST="${WORK_DIR}/dev_pubkey_whitelist.txt"
+BLS_REGISTRATION="${WORK_DIR}/bls_registration.json"
+BLS_BINDING_TOOL="${WORK_DIR}/issue_cluster_certificate.py"
 AK_DAYS=365
-AK_SUBJ="/C=CN/ST=BJ/L=BJ/O=TestDevice/OU=TPM-AK/CN=AK-Test-001"
+AK_SUBJ="/CN=L3-001"
 MLDSA_EXT_OID="1.3.6.1.4.1.311.21.99"
+BLS_EXT_OID="1.3.6.1.4.1.55555.1.1"
 MLDSA_PK_BIN_SIZE=2592
 MLDSA_PK_HEX_SIZE=$((MLDSA_PK_BIN_SIZE * 2))
 
@@ -24,6 +27,8 @@ check_critical() {
     [ ! -f "${MLDSA_HEX_FILE}" ] && { echo "Error: MLDSA Hex Missing"; exit 1; }
     [ ! -f "${EK_CERT}" ] && { echo "Error: EK Cert Missing"; exit 1; }
     [ ! -f "${DEV_PUBKEY_WHITELIST}" ] && { echo "Error: Whitelist Missing"; exit 1; }
+    [ ! -f "${BLS_REGISTRATION}" ] && { echo "Error: BLS Registration Missing"; exit 1; }
+    [ ! -f "${BLS_BINDING_TOOL}" ] && { echo "Error: BLS Binding Tool Missing"; exit 1; }
     
     MLDSA_HEX_CONTENT=$(tr -d '\n' < "${MLDSA_HEX_FILE}")
     MLDSA_HEX_LEN=${#MLDSA_HEX_CONTENT}
@@ -36,6 +41,10 @@ verify_core() {
     openssl ec -in "${CA_KEY}" -check -noout >/dev/null 2>&1 || { echo "Error: CA ECC Key Invalid"; exit 1; }
     openssl x509 -in "${CA_CERT}" -checkend 0 -noout >/dev/null 2>&1 || { echo "Error: CA Cert Invalid"; exit 1; }
     openssl ec -in "${AK_PUB_PEM}" -pubin -noout >/dev/null 2>&1 || { echo "Error: AK ECC PEM Invalid"; exit 1; }
+    openssl ec -in "${AK_PUB_PEM}" -pubin -text -noout 2>/dev/null | grep -q "384 bit" || {
+        echo "Error: AK public key is not the current P-384 key; refusing to issue a stale P-256 certificate"
+        exit 1
+    }
     echo "All core files verified"
 }
 
@@ -61,6 +70,16 @@ gen_mldsa_raw() {
 
 gen_ext_config() {
     gen_mldsa_raw
+
+    # This validates the BLS key, KeyID and proof of possession before the
+    # binding is inserted into the otherwise unchanged AK certificate.
+    BLS_BINDING_HEX=$(python3 "${BLS_BINDING_TOOL}" \
+        --registration "${BLS_REGISTRATION}" --binding-der) || {
+        echo "Error: Invalid BLS registration"; exit 1;
+    }
+    if ! printf '%s' "${BLS_BINDING_HEX}" | grep -Eq '^[0-9a-fA-F]+$'; then
+        echo "Error: Invalid BLS binding DER"; exit 1;
+    fi
     
     cat > "${WORK_DIR}/extfile.cnf" << EOF
 [req]
@@ -70,44 +89,40 @@ req_extensions = v3_req
 prompt = no
 
 [req_distinguished_name]
-C = CN
-ST = BJ
-L = BJ
-O = TestDevice
-OU = TPM-AK
-CN = AK-Test-001
+CN = L3-001
 
 [v3_req]
-basicConstraints = CA:FALSE
-keyUsage = digitalSignature
+basicConstraints = critical,CA:TRUE,pathlen:1
+keyUsage = critical,digitalSignature,keyCertSign,cRLSign
 extendedKeyUsage = 1.3.6.1.5.5.7.3.1
 ${MLDSA_EXT_OID} = ASN1:OCTETSTRING:${MLDSA_RAW_HEX}
+${BLS_EXT_OID} = DER:${BLS_BINDING_HEX}
 
 [v3_ca]
-basicConstraints = CA:FALSE
-keyUsage = digitalSignature
+basicConstraints = critical,CA:TRUE,pathlen:1
+keyUsage = critical,digitalSignature,keyCertSign,cRLSign
 extendedKeyUsage = 1.3.6.1.5.5.7.3.1
 ${MLDSA_EXT_OID} = ASN1:OCTETSTRING:${MLDSA_RAW_HEX}
+${BLS_EXT_OID} = DER:${BLS_BINDING_HEX}
 EOF
 }
 
 gen_ca_req() {
     openssl ecparam -name prime256v1 -genkey -noout -out "${WORK_DIR}/dummy_temp.key" 2>/dev/null
-    
+
     openssl req -new -key "${WORK_DIR}/dummy_temp.key" -out "${TEMP_REQ}" \
         -subj "${AK_SUBJ}" -sha384 \
         -config "${WORK_DIR}/extfile.cnf" \
         -extensions v3_req >/dev/null 2>&1 || {
         echo "Error: Gen Dummy REQ Failed"; exit 1;
     }
-    
+
     rm -f "${WORK_DIR}/dummy_temp.key"
 }
 
-
 raw_sign_ak() {
     echo "Signing AK Cert with forced public key..."
-    
+
     openssl x509 -req -in "${TEMP_REQ}" -CA "${CA_CERT}" -CAkey "${CA_KEY}" \
         -CAserial "${CA_SRL}" -CAcreateserial -days "${AK_DAYS}" -sha384 \
         -out "${AK_CERT}" \
@@ -132,6 +147,10 @@ verify_final() {
     else
         echo "Warn: Low OpenSSL Verify Tip, Cert Is CA-Signed"
     fi
+
+    python3 "${BLS_BINDING_TOOL}" --verify-certificate "${AK_CERT}" || {
+        echo "Error: BLS certificate binding validation failed"; exit 1;
+    }
     
     echo -e "\n=== Certificate Info ==="
     openssl x509 -in "${AK_CERT}" -text -noout | grep -E "Version|${MLDSA_EXT_OID}" -A3
@@ -193,6 +212,7 @@ main() {
     clean_temp
     echo -e "\nFinal AK Cert: ${AK_CERT}"
     echo "MLDSA Ext OID: ${MLDSA_EXT_OID}"
+    echo "Cluster BLS Ext OID: ${BLS_EXT_OID}"
 }
 
 main

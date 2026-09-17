@@ -1,0 +1,36 @@
+{
+  "cacheFormat": 1,
+  "keyListAuthentication": "DEMO-PREPROVISIONED-FIXED-KEYS",
+  "keyList": {
+    "protocolVersion": 1,
+    "ciphersuiteID": "BLS12381G2_XMD:SHA-256_SSWU_RO_POP_",
+    "clusterID": "C-001",
+    "epoch": 1,
+    "members": [
+      {
+        "nodeID": "L1-001",
+        "keyID": "d385d9d420c03a45954a3a6ad91903c0",
+        "blsPublicKey": "b8bc7d9242c995ebd2a5af60275406a5af07016ffde6a9e4e71777c032d1bac9582ce280ea747fe70ac8978424a5e935",
+        "status": "active",
+        "level": "L1",
+        "parentNodeID": "L2-001"
+      },
+      {
+        "nodeID": "L2-001",
+        "keyID": "35f96c8af6706cee22369540cb0d9c3a",
+        "blsPublicKey": "93936ce6a8e86787fd9038f20abf65075aaf4c52209afba0ec69833d3d37dc263db874146c85ca475c4b2d17ab8772ed",
+        "status": "active",
+        "level": "L2",
+        "parentNodeID": "L3-001"
+      },
+      {
+        "nodeID": "L3-001",
+        "keyID": "c533a85733b81aefa399dbc14d870cf9",
+        "blsPublicKey": "9112a0386a2340714ba0c6d2df235377a8679c3899d03e6ef04dba7a50ef49e5a1dc93105e9374e93ed301b63487e17c",
+        "status": "active",
+        "level": "L3"
+      }
+    ],
+    "aggregatePublicKey": "88bb3253973b05d9996ea9adcc9d0a3403187cc2529ea5ce436ea3a318d9050dc285397da501256f28b27f73e5dc6651"
+  }
+}

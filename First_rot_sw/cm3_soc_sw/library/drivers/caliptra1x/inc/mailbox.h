@@ -98,6 +98,10 @@ enum mailbox_command {
     OP_SEND_INITIATE               = 0x44C0FFFA,
     OP_RECV_CLP_CSR                = 0x44C0FFFB,
     OP_RECV_CLP_CTX                = 0x44C0FFFC,
+    /* L1 Cluster-BLS proxy operations.  CM3 only forwards these requests to
+     * the local Caliptra; it never handles the BLS private key. */
+    OP_BLS_GET_REGISTRATION        = 0x44C0FFE0,
+    OP_BLS_SIGN_CHALLENGE          = 0x44C0FFE3,
     OP_RECV_SOC_FW                 = 0x1A2B3C4D,
 };
 
@@ -195,7 +199,7 @@ static inline void caliptra_mbox_write_dlen(uint32_t dlen)
 
 bool caliptra_test_for_completion();
 int  caliptra_complete();
+uint32_t caliptra_mbox_last_response_size(void);
 int caliptra_check_status_get_response(struct caliptra_buffer *mbox_rx_buffer, uint32_t *bytes_read);
 int pack_and_execute_command(struct parcel *parcel, bool async);
 #endif
-

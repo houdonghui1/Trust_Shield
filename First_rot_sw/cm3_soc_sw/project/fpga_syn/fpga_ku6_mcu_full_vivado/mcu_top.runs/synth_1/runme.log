@@ -1,0 +1,645 @@
+
+*** Running vivado
+    with args -log mcu_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source mcu_top.tcl
+
+
+****** Vivado v2021.1 (64-bit)
+  **** SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+  **** IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+    ** Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+
+source mcu_top.tcl -notrace
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1271]}  -suppress '. The existing rule will be replaced.
+WARNING: [Common 17-1361] You have specified a new message control rule that is equivalent to an existing rule with attributes ' -id {[BD 41-1306]}  -suppress '. The existing rule will be replaced.
+Command: synth_design -top mcu_top -part xcku060-ffva1156-2-i
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcku060'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcku060'
+INFO: [Device 21-403] Loading part xcku060-ffva1156-2-i
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 3101832
+WARNING: [Synth 8-2306] macro TRN_IDLE redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:117]
+WARNING: [Synth 8-2306] macro TRN_BUSY redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:118]
+WARNING: [Synth 8-2306] macro TRN_NONSEQ redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:119]
+WARNING: [Synth 8-2306] macro TRN_SEQ redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:120]
+WARNING: [Synth 8-2306] macro BUR_SINGLE redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:123]
+WARNING: [Synth 8-2306] macro BUR_INCR redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:124]
+WARNING: [Synth 8-2306] macro BUR_WRAP4 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:125]
+WARNING: [Synth 8-2306] macro BUR_INCR4 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:126]
+WARNING: [Synth 8-2306] macro BUR_WRAP8 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:127]
+WARNING: [Synth 8-2306] macro BUR_INCR8 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:128]
+WARNING: [Synth 8-2306] macro BUR_WRAP16 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:129]
+WARNING: [Synth 8-2306] macro BUR_INCR16 redefined [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:130]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2519.816 ; gain = 16.000 ; free physical = 14527 ; free virtual = 37350
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mcu_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/mcu_top.v:18]
+INFO: [Synth 8-6157] synthesizing module 'fp_domain' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/fp_domain.v:16]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix.v:49]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_i' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:32]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:417]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:433]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_i' (1#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_i.v:32]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS0.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_default_slave' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_default_slave.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_default_slave' (2#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_default_slave.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS0' (3#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS0.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS1.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS1' (4#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS1.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS2' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS2.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS2' (5#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS2.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_decoderS4' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS4.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_decoderS4' (6#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_decoderS4.v:36]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM0.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:35]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:172]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:175]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM0' (7#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM0.v:35]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM0' (8#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM0.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM1.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:35]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:169]
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:172]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM1' (9#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM1.v:35]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM1' (10#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM1.v:35]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM6' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM6.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM6' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM6.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM6' (11#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM6.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM6' (12#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM6.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM7' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM7.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM7' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM7.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM7' (13#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM7.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM7' (14#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM7.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_oM8' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM8.v:38]
+INFO: [Synth 8-6157] synthesizing module 'ahb_bus_matrix_arbiterM8' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM8.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_arbiterM8' (15#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_arbiterM8.v:39]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix_oM8' (16#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix_oM8.v:38]
+INFO: [Synth 8-6155] done synthesizing module 'ahb_bus_matrix' (17#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_busmatrix/verilog/built/ahb_bus_matrix/ahb_bus_matrix.v:49]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb/verilog/cmsdk_ahb_to_apb.v:31]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb' (18#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb/verilog/cmsdk_ahb_to_apb.v:31]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async.v:29]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async_h' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v:27]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v:179]
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async_h' (19#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_h.v:27]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async_syn' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_syn.v:28]
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async_syn' (20#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_syn.v:28]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_apb_async_p' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_p.v:27]
+	Parameter ADDRWIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async_p' (21#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async_p.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_apb_async' (22#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_apb_async/verilog/cmsdk_ahb_to_apb_async.v:29]
+INFO: [Synth 8-6157] synthesizing module 'CORTEXM3INTEGRATIONDS' [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/CORTEXM3INTEGRATIONDS.v:24]
+INFO: [Synth 8-6157] synthesizing module 'cortexm3ds_logic' [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/cortexm3ds_logic.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'cortexm3ds_logic' (23#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/cortexm3ds_logic.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'CORTEXM3INTEGRATIONDS' (24#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cm3/CORTEXM3INTEGRATIONDS.v:24]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff_2d' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:79]
+	Parameter WIDTH bound to: 16 - type: integer 
+	Parameter DEFAULT_VAL bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff_2d' (25#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:79]
+INFO: [Synth 8-6157] synthesizing module 'sram_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/sram/sram_top.v:30]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_ahb_to_sram' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_sram/verilog/cmsdk_ahb_to_sram.v:26]
+	Parameter AW bound to: 17 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_ahb_to_sram' (26#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_ahb_to_sram/verilog/cmsdk_ahb_to_sram.v:26]
+INFO: [Synth 8-6157] synthesizing module 'ram_128k' [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/.Xil/Vivado-3101683-secure-Precision-3660/realtime/ram_128k_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ram_128k' (27#1) [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/.Xil/Vivado-3101683-secure-Precision-3660/realtime/ram_128k_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'sram_top' (28#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/sram/sram_top.v:30]
+INFO: [Synth 8-6157] synthesizing module 'apb0_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb0_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_apb_slave_mux' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+	Parameter PORT0_ENABLE bound to: 1 - type: integer 
+	Parameter PORT1_ENABLE bound to: 1 - type: integer 
+	Parameter PORT2_ENABLE bound to: 1 - type: integer 
+	Parameter PORT3_ENABLE bound to: 0 - type: integer 
+	Parameter PORT4_ENABLE bound to: 0 - type: integer 
+	Parameter PORT5_ENABLE bound to: 0 - type: integer 
+	Parameter PORT6_ENABLE bound to: 0 - type: integer 
+	Parameter PORT7_ENABLE bound to: 0 - type: integer 
+	Parameter PORT8_ENABLE bound to: 0 - type: integer 
+	Parameter PORT9_ENABLE bound to: 0 - type: integer 
+	Parameter PORT10_ENABLE bound to: 1 - type: integer 
+	Parameter PORT11_ENABLE bound to: 0 - type: integer 
+	Parameter PORT12_ENABLE bound to: 0 - type: integer 
+	Parameter PORT13_ENABLE bound to: 0 - type: integer 
+	Parameter PORT14_ENABLE bound to: 0 - type: integer 
+	Parameter PORT15_ENABLE bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_apb_slave_mux' (29#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+INFO: [Synth 8-6157] synthesizing module 'debug0_apb_cfg' [/home/houdonghui/cm3_ahbmtx_mcu/library/gen_apb/debug0_apb_cfg.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'debug0_apb_cfg' (30#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/gen_apb/debug0_apb_cfg.v:1]
+INFO: [Synth 8-6157] synthesizing module 'uart_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_top.v:19]
+INFO: [Synth 8-6157] synthesizing module 'uart_regs_wrap' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_regs_wrap.v:13]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+	Parameter WIDTH bound to: 1 - type: integer 
+	Parameter DEFAULT_VAL bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff' (31#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+INFO: [Synth 8-6157] synthesizing module 'uart_apb_cfg' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_apb_cfg.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'uart_apb_cfg' (32#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_apb_cfg.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'uart_regs_wrap' (33#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_regs_wrap.v:13]
+INFO: [Synth 8-6157] synthesizing module 'uart_data_buffer' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_data_buffer.v:13]
+INFO: [Synth 8-6157] synthesizing module 'fifo_sync' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v:23]
+	Parameter ADDR_WIDTH bound to: 4 - type: integer 
+	Parameter DATA_WIDTH bound to: 10 - type: integer 
+INFO: [Synth 8-226] default block is never used [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v:83]
+INFO: [Synth 8-6155] done synthesizing module 'fifo_sync' (34#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/fifo_gen.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'uart_data_buffer' (35#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_data_buffer.v:13]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff_3d_en' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:185]
+	Parameter WIDTH bound to: 1 - type: integer 
+	Parameter DEFAULT_VAL bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff_3d_en' (36#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:185]
+INFO: [Synth 8-6157] synthesizing module 'uart_pe_core' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_core.v:18]
+INFO: [Synth 8-6157] synthesizing module 'posedge_detect' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+INFO: [Synth 8-6155] done synthesizing module 'posedge_detect' (37#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+INFO: [Synth 8-6157] synthesizing module 'uart_pe_tx' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_tx.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'uart_pe_tx' (38#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_tx.v:13]
+INFO: [Synth 8-6157] synthesizing module 'uart_pe_rx' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_rx.v:13]
+INFO: [Synth 8-6157] synthesizing module 'sync_ff__parameterized0' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+	Parameter WIDTH bound to: 1 - type: integer 
+	Parameter DEFAULT_VAL bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_ff__parameterized0' (38#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/sync_ff.v:26]
+INFO: [Synth 8-6157] synthesizing module 'negedge_detect' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:61]
+INFO: [Synth 8-6155] done synthesizing module 'negedge_detect' (39#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:61]
+INFO: [Synth 8-6155] done synthesizing module 'uart_pe_rx' (40#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_rx.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'uart_pe_core' (41#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_pe_core/uart_pe_core.v:18]
+INFO: [Synth 8-6157] synthesizing module 'posedge_detect__parameterized0' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+	Parameter WIDTH bound to: 9 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'posedge_detect__parameterized0' (41#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/edge_detect.v:24]
+INFO: [Synth 8-6157] synthesizing module 'interrupt_gen' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:16]
+	Parameter WIDTH bound to: 9 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'interrupt_bit_gen' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'interrupt_bit_gen' (42#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'interrupt_gen' (43#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/interrupt_gen.v:16]
+INFO: [Synth 8-6155] done synthesizing module 'uart_top' (44#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/uart/uart_top.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'apb0_top' (45#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb0_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'apb1_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb1_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_apb_slave_mux__parameterized0' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+	Parameter PORT0_ENABLE bound to: 1 - type: integer 
+	Parameter PORT1_ENABLE bound to: 0 - type: integer 
+	Parameter PORT2_ENABLE bound to: 0 - type: integer 
+	Parameter PORT3_ENABLE bound to: 0 - type: integer 
+	Parameter PORT4_ENABLE bound to: 0 - type: integer 
+	Parameter PORT5_ENABLE bound to: 0 - type: integer 
+	Parameter PORT6_ENABLE bound to: 0 - type: integer 
+	Parameter PORT7_ENABLE bound to: 0 - type: integer 
+	Parameter PORT8_ENABLE bound to: 0 - type: integer 
+	Parameter PORT9_ENABLE bound to: 0 - type: integer 
+	Parameter PORT10_ENABLE bound to: 0 - type: integer 
+	Parameter PORT11_ENABLE bound to: 0 - type: integer 
+	Parameter PORT12_ENABLE bound to: 0 - type: integer 
+	Parameter PORT13_ENABLE bound to: 0 - type: integer 
+	Parameter PORT14_ENABLE bound to: 0 - type: integer 
+	Parameter PORT15_ENABLE bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_apb_slave_mux__parameterized0' (45#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+INFO: [Synth 8-6155] done synthesizing module 'apb1_top' (46#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb1_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'apb2_top' [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb2_top.v:15]
+INFO: [Synth 8-6157] synthesizing module 'cmsdk_apb_slave_mux__parameterized1' [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+	Parameter PORT0_ENABLE bound to: 1 - type: integer 
+	Parameter PORT1_ENABLE bound to: 1 - type: integer 
+	Parameter PORT2_ENABLE bound to: 0 - type: integer 
+	Parameter PORT3_ENABLE bound to: 0 - type: integer 
+	Parameter PORT4_ENABLE bound to: 0 - type: integer 
+	Parameter PORT5_ENABLE bound to: 0 - type: integer 
+	Parameter PORT6_ENABLE bound to: 0 - type: integer 
+	Parameter PORT7_ENABLE bound to: 0 - type: integer 
+	Parameter PORT8_ENABLE bound to: 0 - type: integer 
+	Parameter PORT9_ENABLE bound to: 0 - type: integer 
+	Parameter PORT10_ENABLE bound to: 0 - type: integer 
+	Parameter PORT11_ENABLE bound to: 0 - type: integer 
+	Parameter PORT12_ENABLE bound to: 0 - type: integer 
+	Parameter PORT13_ENABLE bound to: 0 - type: integer 
+	Parameter PORT14_ENABLE bound to: 0 - type: integer 
+	Parameter PORT15_ENABLE bound to: 0 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cmsdk_apb_slave_mux__parameterized1' (46#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/cmsdk/cmsdk_apb_slave_mux/verilog/cmsdk_apb_slave_mux.v:26]
+INFO: [Synth 8-6155] done synthesizing module 'apb2_top' (47#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/apb2_top.v:15]
+INFO: [Synth 8-6155] done synthesizing module 'fp_domain' (48#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/domain/fp_domain.v:16]
+INFO: [Synth 8-6157] synthesizing module 'fpga_platform' [/home/houdonghui/cm3_ahbmtx_mcu/user/fpga_verilog/fpga_platform.v:16]
+INFO: [Synth 8-6157] synthesizing module 'pll_50m' [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/.Xil/Vivado-3101683-secure-Precision-3660/realtime/pll_50m_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'pll_50m' (49#1) [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/.Xil/Vivado-3101683-secure-Precision-3660/realtime/pll_50m_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_even_division' [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/clock_gen.v:36]
+	Parameter N bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'clk_even_division' (50#1) [/home/houdonghui/cm3_ahbmtx_mcu/library/rtl_logic/clock_gen.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'fpga_platform' (51#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/fpga_verilog/fpga_platform.v:16]
+INFO: [Synth 8-6155] done synthesizing module 'mcu_top' (52#1) [/home/houdonghui/cm3_ahbmtx_mcu/user/verilog/mcu_top.v:18]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:23 ; elapsed = 00:00:26 . Memory (MB): peak = 3459.012 ; gain = 955.195 ; free physical = 14431 ; free virtual = 37270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 3459.012 ; gain = 955.195 ; free physical = 14688 ; free virtual = 37527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 3459.012 ; gain = 955.195 ; free physical = 14688 ; free virtual = 37527
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.26 . Memory (MB): peak = 3459.012 ; gain = 0.000 ; free physical = 14629 ; free virtual = 37468
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc] for cell 'u_fpga_platform/u_pll0'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc] for cell 'u_fpga_platform/u_pll0'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_itcm'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_itcm'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_dtcm'
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/ram_128k/ram_128k/ram_128k_in_context.xdc] for cell 'u_fp_domain/u_sram_top/u_dtcm'
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]
+WARNING: [Vivado 12-584] No ports matched 'ETH_RST'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc:30]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]
+WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/mcu_top_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_pin_assignments.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/mcu_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/mcu_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc]
+CRITICAL WARNING: [Constraints 18-1056] Clock 'hse' completely overrides clock 'CLK'.
+New: create_clock -period 5.000 -name hse -waveform {0.000 2.500} [get_ports CLK], [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:14]
+Previous: create_clock -period 5.000 [get_ports CLK], [/home/houdonghui/cm3_ahbmtx_mcu/library/xilinx_ip/pll_50m/pll_50m/pll_50m_in_context.xdc:1]
+Resolution: Review the constraint files and remove the redundant clock definition(s). If the clock constraints are not saved in a file, you can first save the constraints to an XDC file and reload the design once the constraints have been corrected.
+CRITICAL WARNING: [Designutils 20-1307] Command 'derive_pll_clocks' is not supported in the xdc constraint file. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:17]
+WARNING: [Vivado 12-627] No clocks matched 'clk_out1_pll_50m'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+INFO: [Vivado 12-626] No clocks found. Please use 'create_clock' or 'create_generated_clock' command to create clocks. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group [get_clocks clk_out1_pll_50m]'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:19]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-627] No clocks matched 'clk_out2_pll_50m'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+INFO: [Vivado 12-626] No clocks found. Please use 'create_clock' or 'create_generated_clock' command to create clocks. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group [get_clocks clk_out2_pll_50m]'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:20]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-627] No clocks matched 'clk_out3_pll_50m'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+INFO: [Vivado 12-626] No clocks found. Please use 'create_clock' or 'create_generated_clock' command to create clocks. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group [get_clocks clk_out3_pll_50m]'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+CRITICAL WARNING: [Vivado 12-4739] set_clock_groups:No valid object(s) found for '-group '. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:21]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-507] No nets matched 'TCK_IBUF'. [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc:27]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc]
+WARNING: [Project 1-498] One or more constraints failed evaluation while reading constraint file [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/fpga_ku6_mcu_full_timing_constrain.xdc] and the design contains unresolved black boxes. These constraints will be read post-synthesis (as long as their source constraint file is marked as used_in_implementation) and should be applied correctly then. You should review the constraints listed in the file [.Xil/mcu_top_propImpl.xdc] and check the run log file to verify that these constraints were correctly applied.
+Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3523.043 ; gain = 0.000 ; free physical = 14538 ; free virtual = 37376
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 3523.043 ; gain = 0.000 ; free physical = 14538 ; free virtual = 37376
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:51 ; elapsed = 00:00:53 . Memory (MB): peak = 3523.043 ; gain = 1019.227 ; free physical = 14677 ; free virtual = 37516
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'current_state_reg' in module 'uart_pe_tx'
+INFO: [Synth 8-802] inferred FSM for state register 'current_state_reg' in module 'uart_pe_rx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 ST_IDLE |                          0001000 |                              000
+             ST_APB_WAIT |                          0000100 |                              001
+             ST_APB_TRNF |                          0000010 |                              010
+            ST_APB_TRNF2 |                          1000000 |                              011
+             ST_APB_ERR1 |                          0010000 |                              101
+             ST_APB_ERR2 |                          0000001 |                              110
+            ST_APB_ENDOK |                          0100000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg_reg' using encoding 'one-hot' in module 'cmsdk_ahb_to_apb'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                fsm_idle |                               11 |                               00
+                fsm_wait |                               00 |                               11
+                fsm_done |                               01 |                               01
+                 fsm_wr1 |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_reg' using encoding 'sequential' in module 'cmsdk_ahb_to_apb_async_h'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            fsm_apb_idle |                              001 |                               00
+            fsm_apb_cyc1 |                              010 |                               01
+            fsm_apb_wait |                              100 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_reg' using encoding 'one-hot' in module 'cmsdk_ahb_to_apb_async_p'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+*
+                 TX_IDLE |                          0000001 |                          0000001
+                TX_START |                          0000010 |                          0000010
+                 TX_DATA |                          0000100 |                          0000100
+               TX_PARITY |                          0001000 |                          0001000
+                 TX_STOP |                          0010000 |                          0010000
+             TX_INTERVAL |                          0100000 |                          0100000
+                  TX_END |                          1000000 |                          1000000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'current_state_reg' in module 'uart_pe_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+*
+                 RX_IDLE |                           000001 |                           000001
+                RX_START |                           000010 |                           000010
+                 RX_DATA |                           000100 |                           000100
+               RX_PARITY |                           001000 |                           001000
+                 RX_STOP |                           010000 |                           010000
+                  RX_END |                           100000 |                           100000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'current_state_reg' in module 'uart_pe_rx'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:49 ; elapsed = 00:01:52 . Memory (MB): peak = 3523.043 ; gain = 1019.227 ; free physical = 10502 ; free virtual = 33360
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   34 Bit       Adders := 11    
+	   2 Input   33 Bit       Adders := 6     
+	   2 Input   32 Bit       Adders := 3     
+	   3 Input   32 Bit       Adders := 2     
+	   2 Input   31 Bit       Adders := 1     
+	   3 Input   31 Bit       Adders := 1     
+	   2 Input   24 Bit       Adders := 1     
+	   2 Input   21 Bit       Adders := 1     
+	   2 Input   18 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 1     
+	   2 Input   14 Bit       Adders := 1     
+	   2 Input   13 Bit       Adders := 1     
+	   2 Input   12 Bit       Adders := 7     
+	   2 Input    9 Bit       Adders := 1     
+	   3 Input    7 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 3     
+	   3 Input    6 Bit       Adders := 1     
+	   3 Input    5 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 2     
+	   2 Input    4 Bit       Adders := 18    
+	   2 Input    2 Bit       Adders := 4     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1256  
+	   3 Input      1 Bit         XORs := 2     
+	   4 Input      1 Bit         XORs := 1     
++---XORs : 
+	               11 Bit    Wide XORs := 1     
+	               10 Bit    Wide XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 17    
+	               30 Bit    Registers := 3     
+	               16 Bit    Registers := 2     
+	               15 Bit    Registers := 2     
+	               12 Bit    Registers := 4     
+	               11 Bit    Registers := 2     
+	               10 Bit    Registers := 35    
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 8     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 4     
+	                4 Bit    Registers := 35    
+	                3 Bit    Registers := 8     
+	                2 Bit    Registers := 29    
+	                1 Bit    Registers := 5809  
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 40    
+	   4 Input   32 Bit        Muxes := 8     
+	   3 Input   32 Bit        Muxes := 2     
+	   2 Input   15 Bit        Muxes := 2     
+	   2 Input   12 Bit        Muxes := 4     
+	   4 Input   11 Bit        Muxes := 1     
+	   5 Input   11 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 2     
+	   2 Input   10 Bit        Muxes := 3     
+	   5 Input   10 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 8     
+	   7 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 19    
+	   8 Input    7 Bit        Muxes := 1     
+	   5 Input    7 Bit        Muxes := 1     
+	   3 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 6     
+	   3 Input    6 Bit        Muxes := 2     
+	   7 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 13    
+	   3 Input    5 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 48    
+	   3 Input    4 Bit        Muxes := 2     
+	   4 Input    4 Bit        Muxes := 6     
+	   5 Input    4 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 34    
+	   4 Input    3 Bit        Muxes := 3     
+	   7 Input    3 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 3     
+	   2 Input    2 Bit        Muxes := 52    
+	   4 Input    2 Bit        Muxes := 5     
+	   5 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 5     
+	   2 Input    1 Bit        Muxes := 2298  
+	   4 Input    1 Bit        Muxes := 22    
+	   3 Input    1 Bit        Muxes := 9     
+	   5 Input    1 Bit        Muxes := 3     
+	   9 Input    1 Bit        Muxes := 2     
+	   7 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 2760 (col length:120)
+BRAMs: 2160 (col length: RAMB18 120 RAMB36 60)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+DSP Report: Generating DSP Glym17, operation Mode is: A*B.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: Generating DSP Glym17, operation Mode is: A*B.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: Generating DSP Glym17, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+DSP Report: operator Glym17 is absorbed into DSP Glym17.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:04:22 ; elapsed = 00:04:28 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10343 ; free virtual = 33264
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below)
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name      | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|cortexm3ds_logic | A*B            | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cortexm3ds_logic | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cortexm3ds_logic | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++-----------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:04:26 ; elapsed = 00:04:33 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10239 ; free virtual = 33160
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:04:28 ; elapsed = 00:04:34 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10206 ; free virtual = 33129
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:04:34 ; elapsed = 00:04:41 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10239 ; free virtual = 33160
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:04:36 ; elapsed = 00:04:43 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10238 ; free virtual = 33159
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:04:36 ; elapsed = 00:04:43 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10238 ; free virtual = 33159
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:04:37 ; elapsed = 00:04:44 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10236 ; free virtual = 33157
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:04:37 ; elapsed = 00:04:44 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10236 ; free virtual = 33157
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:04:38 ; elapsed = 00:04:45 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10236 ; free virtual = 33157
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:04:38 ; elapsed = 00:04:45 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10236 ; free virtual = 33157
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |ram_128k      |         2|
+|2     |pll_50m       |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |pll_50m         |     1|
+|2     |ram_128k        |     2|
+|4     |BUFG            |     1|
+|5     |CARRY8          |   153|
+|6     |DSP_ALU         |     3|
+|7     |DSP_A_B_DATA    |     3|
+|8     |DSP_C_DATA      |     3|
+|9     |DSP_MULTIPLIER  |     3|
+|10    |DSP_M_DATA      |     3|
+|11    |DSP_OUTPUT      |     3|
+|12    |DSP_PREADD      |     3|
+|13    |DSP_PREADD_DATA |     3|
+|14    |LUT1            |   256|
+|15    |LUT2            |  1263|
+|16    |LUT3            |  1513|
+|17    |LUT4            |  2915|
+|18    |LUT5            |  3370|
+|19    |LUT6            |  8232|
+|20    |MUXF7           |    62|
+|21    |MUXF8           |    14|
+|22    |FDCE            |  3919|
+|23    |FDPE            |   136|
+|24    |FDRE            |  2233|
+|25    |IBUF            |     5|
+|26    |IOBUF           |     1|
+|27    |OBUF            |    10|
+|28    |OBUFT           |     1|
++------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:04:38 ; elapsed = 00:04:45 . Memory (MB): peak = 3869.512 ; gain = 1365.695 ; free physical = 10236 ; free virtual = 33157
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:04:37 ; elapsed = 00:04:42 . Memory (MB): peak = 3873.422 ; gain = 1305.574 ; free physical = 14615 ; free virtual = 37536
+Synthesis Optimization Complete : Time (s): cpu = 00:04:42 ; elapsed = 00:04:46 . Memory (MB): peak = 3873.422 ; gain = 1369.605 ; free physical = 14615 ; free virtual = 37536
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.12 ; elapsed = 00:00:00.12 . Memory (MB): peak = 3873.422 ; gain = 0.000 ; free physical = 14610 ; free virtual = 37530
+INFO: [Netlist 29-17] Analyzing 239 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'mcu_top' is not ideal for floorplanning, since the cellview 'cortexm3ds_logic' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3909.531 ; gain = 0.000 ; free physical = 14572 ; free virtual = 37493
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 11 instances were transformed.
+  BUFG => BUFGCE: 1 instance 
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 3 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 6 instances
+  IOBUF => IOBUF (IBUFCTRL, INBUF, OBUFT): 1 instance 
+
+Synth Design complete, checksum: 48853ad2
+INFO: [Common 17-83] Releasing license: Synthesis
+150 Infos, 43 Warnings, 8 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:04:47 ; elapsed = 00:04:51 . Memory (MB): peak = 3909.531 ; gain = 1413.719 ; free physical = 14770 ; free virtual = 37691
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Common 17-1381] The checkpoint '/home/houdonghui/cm3_ahbmtx_mcu/project/fpga_syn/fpga_ku6_mcu_full_vivado/mcu_top.runs/synth_1/mcu_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file mcu_top_utilization_synth.rpt -pb mcu_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 18 14:56:07 2025...

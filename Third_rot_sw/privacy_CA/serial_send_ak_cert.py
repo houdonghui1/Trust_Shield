@@ -4,6 +4,7 @@ import binascii
 import os
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.backends import default_backend
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -161,6 +162,15 @@ def pem2hex_and_save(pem_path, hex_path):
             cert = x509.load_pem_x509_certificate(pem_data)
         except TypeError:
             cert = x509.load_pem_x509_certificate(pem_data, backend=default_backend())
+        public_key = cert.public_key()
+        if not isinstance(public_key, ec.EllipticCurvePublicKey) or not isinstance(
+            public_key.curve, ec.SECP384R1
+        ):
+            raise Exception(
+                "AK certificate does not contain the current P-384 public key; "
+                "refusing to send a stale P-256 certificate"
+            )
+        print("Validated AK certificate public key: secp384r1")
         
         der_bin = cert.public_bytes(encoding=serialization.Encoding.DER)
         der_hex = binascii.hexlify(der_bin).decode('utf-8')

@@ -14,6 +14,7 @@
 //
 
 #include "caliptra_defines.h"
+#include <string.h>
 #include "printf.h"
 #include "hmac.h"
 #include "caliptra_isr.h"
@@ -35,6 +36,58 @@ void wait_for_hmac_intr(){
 void hmac_zeroize(){
     printf("HMAC zeroize flow.\n");
     lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL, (1 << HMAC_REG_HMAC384_CTRL_ZEROIZE_LOW) & HMAC_REG_HMAC384_CTRL_ZEROIZE_MASK);
+}
+
+bool hmac_kdf_from_kv(uint8_t kv_id, const uint8_t *context,
+                      size_t context_len, uint8_t *out, size_t out_len) {
+    volatile uint32_t *reg_ptr;
+    uint8_t block[128] = {0};
+    uint32_t tag_words[12] = {0};
+
+    if (context == NULL || out == NULL || context_len == 0 ||
+        context_len > sizeof(block) || out_len == 0 || out_len > 48) {
+        return false;
+    }
+    memcpy(block, context, context_len);
+    while ((lsu_read_32(CLP_HMAC_REG_HMAC384_STATUS) &
+            HMAC_REG_HMAC384_STATUS_READY_MASK) == 0) {
+    }
+    lsu_write_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_CTRL,
+                 HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_EN_MASK |
+                 ((kv_id << HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_ENTRY_LOW) &
+                  HMAC_REG_HMAC384_KV_RD_KEY_CTRL_READ_ENTRY_MASK));
+    while ((lsu_read_32(CLP_HMAC_REG_HMAC384_KV_RD_KEY_STATUS) &
+            HMAC_REG_HMAC384_KV_RD_KEY_STATUS_VALID_MASK) == 0) {
+    }
+    reg_ptr = (uint32_t *)CLP_HMAC_REG_HMAC384_BLOCK_0;
+    for (size_t i = 0; i < sizeof(block) / sizeof(uint32_t); ++i) {
+        uint32_t word = (uint32_t)block[i * 4] |
+                        ((uint32_t)block[i * 4 + 1] << 8) |
+                        ((uint32_t)block[i * 4 + 2] << 16) |
+                        ((uint32_t)block[i * 4 + 3] << 24);
+        *reg_ptr++ = word;
+    }
+    reg_ptr = (uint32_t *)CLP_HMAC_REG_HMAC384_LFSR_SEED_0;
+    for (size_t i = 0; i < 5; ++i) {
+        *reg_ptr++ = 0;
+    }
+    lsu_write_32(CLP_HMAC_REG_HMAC384_CTRL,
+                 HMAC_REG_HMAC384_CTRL_INIT_MASK);
+    while ((lsu_read_32(CLP_HMAC_REG_HMAC384_STATUS) &
+            HMAC_REG_HMAC384_STATUS_VALID_MASK) == 0) {
+    }
+    reg_ptr = (uint32_t *)CLP_HMAC_REG_HMAC384_TAG_0;
+    for (size_t i = 0; i < 12; ++i) {
+        tag_words[i] = *reg_ptr++;
+    }
+    for (size_t i = 0; i < out_len; ++i) {
+        uint32_t word = tag_words[i / 4];
+        out[i] = (uint8_t)(word >> (8 * (i % 4)));
+    }
+    memset(tag_words, 0, sizeof(tag_words));
+    memset(block, 0, sizeof(block));
+    hmac_zeroize();
+    return true;
 }
 
 void hmac_flow(hmac_io key, hmac_io block, hmac_io lfsr_seed, hmac_io tag){
